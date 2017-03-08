@@ -1,0 +1,27 @@
+*.js
+*.js.map
+*.log
+!scripts/*.js
+demo/app/*.js
+!demo/karma.conf.js
+!demo/app/tests/*.js
+demo/*.d.ts
+!demo/references.d.ts
+demo/lib
+demo/platforms
+demo/node_modules
+node_modules
+
+# IDEs and editors
+*.iml
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+
+zendesk-sdk.android.d.ts
+zendesk-sdk.ios.d.ts
