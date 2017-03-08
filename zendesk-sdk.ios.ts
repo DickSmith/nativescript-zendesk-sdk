@@ -13,20 +13,20 @@ export class ZendeskSdk {
     public static initialize(
             zendeskUrl: string,
             applicationId: string,
-            oauthClientId: string): ZendeskSdk {
+            oauthClientId: string): typeof ZendeskSdk {
         ZDKConfig.instance()
                  .initializeWithAppIdZendeskUrlClientId(applicationId, zendeskUrl, oauthClientId);
         return ZendeskSdk;
     }
 
-    public static setCoppaEnabled(enable: boolean): ZendeskSdk {
+    public static setCoppaEnabled(enable: boolean): typeof ZendeskSdk {
         ZDKConfig.instance().coppaEnabled = enable;
         return ZendeskSdk;
     }
 
     public static setAnonymousIdentity(
             name: string,
-            email: string): ZendeskSdk {
+            email: string): typeof ZendeskSdk {
         let identity: ZDKAnonymousIdentity = ZDKAnonymousIdentity.new();
         identity.name                      = name;
         identity.email                     = email;
@@ -34,7 +34,7 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
-    public static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk {
+    public static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk {
         ZDKConfig.instance().userIdentity = ZDKJwtIdentity.alloc()
                                                           .initWithJwtUserIdentifier(jwtUserIdentifier);
         return ZendeskSdk;

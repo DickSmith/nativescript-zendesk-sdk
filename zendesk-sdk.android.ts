@@ -15,21 +15,21 @@ export class ZendeskSdk {
     public static initialize(
             zendeskUrl: string,
             applicationId: string,
-            oauthClientId: string): ZendeskSdk {
+            oauthClientId: string): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.init(
                 uiFrame.topmost().android.activity, zendeskUrl, applicationId, oauthClientId
         );
         return ZendeskSdk;
     }
 
-    public static setCoppaEnabled(enable: boolean): ZendeskSdk {
+    public static setCoppaEnabled(enable: boolean): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.setCoppaEnabled(enable);
         return ZendeskSdk;
     }
 
     public static setAnonymousIdentity(
             name: string,
-            email: string): ZendeskSdk {
+            email: string): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.setIdentity(
                 new AnonymousIdentity.Builder()
                         .withNameIdentifier(name)
@@ -39,7 +39,7 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
-    public static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk {
+    public static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.setIdentity(
                 new JwtIdentity(jwtUserIdentifier)
         );
