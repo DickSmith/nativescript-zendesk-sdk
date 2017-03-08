@@ -1,5 +1,5 @@
-*.js
-*.js.map
+#*.js
+#*.js.map
 *.log
 node_modules
 
