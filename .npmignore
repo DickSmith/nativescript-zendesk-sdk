@@ -9,3 +9,7 @@ screenshots/
 
 
 /typings
+/metadata*
+
+!*.js
+!*.js.map
