@@ -146,32 +146,23 @@ export class ZendeskSdk {
                             },
                             getAdditionalInfo(): string{
                                 let temp: string = addDeviceInfo
-                                        ? "\n\nDEVICE INFORMATION:"
-                                          + " - Device Language: "
+                                        ? "\n\n"
                                           + device.language
-                                          + "\n"
-                                          + " - Device Manufacturer: "
-                                          + device.manufacturer
-                                          + "\n"
-                                          + " - Device Model: "
-                                          + device.model
-                                          + "\n"
-                                          + " - Device OS: "
-                                          + device.os
-                                          + "\n"
-                                          + " - Device OS Version: "
-                                          + device.osVersion
-                                          + "\n"
-                                          + " - Device Region: "
+                                          + "-"
                                           + device.region
                                           + "\n"
-                                          + " - Device SDK Version: "
-                                          + device.sdkVersion
+                                          + device.manufacturer
+                                          + device.model
                                           + "\n"
-                                          + " - Device UUID: "
+                                          + device.os
+                                          + device.osVersion
+                                          + "("
+                                          + device.sdkVersion
+                                          + ")"
+                                          + "\n"
                                           + device.uuid
                                         : "";
-                                return !!additionalInfo ? additionalInfo + temp : temp;
+                                return !!additionalInfo ? "\n\n" + additionalInfo + temp : temp;
                             },
                             getTags(): any{
                                 return !!tags ? tags : null;

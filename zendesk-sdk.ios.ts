@@ -139,29 +139,20 @@ export class ZendeskSdk {
             addDeviceInfo: boolean = true,
             ...tags: string[]): void {
         let temp: string = addDeviceInfo
-                ? "\n\nDEVICE INFORMATION:"
-                  + " - Device Language: "
+                ? "\n\n"
                   + device.language
-                  + "\n"
-                  + " - Device Manufacturer: "
-                  + device.manufacturer
-                  + "\n"
-                  + " - Device Model: "
-                  + device.model
-                  + "\n"
-                  + " - Device OS: "
-                  + device.os
-                  + "\n"
-                  + " - Device OS Version: "
-                  + device.osVersion
-                  + "\n"
-                  + " - Device Region: "
+                  + "-"
                   + device.region
                   + "\n"
-                  + " - Device SDK Version: "
-                  + device.sdkVersion
+                  + device.manufacturer
+                  + device.model
                   + "\n"
-                  + " - Device UUID: "
+                  + device.os
+                  + device.osVersion
+                  + "("
+                  + device.sdkVersion
+                  + ")"
+                  + "\n"
                   + device.uuid
                 : "";
         ZDKRequests.configure(
@@ -169,7 +160,7 @@ export class ZendeskSdk {
                         account: ZDKAccount,
                         requestCreationConfig: ZDKRequestCreationConfig) => {
                     requestCreationConfig.subject               = requestSubject;
-                    requestCreationConfig.additionalRequestInfo = !!additionalInfo ? additionalInfo + temp : temp;
+                    requestCreationConfig.additionalRequestInfo = !!additionalInfo ? "\n\n" + additionalInfo + temp : temp;
                     requestCreationConfig.tags                  = tags;
                 }
         );

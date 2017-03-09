@@ -114,32 +114,23 @@ var ZendeskSdk = (function () {
             },
             getAdditionalInfo: function () {
                 var temp = addDeviceInfo
-                    ? "\n\nDEVICE INFORMATION:"
-                        + " - Device Language: "
+                    ? "\n\n"
                         + platform_1.device.language
-                        + "\n"
-                        + " - Device Manufacturer: "
-                        + platform_1.device.manufacturer
-                        + "\n"
-                        + " - Device Model: "
-                        + platform_1.device.model
-                        + "\n"
-                        + " - Device OS: "
-                        + platform_1.device.os
-                        + "\n"
-                        + " - Device OS Version: "
-                        + platform_1.device.osVersion
-                        + "\n"
-                        + " - Device Region: "
+                        + "-"
                         + platform_1.device.region
                         + "\n"
-                        + " - Device SDK Version: "
-                        + platform_1.device.sdkVersion
+                        + platform_1.device.manufacturer
+                        + platform_1.device.model
                         + "\n"
-                        + " - Device UUID: "
+                        + platform_1.device.os
+                        + platform_1.device.osVersion
+                        + "("
+                        + platform_1.device.sdkVersion
+                        + ")"
+                        + "\n"
                         + platform_1.device.uuid
                     : "";
-                return !!additionalInfo ? additionalInfo + temp : temp;
+                return !!additionalInfo ? "\n\n" + additionalInfo + temp : temp;
             },
             getTags: function () {
                 return !!tags ? tags : null;
