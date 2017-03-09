@@ -145,24 +145,13 @@ export class ZendeskSdk {
                                 return !!requestSubject ? requestSubject : null;
                             },
                             getAdditionalInfo(): string{
-                                let deviceInfo: string = addDeviceInfo
-                                        ? "\n\n"
-                                          + device.language
-                                          + "-"
-                                          + device.region
-                                          + "\n"
-                                          + device.manufacturer
-                                          + " "
-                                          + device.model
-                                          + "\n"
-                                          + device.os
-                                          + " "
-                                          + device.osVersion
-                                          + "("
-                                          + device.sdkVersion
-                                          + ")"
-                                        : "";
-                                return !!additionalInfo ? "\n\n" + additionalInfo + deviceInfo : deviceInfo;
+                                let deviceInfo: string = addDeviceInfo ? "\n\n" + device.language + "-" + device.region
+                                                                       + "\n" + device.manufacturer + " " + device.model
+                                                                       + "\n" + device.os + " " + device.osVersion + "("
+                                                                       + device.sdkVersion + ")" : "";
+                                return !!additionalInfo || addDeviceInfo ? +(!!additionalInfo
+                                                                                 ? "\n\n" + additionalInfo
+                                                                                 : "") + deviceInfo : "";
                             },
                             getTags(): any{
                                 return !!tags ? tags : null;

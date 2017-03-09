@@ -85,7 +85,6 @@ export class ZendeskSdk {
         let helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         helpCenterContentModel.groupType                              = ZDKHelpCenterOverviewGroupType.Category;
         ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
-
     }
 
     public static showHelpCenterForLabelNames(
@@ -138,36 +137,19 @@ export class ZendeskSdk {
             additionalInfo?: string,
             addDeviceInfo: boolean = true,
             ...tags: string[]): void {
-        let deviceInfo: string = addDeviceInfo
-                ? "\n\n"
-                  + device.language
-                  + "-"
-                  + device.region
-                  + "\n"
-                  + device.manufacturer
-                  + " "
-                  + device.model
-                  + "\n"
-                  + device.os
-                  + " "
-                  + device.osVersion
-                  + "("
-                  + device.sdkVersion
-                  + ")"
-                : "";
+        let deviceInfo: string = addDeviceInfo ? "\n\n" + device.language + "-" + device.region + "\n"
+                                               + device.manufacturer + " " + device.model + "\n" + device.os + " "
+                                               + device.osVersion + "(" + device.sdkVersion + ")" : "";
         ZDKRequests.configure(
                 (
                         account: ZDKAccount,
                         requestCreationConfig: ZDKRequestCreationConfig) => {
                     requestCreationConfig.subject               = requestSubject;
-                    requestCreationConfig.additionalRequestInfo = !!additionalInfo
-                                                                  || addDeviceInfo
+                    requestCreationConfig.additionalRequestInfo = !!additionalInfo || addDeviceInfo
                             ? "\n\n------------------------------" // added to make the output the same as Android SDK
-                              + (
-                                      !!additionalInfo ? "\n\n" + additionalInfo : ""
-                              )
-                              + deviceInfo
-                            : null;
+                                                                  + (!!additionalInfo ? "\n\n" + additionalInfo : "")
+                                                                  + deviceInfo
+                            : "";
                     requestCreationConfig.tags                  = tags;
                 }
         );
