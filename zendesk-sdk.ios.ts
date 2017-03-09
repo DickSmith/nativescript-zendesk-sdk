@@ -136,31 +136,34 @@ export class ZendeskSdk {
     static createRequest(
             requestSubject?: string,
             additionalInfo?: string,
+            addDeviceInfo: boolean = true,
             ...tags: string[]): void {
-        let temp: string = "\n\nDEVICE INFORMATION:"
-                           + " - Device Language: "
-                           + device.language
-                           + "\n"
-                           + " - Device Manufacturer: "
-                           + device.manufacturer
-                           + "\n"
-                           + " - Device Model: "
-                           + device.model
-                           + "\n"
-                           + " - Device OS: "
-                           + device.os
-                           + "\n"
-                           + " - Device OS Version: "
-                           + device.osVersion
-                           + "\n"
-                           + " - Device Region: "
-                           + device.region
-                           + "\n"
-                           + " - Device SDK Version: "
-                           + device.sdkVersion
-                           + "\n"
-                           + " - Device UUID: "
-                           + device.uuid;
+        let temp: string = addDeviceInfo
+                ? "\n\nDEVICE INFORMATION:"
+                  + " - Device Language: "
+                  + device.language
+                  + "\n"
+                  + " - Device Manufacturer: "
+                  + device.manufacturer
+                  + "\n"
+                  + " - Device Model: "
+                  + device.model
+                  + "\n"
+                  + " - Device OS: "
+                  + device.os
+                  + "\n"
+                  + " - Device OS Version: "
+                  + device.osVersion
+                  + "\n"
+                  + " - Device Region: "
+                  + device.region
+                  + "\n"
+                  + " - Device SDK Version: "
+                  + device.sdkVersion
+                  + "\n"
+                  + " - Device UUID: "
+                  + device.uuid
+                : "";
         ZDKRequests.configure(
                 (
                         account: ZDKAccount,

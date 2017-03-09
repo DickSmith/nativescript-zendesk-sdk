@@ -114,35 +114,38 @@ var ZendeskSdk = (function () {
             }
         });
     };
-    ZendeskSdk.createRequest = function (requestSubject, additionalInfo) {
+    ZendeskSdk.createRequest = function (requestSubject, additionalInfo, addDeviceInfo) {
+        if (addDeviceInfo === void 0) { addDeviceInfo = true; }
         var tags = [];
-        for (var _i = 2; _i < arguments.length; _i++) {
-            tags[_i - 2] = arguments[_i];
+        for (var _i = 3; _i < arguments.length; _i++) {
+            tags[_i - 3] = arguments[_i];
         }
-        var temp = "\n\nDEVICE INFORMATION:"
-            + " - Device Language: "
-            + platform_1.device.language
-            + "\n"
-            + " - Device Manufacturer: "
-            + platform_1.device.manufacturer
-            + "\n"
-            + " - Device Model: "
-            + platform_1.device.model
-            + "\n"
-            + " - Device OS: "
-            + platform_1.device.os
-            + "\n"
-            + " - Device OS Version: "
-            + platform_1.device.osVersion
-            + "\n"
-            + " - Device Region: "
-            + platform_1.device.region
-            + "\n"
-            + " - Device SDK Version: "
-            + platform_1.device.sdkVersion
-            + "\n"
-            + " - Device UUID: "
-            + platform_1.device.uuid;
+        var temp = addDeviceInfo
+            ? "\n\nDEVICE INFORMATION:"
+                + " - Device Language: "
+                + platform_1.device.language
+                + "\n"
+                + " - Device Manufacturer: "
+                + platform_1.device.manufacturer
+                + "\n"
+                + " - Device Model: "
+                + platform_1.device.model
+                + "\n"
+                + " - Device OS: "
+                + platform_1.device.os
+                + "\n"
+                + " - Device OS Version: "
+                + platform_1.device.osVersion
+                + "\n"
+                + " - Device Region: "
+                + platform_1.device.region
+                + "\n"
+                + " - Device SDK Version: "
+                + platform_1.device.sdkVersion
+                + "\n"
+                + " - Device UUID: "
+                + platform_1.device.uuid
+            : "";
         ZDKRequests.configure(function (account, requestCreationConfig) {
             requestCreationConfig.subject = requestSubject;
             requestCreationConfig.additionalRequestInfo = !!additionalInfo ? additionalInfo + temp : temp;

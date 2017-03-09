@@ -133,44 +133,47 @@ export class ZendeskSdk {
     }
 
     public static createRequest(
-            requestSubject: string = "Android Ticket",
+            requestSubject?: string,
             additionalInfo?: string,
+            addDeviceInfo: boolean = true,
             ...tags: string[]) {
 
         ContactZendeskActivity.startActivity(
                 uiFrame.topmost().android.activity, new ZendeskFeedbackConfiguration(
                         {
-                            getRequestSubject(): string{
+                            getRequestSubject(): string {
                                 return !!requestSubject ? requestSubject : null;
                             },
                             getAdditionalInfo(): string{
-                                let temp: string = "\n\nDEVICE INFORMATION:"
-                                                   + " - Device Language: "
-                                                   + device.language
-                                                   + "\n"
-                                                   + " - Device Manufacturer: "
-                                                   + device.manufacturer
-                                                   + "\n"
-                                                   + " - Device Model: "
-                                                   + device.model
-                                                   + "\n"
-                                                   + " - Device OS: "
-                                                   + device.os
-                                                   + "\n"
-                                                   + " - Device OS Version: "
-                                                   + device.osVersion
-                                                   + "\n"
-                                                   + " - Device Region: "
-                                                   + device.region
-                                                   + "\n"
-                                                   + " - Device SDK Version: "
-                                                   + device.sdkVersion
-                                                   + "\n"
-                                                   + " - Device UUID: "
-                                                   + device.uuid;
+                                let temp: string = addDeviceInfo
+                                        ? "\n\nDEVICE INFORMATION:"
+                                          + " - Device Language: "
+                                          + device.language
+                                          + "\n"
+                                          + " - Device Manufacturer: "
+                                          + device.manufacturer
+                                          + "\n"
+                                          + " - Device Model: "
+                                          + device.model
+                                          + "\n"
+                                          + " - Device OS: "
+                                          + device.os
+                                          + "\n"
+                                          + " - Device OS Version: "
+                                          + device.osVersion
+                                          + "\n"
+                                          + " - Device Region: "
+                                          + device.region
+                                          + "\n"
+                                          + " - Device SDK Version: "
+                                          + device.sdkVersion
+                                          + "\n"
+                                          + " - Device UUID: "
+                                          + device.uuid
+                                        : "";
                                 return !!additionalInfo ? additionalInfo + temp : temp;
                             },
-                            getTags(): any {
+                            getTags(): any{
                                 return !!tags ? tags : null;
                             },
                         }
