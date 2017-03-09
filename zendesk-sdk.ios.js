@@ -139,9 +139,10 @@ var ZendeskSdk = (function () {
             : "";
         ZDKRequests.configure(function (account, requestCreationConfig) {
             requestCreationConfig.subject = requestSubject;
-            requestCreationConfig.additionalRequestInfo = !!additionalInfo || addDeviceInfo
+            requestCreationConfig.additionalRequestInfo = !!additionalInfo
+                || addDeviceInfo
                 ? "\n\n------------------------------"
-                    + additionalInfo
+                    + (!!additionalInfo ? "\n\n" + additionalInfo : "")
                     + deviceInfo
                 : null;
             requestCreationConfig.tags = tags;
