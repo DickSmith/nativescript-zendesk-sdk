@@ -64,5 +64,6 @@ export declare class ZendeskSdk {
     static createRequest(
             requestSubject?: string,
             additionalInfo?: string,
+            addDeviceInfo?: boolean,
             ...tags: string[]): void;
 }
