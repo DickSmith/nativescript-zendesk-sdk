@@ -113,24 +113,24 @@ var ZendeskSdk = (function () {
                 return !!requestSubject ? requestSubject : null;
             },
             getAdditionalInfo: function () {
-                var temp = addDeviceInfo
+                var deviceInfo = addDeviceInfo
                     ? "\n\n"
                         + platform_1.device.language
                         + "-"
                         + platform_1.device.region
                         + "\n"
                         + platform_1.device.manufacturer
+                        + " "
                         + platform_1.device.model
                         + "\n"
                         + platform_1.device.os
+                        + " "
                         + platform_1.device.osVersion
                         + "("
                         + platform_1.device.sdkVersion
                         + ")"
-                        + "\n"
-                        + platform_1.device.uuid
                     : "";
-                return !!additionalInfo ? "\n\n" + additionalInfo + temp : temp;
+                return !!additionalInfo ? "\n\n" + additionalInfo + deviceInfo : deviceInfo;
             },
             getTags: function () {
                 return !!tags ? tags : null;

@@ -120,26 +120,30 @@ var ZendeskSdk = (function () {
         for (var _i = 3; _i < arguments.length; _i++) {
             tags[_i - 3] = arguments[_i];
         }
-        var temp = addDeviceInfo
+        var deviceInfo = addDeviceInfo
             ? "\n\n"
                 + platform_1.device.language
                 + "-"
                 + platform_1.device.region
                 + "\n"
                 + platform_1.device.manufacturer
+                + " "
                 + platform_1.device.model
                 + "\n"
                 + platform_1.device.os
+                + " "
                 + platform_1.device.osVersion
                 + "("
                 + platform_1.device.sdkVersion
                 + ")"
-                + "\n"
-                + platform_1.device.uuid
             : "";
         ZDKRequests.configure(function (account, requestCreationConfig) {
             requestCreationConfig.subject = requestSubject;
-            requestCreationConfig.additionalRequestInfo = !!additionalInfo ? "\n\n" + additionalInfo + temp : temp;
+            requestCreationConfig.additionalRequestInfo = !!additionalInfo || addDeviceInfo
+                ? "\n\n------------------------------"
+                    + additionalInfo
+                    + deviceInfo
+                : null;
             requestCreationConfig.tags = tags;
         });
         ZDKRequests.presentRequestCreationWithViewController(uiFrame.topmost().ios.controller);

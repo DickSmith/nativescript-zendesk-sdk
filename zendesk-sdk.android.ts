@@ -145,24 +145,24 @@ export class ZendeskSdk {
                                 return !!requestSubject ? requestSubject : null;
                             },
                             getAdditionalInfo(): string{
-                                let temp: string = addDeviceInfo
+                                let deviceInfo: string = addDeviceInfo
                                         ? "\n\n"
                                           + device.language
                                           + "-"
                                           + device.region
                                           + "\n"
                                           + device.manufacturer
+                                          + " "
                                           + device.model
                                           + "\n"
                                           + device.os
+                                          + " "
                                           + device.osVersion
                                           + "("
                                           + device.sdkVersion
                                           + ")"
-                                          + "\n"
-                                          + device.uuid
                                         : "";
-                                return !!additionalInfo ? "\n\n" + additionalInfo + temp : temp;
+                                return !!additionalInfo ? "\n\n" + additionalInfo + deviceInfo : deviceInfo;
                             },
                             getTags(): any{
                                 return !!tags ? tags : null;
