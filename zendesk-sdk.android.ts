@@ -26,7 +26,7 @@ export class ZendeskSdk {
     }
 
     public static setUserLocale(locale: string): typeof ZendeskSdk {
-        ZDKConfig.instance().userLocale = locale;
+        ZendeskConfig.INSTANCE.setDeviceLocale(new java.util.Locale(locale));
         return ZendeskSdk;
     }
 
