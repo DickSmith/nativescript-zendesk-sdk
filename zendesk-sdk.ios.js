@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var uiFrame = require("ui/frame");
+var platform_1 = require("platform");
 var ZendeskSdk = (function () {
     function ZendeskSdk() {
     }
@@ -100,11 +101,16 @@ var ZendeskSdk = (function () {
         ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
     };
     ZendeskSdk.showArticle = function (articleId, locale) {
-        var provider = ZDKHelpCenterProvider.alloc().initWithLocale(locale);
+        var provider = ZDKHelpCenterProvider.alloc()
+            .initWithLocale(locale);
         provider.getArticleByIdWithCallback(articleId, function (items, error) {
             if (items.count > 0) {
-                var vc = ZDKArticleViewController.alloc().initWithArticle(items.firstObject);
-                uiFrame.topmost().ios.controller.pushViewControllerAnimated(vc, true);
+                var vc = ZDKArticleViewController.alloc()
+                    .initWithArticle(items.firstObject);
+                uiFrame.topmost()
+                    .ios
+                    .controller
+                    .pushViewControllerAnimated(vc, true);
             }
         });
     };
@@ -113,9 +119,28 @@ var ZendeskSdk = (function () {
         for (var _i = 2; _i < arguments.length; _i++) {
             tags[_i - 2] = arguments[_i];
         }
+        var temp = platform_1.device.language
+            + "\n"
+            + platform_1.device.manufacturer
+            + "\n"
+            + platform_1.device.model
+            + "\n"
+            + platform_1.device.os
+            + "\n"
+            + platform_1.device.osVersion
+            + "\n"
+            + platform_1.device.region
+            + "\n"
+            + platform_1.device.sdkVersion
+            + "\n"
+            + platform_1.device.uuid;
         ZDKRequests.configure(function (account, requestCreationConfig) {
             requestCreationConfig.subject = requestSubject;
-            requestCreationConfig.additionalRequestInfo = additionalInfo;
+            requestCreationConfig.additionalRequestInfo = !!additionalInfo
+                ? additionalInfo
+                    + "\n"
+                    + temp
+                : temp;
             requestCreationConfig.tags = tags;
         });
         ZDKRequests.presentRequestCreationWithViewController(uiFrame.topmost().ios.controller);

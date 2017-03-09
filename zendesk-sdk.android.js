@@ -9,6 +9,7 @@ var ViewArticleActivity = com.zendesk.sdk.support.ViewArticleActivity;
 var SimpleArticle = com.zendesk.sdk.model.helpcenter.SimpleArticle;
 var ContactZendeskActivity = com.zendesk.sdk.feedback.ui.ContactZendeskActivity;
 var ZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
+var platform_1 = require("platform");
 var ZendeskSdk = (function () {
     function ZendeskSdk() {
     }
@@ -17,7 +18,7 @@ var ZendeskSdk = (function () {
         return ZendeskSdk;
     };
     ZendeskSdk.setUserLocale = function (locale) {
-        ZDKConfig.instance().userLocale = locale;
+        ZendeskConfig.INSTANCE.setDeviceLocale(new java.util.Locale(locale));
         return ZendeskSdk;
     };
     ZendeskSdk.setCoppaEnabled = function (enable) {
@@ -112,7 +113,22 @@ var ZendeskSdk = (function () {
                 return !!requestSubject ? requestSubject : null;
             },
             getAdditionalInfo: function () {
-                return !!additionalInfo ? additionalInfo : null;
+                var temp = platform_1.device.language
+                    + "\n"
+                    + platform_1.device.manufacturer
+                    + "\n"
+                    + platform_1.device.model
+                    + "\n"
+                    + platform_1.device.os
+                    + "\n"
+                    + platform_1.device.osVersion
+                    + "\n"
+                    + platform_1.device.region
+                    + "\n"
+                    + platform_1.device.sdkVersion
+                    + "\n"
+                    + platform_1.device.uuid;
+                return !!additionalInfo ? additionalInfo + "\n" + temp : temp;
             },
             getTags: function () {
                 return !!tags ? tags : null;

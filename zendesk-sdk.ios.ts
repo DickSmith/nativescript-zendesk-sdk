@@ -1,4 +1,5 @@
 import * as uiFrame from 'ui/frame';
+import SupportActivity = com.zendesk.sdk.support.SupportActivity;
 import { device } from 'platform';
 
 export class ZendeskSdk {
