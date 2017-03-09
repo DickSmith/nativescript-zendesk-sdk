@@ -9,6 +9,7 @@ import SimpleArticle = com.zendesk.sdk.model.helpcenter.SimpleArticle;
 import ContactZendeskActivity = com.zendesk.sdk.feedback.ui.ContactZendeskActivity;
 import BaseZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.BaseZendeskFeedbackConfiguration;
 import ZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
+import { device } from 'platform';
 
 export class ZendeskSdk {
 
@@ -123,8 +124,12 @@ export class ZendeskSdk {
                   .show(uiFrame.topmost().android.activity);
     }
 
-    public static showArticle(articleId: string, locale: string): void {
-        ViewArticleActivity.startActivity(uiFrame.topmost().android.activity, new SimpleArticle(long(long(articleId)), ""))
+    public static showArticle(
+            articleId: string,
+            locale: string): void {
+        ViewArticleActivity.startActivity(
+                uiFrame.topmost().android.activity, new SimpleArticle(long(long(articleId)), "")
+        )
     }
 
     public static createRequest(
@@ -139,7 +144,22 @@ export class ZendeskSdk {
                                 return !!requestSubject ? requestSubject : null;
                             },
                             getAdditionalInfo(): string{
-                                return !!additionalInfo ? additionalInfo : null;
+                                let temp: string = device.language
+                                                   + "\n"
+                                                   + device.manufacturer
+                                                   + "\n"
+                                                   + device.model
+                                                   + "\n"
+                                                   + device.os
+                                                   + "\n"
+                                                   + device.osVersion
+                                                   + "\n"
+                                                   + device.region
+                                                   + "\n"
+                                                   + device.sdkVersion
+                                                   + "\n"
+                                                   + device.uuid;
+                                return !!additionalInfo ? additionalInfo + "\n" + temp : temp;
                             },
                             getTags(): any {
                                 return !!tags ? tags : null;

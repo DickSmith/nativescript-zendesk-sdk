@@ -1,9 +1,5 @@
 import * as uiFrame from 'ui/frame';
-import ZendeskConfig = com.zendesk.sdk.network.impl.ZendeskConfig;
-import Identity = com.zendesk.sdk.model.access.Identity;
-import AnonymousIdentity = com.zendesk.sdk.model.access.AnonymousIdentity;
-import JwtIdentity = com.zendesk.sdk.model.access.JwtIdentity;
-import SupportActivity = com.zendesk.sdk.support.SupportActivity;
+import { device } from 'platform';
 
 export class ZendeskSdk {
 
@@ -115,26 +111,57 @@ export class ZendeskSdk {
         ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
     }
 
-    public static showArticle(articleId: string, locale: string): void {
-        let provider: ZDKHelpCenterProvider = ZDKHelpCenterProvider.alloc().initWithLocale(locale);
-        provider.getArticleByIdWithCallback(articleId, (items: NSArray<any>, error: NSError) => {
-            if (items.count > 0) {
-                let vc: ZDKArticleViewController = ZDKArticleViewController.alloc().initWithArticle(items.firstObject);
-                uiFrame.topmost().ios.controller.pushViewControllerAnimated(vc, true);
-            }
-        });
+    public static showArticle(
+            articleId: string,
+            locale: string): void {
+        let provider: ZDKHelpCenterProvider = ZDKHelpCenterProvider.alloc()
+                                                                   .initWithLocale(locale);
+        provider.getArticleByIdWithCallback(
+                articleId,
+                (
+                        items: NSArray<any>,
+                        error: NSError) => {
+                    if ( items.count > 0 ) {
+                        let vc: ZDKArticleViewController = ZDKArticleViewController.alloc()
+                                                                                   .initWithArticle(items.firstObject);
+                        uiFrame.topmost()
+                               .ios
+                               .controller
+                               .pushViewControllerAnimated(vc, true);
+                    }
+                }
+        );
     }
 
     static createRequest(
             requestSubject?: string,
             additionalInfo?: string,
             ...tags: string[]): void {
+        let temp: string = device.language
+                           + "\n"
+                           + device.manufacturer
+                           + "\n"
+                           + device.model
+                           + "\n"
+                           + device.os
+                           + "\n"
+                           + device.osVersion
+                           + "\n"
+                           + device.region
+                           + "\n"
+                           + device.sdkVersion
+                           + "\n"
+                           + device.uuid;
         ZDKRequests.configure(
                 (
                         account: ZDKAccount,
                         requestCreationConfig: ZDKRequestCreationConfig) => {
                     requestCreationConfig.subject               = requestSubject;
-                    requestCreationConfig.additionalRequestInfo = additionalInfo;
+                    requestCreationConfig.additionalRequestInfo = !!additionalInfo
+                            ? additionalInfo
+                              + "\n"
+                              + temp
+                            : temp;
                     requestCreationConfig.tags                  = tags;
                 }
         );
