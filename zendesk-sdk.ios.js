@@ -99,7 +99,14 @@ var ZendeskSdk = (function () {
         helpCenterContentModel.groupType = 1;
         ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
     };
-    ZendeskSdk.showArticle = function (articleId) {
+    ZendeskSdk.showArticle = function (articleId, locale) {
+        var provider = ZDKHelpCenterProvider.alloc().initWithLocale(locale);
+        provider.getArticleByIdWithCallback(articleId, function (items, error) {
+            if (items.count > 0) {
+                var vc = ZDKArticleViewController.alloc().initWithArticle(items.firstObject);
+                uiFrame.topmost().ios.controller.pushViewControllerAnimated(vc, true);
+            }
+        });
     };
     ZendeskSdk.createRequest = function (requestSubject, additionalInfo) {
         var tags = [];

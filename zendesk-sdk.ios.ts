@@ -115,8 +115,14 @@ export class ZendeskSdk {
         ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
     }
 
-    public static showArticle(articleId: number): void {
-        //TODO
+    public static showArticle(articleId: string, locale: string): void {
+        let provider: ZDKHelpCenterProvider = ZDKHelpCenterProvider.alloc().initWithLocale(locale);
+        provider.getArticleByIdWithCallback(articleId, (items: NSArray<any>, error: NSError) => {
+            if (items.count > 0) {
+                let vc: ZDKArticleViewController = ZDKArticleViewController.alloc().initWithArticle(items.firstObject);
+                uiFrame.topmost().ios.controller.pushViewControllerAnimated(vc, true);
+            }
+        });
     }
 
     static createRequest(

@@ -123,8 +123,8 @@ export class ZendeskSdk {
                   .show(uiFrame.topmost().android.activity);
     }
 
-    public static showArticle(articleId: number): void {
-        ViewArticleActivity.startActivity(uiFrame.topmost().android.activity, new SimpleArticle(long(articleId), ""))
+    public static showArticle(articleId: string, locale: string): void {
+        ViewArticleActivity.startActivity(uiFrame.topmost().android.activity, new SimpleArticle(long(long(articleId)), ""))
     }
 
     public static createRequest(

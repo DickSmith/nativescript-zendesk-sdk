@@ -98,8 +98,8 @@ var ZendeskSdk = (function () {
             .withArticlesForSectionIds(sectionIds)
             .show(uiFrame.topmost().android.activity);
     };
-    ZendeskSdk.showArticle = function (articleId) {
-        ViewArticleActivity.startActivity(uiFrame.topmost().android.activity, new SimpleArticle(long(articleId), ""));
+    ZendeskSdk.showArticle = function (articleId, locale) {
+        ViewArticleActivity.startActivity(uiFrame.topmost().android.activity, new SimpleArticle(long(long(articleId)), ""));
     };
     ZendeskSdk.createRequest = function (requestSubject, additionalInfo) {
         if (requestSubject === void 0) { requestSubject = "Android Ticket"; }

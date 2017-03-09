@@ -57,7 +57,9 @@ export declare class ZendeskSdk {
             showAsModalForIos?: boolean,
             ...sectionIds: number[]): void;
 
-    static showArticle(articleId: number): void;
+    static showArticle(
+            articleId: string,
+            locale: string): void;
 
     static createRequest(
             requestSubject?: string,
