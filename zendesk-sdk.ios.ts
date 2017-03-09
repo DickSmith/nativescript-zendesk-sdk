@@ -133,7 +133,7 @@ export class ZendeskSdk {
         );
     }
 
-    static createRequest(
+    public static createRequest(
             requestSubject?: string,
             additionalInfo?: string,
             addDeviceInfo: boolean = true,
@@ -160,9 +160,12 @@ export class ZendeskSdk {
                         account: ZDKAccount,
                         requestCreationConfig: ZDKRequestCreationConfig) => {
                     requestCreationConfig.subject               = requestSubject;
-                    requestCreationConfig.additionalRequestInfo = !!additionalInfo || addDeviceInfo
-                            ? "\n\n------------------------------"
-                              + additionalInfo
+                    requestCreationConfig.additionalRequestInfo = !!additionalInfo
+                                                                  || addDeviceInfo
+                            ? "\n\n------------------------------" // added to make the output the same as Android SDK
+                              + (
+                                      !!additionalInfo ? "\n\n" + additionalInfo : ""
+                              )
                               + deviceInfo
                             : null;
                     requestCreationConfig.tags                  = tags;
