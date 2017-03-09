@@ -118,8 +118,7 @@ export class ZendeskSdk {
         let provider: ZDKHelpCenterProvider = ZDKHelpCenterProvider.alloc()
                                                                    .initWithLocale(locale);
         provider.getArticleByIdWithCallback(
-                articleId,
-                (
+                articleId, (
                         items: NSArray<any>,
                         error: NSError) => {
                     if ( items.count > 0 ) {
@@ -138,31 +137,36 @@ export class ZendeskSdk {
             requestSubject?: string,
             additionalInfo?: string,
             ...tags: string[]): void {
-        let temp: string = device.language
+        let temp: string = "\n\nDEVICE INFORMATION:"
+                           + " - Device Language: "
+                           + device.language
                            + "\n"
+                           + " - Device Manufacturer: "
                            + device.manufacturer
                            + "\n"
+                           + " - Device Model: "
                            + device.model
                            + "\n"
+                           + " - Device OS: "
                            + device.os
                            + "\n"
+                           + " - Device OS Version: "
                            + device.osVersion
                            + "\n"
+                           + " - Device Region: "
                            + device.region
                            + "\n"
+                           + " - Device SDK Version: "
                            + device.sdkVersion
                            + "\n"
+                           + " - Device UUID: "
                            + device.uuid;
         ZDKRequests.configure(
                 (
                         account: ZDKAccount,
                         requestCreationConfig: ZDKRequestCreationConfig) => {
                     requestCreationConfig.subject               = requestSubject;
-                    requestCreationConfig.additionalRequestInfo = !!additionalInfo
-                            ? additionalInfo
-                              + "\n"
-                              + temp
-                            : temp;
+                    requestCreationConfig.additionalRequestInfo = !!additionalInfo ? additionalInfo + temp : temp;
                     requestCreationConfig.tags                  = tags;
                 }
         );

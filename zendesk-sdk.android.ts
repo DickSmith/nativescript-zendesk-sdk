@@ -144,22 +144,31 @@ export class ZendeskSdk {
                                 return !!requestSubject ? requestSubject : null;
                             },
                             getAdditionalInfo(): string{
-                                let temp: string = device.language
+                                let temp: string = "\n\nDEVICE INFORMATION:"
+                                                   + " - Device Language: "
+                                                   + device.language
                                                    + "\n"
+                                                   + " - Device Manufacturer: "
                                                    + device.manufacturer
                                                    + "\n"
+                                                   + " - Device Model: "
                                                    + device.model
                                                    + "\n"
+                                                   + " - Device OS: "
                                                    + device.os
                                                    + "\n"
+                                                   + " - Device OS Version: "
                                                    + device.osVersion
                                                    + "\n"
+                                                   + " - Device Region: "
                                                    + device.region
                                                    + "\n"
+                                                   + " - Device SDK Version: "
                                                    + device.sdkVersion
                                                    + "\n"
+                                                   + " - Device UUID: "
                                                    + device.uuid;
-                                return !!additionalInfo ? additionalInfo + "\n" + temp : temp;
+                                return !!additionalInfo ? additionalInfo + temp : temp;
                             },
                             getTags(): any {
                                 return !!tags ? tags : null;
