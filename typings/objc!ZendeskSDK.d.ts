@@ -1033,7 +1033,7 @@ declare class ZDKHelpCenterOverviewContentModel extends NSObject {
 
 	hideContactSupport: boolean;
 
-	labels: NSArray<any>;
+	labels: /*NSArray<any>*/ any;
 
 	navBarConversationsUIType: ZDKNavBarConversationsUIType;
 }
@@ -1989,7 +1989,7 @@ declare class ZDKRequestCreationConfig extends NSObject {
 
 	subject: string;
 
-	tags: NSArray<any>;
+	tags: /*NSArray<any>*/ any;
 
 	contentSeperator(): string;
 }

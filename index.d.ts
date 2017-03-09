@@ -6,6 +6,8 @@ export declare class ZendeskSdk {
             applicationId: string,
             oauthClientId: string): typeof ZendeskSdk;
 
+    static setUserLocale(locale: string): typeof ZendeskSdk;
+
     static setCoppaEnabled(enable: boolean): typeof ZendeskSdk;
 
     static setAnonymousIdentity(
@@ -14,10 +16,13 @@ export declare class ZendeskSdk {
 
     static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk;
 
-    private static initHelpCenter(
+    private static initHelpCenterAndroid(
             withCategoriesCollapsedForAndroid?,
             showContactUsButtonForAndroid?,
-            showConversationsMenuButtonForAndroid?,
+            showConversationsMenuButtonForAndroid?);
+
+    private static initHelpCenterIos(
+            helpCenterContentModel,
             withoutRequestsForIos?,
             showAsModalForIos?);
 
@@ -53,4 +58,9 @@ export declare class ZendeskSdk {
             ...sectionIds: number[]): void;
 
     static showArticle(articleId: number): void;
+
+    static createRequest(
+            requestSubject?: string,
+            additionalInfo?: string,
+            ...tags: string[]): void;
 }

@@ -6,6 +6,9 @@ import JwtIdentity = com.zendesk.sdk.model.access.JwtIdentity;
 import SupportActivity = com.zendesk.sdk.support.SupportActivity;
 import ViewArticleActivity = com.zendesk.sdk.support.ViewArticleActivity;
 import SimpleArticle = com.zendesk.sdk.model.helpcenter.SimpleArticle;
+import ContactZendeskActivity = com.zendesk.sdk.feedback.ui.ContactZendeskActivity;
+import BaseZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.BaseZendeskFeedbackConfiguration;
+import ZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
 
 export class ZendeskSdk {
 
@@ -19,6 +22,11 @@ export class ZendeskSdk {
         ZendeskConfig.INSTANCE.init(
                 uiFrame.topmost().android.activity, zendeskUrl, applicationId, oauthClientId
         );
+        return ZendeskSdk;
+    }
+
+    public static setUserLocale(locale: string): typeof ZendeskSdk {
+        ZDKConfig.instance().userLocale = locale;
         return ZendeskSdk;
     }
 
@@ -46,15 +54,19 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
-    private static initHelpCenter(
+    private static initHelpCenterAndroid(
             withCategoriesCollapsedForAndroid: boolean = false,
             showContactUsButtonForAndroid: boolean = true,
-            showConversationsMenuButtonForAndroid: boolean = true,
-            withoutRequestsForIos: boolean = false,
-            showAsModalForIos: boolean = false,): SupportActivity.Builder {
+            showConversationsMenuButtonForAndroid: boolean = true,): SupportActivity.Builder {
         return new SupportActivity.Builder().withCategoriesCollapsed(withCategoriesCollapsedForAndroid)
                                             .showContactUsButton(showContactUsButtonForAndroid)
                                             .showConversationsMenuButton(showConversationsMenuButtonForAndroid);
+    }
+
+    private static initHelpCenterIos(
+            helpCenterContentModel: ZDKHelpCenterOverviewContentModel,
+            withoutRequestsForIos: boolean = false,
+            showAsModalForIos: boolean = false,): void {
     }
 
     public static showHelpCenter(
@@ -63,7 +75,7 @@ export class ZendeskSdk {
             showConversationsMenuButtonForAndroid: boolean = true,
             withoutRequestsForIos: boolean = false,
             showAsModalForIos: boolean = false,): void {
-        ZendeskSdk.initHelpCenter(
+        ZendeskSdk.initHelpCenterAndroid(
                 withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid
                   )
                   .show(uiFrame.topmost().android.activity);
@@ -76,7 +88,7 @@ export class ZendeskSdk {
             withoutRequestsForIos: boolean = false,
             showAsModalForIos: boolean = false,
             ...categoryIds: number[]): void {
-        ZendeskSdk.initHelpCenter(
+        ZendeskSdk.initHelpCenterAndroid(
                 withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid
                   )
                   .withArticlesForCategoryIds(categoryIds)
@@ -90,7 +102,7 @@ export class ZendeskSdk {
             withoutRequestsForIos: boolean = false,
             showAsModalForIos: boolean = false,
             ...labelNames: string[]): void {
-        ZendeskSdk.initHelpCenter(
+        ZendeskSdk.initHelpCenterAndroid(
                 withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid
                   )
                   .withLabelNames(labelNames)
@@ -104,14 +116,36 @@ export class ZendeskSdk {
             withoutRequestsForIos: boolean = false,
             showAsModalForIos: boolean = false,
             ...sectionIds: number[]): void {
-        ZendeskSdk.initHelpCenter(
+        ZendeskSdk.initHelpCenterAndroid(
                 withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid
                   )
                   .withArticlesForSectionIds(sectionIds)
                   .show(uiFrame.topmost().android.activity);
     }
 
-    public static showArticle(articleId: number) {
-                ViewArticleActivity.startActivity(uiFrame.topmost().android.activity, new SimpleArticle(long(articleId), ""))
+    public static showArticle(articleId: number): void {
+        ViewArticleActivity.startActivity(uiFrame.topmost().android.activity, new SimpleArticle(long(articleId), ""))
+    }
+
+    public static createRequest(
+            requestSubject: string = "Android Ticket",
+            additionalInfo?: string,
+            ...tags: string[]) {
+
+        ContactZendeskActivity.startActivity(
+                uiFrame.topmost().android.activity, new ZendeskFeedbackConfiguration(
+                        {
+                            getRequestSubject(): string{
+                                return !!requestSubject ? requestSubject : null;
+                            },
+                            getAdditionalInfo(): string{
+                                return !!additionalInfo ? additionalInfo : null;
+                            },
+                            getTags(): any {
+                                return !!tags ? tags : null;
+                            },
+                        }
+                )
+        );
     }
 }

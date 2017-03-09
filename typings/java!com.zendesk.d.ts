@@ -1392,7 +1392,7 @@ declare module com {
 
                     public getAdditionalInfo(): string;
 
-                    public getTags(): java.util.List<any>;
+                    public getTags(): /*java.util.List<any>*/ any;
 
                     public getRequestSubject(): string;
                 }

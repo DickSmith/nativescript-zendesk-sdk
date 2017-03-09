@@ -19,6 +19,11 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
+    public static setUserLocale(locale: string): typeof ZendeskSdk {
+        ZDKConfig.instance().userLocale = locale;
+        return ZendeskSdk;
+    }
+
     public static setCoppaEnabled(enable: boolean): typeof ZendeskSdk {
         ZDKConfig.instance().coppaEnabled = enable;
         return ZendeskSdk;
@@ -40,13 +45,27 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
-    private static initHelpCenter(
+    private static initHelpCenterAndroid(
             withCategoriesCollapsedForAndroid: boolean = false,
             showContactUsButtonForAndroid: boolean = true,
-            showConversationsMenuButtonForAndroid: boolean = true,
+            showConversationsMenuButtonForAndroid: boolean = true,): SupportActivity.Builder {
+        return null;
+    }
+
+    private static initHelpCenterIos(
+            helpCenterContentModel: ZDKHelpCenterOverviewContentModel,
             withoutRequestsForIos: boolean = false,
-            showAsModalForIos: boolean = false,)/*: SupportActivity.Builder*/ {
-        //TODO
+            showAsModalForIos: boolean = false,): void {
+        if ( withoutRequestsForIos ) {
+            ZDKHelpCenter.setNavBarConversationsUIType(ZDKNavBarConversationsUIType.None);
+        }
+        if ( showAsModalForIos ) {
+            uiFrame.topmost().ios.controller.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
+        } else {
+            ZDKHelpCenter.pushHelpCenterOverviewWithContentModel(
+                    uiFrame.topmost().ios.controller, helpCenterContentModel
+            );
+        }
     }
 
     public static showHelpCenter(
@@ -56,17 +75,7 @@ export class ZendeskSdk {
             withoutRequestsForIos: boolean = false,
             showAsModalForIos: boolean = false,): void {
         let helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
-        if ( withoutRequestsForIos ) {
-            ZDKHelpCenter.setNavBarConversationsUIType(ZDKNavBarConversationsUIType.None);
-        }
-        if ( showAsModalForIos ) {
-            uiFrame.topmost().ios.controller.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
-        } else {
-            ZDKHelpCenter.pushHelpCenterOverviewWithContentModel(
-                    uiFrame.topmost().ios.controller,
-                    helpCenterContentModel
-            );
-        }
+        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
     }
 
     public static showHelpCenterForCategoryIds(
@@ -76,7 +85,10 @@ export class ZendeskSdk {
             withoutRequestsForIos: boolean = false,
             showAsModalForIos: boolean = false,
             ...categoryIds: number[]): void {
-        //TODO
+        let helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
+        helpCenterContentModel.groupType                              = ZDKHelpCenterOverviewGroupType.Category;
+        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
+
     }
 
     public static showHelpCenterForLabelNames(
@@ -86,7 +98,9 @@ export class ZendeskSdk {
             withoutRequestsForIos: boolean = false,
             showAsModalForIos: boolean = false,
             ...labelNames: string[]): void {
-        //TODO
+        let helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
+        helpCenterContentModel.labels                                 = labelNames;
+        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
     }
 
     public static showHelpCenterForSectionIds(
@@ -96,10 +110,28 @@ export class ZendeskSdk {
             withoutRequestsForIos: boolean = false,
             showAsModalForIos: boolean = false,
             ...sectionIds: number[]): void {
+        let helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
+        helpCenterContentModel.groupType                              = ZDKHelpCenterOverviewGroupType.Section;
+        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
+    }
+
+    public static showArticle(articleId: number): void {
         //TODO
     }
 
-    public static showArticle(articleId: number) {
-                //TODO
+    static createRequest(
+            requestSubject?: string,
+            additionalInfo?: string,
+            ...tags: string[]): void {
+        ZDKRequests.configure(
+                (
+                        account: ZDKAccount,
+                        requestCreationConfig: ZDKRequestCreationConfig) => {
+                    requestCreationConfig.subject               = requestSubject;
+                    requestCreationConfig.additionalRequestInfo = additionalInfo;
+                    requestCreationConfig.tags                  = tags;
+                }
+        );
+        ZDKRequests.presentRequestCreationWithViewController(uiFrame.topmost().ios.controller);
     }
 }
