@@ -1,4 +1,3 @@
-/// <reference path="./_helpers.d.ts" />
 /// <reference path="../node_modules/tns-platform-declarations/android.d.ts" />
 
 import androidsupportv4appFragmentManager = android.support.v4.app.FragmentManager;
