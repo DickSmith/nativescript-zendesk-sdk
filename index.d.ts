@@ -27,35 +27,35 @@ export declare class ZendeskSdk {
             showAsModalForIos?);
 
     static showHelpCenter(
-            withCategoriesCollapsedForAndroid?: boolean,
-            showContactUsButtonForAndroid?: boolean,
             showConversationsMenuButtonForAndroid?: boolean,
             showConversationsMenuButtonForIos?: boolean,
+            withCategoriesCollapsedForAndroid?: boolean,
+            showContactUsButtonForAndroid?: boolean,
             showAsModalForIos?: boolean): void;
 
     static showHelpCenterForCategoryIds(
-            withCategoriesCollapsedForAndroid?: boolean,
-            showContactUsButtonForAndroid?: boolean,
+            categoryIds: number[],
             showConversationsMenuButtonForAndroid?: boolean,
             showConversationsMenuButtonForIos?: boolean,
-            showAsModalForIos?: boolean,
-            ...categoryIds: number[]): void;
+            withCategoriesCollapsedForAndroid?: boolean,
+            showContactUsButtonForAndroid?: boolean,
+            showAsModalForIos?: boolean): void;
 
     static showHelpCenterForLabelNames(
-            withCategoriesCollapsedForAndroid?: boolean,
-            showContactUsButtonForAndroid?: boolean,
+            labelNames: string[],
             showConversationsMenuButtonForAndroid?: boolean,
             showConversationsMenuButtonForIos?: boolean,
-            showAsModalForIos?: boolean,
-            ...labelNames: string[]): void;
+            withCategoriesCollapsedForAndroid?: boolean,
+            showContactUsButtonForAndroid?: boolean,
+            showAsModalForIos?: boolean): void;
 
     static showHelpCenterForSectionIds(
-            withCategoriesCollapsedForAndroid?: boolean,
-            showContactUsButtonForAndroid?: boolean,
+            sectionIds: number[],
             showConversationsMenuButtonForAndroid?: boolean,
             showConversationsMenuButtonForIos?: boolean,
-            showAsModalForIos?: boolean,
-            ...sectionIds: number[]): void;
+            withCategoriesCollapsedForAndroid?: boolean,
+            showContactUsButtonForAndroid?: boolean,
+            showAsModalForIos?: boolean): void;
 
     static showArticle(
             articleId: string,

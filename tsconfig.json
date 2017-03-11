@@ -25,7 +25,8 @@
             "./node_modules"
         ],
         "types": [
-        ]
+        ],
+        "skipLibCheck": true
     },
     "exclude": [
         "demo",

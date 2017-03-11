@@ -1,4 +1,6 @@
-import * as uiFrame from 'ui/frame';
+import { device } from 'platform';
+import { topmost } from 'ui/frame';
+import Locale = java.util.Locale;
 import ZendeskConfig = com.zendesk.sdk.network.impl.ZendeskConfig;
 import Identity = com.zendesk.sdk.model.access.Identity;
 import AnonymousIdentity = com.zendesk.sdk.model.access.AnonymousIdentity;
@@ -9,7 +11,6 @@ import SimpleArticle = com.zendesk.sdk.model.helpcenter.SimpleArticle;
 import ContactZendeskActivity = com.zendesk.sdk.feedback.ui.ContactZendeskActivity;
 import BaseZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.BaseZendeskFeedbackConfiguration;
 import ZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
-import { device } from 'platform';
 
 export class ZendeskSdk {
 
@@ -21,13 +22,13 @@ export class ZendeskSdk {
             applicationId: string,
             clientId: string): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.init(
-                uiFrame.topmost().android.activity, zendeskUrl, applicationId, clientId
+                topmost().android.activity, zendeskUrl, applicationId, clientId
         );
         return ZendeskSdk;
     }
 
     public static setUserLocale(locale: string): typeof ZendeskSdk {
-        ZendeskConfig.INSTANCE.setDeviceLocale(new java.util.Locale(locale));
+        ZendeskConfig.INSTANCE.setDeviceLocale(new Locale(locale));
         return ZendeskSdk;
     }
 
@@ -71,64 +72,64 @@ export class ZendeskSdk {
     }
 
     public static showHelpCenter(
-            withCategoriesCollapsedForAndroid: boolean = false,
-            showContactUsButtonForAndroid: boolean = false,
             showConversationsMenuButtonForAndroid: boolean = true,
             showConversationsMenuButtonForIos: boolean = true,
+            withCategoriesCollapsedForAndroid: boolean = false,
+            showContactUsButtonForAndroid: boolean = false,
             showAsModalForIos: boolean = false,): void {
         ZendeskSdk.initHelpCenterAndroid(
                 withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid
                   )
-                  .show(uiFrame.topmost().android.activity);
+                  .show(topmost().android.activity);
     }
 
     public static showHelpCenterForCategoryIds(
-            withCategoriesCollapsedForAndroid: boolean = false,
-            showContactUsButtonForAndroid: boolean = false,
+            categoryIds: number[],
             showConversationsMenuButtonForAndroid: boolean = true,
             showConversationsMenuButtonForIos: boolean = true,
-            showAsModalForIos: boolean = false,
-            ...categoryIds: number[]): void {
+            withCategoriesCollapsedForAndroid: boolean = false,
+            showContactUsButtonForAndroid: boolean = false,
+            showAsModalForIos: boolean = false,): void {
         ZendeskSdk.initHelpCenterAndroid(
                 withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid
                   )
                   .withArticlesForCategoryIds(categoryIds)
-                  .show(uiFrame.topmost().android.activity);
+                  .show(topmost().android.activity);
     }
 
     public static showHelpCenterForLabelNames(
-            withCategoriesCollapsedForAndroid: boolean = false,
-            showContactUsButtonForAndroid: boolean = false,
+            labelNames: string[],
             showConversationsMenuButtonForAndroid: boolean = true,
             showConversationsMenuButtonForIos: boolean = true,
-            showAsModalForIos: boolean = false,
-            ...labelNames: string[]): void {
+            withCategoriesCollapsedForAndroid: boolean = false,
+            showContactUsButtonForAndroid: boolean = false,
+            showAsModalForIos: boolean = false,): void {
         ZendeskSdk.initHelpCenterAndroid(
                 withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid
                   )
                   .withLabelNames(labelNames)
-                  .show(uiFrame.topmost().android.activity);
+                  .show(topmost().android.activity);
     }
 
     public static showHelpCenterForSectionIds(
-            withCategoriesCollapsedForAndroid: boolean = false,
-            showContactUsButtonForAndroid: boolean = false,
+            sectionIds: number[],
             showConversationsMenuButtonForAndroid: boolean = true,
             showConversationsMenuButtonForIos: boolean = true,
-            showAsModalForIos: boolean = false,
-            ...sectionIds: number[]): void {
+            withCategoriesCollapsedForAndroid: boolean = false,
+            showContactUsButtonForAndroid: boolean = false,
+            showAsModalForIos: boolean = false,): void {
         ZendeskSdk.initHelpCenterAndroid(
                 withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid
                   )
                   .withArticlesForSectionIds(sectionIds)
-                  .show(uiFrame.topmost().android.activity);
+                  .show(topmost().android.activity);
     }
 
     public static showArticle(
             articleId: string,
             locale: string): void {
         ViewArticleActivity.startActivity(
-                uiFrame.topmost().android.activity, new SimpleArticle(long(long(articleId)), "")
+                topmost().android.activity, new SimpleArticle(global.long(global.long(articleId)), "")
         )
     }
 
@@ -139,12 +140,12 @@ export class ZendeskSdk {
             ...tags: string[]) {
 
         ContactZendeskActivity.startActivity(
-                uiFrame.topmost().android.activity, new ZendeskFeedbackConfiguration(
+                topmost().android.activity, new ZendeskFeedbackConfiguration(
                         {
                             getRequestSubject(): string {
                                 return !!requestSubject ? requestSubject : null;
                             },
-                            getAdditionalInfo(): string{
+                            getAdditionalInfo(): string {
                                 let deviceInfo: string = addDeviceInfo ? "\n\n" + device.language + "-" + device.region
                                                                        + "\n" + device.manufacturer + " " + device.model
                                                                        + "\n" + device.os + " " + device.osVersion + "("
@@ -153,7 +154,7 @@ export class ZendeskSdk {
                                                                                  ? "\n\n" + additionalInfo
                                                                                  : "") + deviceInfo : "";
                             },
-                            getTags(): any{
+                            getTags(): any {
                                 return !!tags ? tags : null;
                             },
                         }
