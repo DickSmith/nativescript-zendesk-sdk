@@ -19,9 +19,9 @@ export class ZendeskSdk {
     public static initialize(
             zendeskUrl: string,
             applicationId: string,
-            oauthClientId: string): typeof ZendeskSdk {
+            clientId: string): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.init(
-                uiFrame.topmost().android.activity, zendeskUrl, applicationId, oauthClientId
+                uiFrame.topmost().android.activity, zendeskUrl, applicationId, clientId
         );
         return ZendeskSdk;
     }
@@ -57,7 +57,7 @@ export class ZendeskSdk {
 
     private static initHelpCenterAndroid(
             withCategoriesCollapsedForAndroid: boolean = false,
-            showContactUsButtonForAndroid: boolean = true,
+            showContactUsButtonForAndroid: boolean = false,
             showConversationsMenuButtonForAndroid: boolean = true,): SupportActivity.Builder {
         return new SupportActivity.Builder().withCategoriesCollapsed(withCategoriesCollapsedForAndroid)
                                             .showContactUsButton(showContactUsButtonForAndroid)
@@ -66,15 +66,15 @@ export class ZendeskSdk {
 
     private static initHelpCenterIos(
             helpCenterContentModel: ZDKHelpCenterOverviewContentModel,
-            withoutRequestsForIos: boolean = false,
+            showConversationsMenuButtonForIos: boolean = true,
             showAsModalForIos: boolean = false,): void {
     }
 
     public static showHelpCenter(
             withCategoriesCollapsedForAndroid: boolean = false,
-            showContactUsButtonForAndroid: boolean = true,
+            showContactUsButtonForAndroid: boolean = false,
             showConversationsMenuButtonForAndroid: boolean = true,
-            withoutRequestsForIos: boolean = false,
+            showConversationsMenuButtonForIos: boolean = true,
             showAsModalForIos: boolean = false,): void {
         ZendeskSdk.initHelpCenterAndroid(
                 withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid
@@ -84,9 +84,9 @@ export class ZendeskSdk {
 
     public static showHelpCenterForCategoryIds(
             withCategoriesCollapsedForAndroid: boolean = false,
-            showContactUsButtonForAndroid: boolean = true,
+            showContactUsButtonForAndroid: boolean = false,
             showConversationsMenuButtonForAndroid: boolean = true,
-            withoutRequestsForIos: boolean = false,
+            showConversationsMenuButtonForIos: boolean = true,
             showAsModalForIos: boolean = false,
             ...categoryIds: number[]): void {
         ZendeskSdk.initHelpCenterAndroid(
@@ -98,9 +98,9 @@ export class ZendeskSdk {
 
     public static showHelpCenterForLabelNames(
             withCategoriesCollapsedForAndroid: boolean = false,
-            showContactUsButtonForAndroid: boolean = true,
+            showContactUsButtonForAndroid: boolean = false,
             showConversationsMenuButtonForAndroid: boolean = true,
-            withoutRequestsForIos: boolean = false,
+            showConversationsMenuButtonForIos: boolean = true,
             showAsModalForIos: boolean = false,
             ...labelNames: string[]): void {
         ZendeskSdk.initHelpCenterAndroid(
@@ -112,9 +112,9 @@ export class ZendeskSdk {
 
     public static showHelpCenterForSectionIds(
             withCategoriesCollapsedForAndroid: boolean = false,
-            showContactUsButtonForAndroid: boolean = true,
+            showContactUsButtonForAndroid: boolean = false,
             showConversationsMenuButtonForAndroid: boolean = true,
-            withoutRequestsForIos: boolean = false,
+            showConversationsMenuButtonForIos: boolean = true,
             showAsModalForIos: boolean = false,
             ...sectionIds: number[]): void {
         ZendeskSdk.initHelpCenterAndroid(

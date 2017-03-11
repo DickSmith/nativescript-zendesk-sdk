@@ -5,9 +5,9 @@ var platform_1 = require("platform");
 var ZendeskSdk = (function () {
     function ZendeskSdk() {
     }
-    ZendeskSdk.initialize = function (zendeskUrl, applicationId, oauthClientId) {
+    ZendeskSdk.initialize = function (zendeskUrl, applicationId, clientId) {
         ZDKConfig.instance()
-            .initializeWithAppIdZendeskUrlClientId(applicationId, zendeskUrl, oauthClientId);
+            .initializeWithAppIdZendeskUrlClientId(applicationId, zendeskUrl, clientId);
         return ZendeskSdk;
     };
     ZendeskSdk.setUserLocale = function (locale) {
@@ -32,14 +32,14 @@ var ZendeskSdk = (function () {
     };
     ZendeskSdk.initHelpCenterAndroid = function (withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid) {
         if (withCategoriesCollapsedForAndroid === void 0) { withCategoriesCollapsedForAndroid = false; }
-        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = true; }
+        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = false; }
         if (showConversationsMenuButtonForAndroid === void 0) { showConversationsMenuButtonForAndroid = true; }
         return null;
     };
-    ZendeskSdk.initHelpCenterIos = function (helpCenterContentModel, withoutRequestsForIos, showAsModalForIos) {
-        if (withoutRequestsForIos === void 0) { withoutRequestsForIos = false; }
+    ZendeskSdk.initHelpCenterIos = function (helpCenterContentModel, showConversationsMenuButtonForIos, showAsModalForIos) {
+        if (showConversationsMenuButtonForIos === void 0) { showConversationsMenuButtonForIos = true; }
         if (showAsModalForIos === void 0) { showAsModalForIos = false; }
-        if (withoutRequestsForIos) {
+        if (!showConversationsMenuButtonForIos) {
             ZDKHelpCenter.setNavBarConversationsUIType(2);
         }
         if (showAsModalForIos) {
@@ -49,20 +49,20 @@ var ZendeskSdk = (function () {
             ZDKHelpCenter.pushHelpCenterOverviewWithContentModel(uiFrame.topmost().ios.controller, helpCenterContentModel);
         }
     };
-    ZendeskSdk.showHelpCenter = function (withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid, withoutRequestsForIos, showAsModalForIos) {
+    ZendeskSdk.showHelpCenter = function (withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid, showConversationsMenuButtonForIos, showAsModalForIos) {
         if (withCategoriesCollapsedForAndroid === void 0) { withCategoriesCollapsedForAndroid = false; }
-        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = true; }
+        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = false; }
         if (showConversationsMenuButtonForAndroid === void 0) { showConversationsMenuButtonForAndroid = true; }
-        if (withoutRequestsForIos === void 0) { withoutRequestsForIos = false; }
+        if (showConversationsMenuButtonForIos === void 0) { showConversationsMenuButtonForIos = true; }
         if (showAsModalForIos === void 0) { showAsModalForIos = false; }
         var helpCenterContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
-        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
+        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, showConversationsMenuButtonForIos, showAsModalForIos);
     };
-    ZendeskSdk.showHelpCenterForCategoryIds = function (withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid, withoutRequestsForIos, showAsModalForIos) {
+    ZendeskSdk.showHelpCenterForCategoryIds = function (withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid, showConversationsMenuButtonForIos, showAsModalForIos) {
         if (withCategoriesCollapsedForAndroid === void 0) { withCategoriesCollapsedForAndroid = false; }
-        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = true; }
+        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = false; }
         if (showConversationsMenuButtonForAndroid === void 0) { showConversationsMenuButtonForAndroid = true; }
-        if (withoutRequestsForIos === void 0) { withoutRequestsForIos = false; }
+        if (showConversationsMenuButtonForIos === void 0) { showConversationsMenuButtonForIos = true; }
         if (showAsModalForIos === void 0) { showAsModalForIos = false; }
         var categoryIds = [];
         for (var _i = 5; _i < arguments.length; _i++) {
@@ -70,13 +70,13 @@ var ZendeskSdk = (function () {
         }
         var helpCenterContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         helpCenterContentModel.groupType = 2;
-        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
+        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, showConversationsMenuButtonForIos, showAsModalForIos);
     };
-    ZendeskSdk.showHelpCenterForLabelNames = function (withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid, withoutRequestsForIos, showAsModalForIos) {
+    ZendeskSdk.showHelpCenterForLabelNames = function (withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid, showConversationsMenuButtonForIos, showAsModalForIos) {
         if (withCategoriesCollapsedForAndroid === void 0) { withCategoriesCollapsedForAndroid = false; }
-        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = true; }
+        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = false; }
         if (showConversationsMenuButtonForAndroid === void 0) { showConversationsMenuButtonForAndroid = true; }
-        if (withoutRequestsForIos === void 0) { withoutRequestsForIos = false; }
+        if (showConversationsMenuButtonForIos === void 0) { showConversationsMenuButtonForIos = true; }
         if (showAsModalForIos === void 0) { showAsModalForIos = false; }
         var labelNames = [];
         for (var _i = 5; _i < arguments.length; _i++) {
@@ -84,13 +84,13 @@ var ZendeskSdk = (function () {
         }
         var helpCenterContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         helpCenterContentModel.labels = labelNames;
-        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
+        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, showConversationsMenuButtonForIos, showAsModalForIos);
     };
-    ZendeskSdk.showHelpCenterForSectionIds = function (withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid, withoutRequestsForIos, showAsModalForIos) {
+    ZendeskSdk.showHelpCenterForSectionIds = function (withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid, showConversationsMenuButtonForIos, showAsModalForIos) {
         if (withCategoriesCollapsedForAndroid === void 0) { withCategoriesCollapsedForAndroid = false; }
-        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = true; }
+        if (showContactUsButtonForAndroid === void 0) { showContactUsButtonForAndroid = false; }
         if (showConversationsMenuButtonForAndroid === void 0) { showConversationsMenuButtonForAndroid = true; }
-        if (withoutRequestsForIos === void 0) { withoutRequestsForIos = false; }
+        if (showConversationsMenuButtonForIos === void 0) { showConversationsMenuButtonForIos = true; }
         if (showAsModalForIos === void 0) { showAsModalForIos = false; }
         var sectionIds = [];
         for (var _i = 5; _i < arguments.length; _i++) {
@@ -98,7 +98,7 @@ var ZendeskSdk = (function () {
         }
         var helpCenterContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         helpCenterContentModel.groupType = 1;
-        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, withoutRequestsForIos, showAsModalForIos);
+        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, showConversationsMenuButtonForIos, showAsModalForIos);
     };
     ZendeskSdk.showArticle = function (articleId, locale) {
         var provider = ZDKHelpCenterProvider.alloc()

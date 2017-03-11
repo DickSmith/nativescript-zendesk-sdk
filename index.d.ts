@@ -4,7 +4,7 @@ export declare class ZendeskSdk {
     static initialize(
             zendeskUrl: string,
             applicationId: string,
-            oauthClientId: string): typeof ZendeskSdk;
+            clientId: string): typeof ZendeskSdk;
 
     static setUserLocale(locale: string): typeof ZendeskSdk;
 
@@ -23,21 +23,21 @@ export declare class ZendeskSdk {
 
     private static initHelpCenterIos(
             helpCenterContentModel,
-            withoutRequestsForIos?,
+            showConversationsMenuButtonForIos?,
             showAsModalForIos?);
 
     static showHelpCenter(
             withCategoriesCollapsedForAndroid?: boolean,
             showContactUsButtonForAndroid?: boolean,
             showConversationsMenuButtonForAndroid?: boolean,
-            withoutRequestsForIos?: boolean,
+            showConversationsMenuButtonForIos?: boolean,
             showAsModalForIos?: boolean): void;
 
     static showHelpCenterForCategoryIds(
             withCategoriesCollapsedForAndroid?: boolean,
             showContactUsButtonForAndroid?: boolean,
             showConversationsMenuButtonForAndroid?: boolean,
-            withoutRequestsForIos?: boolean,
+            showConversationsMenuButtonForIos?: boolean,
             showAsModalForIos?: boolean,
             ...categoryIds: number[]): void;
 
@@ -45,7 +45,7 @@ export declare class ZendeskSdk {
             withCategoriesCollapsedForAndroid?: boolean,
             showContactUsButtonForAndroid?: boolean,
             showConversationsMenuButtonForAndroid?: boolean,
-            withoutRequestsForIos?: boolean,
+            showConversationsMenuButtonForIos?: boolean,
             showAsModalForIos?: boolean,
             ...labelNames: string[]): void;
 
@@ -53,7 +53,7 @@ export declare class ZendeskSdk {
             withCategoriesCollapsedForAndroid?: boolean,
             showContactUsButtonForAndroid?: boolean,
             showConversationsMenuButtonForAndroid?: boolean,
-            withoutRequestsForIos?: boolean,
+            showConversationsMenuButtonForIos?: boolean,
             showAsModalForIos?: boolean,
             ...sectionIds: number[]): void;
 
