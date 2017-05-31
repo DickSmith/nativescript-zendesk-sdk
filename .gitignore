@@ -30,4 +30,4 @@ node_modules
 !/metadata*/Zendesk*
 !/typings/*.d.ts
 !references.d.ts
-!index.d.ts
+!zendesk-sdk.d.ts

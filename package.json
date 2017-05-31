@@ -1,13 +1,13 @@
 {
   "name": "nativescript-zendesk-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Zendesk SDK for NativeScript",
   "main": "zendesk-sdk",
-  "typings": "index.d.ts",
+  "typings": "zendesk-sdk.d.ts",
   "nativescript": {
     "platforms": {
-      "android": "2.5.0",
-      "ios": "2.5.0"
+      "android": "3.0.0",
+      "ios": "3.0.0"
     }
   },
   "scripts": {

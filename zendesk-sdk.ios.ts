@@ -1,8 +1,9 @@
 import { device } from 'tns-core-modules/platform';
 import { topmost } from 'tns-core-modules/ui/frame';
-import SupportActivity = com.zendesk.sdk.support.SupportActivity;
+import { HelpCenterOptions } from './zendesk-sdk.common';
+import { ZendeskSdk as ZendeskSdkDefinition } from './zendesk-sdk';
 
-export class ZendeskSdk {
+export class ZendeskSdk implements ZendeskSdkDefinition {
 
     private constructor() {
     }
@@ -45,72 +46,47 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
-    private static initHelpCenterAndroid(withCategoriesCollapsedForAndroid: boolean = false,
-                                         showContactUsButtonForAndroid: boolean = false,
-                                         showConversationsMenuButtonForAndroid: boolean = true,): SupportActivity.Builder {
-
-        return null;
-    }
-
-    private static initHelpCenterIos(helpCenterContentModel: ZDKHelpCenterOverviewContentModel,
-                                     showConversationsMenuButtonForIos: boolean = true,
-                                     showAsModalForIos: boolean = false,): void {
-        if ( !showConversationsMenuButtonForIos ) {
+    private static initHelpCenter(helpCenterContentModel: ZDKHelpCenterOverviewContentModel,
+                                  options: HelpCenterOptions): void {
+        if ( !options.showConversationsMenuButtonForIos ) {
             ZDKHelpCenter.setNavBarConversationsUIType(ZDKNavBarConversationsUIType.None);
         }
-        if ( showAsModalForIos ) {
+        if ( options.showAsModalForIos ) {
             topmost().ios.controller.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
+            ZDKHelpCenter.presentHelpCenterOverviewWithContentModel(topmost().ios.controller, helpCenterContentModel);
         } else {
-            ZDKHelpCenter.pushHelpCenterOverviewWithContentModel(
-                topmost().ios.controller, helpCenterContentModel,
-            );
+            ZDKHelpCenter.pushHelpCenterOverviewWithContentModel(topmost().ios.controller, helpCenterContentModel);
         }
     }
 
-    public static showHelpCenter(showConversationsMenuButtonForAndroid: boolean = true,
-                                 showConversationsMenuButtonForIos: boolean = true,
-                                 withCategoriesCollapsedForAndroid: boolean = false,
-                                 showContactUsButtonForAndroid: boolean = false,
-                                 showAsModalForIos: boolean = false,): void {
+    public static showHelpCenter(options: HelpCenterOptions = new HelpCenterOptions()): void {
         const helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
-        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, showConversationsMenuButtonForIos, showAsModalForIos);
+        ZendeskSdk.initHelpCenter(helpCenterContentModel, options);
     }
 
     public static showHelpCenterForCategoryIds(categoryIds: number[],
-                                               showConversationsMenuButtonForAndroid: boolean = true,
-                                               showConversationsMenuButtonForIos: boolean = true,
-                                               withCategoriesCollapsedForAndroid: boolean = false,
-                                               showContactUsButtonForAndroid: boolean = false,
-                                               showAsModalForIos: boolean = false,): void {
+                                               options: HelpCenterOptions = new HelpCenterOptions()): void {
         const helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         helpCenterContentModel.groupType = ZDKHelpCenterOverviewGroupType.Category;
-        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, showConversationsMenuButtonForIos, showAsModalForIos);
+        ZendeskSdk.initHelpCenter(helpCenterContentModel, options);
     }
 
     public static showHelpCenterForLabelNames(labelNames: string[],
-                                              showConversationsMenuButtonForAndroid: boolean = true,
-                                              showConversationsMenuButtonForIos: boolean = true,
-                                              withCategoriesCollapsedForAndroid: boolean = false,
-                                              showContactUsButtonForAndroid: boolean = false,
-                                              showAsModalForIos: boolean = false,): void {
+                                              options: HelpCenterOptions = new HelpCenterOptions()): void {
         const helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         const tempNSArray = NSMutableArray.alloc().initWithCapacity(labelNames.length);
         labelNames.forEach((value: string) => {
             tempNSArray.addObject(value);
         });
         helpCenterContentModel.labels = tempNSArray;
-        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, showConversationsMenuButtonForIos, showAsModalForIos);
+        ZendeskSdk.initHelpCenter(helpCenterContentModel, options);
     }
 
     public static showHelpCenterForSectionIds(sectionIds: number[],
-                                              showConversationsMenuButtonForAndroid: boolean = true,
-                                              showConversationsMenuButtonForIos: boolean = true,
-                                              withCategoriesCollapsedForAndroid: boolean = false,
-                                              showContactUsButtonForAndroid: boolean = false,
-                                              showAsModalForIos: boolean = false,): void {
+                                              options: HelpCenterOptions = new HelpCenterOptions()): void {
         const helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         helpCenterContentModel.groupType = ZDKHelpCenterOverviewGroupType.Section;
-        ZendeskSdk.initHelpCenterIos(helpCenterContentModel, showConversationsMenuButtonForIos, showAsModalForIos);
+        ZendeskSdk.initHelpCenter(helpCenterContentModel, options);
     }
 
     public static showArticle(articleId: string,

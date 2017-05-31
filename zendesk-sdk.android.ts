@@ -1,5 +1,7 @@
 import { device } from 'tns-core-modules/platform';
 import { topmost } from 'tns-core-modules/ui/frame';
+import { HelpCenterOptions } from './zendesk-sdk.common';
+import { ZendeskSdk as ZendeskSdkDefinition } from './zendesk-sdk';
 import Locale = java.util.Locale;
 import ZendeskConfig = com.zendesk.sdk.network.impl.ZendeskConfig;
 import AnonymousIdentity = com.zendesk.sdk.model.access.AnonymousIdentity;
@@ -10,7 +12,7 @@ import SimpleArticle = com.zendesk.sdk.model.helpcenter.SimpleArticle;
 import ContactZendeskActivity = com.zendesk.sdk.feedback.ui.ContactZendeskActivity;
 import ZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
 
-export class ZendeskSdk {
+export class ZendeskSdk implements ZendeskSdkDefinition {
 
     private constructor() {
     }
@@ -57,67 +59,30 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
-    private static initHelpCenterAndroid(withCategoriesCollapsedForAndroid: boolean = false,
-                                         showContactUsButtonForAndroid: boolean = false,
-                                         showConversationsMenuButtonForAndroid: boolean = true): SupportActivity.Builder {
-        return new SupportActivity.Builder().withCategoriesCollapsed(withCategoriesCollapsedForAndroid)
-            .showContactUsButton(showContactUsButtonForAndroid)
-            .showConversationsMenuButton(showConversationsMenuButtonForAndroid);
+    private static initHelpCenter(options: HelpCenterOptions): SupportActivity.Builder {
+        return new SupportActivity.Builder()
+            .withCategoriesCollapsed(options.withCategoriesCollapsedForAndroid)
+            .showContactUsButton(options.showContactUsButtonForAndroid)
+            .showConversationsMenuButton(options.showConversationsMenuButtonForAndroid);
     }
 
-    private static initHelpCenterIos(helpCenterContentModel: ZDKHelpCenterOverviewContentModel,
-                                     showConversationsMenuButtonForIos: boolean = true,
-                                     showAsModalForIos: boolean = false): void {
-    }
-
-    public static showHelpCenter(showConversationsMenuButtonForAndroid: boolean = true,
-                                 showConversationsMenuButtonForIos: boolean = true,
-                                 withCategoriesCollapsedForAndroid: boolean = false,
-                                 showContactUsButtonForAndroid: boolean = false,
-                                 showAsModalForIos: boolean = false): void {
-        ZendeskSdk.initHelpCenterAndroid(
-            withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid,
-        )
-            .show(topmost().android.activity);
+    public static showHelpCenter(options: HelpCenterOptions = new HelpCenterOptions()): void {
+        ZendeskSdk.initHelpCenter(options).show(topmost().android.activity);
     }
 
     public static showHelpCenterForCategoryIds(categoryIds: number[],
-                                               showConversationsMenuButtonForAndroid: boolean = true,
-                                               showConversationsMenuButtonForIos: boolean = true,
-                                               withCategoriesCollapsedForAndroid: boolean = false,
-                                               showContactUsButtonForAndroid: boolean = false,
-                                               showAsModalForIos: boolean = false): void {
-        ZendeskSdk.initHelpCenterAndroid(
-            withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid,
-        )
-            .withArticlesForCategoryIds(categoryIds)
-            .show(topmost().android.activity);
+                                               options: HelpCenterOptions = new HelpCenterOptions()): void {
+        ZendeskSdk.initHelpCenter(options).withArticlesForCategoryIds(categoryIds).show(topmost().android.activity);
     }
 
     public static showHelpCenterForLabelNames(labelNames: string[],
-                                              showConversationsMenuButtonForAndroid: boolean = true,
-                                              showConversationsMenuButtonForIos: boolean = true,
-                                              withCategoriesCollapsedForAndroid: boolean = false,
-                                              showContactUsButtonForAndroid: boolean = false,
-                                              showAsModalForIos: boolean = false): void {
-        ZendeskSdk.initHelpCenterAndroid(
-            withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid,
-        )
-            .withLabelNames(labelNames)
-            .show(topmost().android.activity);
+                                              options: HelpCenterOptions = new HelpCenterOptions()): void {
+        ZendeskSdk.initHelpCenter(options).withLabelNames(labelNames).show(topmost().android.activity);
     }
 
     public static showHelpCenterForSectionIds(sectionIds: number[],
-                                              showConversationsMenuButtonForAndroid: boolean = true,
-                                              showConversationsMenuButtonForIos: boolean = true,
-                                              withCategoriesCollapsedForAndroid: boolean = false,
-                                              showContactUsButtonForAndroid: boolean = false,
-                                              showAsModalForIos: boolean = false): void {
-        ZendeskSdk.initHelpCenterAndroid(
-            withCategoriesCollapsedForAndroid, showContactUsButtonForAndroid, showConversationsMenuButtonForAndroid,
-        )
-            .withArticlesForSectionIds(sectionIds)
-            .show(topmost().android.activity);
+                                              options: HelpCenterOptions = new HelpCenterOptions()): void {
+        ZendeskSdk.initHelpCenter(options).withArticlesForSectionIds(sectionIds).show(topmost().android.activity);
     }
 
     public static showArticle(articleId: string,
