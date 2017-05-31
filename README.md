@@ -140,3 +140,36 @@ https://github.com/NativeScript/android-dts-generator
 https://docs.nativescript.org/runtimes/ios/how-to/Use-Native-Libraries  
 Although some manual changes had to be made by commenting-out types and setting to `any` that NativeScript handles the conversions for, such as NSArray and `java.util.List`.  
 Current typings/metadata were generated using version `1.9.0.1` of the Zendesk and Zendesk Provider SDKs.
+
+## Dumping typings...
+##### iOS
+```sh
+pod repo update
+TNS_DEBUG_METADATA_PATH="$(pwd)/metadata" TNS_TYPESCRIPT_DECLARATIONS_PATH="$(pwd)/typings" npm run demo.ios
+cp typings/x86_64/objc\!Zendesk* typings/
+```
+
+##### Android
+```sh
+cd android-sdk
+./gradlew clean
+./gradlew getDeps
+cd lib
+
+jar xf sdk-1.9.2.1.aar
+mv classes.jar used-zendesk-sdk.jar
+
+jar xf sdk-providers-1.9.2.1.aar
+mv classes.jar used-zendesk-providers-sdk.jar
+
+rm -rf */
+find . -type f ! -iname "zendesk-*" -delete
+cd ../..
+
+java -jar ../android-dts-generator/dts-generator/build/libs/dts-generator.jar -input \
+    android-sdk/lib/used-zendesk-sdk.jar \
+    && mv out/android.d.ts typings/java\!ZendeskSDK.d.ts;
+java -jar ../android-dts-generator/dts-generator/build/libs/dts-generator.jar -input \
+    android-sdk/lib/used-zendesk-providers-sdk.jar \
+    && mv out/android.d.ts typings/java\!ZendeskProviderSDK.d.ts;
+```
