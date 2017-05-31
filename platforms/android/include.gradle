@@ -11,5 +11,5 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.zendesk', name: 'sdk', version: '1.9.0.1'
+    compile group: 'com.zendesk', name: 'sdk', version: '1.9.2.1'
 }

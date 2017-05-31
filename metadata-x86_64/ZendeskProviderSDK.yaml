@@ -12877,6 +12877,47 @@ Items:
             - Type:            Interface
               JsName:          NSString
               WithProtocols:   
+      - Name:            titleInPortal
+        JsName:          titleInPortal
+        Filename:        /Users/dick/src/nativescript-zendesk-sdk/demo/platforms/ios/Pods/ZendeskSDK/ZendeskProviderSDK.framework/Headers/ZDKTicketField.h
+        Module:          
+          FullName:        ZendeskProviderSDK.ZDKTicketField
+          IsPartOfFramework: true
+          IsSystemModule:  false
+          Libraries:       
+        Flags:           [ IsIosAppExtensionAvailable ]
+        Type:            Property
+        Getter:          
+          Name:            titleInPortal
+          JsName:          titleInPortal
+          Filename:        /Users/dick/src/nativescript-zendesk-sdk/demo/platforms/ios/Pods/ZendeskSDK/ZendeskProviderSDK.framework/Headers/ZDKTicketField.h
+          Module:          
+            FullName:        ZendeskProviderSDK.ZDKTicketField
+            IsPartOfFramework: true
+            IsSystemModule:  false
+            Libraries:       
+          Flags:           [ IsIosAppExtensionAvailable ]
+          Type:            Method
+          Signature:       
+            - Type:            Interface
+              JsName:          NSString
+              WithProtocols:   
+        Setter:          
+          Name:            'setTitleInPortal:'
+          JsName:          setTitleInPortal
+          Filename:        /Users/dick/src/nativescript-zendesk-sdk/demo/platforms/ios/Pods/ZendeskSDK/ZendeskProviderSDK.framework/Headers/ZDKTicketField.h
+          Module:          
+            FullName:        ZendeskProviderSDK.ZDKTicketField
+            IsPartOfFramework: true
+            IsSystemModule:  false
+            Libraries:       
+          Flags:           [ IsIosAppExtensionAvailable ]
+          Type:            Method
+          Signature:       
+            - Type:            Void
+            - Type:            Interface
+              JsName:          NSString
+              WithProtocols:   
       - Name:            type
         JsName:          type
         Filename:        /Users/dick/src/nativescript-zendesk-sdk/demo/platforms/ios/Pods/ZendeskSDK/ZendeskProviderSDK.framework/Headers/ZDKTicketField.h
@@ -13333,6 +13374,47 @@ Items:
     InstanceMethods: 
     StaticMethods:   
     InstanceProperties: 
+      - Name:            displayName
+        JsName:          displayName
+        Filename:        /Users/dick/src/nativescript-zendesk-sdk/demo/platforms/ios/Pods/ZendeskSDK/ZendeskProviderSDK.framework/Headers/ZDKTicketForm.h
+        Module:          
+          FullName:        ZendeskProviderSDK.ZDKTicketForm
+          IsPartOfFramework: true
+          IsSystemModule:  false
+          Libraries:       
+        Flags:           [ IsIosAppExtensionAvailable ]
+        Type:            Property
+        Getter:          
+          Name:            displayName
+          JsName:          displayName
+          Filename:        /Users/dick/src/nativescript-zendesk-sdk/demo/platforms/ios/Pods/ZendeskSDK/ZendeskProviderSDK.framework/Headers/ZDKTicketForm.h
+          Module:          
+            FullName:        ZendeskProviderSDK.ZDKTicketForm
+            IsPartOfFramework: true
+            IsSystemModule:  false
+            Libraries:       
+          Flags:           [ IsIosAppExtensionAvailable ]
+          Type:            Method
+          Signature:       
+            - Type:            Interface
+              JsName:          NSString
+              WithProtocols:   
+        Setter:          
+          Name:            'setDisplayName:'
+          JsName:          setDisplayName
+          Filename:        /Users/dick/src/nativescript-zendesk-sdk/demo/platforms/ios/Pods/ZendeskSDK/ZendeskProviderSDK.framework/Headers/ZDKTicketForm.h
+          Module:          
+            FullName:        ZendeskProviderSDK.ZDKTicketForm
+            IsPartOfFramework: true
+            IsSystemModule:  false
+            Libraries:       
+          Flags:           [ IsIosAppExtensionAvailable ]
+          Type:            Method
+          Signature:       
+            - Type:            Void
+            - Type:            Interface
+              JsName:          NSString
+              WithProtocols:   
       - Name:            formId
         JsName:          formId
         Filename:        /Users/dick/src/nativescript-zendesk-sdk/demo/platforms/ios/Pods/ZendeskSDK/ZendeskProviderSDK.framework/Headers/ZDKTicketForm.h

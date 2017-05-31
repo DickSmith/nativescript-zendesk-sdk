@@ -8,5 +8,5 @@ screenshots/
 !*.d.ts
 
 
-/typings
-/metadata*
+#/typings
+#/metadata*

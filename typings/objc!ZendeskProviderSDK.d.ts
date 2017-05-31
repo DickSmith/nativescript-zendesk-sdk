@@ -1628,6 +1628,8 @@ declare class ZDKTicketField extends NSObject implements ZDKDictionaryCreatable 
 
 	title: string;
 
+	titleInPortal: string;
+
 	type: ZDKTicketFieldType;
 
 	validationRegex: string;
@@ -1722,6 +1724,8 @@ declare class ZDKTicketForm extends NSObject implements ZDKDictionaryCreatable {
 	static alloc(): ZDKTicketForm; // inherited from NSObject
 
 	static new(): ZDKTicketForm; // inherited from NSObject
+
+	displayName: string;
 
 	formId: number;
 

@@ -232,6 +232,8 @@ declare class ZDKAttachmentViewDataSource extends NSObject implements UICollecti
 
 	collectionViewCellForItemAtIndexPath(collectionView: UICollectionView, indexPath: NSIndexPath): UICollectionViewCell;
 
+	collectionViewIndexPathForIndexTitleAtIndex(collectionView: UICollectionView, title: string, index: number): NSIndexPath;
+
 	collectionViewMoveItemAtIndexPathToIndexPath(collectionView: UICollectionView, sourceIndexPath: NSIndexPath, destinationIndexPath: NSIndexPath): void;
 
 	collectionViewNumberOfItemsInSection(collectionView: UICollectionView, section: number): number;
@@ -239,6 +241,8 @@ declare class ZDKAttachmentViewDataSource extends NSObject implements UICollecti
 	collectionViewViewForSupplementaryElementOfKindAtIndexPath(collectionView: UICollectionView, kind: string, indexPath: NSIndexPath): UICollectionReusableView;
 
 	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
+
+	indexTitlesForCollectionView(collectionView: UICollectionView): NSArray<string>;
 
 	isEqual(object: any): boolean;
 
@@ -1033,7 +1037,7 @@ declare class ZDKHelpCenterOverviewContentModel extends NSObject {
 
 	hideContactSupport: boolean;
 
-	labels: /*NSArray<any>*/ any;
+	labels: NSArray<any>;
 
 	navBarConversationsUIType: ZDKNavBarConversationsUIType;
 }
@@ -1989,7 +1993,7 @@ declare class ZDKRequestCreationConfig extends NSObject {
 
 	subject: string;
 
-	tags: /*NSArray<any>*/ any;
+	tags: NSArray<any>;
 
 	contentSeperator(): string;
 }

@@ -1,6 +1,15 @@
-#*.js
+*.js
 *.js.map
 *.log
+!scripts/*.js
+demo/app/*.js
+!demo/karma.conf.js
+!demo/app/tests/*.js
+demo/*.d.ts
+!demo/references.d.ts
+demo/lib
+demo/platforms
+demo/node_modules
 node_modules
 
 # IDEs and editors
@@ -13,6 +22,12 @@ node_modules
 .settings/
 *.sublime-workspace
 
+#zendesk-sdk.android.d.ts
+#zendesk-sdk.ios.d.ts
 
-zendesk-sdk.android.d.ts
-zendesk-sdk.ios.d.ts
+*.d.ts
+/metadata*
+!/metadata*/Zendesk*
+!/typings/*.d.ts
+!references.d.ts
+!index.d.ts
