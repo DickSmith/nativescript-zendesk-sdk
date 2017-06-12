@@ -7,6 +7,13 @@ screenshots/
 *.ts
 !*.d.ts
 
-
-#/typings
-#/metadata*
+/.idea
+/android-sdk
+/typings
+/.editorconfig
+/references.d.ts
+/package
+/*.tgz
+/.npmignore
+/tslint.json
+/tsconfig.json

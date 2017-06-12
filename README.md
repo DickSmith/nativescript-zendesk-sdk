@@ -59,12 +59,15 @@ ZendeskSdk.showHelpCenter();
 
 #### Optional Parameters
 ```typescript
-showHelpCenter(
+const options = {
     showConversationsMenuButtonForAndroid: boolean = true,
     showConversationsMenuButtonForIos: boolean = true,
     withCategoriesCollapsedForAndroid: boolean = false,
     showContactUsButtonForAndroid: boolean = false,
-    showAsModalForIos: boolean = false,);
+    showAsModalForIos: boolean = false,
+}
+
+ZendeskSdk.showHelpCenter(options);
 ```
 
 _Note:  The SDKs for Android and iOS diverge quite a bit for this section, so some options are only applicable to iOS or Android._
@@ -99,23 +102,17 @@ Per original SDKs, only one filter can be used at a time.
 
 #### Filter by category
 ```typescript
-showHelpCenterForCategoryIds(
-    categoryIds: number[],
-    /*same optional parameters as unfiltered*/);
+showHelpCenterForCategoryIds(categoryIds: number[], options);
 ```
 
 #### Filter by section
 ```typescript
-showHelpCenterForLabelNames(
-    categoryIds: string[],
-    /*same optional parameters as unfiltered*/);
+showHelpCenterForLabelNames(categoryIds: string[], options);
 ```
 
 #### Filter by article label
 ```typescript
-showHelpCenterForSectionIds(
-    categoryIds: number[],
-    /*same optional parameters as unfiltered*/);
+showHelpCenterForSectionIds(categoryIds: number[], options);
 ```
 
 ### Create a request
@@ -145,7 +142,7 @@ Current typings/metadata were generated using version `1.9.0.1` of the Zendesk a
 ##### iOS
 ```sh
 pod repo update
-TNS_DEBUG_METADATA_PATH="$(pwd)/metadata" TNS_TYPESCRIPT_DECLARATIONS_PATH="$(pwd)/typings" npm run demo.ios
+TNS_TYPESCRIPT_DECLARATIONS_PATH="$(pwd)/typings" npm run demo.ios
 cp typings/x86_64/objc\!Zendesk* typings/
 ```
 

@@ -1,7 +1,6 @@
 import { device } from 'tns-core-modules/platform';
 import { topmost } from 'tns-core-modules/ui/frame';
-import { HelpCenterOptions } from './zendesk-sdk.common';
-import { ZendeskSdk as ZendeskSdkDefinition } from './zendesk-sdk';
+import { HelpCenterOptions, ZendeskIosThemeSimple } from './zendesk-sdk.common';
 import Locale = java.util.Locale;
 import ZendeskConfig = com.zendesk.sdk.network.impl.ZendeskConfig;
 import AnonymousIdentity = com.zendesk.sdk.model.access.AnonymousIdentity;
@@ -12,14 +11,14 @@ import SimpleArticle = com.zendesk.sdk.model.helpcenter.SimpleArticle;
 import ContactZendeskActivity = com.zendesk.sdk.feedback.ui.ContactZendeskActivity;
 import ZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
 
-export class ZendeskSdk implements ZendeskSdkDefinition {
+export class ZendeskSdk {
 
     private constructor() {
     }
 
     public static initialize(zendeskUrl: string,
                              applicationId: string,
-                             clientId: string): typeof ZendeskSdk {
+                             clientId: string): ZendeskSdk {
         ZendeskConfig.INSTANCE.init(
             topmost().android.activity, zendeskUrl, applicationId, clientId,
         );
@@ -27,20 +26,20 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
         return ZendeskSdk;
     }
 
-    public static setUserLocale(locale: string): typeof ZendeskSdk {
+    public static setUserLocale(locale: string): ZendeskSdk {
         ZendeskConfig.INSTANCE.setDeviceLocale(new Locale(locale));
 
         return ZendeskSdk;
     }
 
-    public static setCoppaEnabled(enable: boolean): typeof ZendeskSdk {
+    public static setCoppaEnabled(enable: boolean): ZendeskSdk {
         ZendeskConfig.INSTANCE.setCoppaEnabled(enable);
 
         return ZendeskSdk;
     }
 
     public static setAnonymousIdentity(name: string,
-                                       email: string): typeof ZendeskSdk {
+                                       email: string): ZendeskSdk {
         ZendeskConfig.INSTANCE.setIdentity(
             new AnonymousIdentity.Builder()
                 .withNameIdentifier(name)
@@ -51,7 +50,7 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
         return ZendeskSdk;
     }
 
-    public static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk {
+    public static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk {
         ZendeskConfig.INSTANCE.setIdentity(
             new JwtIdentity(jwtUserIdentifier),
         );
@@ -59,7 +58,8 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
         return ZendeskSdk;
     }
 
-    private static initHelpCenter(options: HelpCenterOptions): SupportActivity.Builder {
+    private static initHelpCenter(options: HelpCenterOptions,
+                                  helpCenterContentModel?: any): SupportActivity.Builder {
         return new SupportActivity.Builder()
             .withCategoriesCollapsed(options.withCategoriesCollapsedForAndroid)
             .showContactUsButton(options.showContactUsButtonForAndroid)
@@ -120,4 +120,6 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
             ),
         );
     }
+
+    public static setIosTheme(theme: ZendeskIosThemeSimple): void { }
 }

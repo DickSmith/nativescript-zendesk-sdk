@@ -1,36 +1,35 @@
 import { device } from 'tns-core-modules/platform';
 import { topmost } from 'tns-core-modules/ui/frame';
-import { HelpCenterOptions } from './zendesk-sdk.common';
-import { ZendeskSdk as ZendeskSdkDefinition } from './zendesk-sdk';
+import { HelpCenterOptions, ZendeskIosThemeSimple } from './zendesk-sdk.common';
 
-export class ZendeskSdk implements ZendeskSdkDefinition {
+export class ZendeskSdk {
 
     private constructor() {
     }
 
     public static initialize(zendeskUrl: string,
                              applicationId: string,
-                             clientId: string): typeof ZendeskSdk {
+                             clientId: string): ZendeskSdk {
         ZDKConfig.instance()
             .initializeWithAppIdZendeskUrlClientId(applicationId, zendeskUrl, clientId);
 
         return ZendeskSdk;
     }
 
-    public static setUserLocale(locale: string): typeof ZendeskSdk {
+    public static setUserLocale(locale: string): ZendeskSdk {
         ZDKConfig.instance().userLocale = locale;
 
         return ZendeskSdk;
     }
 
-    public static setCoppaEnabled(enable: boolean): typeof ZendeskSdk {
+    public static setCoppaEnabled(enable: boolean): ZendeskSdk {
         ZDKConfig.instance().coppaEnabled = enable;
 
         return ZendeskSdk;
     }
 
     public static setAnonymousIdentity(name: string,
-                                       email: string): typeof ZendeskSdk {
+                                       email: string): ZendeskSdk {
         let identity: ZDKAnonymousIdentity = ZDKAnonymousIdentity.new();
         identity.name = name;
         identity.email = email;
@@ -39,15 +38,15 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
         return ZendeskSdk;
     }
 
-    public static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk {
+    public static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk {
         ZDKConfig.instance().userIdentity = ZDKJwtIdentity.alloc()
             .initWithJwtUserIdentifier(jwtUserIdentifier);
 
         return ZendeskSdk;
     }
 
-    private static initHelpCenter(helpCenterContentModel: ZDKHelpCenterOverviewContentModel,
-                                  options: HelpCenterOptions): void {
+    private static initHelpCenter(options: HelpCenterOptions,
+                                  helpCenterContentModel: ZDKHelpCenterOverviewContentModel): void {
         if ( !options.showConversationsMenuButtonForIos ) {
             ZDKHelpCenter.setNavBarConversationsUIType(ZDKNavBarConversationsUIType.None);
         }
@@ -61,14 +60,14 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
 
     public static showHelpCenter(options: HelpCenterOptions = new HelpCenterOptions()): void {
         const helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
-        ZendeskSdk.initHelpCenter(helpCenterContentModel, options);
+        ZendeskSdk.initHelpCenter(options, helpCenterContentModel);
     }
 
     public static showHelpCenterForCategoryIds(categoryIds: number[],
                                                options: HelpCenterOptions = new HelpCenterOptions()): void {
         const helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         helpCenterContentModel.groupType = ZDKHelpCenterOverviewGroupType.Category;
-        ZendeskSdk.initHelpCenter(helpCenterContentModel, options);
+        ZendeskSdk.initHelpCenter(options, helpCenterContentModel);
     }
 
     public static showHelpCenterForLabelNames(labelNames: string[],
@@ -79,14 +78,14 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
             tempNSArray.addObject(value);
         });
         helpCenterContentModel.labels = tempNSArray;
-        ZendeskSdk.initHelpCenter(helpCenterContentModel, options);
+        ZendeskSdk.initHelpCenter(options, helpCenterContentModel);
     }
 
     public static showHelpCenterForSectionIds(sectionIds: number[],
                                               options: HelpCenterOptions = new HelpCenterOptions()): void {
         const helpCenterContentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         helpCenterContentModel.groupType = ZDKHelpCenterOverviewGroupType.Section;
-        ZendeskSdk.initHelpCenter(helpCenterContentModel, options);
+        ZendeskSdk.initHelpCenter(options, helpCenterContentModel);
     }
 
     public static showArticle(articleId: string,
@@ -112,16 +111,20 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
                                 additionalInfo?: string,
                                 addDeviceInfo: boolean = true,
                                 ...tags: string[]): void {
-        const deviceInfo: string = addDeviceInfo ? '\n\n' + device.language + '-' + device.region + '\n'
-                                                   + device.manufacturer + ' ' + device.model + '\n' + device.os + ' '
-                                                   + device.osVersion + '(' + device.sdkVersion + ')' : '';
+        const deviceInfo: string = addDeviceInfo
+            ? '\n\n' + device.language + '-' + device.region + '\n'
+              + device.manufacturer + ' ' + device.model + '\n' + device.os + ' '
+              + device.osVersion + '(' + device.sdkVersion + ')'
+            : '';
         ZDKRequests.configure(
             (account: ZDKAccount,
              requestCreationConfig: ZDKRequestCreationConfig) => {
                 requestCreationConfig.subject = requestSubject;
                 requestCreationConfig.additionalRequestInfo = !!additionalInfo || addDeviceInfo
                     ? '\n\n------------------------------' // added to make the output the same as Android SDK
-                      + (!!additionalInfo ? '\n\n' + additionalInfo : '')
+                      + (!!additionalInfo
+                        ? '\n\n' + additionalInfo
+                        : '')
                       + deviceInfo
                     : '';
                 const tempNSArray = NSMutableArray.alloc().initWithCapacity(tags.length);
@@ -132,5 +135,23 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
             },
         );
         ZDKRequests.presentRequestCreationWithViewController(topmost().ios.controller);
+    }
+
+    public static setIosTheme(theme: ZendeskIosThemeSimple): void {
+        let themeTemp: ZDKTheme = ZDKTheme.baseTheme();
+
+        if ( theme.primaryTextColor ) { themeTemp.primaryTextColor = theme.primaryTextColor; }
+        if ( theme.secondaryTextColor ) { themeTemp.secondaryTextColor = theme.secondaryTextColor; }
+        if ( theme.primaryBackgroundColor ) { themeTemp.primaryBackgroundColor = theme.primaryBackgroundColor; }
+        if ( theme.secondaryBackgroundColor ) { themeTemp.secondaryBackgroundColor = theme.secondaryBackgroundColor; }
+        if ( theme.emptyBackgroundColor ) { themeTemp.emptyBackgroundColor = theme.emptyBackgroundColor; }
+        if ( theme.metaTextColor ) { themeTemp.metaTextColor = theme.metaTextColor; }
+        if ( theme.separatorColor ) { themeTemp.separatorColor = theme.separatorColor; }
+        if ( theme.inputFieldTextColor ) { themeTemp.inputFieldTextColor = theme.inputFieldTextColor; }
+        if ( theme.inputFieldBackgroundColor ) { themeTemp.inputFieldBackgroundColor = theme.inputFieldBackgroundColor;}
+        if ( theme.fontName ) { themeTemp.fontName = theme.fontName; }
+        if ( theme.boldFontName ) { themeTemp.boldFontName = theme.boldFontName; }
+
+        themeTemp.apply();
     }
 }

@@ -22,12 +22,9 @@ node_modules
 .settings/
 *.sublime-workspace
 
-#zendesk-sdk.android.d.ts
-#zendesk-sdk.ios.d.ts
-
+/package
+/*.tgz
 *.d.ts
-/metadata*
-!/metadata*/Zendesk*
 !/typings/*.d.ts
 !references.d.ts
 !zendesk-sdk.d.ts
