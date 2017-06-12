@@ -18,7 +18,7 @@ export class ZendeskSdk {
 
     public static initialize(zendeskUrl: string,
                              applicationId: string,
-                             clientId: string): ZendeskSdk {
+                             clientId: string): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.init(
             topmost().android.activity, zendeskUrl, applicationId, clientId,
         );
@@ -26,20 +26,20 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
-    public static setUserLocale(locale: string): ZendeskSdk {
+    public static setUserLocale(locale: string): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.setDeviceLocale(new Locale(locale));
 
         return ZendeskSdk;
     }
 
-    public static setCoppaEnabled(enable: boolean): ZendeskSdk {
+    public static setCoppaEnabled(enable: boolean): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.setCoppaEnabled(enable);
 
         return ZendeskSdk;
     }
 
     public static setAnonymousIdentity(name: string,
-                                       email: string): ZendeskSdk {
+                                       email: string): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.setIdentity(
             new AnonymousIdentity.Builder()
                 .withNameIdentifier(name)
@@ -50,7 +50,7 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
-    public static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk {
+    public static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk {
         ZendeskConfig.INSTANCE.setIdentity(
             new JwtIdentity(jwtUserIdentifier),
         );

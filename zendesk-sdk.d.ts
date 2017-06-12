@@ -5,16 +5,16 @@ export declare class ZendeskSdk {
 
     static initialize(zendeskUrl: string,
                       applicationId: string,
-                      clientId: string): ZendeskSdk;
+                      clientId: string): typeof ZendeskSdk;
 
-    static setUserLocale(locale: string): ZendeskSdk;
+    static setUserLocale(locale: string): typeof ZendeskSdk;
 
-    static setCoppaEnabled(enable: boolean): ZendeskSdk;
+    static setCoppaEnabled(enable: boolean): typeof ZendeskSdk;
 
     static setAnonymousIdentity(name: string,
-                                email: string): ZendeskSdk;
+                                email: string): typeof ZendeskSdk;
 
-    static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk;
+    static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk;
 
     static showHelpCenter(options?: HelpCenterOptions): void;
 
