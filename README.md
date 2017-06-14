@@ -125,10 +125,46 @@ createRequest(
 ```
 
 ## Styling
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/customize_the_look) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/customize_the_look)_
 
 ### Android
+Configured via `app/App_Resources/Android/AndroidManifest.xml` as detailed [here](https://developer.zendesk.com/embeddables/docs/android/customize_the_look).
 
 ### iOS
+```typescript
+import { isIOS } from 'tns-core-modules/platform';
+
+...
+
+if ( isIOS ) {
+    UINavigationBar.appearance().tintColor = new Color('#00FFFF').ios;
+    UINavigationBar.appearance().barTintColor = new Color('#FF00FF').ios;
+    UINavigationBar.appearance().titleTextAttributes =
+        <NSDictionary<string, any>>NSDictionary.dictionaryWithObjectForKey(
+            new Color('#FFFF00').ios,
+            NSForegroundColorAttributeName);
+}
+
+const iOSTheme: ZendeskIosThemeSimple = {
+    primaryTextColor:          '#FF0000',
+    secondaryTextColor:        '#00FF00',
+    primaryBackgroundColor:    '#0000FF',
+    secondaryBackgroundColor:  '#00FFFF',
+    emptyBackgroundColor:      '#FF00FF',
+    metaTextColor:             '#FFFF00',
+    separatorColor:            '#884444',
+    inputFieldTextColor:       '#448844',
+    inputFieldBackgroundColor: '#444488',
+    fontName:                  'Courier',
+    boldFontName:              'Cochin-BoldItalic',
+};
+ZendeskSdk.setIosTheme(iOSTheme);
+```
+The first 3 colors are used primarily on the ActionBar/StatusBar for the "new ticket" screen, as the Help Center uses the default ActionBar/StatusBar colors from the regular NativeScript setup for those.
+
+These settings could affect the whole app, but are ignored by the regular NativeScript Views, but could potentially impact other 3rd part views. Likely you will set these to be the same as what is used in the rest of the app.
+
+The settings within the theme object will only affect the Zendesk.
 
 ## Contributions
 Typings and iOS metadata have been included in the project to allow for easier usage.  

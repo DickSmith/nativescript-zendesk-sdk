@@ -1,6 +1,7 @@
 import { device } from 'tns-core-modules/platform';
 import { topmost } from 'tns-core-modules/ui/frame';
 import { HelpCenterOptions, ZendeskIosThemeSimple } from './zendesk-sdk.common';
+import { Color } from 'tns-core-modules/color/color';
 
 export class ZendeskSdk {
 
@@ -140,15 +141,33 @@ export class ZendeskSdk {
     public static setIosTheme(theme: ZendeskIosThemeSimple): void {
         let themeTemp: ZDKTheme = ZDKTheme.baseTheme();
 
-        if ( theme.primaryTextColor ) { themeTemp.primaryTextColor = theme.primaryTextColor; }
-        if ( theme.secondaryTextColor ) { themeTemp.secondaryTextColor = theme.secondaryTextColor; }
-        if ( theme.primaryBackgroundColor ) { themeTemp.primaryBackgroundColor = theme.primaryBackgroundColor; }
-        if ( theme.secondaryBackgroundColor ) { themeTemp.secondaryBackgroundColor = theme.secondaryBackgroundColor; }
-        if ( theme.emptyBackgroundColor ) { themeTemp.emptyBackgroundColor = theme.emptyBackgroundColor; }
-        if ( theme.metaTextColor ) { themeTemp.metaTextColor = theme.metaTextColor; }
-        if ( theme.separatorColor ) { themeTemp.separatorColor = theme.separatorColor; }
-        if ( theme.inputFieldTextColor ) { themeTemp.inputFieldTextColor = theme.inputFieldTextColor; }
-        if ( theme.inputFieldBackgroundColor ) { themeTemp.inputFieldBackgroundColor = theme.inputFieldBackgroundColor;}
+        if ( theme.primaryTextColor ) {
+            themeTemp.primaryTextColor = new Color(theme.primaryTextColor).ios;
+        }
+        if ( theme.secondaryTextColor ) {
+            themeTemp.secondaryTextColor = new Color(theme.secondaryTextColor).ios;
+        }
+        if ( theme.primaryBackgroundColor ) {
+            themeTemp.primaryBackgroundColor = new Color(theme.primaryBackgroundColor).ios;
+        }
+        if ( theme.secondaryBackgroundColor ) {
+            themeTemp.secondaryBackgroundColor = new Color(theme.secondaryBackgroundColor).ios;
+        }
+        if ( theme.emptyBackgroundColor ) {
+            themeTemp.emptyBackgroundColor = new Color(theme.emptyBackgroundColor).ios;
+        }
+        if ( theme.metaTextColor ) {
+            themeTemp.metaTextColor = new Color(theme.metaTextColor).ios;
+        }
+        if ( theme.separatorColor ) {
+            themeTemp.separatorColor = new Color(theme.separatorColor).ios;
+        }
+        if ( theme.inputFieldTextColor ) {
+            themeTemp.inputFieldTextColor = new Color(theme.inputFieldTextColor).ios;
+        }
+        if ( theme.inputFieldBackgroundColor ) {
+            themeTemp.inputFieldBackgroundColor = new Color(theme.inputFieldBackgroundColor).ios;
+        }
         if ( theme.fontName ) { themeTemp.fontName = theme.fontName; }
         if ( theme.boldFontName ) { themeTemp.boldFontName = theme.boldFontName; }
 
