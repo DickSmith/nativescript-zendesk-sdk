@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/contact_fragment_container">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:visibility="invisible"
+        android:id="@+id/contact_fragment_container">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <com.zendesk.sdk.ui.EmailAddressAutoCompleteTextView
+                android:id="@+id/contact_fragment_email"
+                android:hint="@string/contact_fragment_email_hint"
+                style="@style/contact_fragment_email"
+                android:visibility="gone"
+                android:imeOptions="actionNext"
+                />
+
+            <EditText
+                android:id="@+id/contact_fragment_description"
+                android:hint="@string/contact_fragment_description_hint"
+                style="@style/contact_fragment_description" />
+
+            <com.zendesk.sdk.feedback.ui.AttachmentContainerHost
+                android:id="@+id/contact_fragment_attachments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/contact_fragment_progress"
+        style="@style/contact_fragment_progress"
+    />
+
+</FrameLayout>

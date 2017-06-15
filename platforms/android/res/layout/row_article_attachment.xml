@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                style="@style/article_attachment_row_container" >
+
+    <TextView
+        android:id="@+id/article_attachment_row_filename_text"
+        style="@style/article_attachment_row_filename_text"
+        android:layout_toLeftOf="@+id/article_attachment_row_filesize_text"
+        android:layout_toStartOf="@+id/article_attachment_row_filesize_text"
+        tools:text="Test Article" />
+
+    <TextView
+        android:id="@+id/article_attachment_row_filesize_text"
+        style="@style/article_attachment_row_filesize_text"
+        tools:text="Test Article" />
+
+</RelativeLayout>

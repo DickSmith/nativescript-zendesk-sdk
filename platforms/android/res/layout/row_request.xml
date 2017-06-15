@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                style="@style/request_list_row_container">
+
+    <ImageView
+        android:src="@drawable/unread_indicator"
+        android:id="@+id/row_request_unread_indicator"
+        android:contentDescription="@string/row_request_unread_indicator_alt"
+        style="@style/request_list_row_unread_indicator"/>
+
+    <LinearLayout
+        android:id="@+id/row_request_container"
+        style="@style/request_list_row_request_container">
+
+        <TextView
+            android:id="@+id/row_request_description"
+            style="@style/request_list_row_request_description"/>
+
+        <TextView
+            android:id="@+id/row_request_date"
+            style="@style/request_list_row_request_date"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

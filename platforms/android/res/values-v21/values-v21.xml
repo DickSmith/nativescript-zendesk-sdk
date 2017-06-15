@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ZendeskSdkTheme.Light.HelpCenter.Section.Text" parent="@style/TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+</resources>

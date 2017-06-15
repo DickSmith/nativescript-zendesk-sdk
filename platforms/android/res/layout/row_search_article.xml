@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/help_search_row_min_height"
+    android:orientation="vertical"
+
+    android:paddingLeft="@dimen/help_search_row_padding_start"
+    android:paddingStart="@dimen/help_search_row_padding_start"
+    android:paddingRight="@dimen/help_search_row_padding_end"
+    android:paddingEnd="@dimen/help_search_row_padding_end"
+    android:paddingTop="@dimen/help_search_row_padding_top"
+    android:paddingBottom="@dimen/help_search_row_padding_bottom"
+    >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ZendeskSdkTheme.Light.HelpCenter.SearchResult.Title"
+        />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ZendeskSdkTheme.Light.HelpCenter.SearchResult.Subtitle"
+        />
+
+</LinearLayout>

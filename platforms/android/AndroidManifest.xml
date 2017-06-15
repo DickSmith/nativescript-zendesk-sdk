@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    By downloading or using the Zendesk Mobile SDK, You agree to the Zendesk Master
+    Subscription Agreement https://www.zendesk.com/company/customers-partners/#master-subscription-agreement and Application Developer and API License
+    Agreement https://www.zendesk.com/company/customers-partners/#application-developer-api-license-agreement and
+    acknowledge that such terms govern Your use of and access to the Mobile SDK.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.zendesk.sdk"
+    android:versionCode="6"
+    android:versionName="1.9.2.1" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="25" />
+
+    <!-- Standard internet permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!--
+        PERMISSIONS
+        ===========
+        If you need more permissions please consider that they could potentially break automatic
+        upgrades of our customers' applications. If possible please use a runtime check for the
+        permission
+    -->
+    <!--
+        INSTRUMENTATION TESTING
+        =======================
+        If you need to run the instrumentation tests you will need to change the application tag
+        to use the Zendesk theme
+
+           android:theme="@style/ZendeskSdkTheme"
+
+        Do not ship this as we do not want to force our customers to merge our theme into theirs.
+    -->
+    <application tools:ignore="UnusedAttribute" >
+        <receiver android:name="com.zendesk.sdk.power.BatteryStateBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW" />
+                <action android:name="android.intent.action.BATTERY_OKAY" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.zendesk.sdk.feedback.ui.ContactZendeskActivity"
+            android:label="@string/contact_fragment_title"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name="com.zendesk.sdk.requests.ViewRequestActivity"
+            android:label="@string/contact_fragment_title"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.zendesk.sdk.requests.RequestActivity"
+            android:label="@string/request_list_activity_title" />
+        <activity
+            android:name="com.zendesk.sdk.support.ViewArticleActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name="com.zendesk.sdk.support.SupportActivity"
+            android:label="@string/support_activity_title"
+            android:windowSoftInputMode="adjustResize" />
+
+        <receiver
+            android:name="com.zendesk.sdk.deeplinking.ZendeskDeepLinkingBroadcastReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.zendesk.sdk.deeplinking" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
