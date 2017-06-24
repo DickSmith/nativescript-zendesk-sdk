@@ -1,3 +1,5 @@
+/* tslint:disable indent max-line-length member-ordering unified-signatures member-access semicolon trailing-comma */
+
 /// <reference path="./_helpers.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.access.AccessToken.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.settings.SafeMobileSettings.d.ts" />

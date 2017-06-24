@@ -24,7 +24,6 @@
   "include": [
     "references.d.ts",
     "zendesk-sdk.android.ts",
-    "zendesk-sdk.common.ts",
     "zendesk-sdk.ios.ts"
   ],
   "compileOnSave": false

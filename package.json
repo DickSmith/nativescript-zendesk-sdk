@@ -1,21 +1,23 @@
 {
   "name": "nativescript-zendesk-sdk",
-  "version": "0.0.3",
+  "version": "0.1.0-0",
   "description": "Zendesk SDK for NativeScript",
   "main": "zendesk-sdk",
   "typings": "zendesk-sdk.d.ts",
   "nativescript": {
     "platforms": {
-      "android": "3.0.0",
-      "ios": "3.0.0"
+      "android": "3.1.0",
+      "ios": "3.1.0"
     }
   },
   "scripts": {
     "tns": "tns",
     "tsc": "tsc",
     "tslint": "tslint",
-    "lint": "tslint *.ts --type-check --force --fix",
-    "build": "tsc",
+    "lint": "tslint --type-check --force --fix --project tsconfig.json",
+    "nuke": "rm -rf node_modules/ package-lock.json",
+    "build": "npm run lint && tsc",
+    "prepack": "rm -rf package/",
     "demo.ios": "npm run preparedemo && cd demo && tns run ios --emulator",
     "demo.ios.device": "npm run preparedemo && cd demo && tns run ios",
     "demo.android": "npm run preparedemo && cd demo && tns run android --emulator",
@@ -46,12 +48,10 @@
   "homepage": "https://github.com/DickSmith/nativescript-zendesk-sdk",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "nativescript": "^3.0.3",
-    "prompt": "^1.0.0",
-    "rimraf": "^2.5.0",
-    "tns-core-modules": "^3.0.1",
-    "tns-platform-declarations": "^3.0.1",
+    "nativescript": "~3.1.0",
+    "tns-core-modules": "~3.1.0",
+    "tns-platform-declarations": "~3.1.0",
     "tslint": "^5.4.3",
-    "typescript": "^2.4.0"
+    "typescript": "~2.4.0"
   }
 }

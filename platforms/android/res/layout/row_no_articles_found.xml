@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/android:empty"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="@string/articles_list_fragment_no_articles_found"
-    style="@style/articles_list_fragment_empty_view"
-    />

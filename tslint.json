@@ -8,7 +8,7 @@
     ],
     "array-type": [
       true,
-      "array-simple"
+      "generic"
     ],
     "arrow-parens": [
       true,

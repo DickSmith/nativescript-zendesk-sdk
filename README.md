@@ -19,34 +19,73 @@ _Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/androi
 
 ### [Must do] Initialize the SDK
 _Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/initialize_sdk) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/initialize_sdk)_
+
+```typescript
+export interface InitConfig {
+    applicationId: string;
+    zendeskUrl: string;
+    clientId: string;
+    userLocale?: string;
+    coppaEnabled?: boolean;
+    /** AnonUserIdentity object or JWT Token string */
+    identity?: AnonUserIdentity | string;
+}
+```
+
 ```typescript
 import { ZendeskSdk } from "nativescript-zendesk-sdk";
 ...
-ZendeskSdk.initialize("zendeskUrl", "applicationId", "clientId");
+const initConfig = {
+    ...
+}
+ZendeskSdk.initialize(initConfig);
 ```
-### [Must do] Set an identity (authentication)
+
+If `identity: null` a new anonymous identity is created, but if `identity` is undefined it must be set later, but before launching any Zendesk views/activities.
+
+_Note: `applicationId`, `zendeskUrl`, and `clientId` must be specified when initializing the Zendesk, but locale, COPPA-compliance mode, and Identity can be set/changed later._
+#### [Must do] Set an identity (authentication)
 _Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/set_an_identity) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/set_an_identity)_
 
-#### Authenticate using an anonymous identity
+##### Authenticate using an anonymous identity
 ```typescript
-ZendeskSdk.setAnonymousIdentity(null, null);
+ZendeskSdk.setAnonymousIdentity();
 ```
 
-#### Authenticate using an anonymous identity (with COPPA compliance)
+##### Authenticate using an anonymous identity (with COPPA compliance)
 ```typescript
-ZendeskSdk.setCoppaEnabled(true);
-
-ZendeskSdk.setAnonymousIdentity(null, null);
+ZendeskSdk.setCoppaEnabled()
+          .setAnonymousIdentity();
 ```
 
-#### Authenticate using an anonymous identity (with details)
+##### Authenticate using an anonymous identity (with details)
 ```typescript
-ZendeskSdk.setAnonymousIdentity("name", "email");
+ZendeskSdk.setAnonymousIdentity({name: "name", email: "email"});
 ```
 
-#### Authenticate using your JWT endpoint
+##### Authenticate using your JWT endpoint
 ```typescript
 ZendeskSdk.setJwtIdentity("jwtUserIdentifier");
+```
+
+### Locale Settings
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/localize_text) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/localize_text)_
+
+The locale used by the SDK for static strings will match the Android Application Configuration or the iOS NSUserDefaults.
+_(These strings can be overridden or missing languages can be added as described in the links above)._
+
+To set the Locale of any dynamic content retrieved from Zendesk:
+```typescript
+ZendeskSdk.setUserLocale(localeCode);
+```
+
+### Configure Requests
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/add_data_to_request) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/https://developer.zendesk.com/embeddables/docs/ios/requests#additional-methods-api-providers)_
+
+Before opening the Help Center or creating a Rewuest you can specify the Request settings:
+
+```typescript
+
 ```
 
 ### Show the Help Center
@@ -59,18 +98,25 @@ ZendeskSdk.showHelpCenter();
 
 #### Optional Parameters
 ```typescript
-const options = {
-    showConversationsMenuButtonForAndroid: boolean = true,
-    showConversationsMenuButtonForIos: boolean = true,
-    withCategoriesCollapsedForAndroid: boolean = false,
-    showContactUsButtonForAndroid: boolean = false,
-    showAsModalForIos: boolean = false,
+export interface HelpCenterOptions {
+    /** Default: false */
+    categoriesCollapsedAndroid?: boolean;
+    /** Default: false */
+    contactUsButtonAndroid?: boolean;
+    /** Default: true */
+    conversationsMenuAndroid?: boolean;
+    /** Default: true */
+    conversationsMenuIos?: boolean;
+    /** Default: false */
+    showAsModalForIos?: boolean;
 }
+```
 
+```typescript
 ZendeskSdk.showHelpCenter(options);
 ```
 
-_Note:  The SDKs for Android and iOS diverge quite a bit for this section, so some options are only applicable to iOS or Android._
+_Note:  The SDKs for Android and iOS diverge quite a bit for this section, so some options are only applicable to iOS or Android. The defaults selected are those that provide the most consitency between both_
 
 ##### Both
 
@@ -82,10 +128,7 @@ Enables a button in the navigation bar that enables users to view their active r
 ###### showContactUsButtonForAndroid [_default = false_]
 This displays an additional `(+)` button in the lower-right corner, similar to the button in the Android templates.
 
-While it is enabled by default in the SDK, it has been disabled by default here since:
-1. It is not available on iOS
-2. It is not necessary, since it is also available in the conversations menu
-3. It's usage is ambiguous to begin with and just clutters the screen. (It was likely only added since the SDK developer used the default Android template to start with and just left it in.)
+Enabled by default in the Android SDK, but disabled by default in this plugin for consitency with iOS.
 
 ###### withCategoriesCollapsedForAndroid [_default = false_]
 This collapses the categories into their headers. The default behaviour on both Android and iOS is to show the first 5 of a category, and then has the option to expand further if more are available.
@@ -102,26 +145,22 @@ Per original SDKs, only one filter can be used at a time.
 
 #### Filter by category
 ```typescript
-showHelpCenterForCategoryIds(categoryIds: number[], options);
+ZendeskSdk.showHelpCenterForCategoryIds(categoryIds, options);
 ```
 
 #### Filter by section
 ```typescript
-showHelpCenterForLabelNames(categoryIds: string[], options);
+ZendeskSdk.showHelpCenterForLabelNames(labelNames, options);
 ```
 
 #### Filter by article label
 ```typescript
-showHelpCenterForSectionIds(categoryIds: number[], options);
+ZendeskSdk.showHelpCenterForSectionIds(sectionIds, options);
 ```
 
 ### Create a request
 ```typescript
-createRequest(
-    requestSubject?: string,
-    additionalInfo?: string,
-    addDeviceInfo: boolean = true,
-    ...tags: string[]);
+ZendeskSdk.createRequest();
 ```
 
 ## Styling
@@ -129,6 +168,66 @@ _Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/androi
 
 ### Android
 Configured via `app/App_Resources/Android/AndroidManifest.xml` as detailed [here](https://developer.zendesk.com/embeddables/docs/android/customize_the_look).
+
+#### Simple Styling
+
+Zendesk offers 3 base themes that can be used or extended:
+- **ZendeskSdkTheme.Light**
+- **ZendeskSdkTheme.Dark**
+- **ZendeskSdkTheme.Light**
+
+###### Example extending PnpZendeskSdkTheme.DarkActionBar
+***app/App_Resources/Android/AndroidManifest.xml***
+```xml
+    
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    ...>
+    <application
+        ...>
+        <activity android:name="com.zendesk.sdk.support.SupportActivity"
+                  android:theme="@style/MyZendeskSdkTheme.DarkActionBar"/>
+
+        <activity android:name="com.zendesk.sdk.feedback.ui.ContactZendeskActivity"
+                  android:theme="@style/MyZendeskSdkTheme.DarkActionBar"/>
+
+        <activity android:name="com.zendesk.sdk.support.ViewArticleActivity"
+                  android:theme="@style/MyZendeskSdkTheme.DarkActionBar"/>
+
+        <activity android:name="com.zendesk.sdk.requests.RequestActivity"
+                  android:theme="@style/MyZendeskSdkTheme.DarkActionBar"/>
+
+        <activity android:name="com.zendesk.sdk.requests.ViewRequestActivity"
+                  android:theme="@style/MyZendeskSdkTheme.DarkActionBar"/>
+    </application>
+</manifest>
+```
+
+***app/App_Resources/Android/values/styles.xml***
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+...
+    <style name="PnpZendeskSdkTheme.DarkActionBar" parent="ZendeskSdkTheme.Light.DarkActionBar">
+        <item name="colorPrimary">@color/ns_primary</item>
+        <item name="colorPrimaryDark">@color/ns_primaryDark</item>
+        <item name="colorAccent">@color/ns_accent</item>
+        <item name="android:actionMenuTextColor">@color/ns_blue</item>
+    </style>
+</resources>
+```
+
+```xml
+<style name="YourLightTheme" parent="ZendeskSdkTheme.Light">
+...
+</style>
+<style name="YourDarkTheme" parent="ZendeskSdkTheme.Dark">
+...
+</style>
+<style name="YourLightTheme.DarkActionBar" parent="ZendeskSdkTheme.Light.DarkActionBar">
+...
+</style>
+```
 
 ### iOS
 ```typescript
@@ -160,7 +259,7 @@ const iOSTheme: ZendeskIosThemeSimple = {
 };
 ZendeskSdk.setIosTheme(iOSTheme);
 ```
-The first 3 colors are used primarily on the ActionBar/StatusBar for the "new ticket" screen, as the Help Center uses the default ActionBar/StatusBar colors from the regular NativeScript setup for those.
+The first 3 colors are used primarily on the ActionBar/StatusBar for the "new ticket" screen, as the Help Center uses the default ActionBar/StatusBar colors from the regular NativeScript setup.
 
 These settings could affect the whole app, but are ignored by the regular NativeScript Views, but could potentially impact other 3rd part views. Likely you will set these to be the same as what is used in the rest of the app.
 

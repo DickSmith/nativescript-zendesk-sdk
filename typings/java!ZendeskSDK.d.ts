@@ -1,3 +1,5 @@
+/* tslint:disable indent max-line-length member-ordering unified-signatures member-access semicolon trailing-comma */
+
 /// <reference path="./_helpers.d.ts" />
 declare module com {
 	export module zendesk {

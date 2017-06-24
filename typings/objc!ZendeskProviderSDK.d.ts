@@ -1,3 +1,4 @@
+/* tslint:disable indent max-line-length member-ordering unified-signatures member-access semicolon trailing-comma */
 
 declare var ZDCharacterLimitForUserAgentHeader: number;
 
