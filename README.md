@@ -283,7 +283,7 @@ cp typings/x86_64/objc\!Zendesk* typings/
 
 ##### Android
 ```sh
-cd android-sdk
+cd android
 ./gradlew clean
 ./gradlew getDeps
 
@@ -294,13 +294,13 @@ jar xf sdk-providers-1.9.2.1.aar
 mv classes.jar used-zendesk-providers-sdk.jar
 
 rm -rf */
-find . -type f ! -iname "zendesk-*" -delete
+find . -type f ! -iname "used-zendesk-*" -delete
 cd ../..
 
 java -jar ../android-dts-generator/dts-generator/build/libs/dts-generator.jar -input \
-    android-sdk/lib/used-zendesk-sdk.jar \
+    android/lib/used-zendesk-sdk.jar \
     && mv out/android.d.ts typings/java\!ZendeskSDK.d.ts;
 java -jar ../android-dts-generator/dts-generator/build/libs/dts-generator.jar -input \
-    android-sdk/lib/used-zendesk-providers-sdk.jar \
+    android/lib/used-zendesk-providers-sdk.jar \
     && mv out/android.d.ts typings/java\!ZendeskProviderSDK.d.ts;
 ```

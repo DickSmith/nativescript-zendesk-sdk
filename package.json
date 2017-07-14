@@ -16,6 +16,7 @@
     "tslint": "tslint",
     "lint": "tslint --type-check --force --fix --project tsconfig.json",
     "nuke": "rm -rf node_modules/ package-lock.json",
+    "nuki": "npm run nuke && npm i",
     "build": "npm run lint && tsc",
     "prepack": "rm -rf package/",
     "demo.ios": "npm run preparedemo && cd demo && tns run ios --emulator",
@@ -51,7 +52,7 @@
     "nativescript": "~3.1.0",
     "tns-core-modules": "~3.1.0",
     "tns-platform-declarations": "~3.1.0",
-    "tslint": "^5.4.3",
+    "tslint": "^5.5.0",
     "typescript": "~2.4.0"
   }
 }
