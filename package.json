@@ -48,11 +48,16 @@
   "license": "MIT",
   "homepage": "https://github.com/DickSmith/nativescript-zendesk-sdk",
   "readmeFilename": "README.md",
+  "peerDependencies": {
+    "tns-core-modules": "^3.0.0"
+  },
   "devDependencies": {
     "nativescript": "~3.1.0",
     "tns-core-modules": "~3.1.0",
     "tns-platform-declarations": "~3.1.0",
     "tslint": "^5.5.0",
     "typescript": "~2.4.0"
-  }
+  },
+  "dependencies": {},
+  "bootstrapper": "nativescript-plugin-seed"
 }

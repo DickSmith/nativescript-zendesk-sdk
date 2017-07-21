@@ -4,6 +4,7 @@
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
+    "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
@@ -11,6 +12,7 @@
       "dom",
       "es2015.iterable"
     ],
+    "sourceMap": false,
     "pretty": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
