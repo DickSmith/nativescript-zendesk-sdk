@@ -1,4 +1,3 @@
-/* tslint:disable indent max-line-length member-ordering unified-signatures member-access semicolon trailing-comma */
 
 declare class ZDKAgentCommentTableCell extends ZDKRequestCommentTableCell {
 
@@ -109,6 +108,8 @@ declare class ZDKArticleViewController extends ZDKUIViewController implements MF
 	static new(): ZDKArticleViewController; // inherited from NSObject
 
 	articleView: ZDKArticleView;
+
+	uiDelegate: ZDKHelpCenterConversationsUIDelegate;
 
 	readonly debugDescription: string; // inherited from NSObjectProtocol
 
@@ -756,10 +757,6 @@ declare class ZDKCreateRequestViewController extends UIViewController {
 	static new(): ZDKCreateRequestViewController; // inherited from NSObject
 
 	delegate: ZDKCreateRequestViewControllerDelegate;
-
-	constructor(o: { success: (p1: any) => void; andError: (p1: NSError) => void; });
-
-	initWithSuccessAndError(success: (p1: any) => void, error: (p1: NSError) => void): this;
 }
 
 interface ZDKCreateRequestViewControllerDelegate extends NSObjectProtocol {
@@ -806,33 +803,13 @@ declare class ZDKHelpCenter extends NSObject implements ZDKHelpCenterConversatio
 
 	static presentHelpCenterOverviewWithContentModel(viewController: UIViewController, helpCenterContentModel: ZDKHelpCenterOverviewContentModel): void;
 
-	static presentHelpCenterWithViewController(viewController: UIViewController): void;
-
-	static presentHelpCenterWithViewControllerFilterByArticleLabelsLayoutGuide(viewController: UIViewController, labels: NSArray<any>, aGuide: ZDKLayoutGuide): void;
-
-	static presentHelpCenterWithViewControllerFilterByCategoryIdCategoryNameLayoutGuide(viewController: UIViewController, categoryId: string, categoryName: string, aGuide: ZDKLayoutGuide): void;
-
-	static presentHelpCenterWithViewControllerFilterBySectionIdSectionNameLayoutGuide(viewController: UIViewController, sectionId: string, sectionName: string, aGuide: ZDKLayoutGuide): void;
-
-	static presentHelpCenterWithViewControllerLayoutGuide(viewController: UIViewController, aGuide: ZDKLayoutGuide): void;
-
 	static pushHelpCenterOverviewWithContentModel(navController: UINavigationController, helpCenterContentModel: ZDKHelpCenterOverviewContentModel): void;
-
-	static pushHelpCenterWithNavigationController(navController: UINavigationController): void;
-
-	static pushHelpCenterWithNavigationControllerFilterByArticleLabels(navController: UINavigationController, labels: NSArray<any>): void;
-
-	static pushHelpCenterWithNavigationControllerFilterByArticleLabelsLayoutGuide(navController: UINavigationController, labels: NSArray<any>, aGuide: ZDKLayoutGuide): void;
-
-	static pushHelpCenterWithNavigationControllerFilterByCategoryIdCategoryNameLayoutGuide(navController: UINavigationController, categoryId: string, categoryName: string, aGuide: ZDKLayoutGuide): void;
-
-	static pushHelpCenterWithNavigationControllerFilterBySectionIdSectionNameLayoutGuide(navController: UINavigationController, sectionId: string, sectionName: string, aGuide: ZDKLayoutGuide): void;
-
-	static pushHelpCenterWithNavigationControllerLayoutGuide(navController: UINavigationController, aGuide: ZDKLayoutGuide): void;
 
 	static setConversationsBarButtonImage(name: string): void;
 
 	static setNavBarConversationsUIType(uiType: ZDKNavBarConversationsUIType): void;
+
+	static setUIDelegate(delegate: ZDKHelpCenterConversationsUIDelegate): void;
 
 	readonly debugDescription: string; // inherited from NSObjectProtocol
 
@@ -845,6 +822,8 @@ declare class ZDKHelpCenter extends NSObject implements ZDKHelpCenterConversatio
 	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
 
 	readonly  // inherited from NSObjectProtocol
+
+	active(): ZDKContactUsVisibility;
 
 	class(): typeof NSObject;
 
@@ -875,28 +854,6 @@ declare class ZDKHelpCenter extends NSObject implements ZDKHelpCenterConversatio
 	self(): this;
 }
 
-declare class ZDKHelpCenterArticlesByLabelDataSource extends ZDKHelpCenterDataSource {
-
-	static alloc(): ZDKHelpCenterArticlesByLabelDataSource; // inherited from NSObject
-
-	static new(): ZDKHelpCenterArticlesByLabelDataSource; // inherited from NSObject
-
-	constructor(o: { articleLabels: NSArray<any>; });
-
-	initWithArticleLabels(articleLabels: NSArray<any>): this;
-}
-
-declare class ZDKHelpCenterArticlesDataSource extends ZDKHelpCenterDataSource {
-
-	static alloc(): ZDKHelpCenterArticlesDataSource; // inherited from NSObject
-
-	static new(): ZDKHelpCenterArticlesDataSource; // inherited from NSObject
-
-	constructor(o: { sectionId: string; });
-
-	initWithSectionId(sectionId: string): this;
-}
-
 declare class ZDKHelpCenterAttachmentsDataSource extends ZDKHelpCenterDataSource {
 
 	static alloc(): ZDKHelpCenterAttachmentsDataSource; // inherited from NSObject
@@ -907,26 +864,6 @@ declare class ZDKHelpCenterAttachmentsDataSource extends ZDKHelpCenterDataSource
 
 	initWithArticleId(articleId: string): this;
 }
-
-declare class ZDKHelpCenterCategoriesDataSource extends ZDKHelpCenterDataSource {
-
-	static alloc(): ZDKHelpCenterCategoriesDataSource; // inherited from NSObject
-
-	static new(): ZDKHelpCenterCategoriesDataSource; // inherited from NSObject
-}
-
-interface ZDKHelpCenterConversationsUIDelegate extends NSObjectProtocol {
-
-	conversationsBarButtonImage(): UIImage;
-
-	conversationsBarButtonLocalizedLabel(): string;
-
-	navBarConversationsUIType(): ZDKNavBarConversationsUIType;
-}
-declare var ZDKHelpCenterConversationsUIDelegate: {
-
-	prototype: ZDKHelpCenterConversationsUIDelegate;
-};
 
 declare class ZDKHelpCenterDataSource extends NSObject implements UITableViewDataSource {
 
@@ -1024,25 +961,6 @@ declare var ZDKHelpCenterNoCategoriesLocalisedDescription: string;
 
 declare var ZDKHelpCenterNoSectionsLocalisedDescription: string;
 
-declare class ZDKHelpCenterOverviewContentModel extends NSObject {
-
-	static alloc(): ZDKHelpCenterOverviewContentModel; // inherited from NSObject
-
-	static defaultContent(): ZDKHelpCenterOverviewContentModel;
-
-	static new(): ZDKHelpCenterOverviewContentModel; // inherited from NSObject
-
-	groupIds: NSArray<string>;
-
-	groupType: ZDKHelpCenterOverviewGroupType;
-
-	hideContactSupport: boolean;
-
-	labels: NSArray<any>;
-
-	navBarConversationsUIType: ZDKNavBarConversationsUIType;
-}
-
 declare class ZDKHelpCenterOverviewController extends UIViewController {
 
 	static alloc(): ZDKHelpCenterOverviewController; // inherited from NSObject
@@ -1054,197 +972,6 @@ declare class ZDKHelpCenterOverviewController extends UIViewController {
 	constructor(o: { helpCenterOverviewModel: ZDKHelpCenterOverviewContentModel; });
 
 	initWithHelpCenterOverviewModel(helpCenterContentModel: ZDKHelpCenterOverviewContentModel): this;
-}
-
-declare const enum ZDKHelpCenterOverviewGroupType {
-
-	Default = 0,
-
-	Section = 1,
-
-	Category = 2
-}
-
-declare class ZDKHelpCenterSearchDataSource extends ZDKHelpCenterDataSource {
-
-	static alloc(): ZDKHelpCenterSearchDataSource; // inherited from NSObject
-
-	static new(): ZDKHelpCenterSearchDataSource; // inherited from NSObject
-
-	constructor(o: { query: string; });
-
-	constructor(o: { query: string; andLabels: NSArray<any>; });
-
-	constructor(o: { search: ZDKHelpCenterSearch; });
-
-	initWithQuery(query: string): this;
-
-	initWithQueryAndLabels(query: string, labels: NSArray<any>): this;
-
-	initWithSearch(search: ZDKHelpCenterSearch): this;
-}
-
-declare class ZDKHelpCenterSearchResultTableDelegate extends ZDKHelpCenterTableDelegate {
-
-	static alloc(): ZDKHelpCenterSearchResultTableDelegate; // inherited from NSObject
-
-	static new(): ZDKHelpCenterSearchResultTableDelegate; // inherited from NSObject
-}
-
-declare class ZDKHelpCenterSectionsDataSource extends ZDKHelpCenterDataSource {
-
-	static alloc(): ZDKHelpCenterSectionsDataSource; // inherited from NSObject
-
-	static new(): ZDKHelpCenterSectionsDataSource; // inherited from NSObject
-
-	constructor(o: { categoryId: string; });
-
-	initWithCategoryId(categoryId: string): this;
-}
-
-declare class ZDKHelpCenterTableDelegate extends NSObject implements UITableViewDelegate {
-
-	static alloc(): ZDKHelpCenterTableDelegate; // inherited from NSObject
-
-	static new(): ZDKHelpCenterTableDelegate; // inherited from NSObject
-
-	readonly blockTouches: boolean;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	indexPathForPreferredFocusedViewInTableView(tableView: UITableView): NSIndexPath;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	scrollViewDidEndDecelerating(scrollView: UIScrollView): void;
-
-	scrollViewDidEndDraggingWillDecelerate(scrollView: UIScrollView, decelerate: boolean): void;
-
-	scrollViewDidEndScrollingAnimation(scrollView: UIScrollView): void;
-
-	scrollViewDidEndZoomingWithViewAtScale(scrollView: UIScrollView, view: UIView, scale: number): void;
-
-	scrollViewDidScroll(scrollView: UIScrollView): void;
-
-	scrollViewDidScrollToTop(scrollView: UIScrollView): void;
-
-	scrollViewDidZoom(scrollView: UIScrollView): void;
-
-	scrollViewShouldScrollToTop(scrollView: UIScrollView): boolean;
-
-	scrollViewWillBeginDecelerating(scrollView: UIScrollView): void;
-
-	scrollViewWillBeginDragging(scrollView: UIScrollView): void;
-
-	scrollViewWillBeginZoomingWithView(scrollView: UIScrollView, view: UIView): void;
-
-	scrollViewWillEndDraggingWithVelocityTargetContentOffset(scrollView: UIScrollView, velocity: CGPoint, targetContentOffset: interop.Pointer | interop.Reference<CGPoint>): void;
-
-	self(): this;
-
-	tableViewAccessoryButtonTappedForRowWithIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewAccessoryTypeForRowWithIndexPath(tableView: UITableView, indexPath: NSIndexPath): UITableViewCellAccessoryType;
-
-	tableViewCanFocusRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewCanPerformActionForRowAtIndexPathWithSender(tableView: UITableView, action: string, indexPath: NSIndexPath, sender: any): boolean;
-
-	tableViewDidDeselectRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidEndDisplayingCellForRowAtIndexPath(tableView: UITableView, cell: UITableViewCell, indexPath: NSIndexPath): void;
-
-	tableViewDidEndDisplayingFooterViewForSection(tableView: UITableView, view: UIView, section: number): void;
-
-	tableViewDidEndDisplayingHeaderViewForSection(tableView: UITableView, view: UIView, section: number): void;
-
-	tableViewDidEndEditingRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidHighlightRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidSelectRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidUnhighlightRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidUpdateFocusInContextWithAnimationCoordinator(tableView: UITableView, context: UITableViewFocusUpdateContext, coordinator: UIFocusAnimationCoordinator): void;
-
-	tableViewEditActionsForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): NSArray<UITableViewRowAction>;
-
-	tableViewEditingStyleForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): UITableViewCellEditingStyle;
-
-	tableViewEstimatedHeightForFooterInSection(tableView: UITableView, section: number): number;
-
-	tableViewEstimatedHeightForHeaderInSection(tableView: UITableView, section: number): number;
-
-	tableViewEstimatedHeightForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): number;
-
-	tableViewHeightForFooterInSection(tableView: UITableView, section: number): number;
-
-	tableViewHeightForHeaderInSection(tableView: UITableView, section: number): number;
-
-	tableViewHeightForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): number;
-
-	tableViewIndentationLevelForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): number;
-
-	tableViewPerformActionForRowAtIndexPathWithSender(tableView: UITableView, action: string, indexPath: NSIndexPath, sender: any): void;
-
-	tableViewShouldHighlightRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewShouldIndentWhileEditingRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewShouldShowMenuForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewShouldUpdateFocusInContext(tableView: UITableView, context: UITableViewFocusUpdateContext): boolean;
-
-	tableViewTargetIndexPathForMoveFromRowAtIndexPathToProposedIndexPath(tableView: UITableView, sourceIndexPath: NSIndexPath, proposedDestinationIndexPath: NSIndexPath): NSIndexPath;
-
-	tableViewTitleForDeleteConfirmationButtonForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): string;
-
-	tableViewViewForFooterInSection(tableView: UITableView, section: number): UIView;
-
-	tableViewViewForHeaderInSection(tableView: UITableView, section: number): UIView;
-
-	tableViewWillBeginEditingRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewWillDeselectRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): NSIndexPath;
-
-	tableViewWillDisplayCellForRowAtIndexPath(tableView: UITableView, cell: UITableViewCell, indexPath: NSIndexPath): void;
-
-	tableViewWillDisplayFooterViewForSection(tableView: UITableView, view: UIView, section: number): void;
-
-	tableViewWillDisplayHeaderViewForSection(tableView: UITableView, view: UIView, section: number): void;
-
-	tableViewWillSelectRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): NSIndexPath;
-
-	viewForZoomingInScrollView(scrollView: UIScrollView): UIView;
 }
 
 interface ZDKHelpCentreArticleViewProtocol extends NSObjectProtocol {
@@ -1346,15 +1073,6 @@ declare var ZDKLayoutRespectBottom: ZDKLayoutGuide;
 declare var ZDKLayoutRespectNone: ZDKLayoutGuide;
 
 declare var ZDKLayoutRespectTop: ZDKLayoutGuide;
-
-declare const enum ZDKNavBarConversationsUIType {
-
-	LocalizedLabel = 0,
-
-	Image = 1,
-
-	None = 2
-}
 
 declare const enum ZDKNavBarCreateRequestUIType {
 
@@ -2331,67 +2049,6 @@ declare var ZDKSpinnerDelegate: {
 	prototype: ZDKSpinnerDelegate;
 };
 
-declare class ZDKSupportArticleTableViewCell extends UITableViewCell implements UIAppearanceContainer {
-
-	static alloc(): ZDKSupportArticleTableViewCell; // inherited from NSObject
-
-	static appearance(): ZDKSupportArticleTableViewCell; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): ZDKSupportArticleTableViewCell; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): ZDKSupportArticleTableViewCell; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject>): ZDKSupportArticleTableViewCell; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): ZDKSupportArticleTableViewCell; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject>): ZDKSupportArticleTableViewCell; // inherited from UIAppearance
-
-	static cellIdentifier(): string;
-
-	static new(): ZDKSupportArticleTableViewCell; // inherited from NSObject
-
-	readonly articleParents: UILabel;
-
-	readonly title: UILabel;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	cellHeightForWidth(width: number): number;
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	self(): this;
-}
-
 declare class ZDKSupportAttachmentCell extends UITableViewCell implements UIAppearanceContainer {
 
 	static alloc(): ZDKSupportAttachmentCell; // inherited from NSObject
@@ -2449,250 +2106,6 @@ declare class ZDKSupportAttachmentCell extends UITableViewCell implements UIAppe
 	retainCount(): number;
 
 	self(): this;
-}
-
-declare class ZDKSupportTableViewCell extends UITableViewCell implements UIAppearanceContainer {
-
-	static alloc(): ZDKSupportTableViewCell; // inherited from NSObject
-
-	static appearance(): ZDKSupportTableViewCell; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): ZDKSupportTableViewCell; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): ZDKSupportTableViewCell; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject>): ZDKSupportTableViewCell; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): ZDKSupportTableViewCell; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject>): ZDKSupportTableViewCell; // inherited from UIAppearance
-
-	static cellIdentifier(): string;
-
-	static new(): ZDKSupportTableViewCell; // inherited from NSObject
-
-	readonly title: UILabel;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	cellHeightForWidth(width: number): number;
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	self(): this;
-}
-
-declare class ZDKSupportView extends UIView implements UIAppearanceContainer {
-
-	static alloc(): ZDKSupportView; // inherited from NSObject
-
-	static appearance(): ZDKSupportView; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): ZDKSupportView; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): ZDKSupportView; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject>): ZDKSupportView; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): ZDKSupportView; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject>): ZDKSupportView; // inherited from UIAppearance
-
-	static new(): ZDKSupportView; // inherited from NSObject
-
-	readonly noResultsContactButton: UIButton;
-
-	readonly noResultsFoundLabel: UILabel;
-
-	readonly searchField: UISearchBar;
-
-	readonly table: UITableView;
-
-	viewState: ZDKSupportViewState;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	self(): this;
-}
-
-declare class ZDKSupportViewController extends ZDKUIViewController implements UIScrollViewDelegate, UISearchBarDelegate {
-
-	static alloc(): ZDKSupportViewController; // inherited from NSObject
-
-	static new(): ZDKSupportViewController; // inherited from NSObject
-
-	delegate: ZDKHelpCenterConversationsUIDelegate;
-
-	search: ZDKHelpCenterSearch;
-
-	supportView: ZDKSupportView;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	constructor(o: { category: ZDKHelpCenterCategory; });
-
-	constructor(o: { labels: NSArray<any>; });
-
-	constructor(o: { section: ZDKHelpCenterSection; });
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	dismiss(): void;
-
-	initWithCategory(category: ZDKHelpCenterCategory): this;
-
-	initWithLabels(labels: NSArray<any>): this;
-
-	initWithSection(section: ZDKHelpCenterSection): this;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	positionForBar(bar: UIBarPositioning): UIBarPosition;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	scrollViewDidEndDecelerating(scrollView: UIScrollView): void;
-
-	scrollViewDidEndDraggingWillDecelerate(scrollView: UIScrollView, decelerate: boolean): void;
-
-	scrollViewDidEndScrollingAnimation(scrollView: UIScrollView): void;
-
-	scrollViewDidEndZoomingWithViewAtScale(scrollView: UIScrollView, view: UIView, scale: number): void;
-
-	scrollViewDidScroll(scrollView: UIScrollView): void;
-
-	scrollViewDidScrollToTop(scrollView: UIScrollView): void;
-
-	scrollViewDidZoom(scrollView: UIScrollView): void;
-
-	scrollViewShouldScrollToTop(scrollView: UIScrollView): boolean;
-
-	scrollViewWillBeginDecelerating(scrollView: UIScrollView): void;
-
-	scrollViewWillBeginDragging(scrollView: UIScrollView): void;
-
-	scrollViewWillBeginZoomingWithView(scrollView: UIScrollView, view: UIView): void;
-
-	scrollViewWillEndDraggingWithVelocityTargetContentOffset(scrollView: UIScrollView, velocity: CGPoint, targetContentOffset: interop.Pointer | interop.Reference<CGPoint>): void;
-
-	searchBarBookmarkButtonClicked(searchBar: UISearchBar): void;
-
-	searchBarCancelButtonClicked(searchBar: UISearchBar): void;
-
-	searchBarResultsListButtonClicked(searchBar: UISearchBar): void;
-
-	searchBarSearchButtonClicked(searchBar: UISearchBar): void;
-
-	searchBarSelectedScopeButtonIndexDidChange(searchBar: UISearchBar, selectedScope: number): void;
-
-	searchBarShouldBeginEditing(searchBar: UISearchBar): boolean;
-
-	searchBarShouldChangeTextInRangeReplacementText(searchBar: UISearchBar, range: NSRange, text: string): boolean;
-
-	searchBarShouldEndEditing(searchBar: UISearchBar): boolean;
-
-	searchBarTextDidBeginEditing(searchBar: UISearchBar): void;
-
-	searchBarTextDidChange(searchBar: UISearchBar, searchText: string): void;
-
-	searchBarTextDidEndEditing(searchBar: UISearchBar): void;
-
-	self(): this;
-
-	viewForZoomingInScrollView(scrollView: UIScrollView): UIView;
-}
-
-declare const enum ZDKSupportViewState {
-
-	ContentLoading = 0,
-
-	ContentLoaded = 1,
-
-	Empty = 2,
-
-	EmptyError = 3
 }
 
 declare class ZDKTheme extends NSObject {

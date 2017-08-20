@@ -1,4 +1,3 @@
-/* tslint:disable indent max-line-length member-ordering unified-signatures member-access semicolon trailing-comma */
 
 declare var ZDCharacterLimitForUserAgentHeader: number;
 
@@ -198,8 +197,6 @@ declare class ZDKAnonymousIdentity extends ZDKCoding implements ZDKIdentity {
 	static new(): ZDKAnonymousIdentity; // inherited from NSObject
 
 	email: string;
-
-	externalId: string;
 
 	name: string;
 
@@ -425,11 +422,13 @@ declare class ZDKConfig extends NSObject {
 
 	readonly account: ZDKAccount;
 
+	articleVotingEnabled: boolean;
+
 	readonly authenticationType: ZDKAuthenticationType;
 
 	coppaEnabled: boolean;
 
-	customTicketFields: NSArray<any>;
+	customTicketFields: NSArray<ZDKCustomField>;
 
 	reloadInterval: number;
 
@@ -463,6 +462,15 @@ declare class ZDKContactUsSettings extends ZDKCoding {
 	initWithDictionary(dictionary: NSDictionary<any, any>): this;
 }
 
+declare const enum ZDKContactUsVisibility {
+
+	Off = 0,
+
+	ArticleListOnly = 1,
+
+	ArticleListAndArticle = 2
+}
+
 declare class ZDKConversationsSettings extends ZDKCoding {
 
 	static alloc(): ZDKConversationsSettings; // inherited from NSObject
@@ -484,7 +492,7 @@ declare class ZDKCreateRequest extends NSObject {
 
 	attachments: NSArray<any>;
 
-	customTicketFields: NSArray<any>;
+	customTicketFields: NSArray<ZDKCustomField>;
 
 	requestDescription: string;
 
@@ -616,6 +624,8 @@ declare class ZDKHelpCenterArticle extends NSObject {
 	body: string;
 
 	created_at: Date;
+
+	htmlUrl: string;
 
 	labelNames: NSArray<any>;
 
@@ -839,6 +849,21 @@ declare class ZDKHelpCenterCategoryViewModel extends NSObject implements ZDKHelp
 	updateWithSection(section: ZDKHelpCenterSectionViewModel): void;
 }
 
+interface ZDKHelpCenterConversationsUIDelegate extends NSObjectProtocol {
+
+	active(): ZDKContactUsVisibility;
+
+	conversationsBarButtonImage(): UIImage;
+
+	conversationsBarButtonLocalizedLabel?(): string;
+
+	navBarConversationsUIType(): ZDKNavBarConversationsUIType;
+}
+declare var ZDKHelpCenterConversationsUIDelegate: {
+
+	prototype: ZDKHelpCenterConversationsUIDelegate;
+};
+
 declare class ZDKHelpCenterDeflection extends NSObject {
 
 	static alloc(): ZDKHelpCenterDeflection; // inherited from NSObject
@@ -892,6 +917,34 @@ declare class ZDKHelpCenterLastSearch extends NSObject {
 	initWithQueryResultsCount(query: string, count: number): this;
 
 	toJson(): NSDictionary<any, any>;
+}
+
+declare class ZDKHelpCenterOverviewContentModel extends NSObject {
+
+	static alloc(): ZDKHelpCenterOverviewContentModel; // inherited from NSObject
+
+	static defaultContent(): ZDKHelpCenterOverviewContentModel;
+
+	static new(): ZDKHelpCenterOverviewContentModel; // inherited from NSObject
+
+	groupIds: NSArray<string>;
+
+	groupType: ZDKHelpCenterOverviewGroupType;
+
+	hideContactSupport: boolean;
+
+	labels: NSArray<any>;
+
+	navBarConversationsUIType: ZDKNavBarConversationsUIType;
+}
+
+declare const enum ZDKHelpCenterOverviewGroupType {
+
+	Default = 0,
+
+	Section = 1,
+
+	Category = 2
 }
 
 declare class ZDKHelpCenterParser extends NSObject {
@@ -975,7 +1028,7 @@ declare class ZDKHelpCenterProvider extends ZDKProvider {
 
 	searchForArticlesUsingQueryWithCallback(query: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
-	submitRecordArticleViewWithCallback(articleId: string, callback: (p1: any, p2: NSError) => void): void;
+	submitRecordArticleViewWithCallback(article: ZDKHelpCenterArticle, callback: (p1: any, p2: NSError) => void): void;
 
 	upvoteArticleWithIdWithCallback(articleId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 }
@@ -1309,6 +1362,15 @@ declare class ZDKNSCodingUtil extends NSObject {
 	static new(): ZDKNSCodingUtil; // inherited from NSObject
 }
 
+declare const enum ZDKNavBarConversationsUIType {
+
+	LocalizedLabel = 0,
+
+	Image = 1,
+
+	None = 2
+}
+
 declare const enum ZDKNetworkStatus {
 
 	NotReachable = 0,
@@ -1514,6 +1576,8 @@ declare class ZDKRequestProvider extends ZDKProvider {
 	getRequestsByStatusWithCallback(status: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
 	getTicketFormWithIdsCallback(ticketFormIds: NSArray<number>, callback: (p1: NSArray<ZDKTicketForm>, p2: NSError) => void): void;
+
+	getUpdatesForDevice(callback: (p1: ZDKRequestUpdates, p2: NSError) => void): ZDKRequestUpdatesProtocol;
 }
 
 declare class ZDKRequestStorage extends NSObject {
@@ -1534,6 +1598,28 @@ declare class ZDKRequestStorage extends NSObject {
 
 	storeRequestIdentifier(requestIdentifier: string): void;
 }
+
+declare class ZDKRequestUpdates extends NSObject {
+
+	static alloc(): ZDKRequestUpdates; // inherited from NSObject
+
+	static new(): ZDKRequestUpdates; // inherited from NSObject
+
+	readonly hasUpdates: boolean;
+
+	readonly requestsWithUpdates: NSMutableDictionary<string, number>;
+
+	readonly updateCount: number;
+}
+
+interface ZDKRequestUpdatesProtocol extends NSObjectProtocol {
+
+	markRequestAsRead(requestId: string): void;
+}
+declare var ZDKRequestUpdatesProtocol: {
+
+	prototype: ZDKRequestUpdatesProtocol;
+};
 
 declare class ZDKRequestWithAttachmentsUtil extends NSObject {
 
@@ -1627,6 +1713,8 @@ declare class ZDKTicketField extends NSObject implements ZDKDictionaryCreatable 
 
 	required: boolean;
 
+	systemOptions: NSArray<ZDKTicketFieldSystemOption>;
+
 	title: string;
 
 	titleInPortal: string;
@@ -1693,6 +1781,21 @@ declare class ZDKTicketFieldOption extends NSObject {
 	initWithDictionary(dictionary: NSDictionary<any, any>): this;
 }
 
+declare class ZDKTicketFieldSystemOption extends NSObject {
+
+	static alloc(): ZDKTicketFieldSystemOption; // inherited from NSObject
+
+	static new(): ZDKTicketFieldSystemOption; // inherited from NSObject
+
+	name: string;
+
+	value: string;
+
+	constructor(o: { dictionary: NSDictionary<any, any>; });
+
+	initWithDictionary(dictionary: NSDictionary<any, any>): this;
+}
+
 declare const enum ZDKTicketFieldType {
 
 	Subject = 0,
@@ -1716,6 +1819,14 @@ declare const enum ZDKTicketFieldType {
 	Date = 9,
 
 	CreditCard = 10,
+
+	Priority = 11,
+
+	Status = 12,
+
+	TicketType = 13,
+
+	MultiSelect = 14,
 
 	Unknown = 18446744073709551615
 }
@@ -1898,6 +2009,16 @@ declare class ZDKValidator extends NSObject {
 declare var ZDK_AUTHENTICATION_ANONYMOUS: string;
 
 declare var ZDK_AUTHENTICATION_JWT: string;
+
+declare var ZDK_Article_Down_Vote_Button_Index: number;
+
+declare var ZDK_Article_Down_Vote_Number: number;
+
+declare var ZDK_Article_Even_Vote_Number: number;
+
+declare var ZDK_Article_Up_Vote_Button_Index: number;
+
+declare var ZDK_Article_Up_Vote_Number: number;
 
 declare var ZDK_Header_Suffix_Format: string;
 

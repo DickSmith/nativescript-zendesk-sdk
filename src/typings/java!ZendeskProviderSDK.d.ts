@@ -1,6 +1,3 @@
-/* tslint:disable indent max-line-length member-ordering unified-signatures member-access semicolon trailing-comma */
-
-/// <reference path="./_helpers.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.access.AccessToken.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.settings.SafeMobileSettings.d.ts" />
 declare module com {
@@ -26,6 +23,7 @@ declare module com {
 			export module model {
 				export module access {
 					export class AccessToken {
+						public getUserId(): string;
 						public constructor();
 						public equals(param0: javalangObject): boolean;
 						public hashCode(): number;
@@ -48,17 +46,16 @@ declare module com {
 					export class AnonymousIdentity {
 						public reloadGuid(): void;
 						public getSdkGuid(): string;
+						public constructor();
 						public equals(param0: javalangObject): boolean;
 						public getEmail(): string;
 						public hashCode(): number;
-						public getExternalId(): string;
 						public getName(): string;
 					}
 					export module AnonymousIdentity {
 						export class Builder {
 							public constructor();
 							public build(): com.zendesk.sdk.model.access.Identity;
-							public withExternalIdentifier(param0: string): com.zendesk.sdk.model.access.AnonymousIdentity.Builder;
 							public withNameIdentifier(param0: string): com.zendesk.sdk.model.access.AnonymousIdentity.Builder;
 							public withEmailIdentifier(param0: string): com.zendesk.sdk.model.access.AnonymousIdentity.Builder;
 						}
@@ -222,6 +219,7 @@ declare module com {
 import javalangInteger = java.lang.Integer;
 /// <reference path="./java.lang.Integer.d.ts" />
 /// <reference path="./java.lang.Long.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
 /// <reference path="./java.util.Date.d.ts" />
 declare module com {
 	export module zendesk {
@@ -234,7 +232,9 @@ declare module com {
 						public constructor();
 						public getUserId(): javalangLong;
 						public getValue(): javalangInteger;
+						public equals(param0: javalangObject): boolean;
 						public getCreatedAt(): javautilDate;
+						public hashCode(): number;
 						public getUrl(): string;
 						public getUpdatedAt(): javautilDate;
 						public getItemType(): string;
@@ -1376,6 +1376,27 @@ declare module com {
 	}
 }
 
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./java.util.Map.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module model {
+				export module request {
+					export class RequestUpdates {
+						public getRequestsWithUpdates(): javautilMap;
+						public getUpdateCount(): number;
+						public equals(param0: javalangObject): boolean;
+						public hasUpdates(): boolean;
+						public hashCode(): number;
+						public constructor(param0: javautilMap);
+					}
+				}
+			}
+		}
+	}
+}
+
 /// <reference path="./java.util.List.d.ts" />
 declare module com {
 	export module zendesk {
@@ -1609,6 +1630,7 @@ declare module com {
 						export class RawTicketField {
 							public constructor();
 							public getTitleInPortal(): string;
+							public getSystemFieldOptions(): javautilList;
 							public getId(): number;
 							public getTitle(): string;
 							public getRegexpForValidation(): string;
@@ -1634,6 +1656,24 @@ declare module com {
 							public isDefault(): boolean;
 							public getName(): string;
 							public getId(): number;
+							public getValue(): string;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module model {
+				export module request {
+					export module fields {
+						export class RawTicketFieldSystemOption {
+							public constructor();
+							public getName(): string;
 							public getValue(): string;
 						}
 					}
@@ -1694,14 +1734,15 @@ declare module com {
 				export module request {
 					export module fields {
 						export class TicketField {
+							public constructor(param0: number, param1: com.zendesk.sdk.model.request.fields.TicketFieldType, param2: string, param3: string, param4: string, param5: string, param6: javautilList, param7: javautilList);
 							public getTicketFieldOptions(): javautilList;
 							public getTitleInPortal(): string;
+							public getTicketFieldSystemOptions(): javautilList;
 							public static create(param0: com.zendesk.sdk.model.request.fields.RawTicketField): com.zendesk.sdk.model.request.fields.TicketField;
 							public getId(): number;
 							public getTitle(): string;
 							public getRegexpForValidation(): string;
 							public getDescription(): string;
-							public constructor(param0: number, param1: com.zendesk.sdk.model.request.fields.TicketFieldType, param2: string, param3: string, param4: string, param5: string, param6: javautilList);
 							public getType(): com.zendesk.sdk.model.request.fields.TicketFieldType;
 						}
 					}
@@ -1734,6 +1775,27 @@ declare module com {
 	}
 }
 
+/// <reference path="./com.zendesk.sdk.model.request.fields.RawTicketFieldSystemOption.d.ts" />
+/// <reference path="./java.lang.String.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module model {
+				export module request {
+					export module fields {
+						export class TicketFieldSystemOption {
+							public static create(param0: com.zendesk.sdk.model.request.fields.RawTicketFieldSystemOption): com.zendesk.sdk.model.request.fields.TicketFieldSystemOption;
+							public constructor(param0: string, param1: string);
+							public getName(): string;
+							public getValue(): string;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 /// <reference path="./java.lang.String.d.ts" />
 declare module com {
 	export module zendesk {
@@ -1748,11 +1810,15 @@ declare module com {
 							public static Description: com.zendesk.sdk.model.request.fields.TicketFieldType;
 							public static Integer: com.zendesk.sdk.model.request.fields.TicketFieldType;
 							public static PartialCreditCard: com.zendesk.sdk.model.request.fields.TicketFieldType;
+							public static Priority: com.zendesk.sdk.model.request.fields.TicketFieldType;
+							public static Status: com.zendesk.sdk.model.request.fields.TicketFieldType;
+							public static TicketType: com.zendesk.sdk.model.request.fields.TicketFieldType;
 							public static Regexp: com.zendesk.sdk.model.request.fields.TicketFieldType;
 							public static Subject: com.zendesk.sdk.model.request.fields.TicketFieldType;
 							public static Tagger: com.zendesk.sdk.model.request.fields.TicketFieldType;
 							public static Text: com.zendesk.sdk.model.request.fields.TicketFieldType;
 							public static TextArea: com.zendesk.sdk.model.request.fields.TicketFieldType;
+							public static MultiSelect: com.zendesk.sdk.model.request.fields.TicketFieldType;
 							public static Unknown: com.zendesk.sdk.model.request.fields.TicketFieldType;
 							public static values(): native.Array<com.zendesk.sdk.model.request.fields.TicketFieldType>;
 							public static valueOf(param0: string): com.zendesk.sdk.model.request.fields.TicketFieldType;
@@ -1813,6 +1879,32 @@ declare module com {
 						public constructor();
 						public isEnabled(): boolean;
 						public getMaxAttachmentSize(): number;
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module model {
+				export module settings {
+					export class BlipsPermissions {
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module model {
+				export module settings {
+					export class BlipsSettings {
 					}
 				}
 			}
@@ -1919,6 +2011,7 @@ declare module com {
 						public getRateMyAppTags(): javautilList;
 						public isAttachmentsEnabled(): boolean;
 						public isRateMyAppEnabled(): boolean;
+						public isPathfinderEnabled(): boolean;
 						public isTicketFormSupportAvailable(): boolean;
 						public getHelpCenterLocale(): string;
 						public getContactZendeskTags(): javautilList;
@@ -1942,6 +2035,7 @@ declare module com {
 }
 
 /// <reference path="./com.zendesk.sdk.model.access.AuthenticationType.d.ts" />
+/// <reference path="./com.zendesk.sdk.model.settings.BlipsSettings.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.settings.ContactUsSettings.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.settings.ConversationsSettings.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.settings.HelpCenterSettings.d.ts" />
@@ -1956,6 +2050,7 @@ declare module com {
 					export class SdkSettings {
 						public constructor();
 						public getAuthentication(): com.zendesk.sdk.model.access.AuthenticationType;
+						public getBlipsSettings(): com.zendesk.sdk.model.settings.BlipsSettings;
 						public getHelpCenterSettings(): com.zendesk.sdk.model.settings.HelpCenterSettings;
 						public getUpdatedAt(): javautilDate;
 						public getConversationsSettings(): com.zendesk.sdk.model.settings.ConversationsSettings;
@@ -2066,22 +2161,24 @@ declare module com {
 					});
 					public static APPLICATION_JSON: string;
 					public static HEADER_SUFFIX_FORMAT: string;
-					public static ACCEPT_HEADER: string;
-					public static AUTHORIZATION_HEADER: string;
 					public static ENVIRONMENT_DEBUG: string;
 					public static ENVIRONMENT_PRODUCTION: string;
-					public static CLIENT_IDENTIFIER_HEADER: string;
-					public static SDK_GUID_HEADER: string;
-					public static ACCEPT_LANGUAGE_HEADER: string;
+					public static HOURS_MINUTES_FORMAT: string;
 					public static USER_AGENT_HEADER: string;
 					public static ZENDESK_SDK_FOR_ANDROID: string;
 					public static HEADER_SUFFIX_MAX_LENGTH: number;
+					public static ACCEPT_HEADER: string;
+					public static AUTHORIZATION_HEADER: string;
+					public static CLIENT_IDENTIFIER_HEADER: string;
+					public static SDK_GUID_HEADER: string;
+					public static ACCEPT_LANGUAGE_HEADER: string;
 				}
 			}
 		}
 	}
 }
 
+/// <reference path="./com.zendesk.sdk.model.helpcenter.Article.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.helpcenter.AttachmentType.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.helpcenter.HelpCenterSearch.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.helpcenter.ListArticleQuery.d.ts" />
@@ -2114,14 +2211,14 @@ declare module com {
 						downvoteArticle(param0: javalangLong, param1: com.zendesk.service.ZendeskCallback): void;
 						deleteVote(param0: javalangLong, param1: com.zendesk.service.ZendeskCallback): void;
 						getSuggestedArticles(param0: com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch, param1: com.zendesk.service.ZendeskCallback): void;
-						submitRecordArticleView(param0: javalangLong, param1: javautilLocale, param2: com.zendesk.service.ZendeskCallback): void;
+						submitRecordArticleView(param0: com.zendesk.sdk.model.helpcenter.Article, param1: javautilLocale, param2: com.zendesk.service.ZendeskCallback): void;
 					});
 					public getSection(param0: javalangLong, param1: com.zendesk.service.ZendeskCallback): void;
 					public getCategory(param0: javalangLong, param1: com.zendesk.service.ZendeskCallback): void;
+					public submitRecordArticleView(param0: com.zendesk.sdk.model.helpcenter.Article, param1: javautilLocale, param2: com.zendesk.service.ZendeskCallback): void;
 					public upvoteArticle(param0: javalangLong, param1: com.zendesk.service.ZendeskCallback): void;
 					public getArticles(param0: javalangLong, param1: com.zendesk.service.ZendeskCallback): void;
 					public getSections(param0: javalangLong, param1: com.zendesk.service.ZendeskCallback): void;
-					public submitRecordArticleView(param0: javalangLong, param1: javautilLocale, param2: com.zendesk.service.ZendeskCallback): void;
 					public getSuggestedArticles(param0: com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch, param1: com.zendesk.service.ZendeskCallback): void;
 					public getArticle(param0: javalangLong, param1: com.zendesk.service.ZendeskCallback): void;
 					public getCategories(param0: com.zendesk.service.ZendeskCallback): void;
@@ -2315,9 +2412,11 @@ declare module com {
 						addComment(param0: string, param1: com.zendesk.sdk.model.request.EndUserComment, param2: com.zendesk.service.ZendeskCallback): void;
 						getRequest(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
 						getTicketFormsById(param0: javautilList, param1: com.zendesk.service.ZendeskCallback): void;
+						getUpdatesForDevice(param0: com.zendesk.service.ZendeskCallback): void;
 					});
 					public createRequest(param0: com.zendesk.sdk.model.request.CreateRequest, param1: com.zendesk.service.ZendeskCallback): void;
 					public getTicketFormsById(param0: javautilList, param1: com.zendesk.service.ZendeskCallback): void;
+					public getUpdatesForDevice(param0: com.zendesk.service.ZendeskCallback): void;
 					public getAllRequests(param0: com.zendesk.service.ZendeskCallback): void;
 					public getComments(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
 					public addComment(param0: string, param1: com.zendesk.sdk.model.request.EndUserComment, param2: com.zendesk.service.ZendeskCallback): void;
@@ -2465,9 +2564,9 @@ declare module com {
 					 * Constructs a new instance of the com.zendesk.sdk.network.SdkSettingsService interface with the provided implementation.
 					 */
 					public constructor(implementation: {
-						getSettings(param0: string, param1: string): retrofit2Call;
+						getSettings(param0: string): retrofit2Call;
 					});
-					public getSettings(param0: string, param1: string): retrofit2Call;
+					public getSettings(param0: string): retrofit2Call;
 				}
 			}
 		}
@@ -2655,7 +2754,6 @@ declare module com {
 import androidcontentContext = android.content.Context;
 /// <reference path="./android.content.Context.d.ts" />
 /// <reference path="./com.zendesk.sdk.network.SdkOptions.d.ts" />
-/// <reference path="./com.zendesk.sdk.util.ScopeCache.d.ts" />
 /// <reference path="./java.lang.Long.d.ts" />
 /// <reference path="./java.util.List.d.ts" />
 /// <reference path="./java.util.Locale.d.ts" />
@@ -2665,21 +2763,18 @@ declare module com {
 			export module network {
 				export module impl {
 					export class ApplicationScope {
+						public getApplicationContext(): androidcontentContext;
 						public newBuilder(): com.zendesk.sdk.network.impl.ApplicationScope.Builder;
 						public getOAuthToken(): string;
-						public isCoppaEnabled(): boolean;
-						public getStorageModuleCache(): com.zendesk.sdk.util.ScopeCache;
-						public getUrl(): string;
-						public getUserAgentHeader(): string;
-						public getTicketFormId(): javalangLong;
-						public getApplicationContext(): androidcontentContext;
 						public getCustomFields(): javautilList;
+						public isCoppaEnabled(): boolean;
 						public getSdkOptions(): com.zendesk.sdk.network.SdkOptions;
-						public getRestAdapterCache(): com.zendesk.sdk.util.ScopeCache;
+						public getUrl(): string;
 						public getAppId(): string;
+						public getUserAgentHeader(): string;
 						public getLocale(): javautilLocale;
 						public isDevelopmentMode(): boolean;
-						public getLibraryModuleCache(): com.zendesk.sdk.util.ScopeCache;
+						public getTicketFormId(): javalangLong;
 					}
 					export module ApplicationScope {
 						export class Builder {
@@ -2710,7 +2805,481 @@ declare module com {
 		export module sdk {
 			export module network {
 				export module impl {
+					export class BaseModule {
+					}
+				}
+			}
+		}
+	}
+}
+
+import daggerinternalFactory = dagger.internal.Factory;
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideAppIdFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
+						public get(): string;
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule): daggerinternalFactory;
+						public static proxyProvideAppId(param0: com.zendesk.sdk.network.impl.BaseModule): string;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./android.content.Context.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideApplicationContextFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
+						public get(): androidcontentContext;
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule): daggerinternalFactory;
+						public static proxyProvideApplicationContext(param0: com.zendesk.sdk.network.impl.BaseModule): androidcontentContext;
+					}
+				}
+			}
+		}
+	}
+}
+
+import javaxinjectProvider = javax.inject.Provider;
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.Serializer.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideBase64SerializerFactory {
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javaxinjectProvider);
+						public static proxyProvideBase64Serializer(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javalangObject): com.zendesk.sdk.network.impl.Serializer;
+						public get(): com.zendesk.sdk.network.impl.Serializer;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.util.List.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideConnectionSpecFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule): daggerinternalFactory;
+						public get(): javautilList;
+						public static proxyProvideConnectionSpec(param0: com.zendesk.sdk.network.impl.BaseModule): javautilList;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.DeviceInfo.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideDeviceInfoFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
+						public get(): com.zendesk.sdk.network.impl.DeviceInfo;
+						public static proxyProvideDeviceInfo(param0: com.zendesk.sdk.network.impl.BaseModule): com.zendesk.sdk.network.impl.DeviceInfo;
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.util.Locale.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideLocaleFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
+						public static proxyProvideLocale(param0: com.zendesk.sdk.network.impl.BaseModule): javautilLocale;
+						public get(): javautilLocale;
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideOAuthtokenFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
+						public get(): string;
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule): daggerinternalFactory;
+						public static proxyProvideOAuthtoken(param0: com.zendesk.sdk.network.impl.BaseModule): string;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.google.gson.Gson.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.Serializer.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideSerializerFactory {
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideSerializer(param0: com.zendesk.sdk.network.impl.BaseModule, param1: com.google.gson.Gson): com.zendesk.sdk.network.impl.Serializer;
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javaxinjectProvider);
+						public get(): com.zendesk.sdk.network.impl.Serializer;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideUrlFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
+						public static proxyProvideUrl(param0: com.zendesk.sdk.network.impl.BaseModule): string;
+						public get(): string;
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideUserAgentHeaderFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
+						public get(): string;
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule): daggerinternalFactory;
+						public static proxyProvideUserAgentHeader(param0: com.zendesk.sdk.network.impl.BaseModule): string;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskLocaleConverter.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideZendeskLocaleConverterFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
+						public get(): com.zendesk.sdk.network.impl.ZendeskLocaleConverter;
+						public static proxyProvideZendeskLocaleConverter(param0: com.zendesk.sdk.network.impl.BaseModule): com.zendesk.sdk.network.impl.ZendeskLocaleConverter;
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./java.util.Locale.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BaseModule_ProvideZendeskLocaleTagFactory {
+						public static create(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+						public constructor(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+						public get(): string;
+						public static proxyProvideZendeskLocaleTag(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javalangObject, param2: javautilLocale): string;
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BlipsFormatHelper {
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BlipsPageView.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BlipsPageView {
+						public equals(param0: javalangObject): boolean;
+						public hashCode(): number;
+					}
+					export module BlipsPageView {
+						export class Builder {
+							public from(param0: com.zendesk.sdk.network.impl.BlipsPageView): com.zendesk.sdk.network.impl.BlipsPageView.Builder;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BlipsPageViewRequest extends com.zendesk.sdk.network.impl.BlipsRequest {
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./java.lang.String.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BlipsProvider {
+						/**
+						 * Constructs a new instance of the com.zendesk.sdk.network.impl.BlipsProvider interface with the provided implementation.
+						 */
+						public constructor(implementation: {
+							sendHelpCenterSearchBlip(param0: string): void;
+							sendPageViewBlip(param0: string, param1: string): void;
+						});
+						public sendHelpCenterSearchBlip(param0: string): void;
+						public sendPageViewBlip(param0: string, param1: string): void;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./java.lang.Long.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export abstract class BlipsRequest {
+						public version: string;
+						public timestamp: string;
+						public channel: string;
+						public schemaVersion: string;
+						public userId: javalangLong;
+						public appId: string;
+						public getAppId(): string;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./java.lang.String.d.ts" />
+/// <reference path="./retrofit2.Call.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BlipsService {
+						/**
+						 * Constructs a new instance of the com.zendesk.sdk.network.impl.BlipsService interface with the provided implementation.
+						 */
+						public constructor(implementation: {
+							send(param0: string): retrofit2Call;
+						});
+						public send(param0: string): retrofit2Call;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BlipsUserAction.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./java.lang.String.d.ts" />
+/// <reference path="./java.util.Map.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BlipsUserAction {
+						public equals(param0: javalangObject): boolean;
+						public hashCode(): number;
+						public toString(): string;
+					}
+					export module BlipsUserAction {
+						export class Builder {
+							public constructor();
+							public withCategory(param0: string): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
+							public build(): com.zendesk.sdk.network.impl.BlipsUserAction;
+							public withAction(param0: string): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
+							public withValue(param0: javautilMap): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
+							public from(param0: com.zendesk.sdk.network.impl.BlipsUserAction): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
+							public withLabel(param0: string): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class BlipsUserActionRequest extends com.zendesk.sdk.network.impl.BlipsRequest {
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
 					export class ConfigurationRuntimeException {
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.StubComponent.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.StubModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskConfig.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class DaggerStubComponent {
+						public static builder(): com.zendesk.sdk.network.impl.DaggerStubComponent.Builder;
+						public static create(): com.zendesk.sdk.network.impl.StubComponent;
+						public inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
+					}
+					export module DaggerStubComponent {
+						export class Builder {
+							public build(): com.zendesk.sdk.network.impl.StubComponent;
+							public stubModule(param0: com.zendesk.sdk.network.impl.StubModule): com.zendesk.sdk.network.impl.DaggerStubComponent.Builder;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BaseModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.SupportSdkProvidersComponent.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskConfig.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskConfigModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class DaggerSupportSdkProvidersComponent {
+						public static builder(): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
+						public inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
+					}
+					export module DaggerSupportSdkProvidersComponent {
+						export class Builder {
+							public baseModule(param0: com.zendesk.sdk.network.impl.BaseModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
+							public restModule(param0: com.zendesk.sdk.network.impl.RestModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
+							public providerModule(param0: com.zendesk.sdk.network.impl.ProviderModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
+							public storageModule(param0: com.zendesk.sdk.storage.StorageModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
+							public build(): com.zendesk.sdk.network.impl.SupportSdkProvidersComponent;
+							public serviceModule(param0: com.zendesk.sdk.network.impl.ServiceModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
+							public zendeskConfigModule(param0: com.zendesk.sdk.network.impl.ZendeskConfigModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
+						}
 					}
 				}
 			}
@@ -2734,9 +3303,11 @@ declare module com {
 	}
 }
 
+import okhttp3Cache = okhttp3.Cache;
 import okhttp3InterceptorChain = okhttp3.Interceptor.Chain;
 import okhttp3Response = okhttp3.Response;
 /// <reference path="./com.zendesk.sdk.storage.SdkStorage.d.ts" />
+/// <reference path="./okhttp3.Cache.d.ts" />
 /// <reference path="./okhttp3.Response.d.ts" />
 declare module com {
 	export module zendesk {
@@ -2744,9 +3315,9 @@ declare module com {
 			export module network {
 				export module impl {
 					export class DefaultZendeskUnauthorizedInterceptor {
+						public constructor(param0: com.zendesk.sdk.storage.SdkStorage, param1: okhttp3Cache);
 						public intercept(param0: okhttp3InterceptorChain): okhttp3Response;
 						public onHttpUnauthorized(): void;
-						public constructor(param0: com.zendesk.sdk.storage.SdkStorage);
 					}
 				}
 			}
@@ -2754,12 +3325,50 @@ declare module com {
 	}
 }
 
+/// <reference path="./android.content.Context.d.ts" />
+/// <reference path="./java.util.Map.d.ts" />
 declare module com {
 	export module zendesk {
 		export module sdk {
 			export module network {
 				export module impl {
-					export class HelpCenterLocaleConverter {
+					export class DeviceInfo {
+						public getDeviceInfoAsMapForMetaData(): javautilMap;
+						public isLowMemory(): boolean;
+						public constructor(param0: androidcontentContext);
+					}
+				}
+			}
+		}
+	}
+}
+
+import javalangClass = java.lang.Class;
+/// <reference path="./java.lang.Class.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class GsonSerializer {
+						public deserialize(param0: javalangObject, param1: javalangClass): javalangObject;
+						public serialize(param0: javalangObject): string;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./okhttp3.Response.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class HelpCenterCachingInterceptor {
+						public intercept(param0: okhttp3InterceptorChain): okhttp3Response;
 					}
 				}
 			}
@@ -2820,17 +3429,307 @@ declare module com {
 	}
 }
 
-/// <reference path="./com.zendesk.sdk.network.NetworkInfoProvider.d.ts" />
-/// <reference path="./com.zendesk.sdk.network.impl.ApplicationScope.d.ts" />
-/// <reference path="./com.zendesk.sdk.network.impl.ProviderStore.d.ts" />
 declare module com {
 	export module zendesk {
 		export module sdk {
 			export module network {
 				export module impl {
-					export class ProviderInjector {
-						public static injectNetworkInfoProvider(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.network.NetworkInfoProvider;
-						public static injectProviderStore(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.network.impl.ProviderStore;
+					export class ProviderModule {
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./android.content.Context.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.NetworkInfoProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_InjectNetworkInfoProviderFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider);
+						public static proxyInjectNetworkInfoProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: androidcontentContext): com.zendesk.sdk.network.NetworkInfoProvider;
+						public get(): com.zendesk.sdk.network.NetworkInfoProvider;
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.BaseProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.UserProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_InjectUserProviderFactory {
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+						public static proxyInjectUserProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: javalangObject): com.zendesk.sdk.network.UserProvider;
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+						public get(): com.zendesk.sdk.network.UserProvider;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.BaseProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.SettingsHelper.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_InjectZendeskSettingsHelperFactory {
+						public get(): com.zendesk.sdk.network.SettingsHelper;
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider);
+						public static proxyInjectZendeskSettingsHelper(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider): com.zendesk.sdk.network.SettingsHelper;
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.AccessProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_ProvideAccessProviderFactory {
+						public static proxyProvideAccessProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.storage.IdentityStorage, param2: javalangObject): com.zendesk.sdk.network.AccessProvider;
+						public get(): com.zendesk.sdk.network.AccessProvider;
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.BaseProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.HelpCenterProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.HelpCenterSessionCache.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_ProvideHelpCenterProviderFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideHelpCenterProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: javalangObject, param3: com.zendesk.sdk.storage.HelpCenterSessionCache, param4: javalangObject): com.zendesk.sdk.network.HelpCenterProvider;
+						public get(): com.zendesk.sdk.network.HelpCenterProvider;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.HelpCenterProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.NetworkInfoProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.PushRegistrationProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.RequestProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.SdkSettingsProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.SettingsHelper.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.UploadProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.UserProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderStore.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_ProvideProviderStoreFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider, param7: javaxinjectProvider, param8: javaxinjectProvider);
+						public static proxyProvideProviderStore(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.UserProvider, param2: com.zendesk.sdk.network.HelpCenterProvider, param3: com.zendesk.sdk.network.PushRegistrationProvider, param4: com.zendesk.sdk.network.RequestProvider, param5: com.zendesk.sdk.network.UploadProvider, param6: com.zendesk.sdk.network.SdkSettingsProvider, param7: com.zendesk.sdk.network.NetworkInfoProvider, param8: com.zendesk.sdk.network.SettingsHelper): com.zendesk.sdk.network.impl.ProviderStore;
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider, param7: javaxinjectProvider, param8: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.ProviderStore;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.BaseProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.PushRegistrationProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_ProvidePushRegistrationProviderFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.PushRegistrationProvider;
+						public static proxyProvidePushRegistrationProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: javalangObject, param3: com.zendesk.sdk.storage.IdentityStorage, param4: com.zendesk.sdk.storage.PushRegistrationResponseStorage): com.zendesk.sdk.network.PushRegistrationProvider;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.BaseProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.RequestProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.RequestSessionCache.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.RequestStorage.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./java.util.Locale.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_ProvideRequestProviderFactory {
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider, param7: javaxinjectProvider): daggerinternalFactory;
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider, param7: javaxinjectProvider);
+						public get(): com.zendesk.sdk.network.RequestProvider;
+						public static proxyProvideRequestProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: com.zendesk.sdk.storage.IdentityStorage, param3: javalangObject, param4: com.zendesk.sdk.storage.RequestStorage, param5: com.zendesk.sdk.storage.RequestSessionCache, param6: com.zendesk.sdk.storage.PushRegistrationResponseStorage, param7: javautilLocale): com.zendesk.sdk.network.RequestProvider;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.SdkSettingsProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.SdkSettingsStorage.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./java.lang.String.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_ProvideSdkSettingsProviderFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideSdkSettingsProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javalangObject, param2: string, param3: com.zendesk.sdk.storage.SdkSettingsStorage, param4: string): com.zendesk.sdk.network.SdkSettingsProvider;
+						public get(): com.zendesk.sdk.network.SdkSettingsProvider;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.BaseProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.UploadProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_ProvideUploadProviderFactory {
+						public static proxyProvideUploadProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: javalangObject): com.zendesk.sdk.network.UploadProvider;
+						public get(): com.zendesk.sdk.network.UploadProvider;
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.AccessProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.BaseProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.SdkSettingsProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.SdkSettingsStorage.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_ProvideZendeskBaseProviderFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideZendeskBaseProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.AccessProvider, param2: com.zendesk.sdk.storage.SdkSettingsStorage, param3: com.zendesk.sdk.storage.IdentityStorage, param4: com.zendesk.sdk.network.SdkSettingsProvider): com.zendesk.sdk.network.BaseProvider;
+						public get(): com.zendesk.sdk.network.BaseProvider;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.BaseProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.BlipsProvider.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.DeviceInfo.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./java.lang.String.d.ts" />
+/// <reference path="./java.util.Locale.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ProviderModule_ProvideZendeskBlipsProviderFactory {
+						public get(): com.zendesk.sdk.network.impl.BlipsProvider;
+						public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider, param7: javaxinjectProvider): daggerinternalFactory;
+						public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider, param7: javaxinjectProvider);
+						public static proxyProvideZendeskBlipsProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: javalangObject, param3: javautilLocale, param4: com.zendesk.sdk.storage.IdentityStorage, param5: javalangObject, param6: com.zendesk.sdk.network.impl.DeviceInfo, param7: string): com.zendesk.sdk.network.impl.BlipsProvider;
 					}
 				}
 			}
@@ -2880,17 +3779,624 @@ declare module com {
 	}
 }
 
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule {
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./android.content.Context.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./okhttp3.Cache.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideCacheFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider);
+						public get(): okhttp3Cache;
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideCache(param0: com.zendesk.sdk.network.impl.RestModule, param1: androidcontentContext): okhttp3Cache;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.google.gson.TypeAdapter.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideDateTypeAdapterFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule);
+						public static proxyProvideDateTypeAdapter(param0: com.zendesk.sdk.network.impl.RestModule): com.google.gson.TypeAdapter;
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule): daggerinternalFactory;
+						public get(): com.google.gson.TypeAdapter;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.DefaultZendeskUnauthorizedInterceptor.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.SdkStorage.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./okhttp3.Cache.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideDefaultZendeskUnauthorizedInterceptorFactory {
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.DefaultZendeskUnauthorizedInterceptor;
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+						public static proxyProvideDefaultZendeskUnauthorizedInterceptor(param0: com.zendesk.sdk.network.impl.RestModule, param1: com.zendesk.sdk.storage.SdkStorage, param2: okhttp3Cache): com.zendesk.sdk.network.impl.DefaultZendeskUnauthorizedInterceptor;
+					}
+				}
+			}
+		}
+	}
+}
+
+import retrofit2convertergsonGsonConverterFactory = retrofit2.converter.gson.GsonConverterFactory;
+/// <reference path="./com.google.gson.Gson.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./retrofit2.converter.gson.GsonConverterFactory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideGsonConverterFactoryFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider);
+						public get(): retrofit2convertergsonGsonConverterFactory;
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideGsonConverterFactory(param0: com.zendesk.sdk.network.impl.RestModule, param1: com.google.gson.Gson): retrofit2convertergsonGsonConverterFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.google.gson.Gson.d.ts" />
+/// <reference path="./com.google.gson.TypeAdapter.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideGsonFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider);
+						public get(): com.google.gson.Gson;
+						public static proxyProvideGson(param0: com.zendesk.sdk.network.impl.RestModule, param1: com.google.gson.TypeAdapter): com.google.gson.Gson;
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.HelpCenterCachingInterceptor.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideHelpCenterCachingInterceptorFactory {
+						public static proxyProvideHelpCenterCachingInterceptor(param0: com.zendesk.sdk.network.impl.RestModule): com.zendesk.sdk.network.impl.HelpCenterCachingInterceptor;
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule);
+						public get(): com.zendesk.sdk.network.impl.HelpCenterCachingInterceptor;
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+import okhttp3loggingHttpLoggingInterceptor = okhttp3.logging.HttpLoggingInterceptor;
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./okhttp3.logging.HttpLoggingInterceptor.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideHttpLoggingInterceptorFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule);
+						public get(): okhttp3loggingHttpLoggingInterceptor;
+						public static proxyProvideHttpLoggingInterceptor(param0: com.zendesk.sdk.network.impl.RestModule): okhttp3loggingHttpLoggingInterceptor;
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+import okhttp3OkHttpClient = okhttp3.OkHttpClient;
+/// <reference path="./com.zendesk.sdk.network.impl.DefaultZendeskUnauthorizedInterceptor.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskRequestInterceptor.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+/// <reference path="./java.util.List.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./okhttp3.Cache.d.ts" />
+/// <reference path="./okhttp3.OkHttpClient.d.ts" />
+/// <reference path="./okhttp3.logging.HttpLoggingInterceptor.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideOkHttpClientFactory {
+						public get(): okhttp3OkHttpClient;
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideOkHttpClient(param0: com.zendesk.sdk.network.impl.RestModule, param1: com.zendesk.sdk.network.impl.DefaultZendeskUnauthorizedInterceptor, param2: com.zendesk.sdk.network.impl.ZendeskRequestInterceptor, param3: okhttp3loggingHttpLoggingInterceptor, param4: javalangObject, param5: javautilList, param6: okhttp3Cache): okhttp3OkHttpClient;
+					}
+				}
+			}
+		}
+	}
+}
+
 import retrofit2Retrofit = retrofit2.Retrofit;
-/// <reference path="./com.zendesk.sdk.network.impl.ApplicationScope.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.String.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./okhttp3.OkHttpClient.d.ts" />
+/// <reference path="./retrofit2.Retrofit.d.ts" />
+/// <reference path="./retrofit2.converter.gson.GsonConverterFactory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideRestAdapterFactory {
+						public get(): retrofit2Retrofit;
+						public static proxyProvideRestAdapter(param0: com.zendesk.sdk.network.impl.RestModule, param1: string, param2: retrofit2convertergsonGsonConverterFactory, param3: okhttp3OkHttpClient): retrofit2Retrofit;
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.RestModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskRequestInterceptor.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./java.lang.String.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class RestModule_ProvideZendeskRequestInterceptorFactory {
+						public get(): com.zendesk.sdk.network.impl.ZendeskRequestInterceptor;
+						public static proxyProvideZendeskRequestInterceptor(param0: com.zendesk.sdk.network.impl.RestModule, param1: string, param2: string, param3: string): com.zendesk.sdk.network.impl.ZendeskRequestInterceptor;
+						public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./java.lang.Class.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class Serializer {
+						/**
+						 * Constructs a new instance of the com.zendesk.sdk.network.impl.Serializer interface with the provided implementation.
+						 */
+						public constructor(implementation: {
+							deserialize(param0: javalangObject, param1: javalangClass): javalangObject;
+							serialize(param0: javalangObject): string;
+						});
+						public deserialize(param0: javalangObject, param1: javalangClass): javalangObject;
+						public serialize(param0: javalangObject): string;
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule {
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.AccessService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
 /// <reference path="./retrofit2.Retrofit.d.ts" />
 declare module com {
 	export module zendesk {
 		export module sdk {
 			export module network {
 				export module impl {
-					export class RestAdapterInjector {
-						public static injectRestAdapter(param0: com.zendesk.sdk.network.impl.ApplicationScope): retrofit2Retrofit;
+					export class ServiceModule_ProvideAccessServiceFactory {
+						public get(): com.zendesk.sdk.network.AccessService;
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideAccessService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2Retrofit): com.zendesk.sdk.network.AccessService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.BlipsService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./retrofit2.Retrofit.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideBlipsServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.BlipsService;
+						public static proxyProvideBlipsService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2Retrofit): com.zendesk.sdk.network.impl.BlipsService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.HelpCenterService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./retrofit2.Retrofit.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideHelpCenterServiceFactory {
+						public get(): com.zendesk.sdk.network.HelpCenterService;
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideHelpCenterService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2Retrofit): com.zendesk.sdk.network.HelpCenterService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.PushRegistrationService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./retrofit2.Retrofit.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvidePushRegistrationServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static proxyProvidePushRegistrationService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2Retrofit): com.zendesk.sdk.network.PushRegistrationService;
+						public get(): com.zendesk.sdk.network.PushRegistrationService;
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.RequestService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./retrofit2.Retrofit.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideRequestServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.RequestService;
+						public static proxyProvideRequestService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2Retrofit): com.zendesk.sdk.network.RequestService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.SdkSettingsService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./retrofit2.Retrofit.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideSdkSettingsServiceFactory {
+						public get(): com.zendesk.sdk.network.SdkSettingsService;
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideSdkSettingsService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2Retrofit): com.zendesk.sdk.network.SdkSettingsService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.UploadService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./retrofit2.Retrofit.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideUploadServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideUploadService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2Retrofit): com.zendesk.sdk.network.UploadService;
+						public get(): com.zendesk.sdk.network.UploadService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.UserService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+/// <reference path="./retrofit2.Retrofit.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideUserServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static proxyProvideUserService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2Retrofit): com.zendesk.sdk.network.UserService;
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.UserService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.AccessService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskAccessService.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideZendeskAccessServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideZendeskAccessService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.AccessService): com.zendesk.sdk.network.impl.ZendeskAccessService;
+						public get(): com.zendesk.sdk.network.impl.ZendeskAccessService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.HelpCenterService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskHelpCenterService.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideZendeskHelpCenterServiceFactory {
+						public static proxyProvideZendeskHelpCenterService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.HelpCenterService): com.zendesk.sdk.network.impl.ZendeskHelpCenterService;
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.ZendeskHelpCenterService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.PushRegistrationService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskPushRegistrationService.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideZendeskPushRegistrationServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.ZendeskPushRegistrationService;
+						public static proxyProvideZendeskPushRegistrationService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.PushRegistrationService): com.zendesk.sdk.network.impl.ZendeskPushRegistrationService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.RequestService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskRequestService.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideZendeskRequestServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.ZendeskRequestService;
+						public static proxyProvideZendeskRequestService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.RequestService): com.zendesk.sdk.network.impl.ZendeskRequestService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.SdkSettingsService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskSdkSettingsService.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideZendeskSdkSettingsServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.ZendeskSdkSettingsService;
+						public static proxyProvideZendeskSdkSettingsService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.SdkSettingsService): com.zendesk.sdk.network.impl.ZendeskSdkSettingsService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.UploadService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskUploadService.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideZendeskUploadServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public static proxyProvideZendeskUploadService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.UploadService): com.zendesk.sdk.network.impl.ZendeskUploadService;
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.ZendeskUploadService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.UserService.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ServiceModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskUserService.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ServiceModule_ProvideZendeskUserServiceFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider);
+						public get(): com.zendesk.sdk.network.impl.ZendeskUserService;
+						public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javaxinjectProvider): daggerinternalFactory;
+						public static proxyProvideZendeskUserService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.UserService): com.zendesk.sdk.network.impl.ZendeskUserService;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.model.helpcenter.ArticleVote.d.ts" />
+/// <reference path="./java.lang.Long.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubArticleVoteStorage {
 						public constructor();
+						public storeArticleVote(param0: javalangLong, param1: com.zendesk.sdk.model.helpcenter.ArticleVote): void;
+						public getStoredArticleVote(param0: javalangLong): com.zendesk.sdk.model.helpcenter.ArticleVote;
+						public removeStoredArticleVote(param0: javalangLong): void;
 					}
 				}
 			}
@@ -2898,15 +4404,39 @@ declare module com {
 	}
 }
 
-/// <reference path="./retrofit2.Retrofit.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskConfig.d.ts" />
 declare module com {
 	export module zendesk {
 		export module sdk {
 			export module network {
 				export module impl {
-					export class RestAdapterModule {
-						public constructor(param0: retrofit2Retrofit);
-						public getRetrofit(): retrofit2Retrofit;
+					export class StubComponent {
+						/**
+						 * Constructs a new instance of the com.zendesk.sdk.network.impl.StubComponent interface with the provided implementation.
+						 */
+						public constructor(implementation: {
+							inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
+						});
+						public inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.model.helpcenter.LastSearch.d.ts" />
+/// <reference path="./java.lang.String.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubHelpCenterSessionCache {
+						public getLastSearch(): com.zendesk.sdk.model.helpcenter.LastSearch;
+						public unsetUniqueSearchResultClick(): void;
+						public setLastSearch(param0: string, param1: number): void;
+						public isUniqueSearchResultClick(): boolean;
 					}
 				}
 			}
@@ -2919,7 +4449,110 @@ declare module com {
 		export module sdk {
 			export module network {
 				export module impl {
-					export class ServiceInjector {
+					export class StubIdentity {
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.model.access.AccessToken.d.ts" />
+/// <reference path="./com.zendesk.sdk.model.access.Identity.d.ts" />
+/// <reference path="./java.lang.Long.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubIdentityStorage {
+						public getUserId(): javalangLong;
+						public getUUID(): string;
+						public storeUserId(param0: javalangLong): void;
+						public anonymiseIdentity(): com.zendesk.sdk.model.access.Identity;
+						public getIdentity(): com.zendesk.sdk.model.access.Identity;
+						public clearUserData(): void;
+						public getCacheKey(): string;
+						public storeAccessToken(param0: com.zendesk.sdk.model.access.AccessToken): void;
+						public storeIdentity(param0: com.zendesk.sdk.model.access.Identity): void;
+						public getStoredAccessToken(): com.zendesk.sdk.model.access.AccessToken;
+						public getStoredAccessTokenAsBearerToken(): string;
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubModule {
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderStore.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.StubModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskConfigHelper.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageStore.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubModule_InjectStubZendeskConfigHelperFactory {
+						public static proxyInjectStubZendeskConfigHelper(param0: com.zendesk.sdk.network.impl.StubModule, param1: com.zendesk.sdk.network.impl.ProviderStore, param2: com.zendesk.sdk.storage.StorageStore): com.zendesk.sdk.network.impl.ZendeskConfigHelper;
+						public static create(param0: com.zendesk.sdk.network.impl.StubModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.ZendeskConfigHelper;
+						public constructor(param0: com.zendesk.sdk.network.impl.StubModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderStore.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.StubModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubModule_ProvideStubProviderStoreFactory {
+						public static create(param0: com.zendesk.sdk.network.impl.StubModule): daggerinternalFactory;
+						public static proxyProvideStubProviderStore(param0: com.zendesk.sdk.network.impl.StubModule): com.zendesk.sdk.network.impl.ProviderStore;
+						public get(): com.zendesk.sdk.network.impl.ProviderStore;
+						public constructor(param0: com.zendesk.sdk.network.impl.StubModule);
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.StubModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageStore.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubModule_ProvideStubStorageStoreFactory {
+						public static create(param0: com.zendesk.sdk.network.impl.StubModule): daggerinternalFactory;
+						public static proxyProvideStubStorageStore(param0: com.zendesk.sdk.network.impl.StubModule): com.zendesk.sdk.storage.StorageStore;
+						public get(): com.zendesk.sdk.storage.StorageStore;
+						public constructor(param0: com.zendesk.sdk.network.impl.StubModule);
 					}
 				}
 			}
@@ -2998,6 +4631,121 @@ declare module com {
 	}
 }
 
+/// <reference path="./com.zendesk.sdk.model.request.RequestUpdates.d.ts" />
+/// <reference path="./java.lang.Integer.d.ts" />
+/// <reference path="./java.lang.String.d.ts" />
+/// <reference path="./java.util.List.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubRequestStorage {
+						public getStoredRequestIds(): javautilList;
+						public hasStoredRequestUpdates(): boolean;
+						public getRequestUpdates(): com.zendesk.sdk.model.request.RequestUpdates;
+						public clearUserData(): void;
+						public getCacheKey(): string;
+						public storeRequestId(param0: string): void;
+						public setCommentCount(param0: string, param1: number): void;
+						public getCommentCount(param0: string): javalangInteger;
+						public markRequestAsRead(param0: string): void;
+						public getRequestUpdatesTimestamp(): number;
+						public setRequestUpdates(param0: com.zendesk.sdk.model.request.RequestUpdates): void;
+					}
+				}
+			}
+		}
+	}
+}
+
+import javautilconcurrentTimeUnit = java.util.concurrent.TimeUnit;
+/// <reference path="./com.zendesk.sdk.model.settings.SafeMobileSettings.d.ts" />
+/// <reference path="./java.util.concurrent.TimeUnit.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubSdkSettingsStorage {
+						public hasStoredSdkSettings(): boolean;
+						public areSettingsUpToDate(param0: number, param1: javautilconcurrentTimeUnit): boolean;
+						public getStoredSettings(): com.zendesk.sdk.model.settings.SafeMobileSettings;
+						public deleteStoredSettings(): void;
+						public setStoredSettings(param0: com.zendesk.sdk.model.settings.SafeMobileSettings): void;
+					}
+				}
+			}
+		}
+	}
+}
+
+import javautilSet = java.util.Set;
+/// <reference path="./java.util.Set.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubSdkStorage {
+						public registerUserStorage(param0: com.zendesk.sdk.storage.SdkStorage.UserStorage): void;
+						public clearUserData(): void;
+						public getUserStorage(): javautilSet;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.storage.ArticleVoteStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.HelpCenterSessionCache.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.RequestStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.SdkSettingsStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.SdkStorage.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class StubStorageStore {
+						public sdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
+						public identityStorage(): com.zendesk.sdk.storage.IdentityStorage;
+						public requestStorage(): com.zendesk.sdk.storage.RequestStorage;
+						public helpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
+						public sdkStorage(): com.zendesk.sdk.storage.SdkStorage;
+						public pushStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
+						public voteStorage(): com.zendesk.sdk.storage.ArticleVoteStorage;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskConfig.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class SupportSdkProvidersComponent {
+						/**
+						 * Constructs a new instance of the com.zendesk.sdk.network.impl.SupportSdkProvidersComponent interface with the provided implementation.
+						 */
+						public constructor(implementation: {
+							inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
+						});
+						public inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
+					}
+				}
+			}
+		}
+	}
+}
+
 /// <reference path="./com.zendesk.sdk.model.access.AnonymousIdentity.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.access.JwtIdentity.d.ts" />
 /// <reference path="./com.zendesk.sdk.network.impl.ZendeskAccessService.d.ts" />
@@ -3034,6 +4782,23 @@ declare module com {
 	}
 }
 
+/// <reference path="./java.lang.Class.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ZendeskBase64Serializer {
+						public deserialize(param0: javalangObject, param1: javalangClass): javalangObject;
+						public serialize(param0: javalangObject): string;
+					}
+				}
+			}
+		}
+	}
+}
+
 /// <reference path="./com.zendesk.sdk.model.settings.SafeMobileSettings.d.ts" />
 /// <reference path="./com.zendesk.sdk.network.AccessProvider.d.ts" />
 /// <reference path="./com.zendesk.sdk.network.SdkSettingsProvider.d.ts" />
@@ -3050,6 +4815,22 @@ declare module com {
 						public getAccessToken(param0: com.zendesk.sdk.model.settings.SafeMobileSettings, param1: com.zendesk.service.ZendeskCallback): void;
 						public constructor(param0: com.zendesk.sdk.network.AccessProvider, param1: com.zendesk.sdk.storage.SdkSettingsStorage, param2: com.zendesk.sdk.storage.IdentityStorage, param3: com.zendesk.sdk.network.SdkSettingsProvider);
 						public configureSdk(param0: com.zendesk.service.ZendeskCallback): void;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./java.lang.String.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ZendeskBlipsProvider {
+						public sendHelpCenterSearchBlip(param0: string): void;
+						public sendPageViewBlip(param0: string, param1: string): void;
 					}
 				}
 			}
@@ -3131,7 +4912,7 @@ declare module com {
 		export module sdk {
 			export module network {
 				export module impl {
-					export class ZendeskConfigInjector {
+					export class ZendeskConfigModule {
 					}
 				}
 			}
@@ -3139,6 +4920,70 @@ declare module com {
 	}
 }
 
+/// <reference path="./com.zendesk.sdk.network.impl.ProviderStore.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskConfigHelper.d.ts" />
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskConfigModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageStore.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ZendeskConfigModule_ProvideZendeskConfigHelperFactory {
+						public constructor(param0: com.zendesk.sdk.network.impl.ZendeskConfigModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+						public static create(param0: com.zendesk.sdk.network.impl.ZendeskConfigModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+						public get(): com.zendesk.sdk.network.impl.ZendeskConfigHelper;
+						public static proxyProvideZendeskConfigHelper(param0: com.zendesk.sdk.network.impl.ZendeskConfigModule, param1: com.zendesk.sdk.network.impl.ProviderStore, param2: com.zendesk.sdk.storage.StorageStore): com.zendesk.sdk.network.impl.ZendeskConfigHelper;
+					}
+				}
+			}
+		}
+	}
+}
+
+import daggerMembersInjector = dagger.MembersInjector;
+/// <reference path="./com.zendesk.sdk.network.impl.ZendeskConfig.d.ts" />
+/// <reference path="./dagger.MembersInjector.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ZendeskConfig_MembersInjector {
+						public static injectZendeskConfigHelper(param0: com.zendesk.sdk.network.impl.ZendeskConfig, param1: javaxinjectProvider): void;
+						public constructor(param0: javaxinjectProvider);
+						public static create(param0: javaxinjectProvider): daggerMembersInjector;
+						public injectMembers(param0: com.zendesk.sdk.network.impl.ZendeskConfig): void;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.google.gson.stream.JsonReader.d.ts" />
+/// <reference path="./com.google.gson.stream.JsonWriter.d.ts" />
+/// <reference path="./java.util.Date.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ZendeskDateTypeAdapter {
+						public constructor();
+						public read(param0: com.google.gson.stream.JsonReader): javautilDate;
+						public write(param0: com.google.gson.stream.JsonWriter, param1: javautilDate): void;
+					}
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.model.helpcenter.Article.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.helpcenter.AttachmentType.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.helpcenter.HelpCenterSearch.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.helpcenter.ListArticleQuery.d.ts" />
@@ -3153,9 +4998,9 @@ declare module com {
 			export module network {
 				export module impl {
 					export class ZendeskHelpCenterProvider {
+						public submitRecordArticleView(param0: com.zendesk.sdk.model.helpcenter.Article, param1: javautilLocale, param2: com.zendesk.service.ZendeskCallback): void;
 						public listArticlesFlat(param0: com.zendesk.sdk.model.helpcenter.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback): void;
 						public getCategories(param0: com.zendesk.service.ZendeskCallback): void;
-						public submitRecordArticleView(param0: javalangLong, param1: javautilLocale, param2: com.zendesk.service.ZendeskCallback): void;
 						public getArticle(param0: javalangLong, param1: com.zendesk.service.ZendeskCallback): void;
 						public getSuggestedArticles(param0: com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch, param1: com.zendesk.service.ZendeskCallback): void;
 						public listArticles(param0: com.zendesk.sdk.model.helpcenter.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback): void;
@@ -3203,6 +5048,19 @@ declare module com {
 						public getSectionsForCategory(param0: string, param1: javalangLong, param2: javautilLocale, param3: com.zendesk.service.ZendeskCallback): void;
 						public upvoteArticle(param0: string, param1: javalangLong, param2: string, param3: com.zendesk.service.ZendeskCallback): void;
 						public deleteVote(param0: string, param1: javalangLong, param2: com.zendesk.service.ZendeskCallback): void;
+					}
+				}
+			}
+		}
+	}
+}
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module network {
+				export module impl {
+					export class ZendeskLocaleConverter {
 					}
 				}
 			}
@@ -3328,7 +5186,7 @@ declare module com {
 				export module impl {
 					export class ZendeskRequestInterceptor {
 						public intercept(param0: okhttp3InterceptorChain): okhttp3Response;
-						public constructor(param0: string, param1: string);
+						public constructor(param0: string, param1: string, param2: string);
 					}
 				}
 			}
@@ -3339,6 +5197,7 @@ declare module com {
 /// <reference path="./com.zendesk.sdk.model.request.CreateRequest.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.request.EndUserComment.d.ts" />
 /// <reference path="./com.zendesk.service.ZendeskCallback.d.ts" />
+/// <reference path="./java.lang.Object.d.ts" />
 /// <reference path="./java.lang.String.d.ts" />
 /// <reference path="./java.util.List.d.ts" />
 declare module com {
@@ -3350,10 +5209,17 @@ declare module com {
 						public addComment(param0: string, param1: com.zendesk.sdk.model.request.EndUserComment, param2: com.zendesk.service.ZendeskCallback): void;
 						public getComments(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
 						public getRequest(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
+						public getUpdatesForDevice(param0: com.zendesk.service.ZendeskCallback): void;
 						public createRequest(param0: com.zendesk.sdk.model.request.CreateRequest, param1: com.zendesk.service.ZendeskCallback): void;
 						public getTicketFormsById(param0: javautilList, param1: com.zendesk.service.ZendeskCallback): void;
 						public getAllRequests(param0: com.zendesk.service.ZendeskCallback): void;
 						public getRequests(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
+					}
+					export module ZendeskRequestProvider {
+						export class RequestUpdatesCacheCallback extends com.zendesk.sdk.network.impl.PassThroughErrorZendeskCallback {
+							public onSuccess(param0: javalangObject): void;
+							public onSuccess(param0: javautilList): void;
+						}
 					}
 				}
 			}
@@ -3401,7 +5267,7 @@ declare module com {
 			export module network {
 				export module impl {
 					export class ZendeskSdkSettingsService {
-						public getSettings(param0: string, param1: string, param2: com.zendesk.service.ZendeskCallback): void;
+						public getSettings(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
 					}
 				}
 			}
@@ -3545,6 +5411,30 @@ declare module com {
 	}
 }
 
+/// <reference path="./com.zendesk.sdk.model.helpcenter.ArticleVote.d.ts" />
+/// <reference path="./java.lang.Long.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class ArticleVoteStorage {
+					/**
+					 * Constructs a new instance of the com.zendesk.sdk.storage.ArticleVoteStorage interface with the provided implementation.
+					 */
+					public constructor(implementation: {
+						storeArticleVote(param0: javalangLong, param1: com.zendesk.sdk.model.helpcenter.ArticleVote): void;
+						getStoredArticleVote(param0: javalangLong): com.zendesk.sdk.model.helpcenter.ArticleVote;
+						removeStoredArticleVote(param0: javalangLong): void;
+					});
+					public getStoredArticleVote(param0: javalangLong): com.zendesk.sdk.model.helpcenter.ArticleVote;
+					public removeStoredArticleVote(param0: javalangLong): void;
+					public storeArticleVote(param0: javalangLong, param1: com.zendesk.sdk.model.helpcenter.ArticleVote): void;
+				}
+			}
+		}
+	}
+}
+
 /// <reference path="./com.zendesk.sdk.model.helpcenter.LastSearch.d.ts" />
 /// <reference path="./java.lang.String.d.ts" />
 declare module com {
@@ -3573,6 +5463,7 @@ declare module com {
 
 /// <reference path="./com.zendesk.sdk.model.access.AccessToken.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.access.Identity.d.ts" />
+/// <reference path="./java.lang.Long.d.ts" />
 declare module com {
 	export module zendesk {
 		export module sdk {
@@ -3584,6 +5475,8 @@ declare module com {
 					public constructor(implementation: {
 						storeAccessToken(param0: com.zendesk.sdk.model.access.AccessToken): void;
 						getStoredAccessToken(): com.zendesk.sdk.model.access.AccessToken;
+						storeUserId(param0: javalangLong): void;
+						getUserId(): javalangLong;
 						getStoredAccessTokenAsBearerToken(): string;
 						getUUID(): string;
 						storeIdentity(param0: com.zendesk.sdk.model.access.Identity): void;
@@ -3594,7 +5487,9 @@ declare module com {
 					});
 					public storeAccessToken(param0: com.zendesk.sdk.model.access.AccessToken): void;
 					public getStoredAccessToken(): com.zendesk.sdk.model.access.AccessToken;
+					public getUserId(): javalangLong;
 					public getIdentity(): com.zendesk.sdk.model.access.Identity;
+					public storeUserId(param0: javalangLong): void;
 					public anonymiseIdentity(): com.zendesk.sdk.model.access.Identity;
 					public getCacheKey(): string;
 					public getUUID(): string;
@@ -3659,6 +5554,7 @@ declare module com {
 	}
 }
 
+/// <reference path="./com.zendesk.sdk.model.request.RequestUpdates.d.ts" />
 /// <reference path="./java.lang.Integer.d.ts" />
 /// <reference path="./java.lang.String.d.ts" />
 /// <reference path="./java.util.List.d.ts" />
@@ -3675,12 +5571,22 @@ declare module com {
 						storeRequestId(param0: string): void;
 						setCommentCount(param0: string, param1: number): void;
 						getCommentCount(param0: string): javalangInteger;
+						hasStoredRequestUpdates(): boolean;
+						getRequestUpdatesTimestamp(): number;
+						setRequestUpdates(param0: com.zendesk.sdk.model.request.RequestUpdates): void;
+						markRequestAsRead(param0: string): void;
+						getRequestUpdates(): com.zendesk.sdk.model.request.RequestUpdates;
 						clearUserData(): void;
 						getCacheKey(): string;
 					});
 					public getStoredRequestIds(): javautilList;
+					public markRequestAsRead(param0: string): void;
+					public getRequestUpdatesTimestamp(): number;
+					public getRequestUpdates(): com.zendesk.sdk.model.request.RequestUpdates;
+					public setRequestUpdates(param0: com.zendesk.sdk.model.request.RequestUpdates): void;
 					public storeRequestId(param0: string): void;
 					public getCacheKey(): string;
+					public hasStoredRequestUpdates(): boolean;
 					public setCommentCount(param0: string, param1: number): void;
 					public clearUserData(): void;
 					public getCommentCount(param0: string): javalangInteger;
@@ -3690,7 +5596,6 @@ declare module com {
 	}
 }
 
-import javautilconcurrentTimeUnit = java.util.concurrent.TimeUnit;
 /// <reference path="./com.zendesk.sdk.model.settings.SafeMobileSettings.d.ts" />
 /// <reference path="./java.util.concurrent.TimeUnit.d.ts" />
 declare module com {
@@ -3719,7 +5624,6 @@ declare module com {
 	}
 }
 
-import javautilSet = java.util.Set;
 /// <reference path="./java.util.Set.d.ts" />
 declare module com {
 	export module zendesk {
@@ -3756,62 +5660,204 @@ declare module com {
 	}
 }
 
-/// <reference path="./com.zendesk.sdk.network.impl.ApplicationScope.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.HelpCenterSessionCache.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.RequestSessionCache.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.RequestStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.SdkSettingsStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.SdkStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.StorageStore.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.StubStorageStore.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module storage {
-				export class StorageInjector {
-					public static injectCachedSdkStorage(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.storage.SdkStorage;
-					public static injectCachedRequestSessionCache(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.storage.RequestSessionCache;
-					public static injectStubStorageStore(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.storage.StubStorageStore;
-					public static injectCachedRequestStorage(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.storage.RequestStorage;
-					public constructor();
-					public static injectCachedPushRegistrationResponseStorage(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
-					public static injectCachedSdkSettingsStorage(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.storage.SdkSettingsStorage;
-					public static injectCachedHelpCenterSessionCache(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.storage.HelpCenterSessionCache;
-					public static injectCachedIdentityStorage(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.storage.IdentityStorage;
-					public static injectStorageStore(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.storage.StorageStore;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./com.zendesk.sdk.storage.HelpCenterSessionCache.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.RequestSessionCache.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.RequestStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.SdkSettingsStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.SdkStorage.d.ts" />
 declare module com {
 	export module zendesk {
 		export module sdk {
 			export module storage {
 				export class StorageModule {
-					public getRequestStorage(): com.zendesk.sdk.storage.RequestStorage;
-					public getSdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
-					public getHelpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
-					public getIdentityStorage(): com.zendesk.sdk.storage.IdentityStorage;
-					public getSdkStorage(): com.zendesk.sdk.storage.SdkStorage;
-					public getPushRegistrationResponseStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
-					public getRequestSessionCache(): com.zendesk.sdk.storage.RequestSessionCache;
+					public constructor();
 				}
 			}
 		}
 	}
 }
 
+/// <reference path="./android.content.Context.d.ts" />
+/// <reference path="./com.google.gson.Gson.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.ArticleVoteStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class StorageModule_ProvideArticleVoteStorageFactory {
+					public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+					public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+					public get(): com.zendesk.sdk.storage.ArticleVoteStorage;
+					public static proxyProvideArticleVoteStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: androidcontentContext, param2: com.google.gson.Gson): com.zendesk.sdk.storage.ArticleVoteStorage;
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.storage.HelpCenterSessionCache.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class StorageModule_ProvideHelpCenterSessionCacheFactory {
+					public constructor(param0: com.zendesk.sdk.storage.StorageModule);
+					public get(): com.zendesk.sdk.storage.HelpCenterSessionCache;
+					public static create(param0: com.zendesk.sdk.storage.StorageModule): daggerinternalFactory;
+					public static proxyProvideHelpCenterSessionCache(param0: com.zendesk.sdk.storage.StorageModule): com.zendesk.sdk.storage.HelpCenterSessionCache;
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./android.content.Context.d.ts" />
+/// <reference path="./com.google.gson.Gson.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class StorageModule_ProvideIdentityStorageFactory {
+					public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+					public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+					public get(): com.zendesk.sdk.storage.IdentityStorage;
+					public static proxyProvideIdentityStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: androidcontentContext, param2: com.google.gson.Gson): com.zendesk.sdk.storage.IdentityStorage;
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./android.content.Context.d.ts" />
+/// <reference path="./com.google.gson.Gson.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class StorageModule_ProvidePushDeviceIdStorageFactory {
+					public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+					public static proxyProvidePushDeviceIdStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: androidcontentContext, param2: com.google.gson.Gson): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
+					public get(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
+					public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.storage.RequestSessionCache.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class StorageModule_ProvideRequestSessionCacheFactory {
+					public constructor(param0: com.zendesk.sdk.storage.StorageModule);
+					public get(): com.zendesk.sdk.storage.RequestSessionCache;
+					public static proxyProvideRequestSessionCache(param0: com.zendesk.sdk.storage.StorageModule): com.zendesk.sdk.storage.RequestSessionCache;
+					public static create(param0: com.zendesk.sdk.storage.StorageModule): daggerinternalFactory;
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./android.content.Context.d.ts" />
+/// <reference path="./com.google.gson.Gson.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.RequestStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class StorageModule_ProvideRequestStorageFactory {
+					public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+					public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+					public static proxyProvideRequestStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: androidcontentContext, param2: com.google.gson.Gson): com.zendesk.sdk.storage.RequestStorage;
+					public get(): com.zendesk.sdk.storage.RequestStorage;
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./android.content.Context.d.ts" />
+/// <reference path="./com.google.gson.Gson.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.SdkSettingsStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class StorageModule_ProvideSdkSettingsStorageFactory {
+					public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider);
+					public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider): daggerinternalFactory;
+					public get(): com.zendesk.sdk.storage.SdkSettingsStorage;
+					public static proxyProvideSdkSettingsStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: androidcontentContext, param2: com.google.gson.Gson): com.zendesk.sdk.storage.SdkSettingsStorage;
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.storage.SdkStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class StorageModule_ProvideSdkStorageFactory {
+					public constructor(param0: com.zendesk.sdk.storage.StorageModule);
+					public static proxyProvideSdkStorage(param0: com.zendesk.sdk.storage.StorageModule): com.zendesk.sdk.storage.SdkStorage;
+					public get(): com.zendesk.sdk.storage.SdkStorage;
+					public static create(param0: com.zendesk.sdk.storage.StorageModule): daggerinternalFactory;
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.storage.ArticleVoteStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.HelpCenterSessionCache.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.RequestStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.SdkSettingsStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.SdkStorage.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageModule.d.ts" />
+/// <reference path="./com.zendesk.sdk.storage.StorageStore.d.ts" />
+/// <reference path="./dagger.internal.Factory.d.ts" />
+/// <reference path="./javax.inject.Provider.d.ts" />
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module storage {
+				export class StorageModule_ProvideStorageStoreFactory {
+					public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider, param7: javaxinjectProvider);
+					public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javaxinjectProvider, param2: javaxinjectProvider, param3: javaxinjectProvider, param4: javaxinjectProvider, param5: javaxinjectProvider, param6: javaxinjectProvider, param7: javaxinjectProvider): daggerinternalFactory;
+					public get(): com.zendesk.sdk.storage.StorageStore;
+					public static proxyProvideStorageStore(param0: com.zendesk.sdk.storage.StorageModule, param1: com.zendesk.sdk.storage.SdkStorage, param2: com.zendesk.sdk.storage.IdentityStorage, param3: com.zendesk.sdk.storage.RequestStorage, param4: com.zendesk.sdk.storage.SdkSettingsStorage, param5: com.zendesk.sdk.storage.HelpCenterSessionCache, param6: com.zendesk.sdk.storage.PushRegistrationResponseStorage, param7: com.zendesk.sdk.storage.ArticleVoteStorage): com.zendesk.sdk.storage.StorageStore;
+				}
+			}
+		}
+	}
+}
+
+/// <reference path="./com.zendesk.sdk.storage.ArticleVoteStorage.d.ts" />
 /// <reference path="./com.zendesk.sdk.storage.HelpCenterSessionCache.d.ts" />
 /// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
 /// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
@@ -3833,10 +5879,12 @@ declare module com {
 						sdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
 						helpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
 						pushStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
+						voteStorage(): com.zendesk.sdk.storage.ArticleVoteStorage;
 					});
 					public helpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
 					public sdkStorage(): com.zendesk.sdk.storage.SdkStorage;
 					public sdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
+					public voteStorage(): com.zendesk.sdk.storage.ArticleVoteStorage;
 					public identityStorage(): com.zendesk.sdk.storage.IdentityStorage;
 					public pushStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
 					public requestStorage(): com.zendesk.sdk.storage.RequestStorage;
@@ -3846,126 +5894,16 @@ declare module com {
 	}
 }
 
-/// <reference path="./com.zendesk.sdk.model.helpcenter.LastSearch.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
+/// <reference path="./com.zendesk.sdk.model.helpcenter.ArticleVote.d.ts" />
+/// <reference path="./java.lang.Long.d.ts" />
 declare module com {
 	export module zendesk {
 		export module sdk {
 			export module storage {
-				export class StubHelpCenterSessionCache {
-					public getLastSearch(): com.zendesk.sdk.model.helpcenter.LastSearch;
-					public unsetUniqueSearchResultClick(): void;
-					public setLastSearch(param0: string, param1: number): void;
-					public isUniqueSearchResultClick(): boolean;
-				}
-			}
-		}
-	}
-}
-
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module storage {
-				export class StubIdentity {
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./com.zendesk.sdk.model.access.AccessToken.d.ts" />
-/// <reference path="./com.zendesk.sdk.model.access.Identity.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module storage {
-				export class StubIdentityStorage {
-					public storeAccessToken(param0: com.zendesk.sdk.model.access.AccessToken): void;
-					public getStoredAccessToken(): com.zendesk.sdk.model.access.AccessToken;
-					public getIdentity(): com.zendesk.sdk.model.access.Identity;
-					public anonymiseIdentity(): com.zendesk.sdk.model.access.Identity;
-					public getCacheKey(): string;
-					public getUUID(): string;
-					public getStoredAccessTokenAsBearerToken(): string;
-					public clearUserData(): void;
-					public storeIdentity(param0: com.zendesk.sdk.model.access.Identity): void;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./java.lang.Integer.d.ts" />
-/// <reference path="./java.lang.String.d.ts" />
-/// <reference path="./java.util.List.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module storage {
-				export class StubRequestStorage {
-					public getStoredRequestIds(): javautilList;
-					public storeRequestId(param0: string): void;
-					public getCacheKey(): string;
-					public setCommentCount(param0: string, param1: number): void;
-					public clearUserData(): void;
-					public getCommentCount(param0: string): javalangInteger;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./com.zendesk.sdk.model.settings.SafeMobileSettings.d.ts" />
-/// <reference path="./java.util.concurrent.TimeUnit.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module storage {
-				export class StubSdkSettingsStorage {
-					public hasStoredSdkSettings(): boolean;
-					public areSettingsUpToDate(param0: number, param1: javautilconcurrentTimeUnit): boolean;
-					public setStoredSettings(param0: com.zendesk.sdk.model.settings.SafeMobileSettings): void;
-					public getStoredSettings(): com.zendesk.sdk.model.settings.SafeMobileSettings;
-					public deleteStoredSettings(): void;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./java.util.Set.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module storage {
-				export class StubSdkStorage {
-					public registerUserStorage(param0: com.zendesk.sdk.storage.SdkStorage.UserStorage): void;
-					public getUserStorage(): javautilSet;
-					public clearUserData(): void;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./com.zendesk.sdk.storage.HelpCenterSessionCache.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.RequestStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.SdkSettingsStorage.d.ts" />
-/// <reference path="./com.zendesk.sdk.storage.SdkStorage.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module storage {
-				export class StubStorageStore {
-					public helpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
-					public sdkStorage(): com.zendesk.sdk.storage.SdkStorage;
-					public sdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
-					public identityStorage(): com.zendesk.sdk.storage.IdentityStorage;
-					public pushStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
-					public requestStorage(): com.zendesk.sdk.storage.RequestStorage;
+				export class ZendeskArticleVoteStorage {
+					public getStoredArticleVote(param0: javalangLong): com.zendesk.sdk.model.helpcenter.ArticleVote;
+					public removeStoredArticleVote(param0: javalangLong): void;
+					public storeArticleVote(param0: javalangLong, param1: com.zendesk.sdk.model.helpcenter.ArticleVote): void;
 				}
 			}
 		}
@@ -3992,6 +5930,7 @@ declare module com {
 
 /// <reference path="./com.zendesk.sdk.model.access.AccessToken.d.ts" />
 /// <reference path="./com.zendesk.sdk.model.access.Identity.d.ts" />
+/// <reference path="./java.lang.Long.d.ts" />
 declare module com {
 	export module zendesk {
 		export module sdk {
@@ -3999,7 +5938,9 @@ declare module com {
 				export class ZendeskIdentityStorage {
 					public storeAccessToken(param0: com.zendesk.sdk.model.access.AccessToken): void;
 					public getStoredAccessToken(): com.zendesk.sdk.model.access.AccessToken;
+					public getUserId(): javalangLong;
 					public getIdentity(): com.zendesk.sdk.model.access.Identity;
+					public storeUserId(param0: javalangLong): void;
 					public anonymiseIdentity(): com.zendesk.sdk.model.access.Identity;
 					public getCacheKey(): string;
 					public getUUID(): string;
@@ -4045,6 +5986,7 @@ declare module com {
 	}
 }
 
+/// <reference path="./com.zendesk.sdk.model.request.RequestUpdates.d.ts" />
 /// <reference path="./java.lang.Integer.d.ts" />
 /// <reference path="./java.lang.String.d.ts" />
 /// <reference path="./java.util.List.d.ts" />
@@ -4054,8 +5996,13 @@ declare module com {
 			export module storage {
 				export class ZendeskRequestStorage {
 					public getStoredRequestIds(): javautilList;
+					public markRequestAsRead(param0: string): void;
+					public getRequestUpdatesTimestamp(): number;
+					public getRequestUpdates(): com.zendesk.sdk.model.request.RequestUpdates;
+					public setRequestUpdates(param0: com.zendesk.sdk.model.request.RequestUpdates): void;
 					public storeRequestId(param0: string): void;
 					public getCacheKey(): string;
+					public hasStoredRequestUpdates(): boolean;
 					public setCommentCount(param0: string, param1: number): void;
 					public clearUserData(): void;
 					public getCommentCount(param0: string): javalangInteger;
@@ -4098,6 +6045,7 @@ declare module com {
 	}
 }
 
+/// <reference path="./com.zendesk.sdk.storage.ArticleVoteStorage.d.ts" />
 /// <reference path="./com.zendesk.sdk.storage.HelpCenterSessionCache.d.ts" />
 /// <reference path="./com.zendesk.sdk.storage.IdentityStorage.d.ts" />
 /// <reference path="./com.zendesk.sdk.storage.PushRegistrationResponseStorage.d.ts" />
@@ -4112,102 +6060,10 @@ declare module com {
 					public helpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
 					public sdkStorage(): com.zendesk.sdk.storage.SdkStorage;
 					public sdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
+					public voteStorage(): com.zendesk.sdk.storage.ArticleVoteStorage;
 					public identityStorage(): com.zendesk.sdk.storage.IdentityStorage;
 					public pushStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
 					public requestStorage(): com.zendesk.sdk.storage.RequestStorage;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./android.content.Context.d.ts" />
-/// <reference path="./com.zendesk.sdk.network.impl.ApplicationScope.d.ts" />
-/// <reference path="./java.util.List.d.ts" />
-/// <reference path="./java.util.Locale.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module util {
-				export class BaseInjector {
-					public static injectUrl(param0: com.zendesk.sdk.network.impl.ApplicationScope): string;
-					public constructor();
-					public static injectAppId(param0: com.zendesk.sdk.network.impl.ApplicationScope): string;
-					public static injectApplicationContext(param0: com.zendesk.sdk.network.impl.ApplicationScope): androidcontentContext;
-					public static injectUserAgentHeader(param0: com.zendesk.sdk.network.impl.ApplicationScope): string;
-					public static injectLocale(param0: com.zendesk.sdk.network.impl.ApplicationScope): javautilLocale;
-					public static injectConnectionSpec(param0: com.zendesk.sdk.network.impl.ApplicationScope): javautilList;
-					public static injectOAuthToken(param0: com.zendesk.sdk.network.impl.ApplicationScope): string;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./java.lang.Object.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module util {
-				export class DependencyProvider {
-					/**
-					 * Constructs a new instance of the com.zendesk.sdk.util.DependencyProvider interface with the provided implementation.
-					 */
-					public constructor(implementation: {
-						provideDependency(): javalangObject;
-					});
-					public provideDependency(): javalangObject;
-				}
-			}
-		}
-	}
-}
-
-import okhttp3OkHttpClient = okhttp3.OkHttpClient;
-/// <reference path="./com.google.gson.Gson.d.ts" />
-/// <reference path="./com.zendesk.sdk.network.impl.ApplicationScope.d.ts" />
-/// <reference path="./okhttp3.OkHttpClient.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module util {
-				export class LibraryInjector {
-					public static injectOkHttpClient(param0: com.zendesk.sdk.network.impl.ApplicationScope): okhttp3OkHttpClient;
-					public constructor();
-					public static injectCachedGson(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.google.gson.Gson;
-					public static injectGson(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.google.gson.Gson;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./com.google.gson.Gson.d.ts" />
-/// <reference path="./okhttp3.OkHttpClient.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module util {
-				export class LibraryModule {
-					public getOkHttpClient(): okhttp3OkHttpClient;
-					public getGson(): com.google.gson.Gson;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./com.zendesk.sdk.network.impl.ApplicationScope.d.ts" />
-/// <reference path="./com.zendesk.sdk.network.impl.RestAdapterModule.d.ts" />
-/// <reference path="./com.zendesk.sdk.util.LibraryModule.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module util {
-				export class ModuleInjector {
-					public static injectCachedRestAdapterModule(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.network.impl.RestAdapterModule;
-					public static injectCachedLibraryModule(param0: com.zendesk.sdk.network.impl.ApplicationScope): com.zendesk.sdk.util.LibraryModule;
-					public constructor();
 				}
 			}
 		}
@@ -4228,21 +6084,6 @@ declare module com {
 					public static isMobile(param0: androidcontentContext): boolean;
 					public static getActiveNetworkInfo(param0: androidcontentContext): androidnetNetworkInfo;
 					public static getConnectivityManager(param0: androidcontentContext): androidnetConnectivityManager;
-				}
-			}
-		}
-	}
-}
-
-/// <reference path="./com.zendesk.sdk.util.DependencyProvider.d.ts" />
-/// <reference path="./java.lang.Object.d.ts" />
-declare module com {
-	export module zendesk {
-		export module sdk {
-			export module util {
-				export class ScopeCache {
-					public constructor();
-					public get(param0: com.zendesk.sdk.util.DependencyProvider): javalangObject;
 				}
 			}
 		}

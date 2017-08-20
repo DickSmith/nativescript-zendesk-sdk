@@ -100,19 +100,6 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
         return ZendeskSdk;
     }
 
-    private static _initHelpCenter(options: HelpCenterOptions,
-                                   helpCenterContentModel: ZDKHelpCenterOverviewContentModel): void {
-        if ( options.conversationsMenuIos != null ? !options.conversationsMenuIos : false ) {
-            ZDKHelpCenter.setNavBarConversationsUIType(ZDKNavBarConversationsUIType.None);
-        }
-        if ( options.showAsModalForIos != null ? options.showAsModalForIos : false ) {
-            topmost().ios.controller.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
-            ZDKHelpCenter.presentHelpCenterOverviewWithContentModel(topmost().ios.controller, helpCenterContentModel);
-        } else {
-            ZDKHelpCenter.pushHelpCenterOverviewWithContentModel(topmost().ios.controller, helpCenterContentModel);
-        }
-    }
-
     public static showHelpCenter(options: HelpCenterOptions = {}): void {
         const contentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
         ZendeskSdk._initHelpCenter(options, contentModel);
@@ -199,6 +186,19 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
         if ( theme.boldFontName ) { baseTheme.boldFontName = theme.boldFontName; }
 
         baseTheme.apply();
+    }
+
+    private static _initHelpCenter(options: HelpCenterOptions,
+                                   helpCenterContentModel: ZDKHelpCenterOverviewContentModel): void {
+        if ( options.conversationsMenuIos != null ? !options.conversationsMenuIos : false ) {
+            ZDKHelpCenter.setNavBarConversationsUIType(ZDKNavBarConversationsUIType.None);
+        }
+        if ( options.showAsModalForIos != null ? options.showAsModalForIos : false ) {
+            topmost().ios.controller.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
+            ZDKHelpCenter.presentHelpCenterOverviewWithContentModel(topmost().ios.controller, helpCenterContentModel);
+        } else {
+            ZDKHelpCenter.pushHelpCenterOverviewWithContentModel(topmost().ios.controller, helpCenterContentModel);
+        }
     }
 
     private constructor() { }

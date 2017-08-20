@@ -116,28 +116,6 @@ export class ZendeskSdk {
         return ZendeskSdk;
     }
 
-    private static _initHelpCenter(options: HelpCenterOptions): SupportActivity.Builder {
-
-        const supportActivityBuilder: SupportActivity.Builder = new SupportActivity.Builder()
-            .withCategoriesCollapsed(
-                options.categoriesCollapsedAndroid != null
-                    ? options.categoriesCollapsedAndroid
-                    : false)
-            .showContactUsButton(
-                options.contactUsButtonAndroid != null
-                    ? options.contactUsButtonAndroid
-                    : false)
-            .showConversationsMenuButton(
-                options.conversationsMenuAndroid != null
-                    ? options.conversationsMenuAndroid
-                    : true);
-        if ( ZendeskSdk._zendeskRequestConfiguration ) {
-            supportActivityBuilder.withContactConfiguration(ZendeskSdk._zendeskRequestConfiguration);
-        }
-
-        return supportActivityBuilder;
-    }
-
     public static showHelpCenter(options: HelpCenterOptions = {}): void {
 
         ZendeskSdk._initHelpCenter(options).show(topmost().android.activity);
@@ -174,6 +152,28 @@ export class ZendeskSdk {
     }
 
     public static setIosTheme(theme: IosThemeSimple): void { }
+
+    private static _initHelpCenter(options: HelpCenterOptions): SupportActivity.Builder {
+
+        const supportActivityBuilder: SupportActivity.Builder = new SupportActivity.Builder()
+            .withCategoriesCollapsed(
+                options.categoriesCollapsedAndroid != null
+                    ? options.categoriesCollapsedAndroid
+                    : false)
+            .showContactUsButton(
+                options.contactUsButtonAndroid != null
+                    ? options.contactUsButtonAndroid
+                    : false)
+            .showConversationsMenuButton(
+                options.conversationsMenuAndroid != null
+                    ? options.conversationsMenuAndroid
+                    : true);
+        if ( ZendeskSdk._zendeskRequestConfiguration ) {
+            supportActivityBuilder.withContactConfiguration(ZendeskSdk._zendeskRequestConfiguration);
+        }
+
+        return supportActivityBuilder;
+    }
 
     private constructor() { }
 }

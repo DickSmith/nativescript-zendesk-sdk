@@ -1,10 +1,15 @@
 {
+  "defaultSeverity": "warning",
+  "extends": [
+    "tslint:recommended"
+  ],
   "rules": {
+    "adjacent-overload-signatures": true,
     "align": [
       true,
-      "arguments",
       "parameters",
-      "statements"
+      "statements",
+      "elements"
     ],
     "array-type": [
       true,
@@ -17,18 +22,23 @@
     "arrow-return-shorthand": [
       true
     ],
+    "binary-expression-operand-order": true,
     "callable-types": true,
     "class-name": true,
     "comment-format": [
       true,
       "check-space"
     ],
+    "completed-docs": false,
     "curly": true,
+    "cyclomatic-complexity": [true, 20],
+    "encoding": true,
     "eofline": true,
     "forin": true,
     "import-blacklist": [
       true,
-      "rxjs"
+      "rxjs",
+      "nativescript-angular"
     ],
     "import-spacing": true,
     "indent": [
@@ -37,7 +47,7 @@
     ],
     "interface-name": [
       true,
-      "never-prefix"
+      "always-prefix"
     ],
     "interface-over-type-literal": true,
     "jsdoc-format": true,
@@ -45,17 +55,18 @@
     "match-default-export-name": true,
     "max-line-length": [
       true,
-      120
+      160
     ],
     "member-access": true,
     "member-ordering": [
       true,
-      "static-before-instance",
-      "variables-before-functions"
+      {
+        "order": "instance-sandwich"
+      }
     ],
     "newline-before-return": true,
     "new-parens": true,
-    "no-angle-bracket-type-assertion": true,
+    "no-angle-bracket-type-assertion": false,
     "no-any": false,
     "no-arg": true,
     "no-bitwise": true,
@@ -75,21 +86,33 @@
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-variable": true,
+    "no-duplicate-super": true,
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
+    "no-import-side-effect": true,
     "no-inferrable-types": false,
+    "no-internal-module": true,
+    "no-irregular-whitespace": true,
+    "no-namespace": false,
     "no-parameter-properties": false,
+    "no-reference-import": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
     "no-unnecessary-initializer": true,
+    "no-unnecessary-qualifier": true,
+    "no-unsafe-any": true,
     "no-unused-expression": true,
+    "number-literal-format": true,
     "no-use-before-declare": true,
     "no-var-keyword": true,
-    "object-literal-key-quotes": false,
+    "object-literal-key-quotes": [
+      true,
+      "consistent"
+    ],
     "object-literal-shorthand": true,
     "object-literal-sort-keys": false,
     "one-line": [
@@ -100,24 +123,67 @@
       "check-open-brace",
       "check-whitespace"
     ],
+    "one-variable-per-declaration": [
+      true,
+      "ignore-for-loop"
+    ],
     "ordered-imports": [
       true,
       {
-        "import-sources-order": "lowercase-last",
-        "named-imports-order": "lowercase-last"
+        "import-sources-order": "any",
+        "named-imports-order": "case-insensitive"
       }
     ],
     "prefer-const": true,
+    "prefer-function-over-method": false,
+    "prefer-method-signature": true,
+    "prefer-switch": [
+      true,
+      {
+        "min-cases": 3
+      }
+    ],
+    "prefer-template": [
+      true,
+      "allow-single-concat"
+    ],
     "quotemark": [
       true,
-      "single"
+      "single",
+      "avoid-escape",
+      "avoid-template"
     ],
     "radix": true,
-    "semicolon": true,
+    "return-undefined": true,
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "space-before-function-paren": [
+      true,
+      {
+        "anonymous": "always",
+        "asyncArrow": "always",
+        "constructor": "never",
+        "method": "never",
+        "named": "never"
+      }
+    ],
+    "switch-final-break": [
+      true,
+      "always"
+    ],
     "trailing-comma": [
       true,
       {
-        "multiline": "always",
+        "multiline": {
+          "arrays": "always",
+          "exports": "always",
+          "functions": "ignore",
+          "imports": "always",
+          "objects": "always",
+          "typeLiterals": "ignore"
+        },
         "singleline": "never"
       }
     ],
@@ -125,6 +191,7 @@
       true,
       "allow-null-check"
     ],
+    "type-literal-delimiter": true,
     "typedef-whitespace": [
       true,
       {
@@ -137,14 +204,21 @@
     ],
     "typeof-compare": true,
     "unified-signatures": true,
-    "variable-name": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore"
+    ],
     "whitespace": [
       true,
       "check-branch",
       "check-decl",
       "check-operator",
+      "check-module",
       "check-separator",
-      "check-type"
+      "check-type",
+      "check-preblock"
     ]
   }
 }

@@ -1,9 +1,5 @@
 /**
-!/LICENSE
 !/platforms/**
-!/README.md
 !/zendesk-sdk.android.js
-!/zendesk-sdk.common.d.ts
-!/zendesk-sdk.common.js
 !/zendesk-sdk.d.ts
 !/zendesk-sdk.ios.js
