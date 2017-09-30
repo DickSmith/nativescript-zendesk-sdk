@@ -1,14 +1,23 @@
 {
   "name": "nativescript-zendesk-sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Zendesk SDK for NativeScript",
   "main": "zendesk-sdk",
   "typings": "zendesk-sdk.d.ts",
   "nativescript": {
     "platforms": {
-      "android": "3.1.0",
-      "ios": "3.1.0"
+      "android": "3.2.0",
+      "ios": "3.2.0"
     }
+  },
+  "plugin": {
+    "nan": "true",
+    "pan": "true",
+    "core3": "true",
+    "vue": "true",
+    "webpack": "true",
+    "category": "Interface",
+    "wrapper": ""
   },
   "scripts": {
     "tsc": "tsc -skipLibCheck",
@@ -26,7 +35,7 @@
     "nuke": "rm -rf node_modules/ package-lock.json ../demo/hooks ../demo/node_modules ../demo/platforms ../demo/package-lock.json",
     "nuki": "npm run nuke && npm i",
     "build": "npm run lint && tsc",
-    "prepack": "npm run build",
+    "prepack": "npm run build && cp README.md .. && cp CHANGELOG.md .. && CP LICENSE ..",
     "demo.buildonly.ios": "npm i && npm run tsc && cd ../demo && tns build ios --syncAllFiles",
     "typings.ios": "npm run nuki && pod repo update && TNS_TYPESCRIPT_DECLARATIONS_PATH=\"$(pwd)/typings\" npm run demo.buildonly.ios"
   },
@@ -56,13 +65,12 @@
     "typescript": ">=2.4.0"
   },
   "devDependencies": {
-    "nativescript": "~3.1.0",
     "prompt": "^1.0.0",
     "rimraf": "^2.5.0",
-    "tns-core-modules": "~3.1.0",
-    "tns-platform-declarations": "~3.1.0",
-    "tslint": "~5.5.0",
-    "typescript": "~2.4.0"
+    "tns-core-modules": "~3.2.0",
+    "tns-platform-declarations": "~3.2.0",
+    "tslint": "~5.7.0",
+    "typescript": "2.5.2"
   },
   "dependencies": {},
   "bootstrapper": "nativescript-plugin-seed"

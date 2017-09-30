@@ -217,8 +217,6 @@ declare class ZDKAppSettings extends ZDKCoding {
 
 	readonly helpCenterSettings: ZDKHelpCenterSettings;
 
-	readonly rateMyAappSettings: ZDKRateMyAppSettings;
-
 	readonly ticketFormsSettings: ZDKTicketFormsSettings;
 
 	constructor(o: { dictionary: NSDictionary<any, any>; });
@@ -1438,69 +1436,6 @@ declare class ZDKPushRegistrationResponse extends NSObject {
 	initWithDictionary(dictionary: NSDictionary<any, any>): this;
 }
 
-declare var ZDKRMAAccessibilityID: string;
-
-declare var ZDKRMAAppVersion: string;
-
-declare var ZDKRMAChosenAction: string;
-
-declare var ZDKRMADateOfActionChosen: string;
-
-declare var ZDKRMAInitialCheckDate: string;
-
-declare var ZDKRMANotificationBack: string;
-
-declare var ZDKRMANotificationDontAsk: string;
-
-declare var ZDKRMANotificationFeedbackError: string;
-
-declare var ZDKRMANotificationFeedbackSuccess: string;
-
-declare var ZDKRMANotificationNo: string;
-
-declare var ZDKRMANotificationSend: string;
-
-declare var ZDKRMANotificationShouldStore: string;
-
-declare var ZDKRMANotificationTriggered: string;
-
-declare var ZDKRMANotificationWillHideDialog: string;
-
-declare var ZDKRMANotificationYes: string;
-
-declare var ZDKRMARequestBuildVariantTag: string;
-
-declare var ZDKRMARequestFeedbackTag: string;
-
-declare var ZDKRMARequestIOSTag: string;
-
-declare var ZDKRMARequestText: string;
-
-declare var ZDKRMAVisitCount: string;
-
-declare class ZDKRateMyAppSettings extends ZDKCoding {
-
-	static alloc(): ZDKRateMyAppSettings; // inherited from NSObject
-
-	static new(): ZDKRateMyAppSettings; // inherited from NSObject
-
-	readonly appStoreUrl: string;
-
-	readonly delay: number;
-
-	readonly duration: number;
-
-	readonly enabled: boolean;
-
-	readonly tags: NSArray<any>;
-
-	readonly visits: number;
-
-	constructor(o: { dictionary: NSDictionary<any, any>; });
-
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
-}
-
 declare class ZDKReachability extends NSObject {
 
 	static alloc(): ZDKReachability; // inherited from NSObject
@@ -2022,8 +1957,6 @@ declare var ZDK_Article_Up_Vote_Number: number;
 
 declare var ZDK_Header_Suffix_Format: string;
 
-declare var ZDSDKUserDefaultsKey: string;
-
 declare var ZD_DefaultAnimationTime: number;
 
 declare var ZD_HC_ArticleByIdStarting: string;
@@ -2097,7 +2030,3 @@ declare var ZD_ResignFirstResponder: string;
 declare var ZendeskSDKVersionNumber: number;
 
 declare var ZendeskSDKVersionString: string;
-
-declare var iOS7AppStoreURLFormat: string;
-
-declare var iOSAppStoreURLFormat: string;

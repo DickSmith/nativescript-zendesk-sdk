@@ -27,10 +27,6 @@ export class ZendeskSdk {
             ZendeskSdk.setUserLocale(config.userLocale);
         }
 
-        if ( config.coppaEnabled ) {
-            ZendeskSdk.setCoppaEnabled(config.coppaEnabled);
-        }
-
         if ( config.identity === null ) {
             ZendeskSdk.setAnonymousIdentity();
         } else if ( typeof config.identity === 'object' ) {
@@ -45,13 +41,6 @@ export class ZendeskSdk {
     public static setUserLocale(locale: string): typeof ZendeskSdk {
 
         ZendeskConfig.INSTANCE.setDeviceLocale(new Locale(locale));
-
-        return ZendeskSdk;
-    }
-
-    public static setCoppaEnabled(enable: boolean = true): typeof ZendeskSdk {
-
-        ZendeskConfig.INSTANCE.setCoppaEnabled(enable);
 
         return ZendeskSdk;
     }
@@ -159,10 +148,6 @@ export class ZendeskSdk {
             .withCategoriesCollapsed(
                 options.categoriesCollapsedAndroid != null
                     ? options.categoriesCollapsedAndroid
-                    : false)
-            .showContactUsButton(
-                options.contactUsButtonAndroid != null
-                    ? options.contactUsButtonAndroid
                     : false)
             .showConversationsMenuButton(
                 options.conversationsMenuAndroid != null

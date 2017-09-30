@@ -709,331 +709,6 @@ declare namespace com {
 declare namespace com {
   export namespace zendesk {
     export namespace sdk {
-      export namespace rating {
-        export class RateMyAppButton {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.rating.RateMyAppButton interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            getLabel(): string;
-            getStyleAttributeId(): number;
-            getOnClickListener(): android.view.View.OnClickListener;
-            getId(): number;
-            shouldDismissDialog(): boolean;
-          });
-          public shouldDismissDialog(): boolean;
-          public getLabel(): string;
-          public getStyleAttributeId(): number;
-          public getOnClickListener(): android.view.View.OnClickListener;
-          public getId(): number;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export class RateMyAppRule {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.rating.RateMyAppRule interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            permitsShowOfDialog(): boolean;
-          });
-          public permitsShowOfDialog(): boolean;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace impl {
-          export abstract class BaseRateMyAppButton {
-            public constructor();
-            public getLabel(): string;
-            public shouldDismissDialog(): boolean;
-            public getId(): number;
-            public getStyleAttributeId(): number;
-            public getOnClickListener(): android.view.View.OnClickListener;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace impl {
-          export class IdentityRateMyAppRule {
-            public constructor(param0: android.content.Context);
-            public permitsShowOfDialog(): boolean;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace impl {
-          export class MetricsRateMyAppRule {
-            public constructor(param0: android.content.Context);
-            public permitsShowOfDialog(): boolean;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace impl {
-          export class NetworkRateMyAppRule {
-            public constructor(param0: android.content.Context);
-            public permitsShowOfDialog(): boolean;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace impl {
-          export class RateMyAppDontAskAgainButton extends com.zendesk.sdk.rating.impl.BaseRateMyAppButton {
-            public constructor();
-            public getLabel(): string;
-            public constructor(param0: android.content.Context);
-            public shouldDismissDialog(): boolean;
-            public getId(): number;
-            public getStyleAttributeId(): number;
-            public getOnClickListener(): android.view.View.OnClickListener;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace impl {
-          export class RateMyAppRules {
-            public constructor(param0: native.Array<com.zendesk.sdk.rating.RateMyAppRule>);
-            public checkRules(): boolean;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace impl {
-          export class RateMyAppSendFeedbackButton extends com.zendesk.sdk.rating.impl.BaseRateMyAppButton {
-            public static FEEDBACK_DIALOG_TAG: string;
-            public constructor();
-            public setFeedbackListener(param0: com.zendesk.sdk.network.SubmissionListener): void;
-            public getLabel(): string;
-            public shouldDismissDialog(): boolean;
-            public constructor(param0: android.support.v4.app.FragmentActivity, param1: com.zendesk.sdk.feedback.FeedbackConnector);
-            public getId(): number;
-            public getStyleAttributeId(): number;
-            public getOnClickListener(): android.view.View.OnClickListener;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace impl {
-          export class RateMyAppStoreButton extends com.zendesk.sdk.rating.impl.BaseRateMyAppButton {
-            public constructor();
-            public getLabel(): string;
-            public constructor(param0: android.content.Context);
-            public shouldDismissDialog(): boolean;
-            public getId(): number;
-            public getStyleAttributeId(): number;
-            public getOnClickListener(): android.view.View.OnClickListener;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace impl {
-          export class SettingsRateMyAppRule {
-            public constructor(param0: android.content.Context);
-            public permitsShowOfDialog(): boolean;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace ui {
-          export class DefaultContactConfiguration extends com.zendesk.sdk.feedback.BaseZendeskFeedbackConfiguration {
-            public constructor();
-            public getTags(): java.util.List;
-            public getRequestSubject(): string;
-            public constructor(param0: android.content.Context);
-            public getAdditionalInfo(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace ui {
-          export class FeedbackDialog extends com.zendesk.sdk.ui.ZendeskDialog {
-            public onDestroyView(): void;
-            public constructor();
-            public setFeedbackListener(param0: com.zendesk.sdk.network.SubmissionListener): void;
-            public static newInstance(param0: com.zendesk.sdk.feedback.FeedbackConnector): com.zendesk.sdk.rating.ui.FeedbackDialog;
-            public onCreateView(param0: android.view.LayoutInflater, param1: android.view.ViewGroup, param2: android.os.Bundle): android.view.View;
-            public onCreate(param0: android.os.Bundle): void;
-          }
-          export namespace FeedbackDialog {
-            export class NullSafeFeedbackConnector {
-              public isValid(): boolean;
-              public sendFeedback(param0: string, param1: java.util.List, param2: com.zendesk.service.ZendeskCallback): void;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace ui {
-          export class RateMyAppButtonContainer {
-            public constructor(param0: android.content.Context, param1: java.util.List);
-            public setRateMyAppSelectionListener(param0: com.zendesk.sdk.rating.ui.RateMyAppButtonContainer.RateMyAppSelectionListener): void;
-            public setDismissableListener(param0: com.zendesk.sdk.rating.ui.RateMyAppButtonContainer.DismissableListener): void;
-          }
-          export namespace RateMyAppButtonContainer {
-            export class DismissableListener {
-              /**
-               * Constructs a new instance of the com.zendesk.sdk.rating.ui.RateMyAppButtonContainer$DismissableListener interface with the provided implementation.
-               */
-              public constructor(implementation: {
-                dismissDialog(): void;
-              });
-              public dismissDialog(): void;
-            }
-            export class RateMyAppSelectionListener {
-              /**
-               * Constructs a new instance of the com.zendesk.sdk.rating.ui.RateMyAppButtonContainer$RateMyAppSelectionListener interface with the provided implementation.
-               */
-              public constructor(implementation: {
-                selectionMade(param0: number): void;
-              });
-              public selectionMade(param0: number): void;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace rating {
-        export namespace ui {
-          export class RateMyAppDialog extends com.zendesk.sdk.ui.ZendeskDialog {
-            public static RMA_DIALOG_TAG: string;
-            public onStart(): void;
-            public constructor();
-            public onCreateDialog(param0: android.os.Bundle): android.app.Dialog;
-            public tearDownDialog(param0: android.support.v4.app.FragmentManager): void;
-            public onCreateView(param0: android.view.LayoutInflater, param1: android.view.ViewGroup, param2: android.os.Bundle): android.view.View;
-            public showAlways(param0: android.support.v4.app.FragmentActivity): void;
-            public show(param0: android.support.v4.app.FragmentActivity, param1: boolean): void;
-            public show(param0: android.support.v4.app.FragmentActivity): void;
-          }
-          export namespace RateMyAppDialog {
-            export class Builder {
-              public constructor(param0: android.support.v4.app.FragmentActivity);
-              public withSendFeedbackButton(param0: com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration, param1: com.zendesk.sdk.network.SubmissionListener): com.zendesk.sdk.rating.ui.RateMyAppDialog.Builder;
-              public withRules(param0: native.Array<com.zendesk.sdk.rating.RateMyAppRule>): com.zendesk.sdk.rating.ui.RateMyAppDialog.Builder;
-              public withSendFeedbackButton(param0: com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration): com.zendesk.sdk.rating.ui.RateMyAppDialog.Builder;
-              public withButton(param0: com.zendesk.sdk.rating.RateMyAppButton): com.zendesk.sdk.rating.ui.RateMyAppDialog.Builder;
-              public withSendFeedbackButton(): com.zendesk.sdk.rating.ui.RateMyAppDialog.Builder;
-              public withSelectionListener(param0: com.zendesk.sdk.rating.ui.RateMyAppButtonContainer.RateMyAppSelectionListener): com.zendesk.sdk.rating.ui.RateMyAppDialog.Builder;
-              public withOnShowListener(param0: com.zendesk.sdk.rating.ui.RateMyAppDialog.OnShowListener): com.zendesk.sdk.rating.ui.RateMyAppDialog.Builder;
-              public withAndroidStoreRatingButton(): com.zendesk.sdk.rating.ui.RateMyAppDialog.Builder;
-              public withDontRemindMeAgainButton(): com.zendesk.sdk.rating.ui.RateMyAppDialog.Builder;
-              public build(): com.zendesk.sdk.rating.ui.RateMyAppDialog;
-            }
-            export class OnShowListener {
-              /**
-               * Constructs a new instance of the com.zendesk.sdk.rating.ui.RateMyAppDialog$OnShowListener interface with the provided implementation.
-               */
-              public constructor(implementation: {
-                onShow(param0: android.content.DialogInterface): void;
-              });
-              public onShow(param0: android.content.DialogInterface): void;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
       export namespace requests {
         export class CommentWithUser {
           public static build(param0: com.zendesk.sdk.model.request.CommentResponse, param1: java.util.List): com.zendesk.sdk.requests.CommentWithUser;
@@ -1267,23 +942,21 @@ declare namespace com {
 declare namespace com {
   export namespace zendesk {
     export namespace sdk {
-      export namespace storage {
-        export class RateMyAppStorage {
-          public isRatedForCurrentVersion(): boolean;
-          public getNumberOfLaunches(): number;
-          public setRatedForCurrentVersion(): void;
-          public getCacheKey(): string;
-          public incrementNumberOfLaunches(): void;
+      export namespace support {
+        export class ArticleVotingView {
+          public constructor(param0: android.content.Context, param1: android.util.AttributeSet);
+          public constructor(param0: android.content.Context, param1: android.util.AttributeSet, param2: number);
           public constructor(param0: android.content.Context);
-          public isDontShowAgain(): boolean;
-          public reset(): void;
-          public isNumberOfLaunchesMet(): boolean;
-          public setDontShowAgain(): void;
-          public setSavedFeedback(param0: string): void;
-          public getCanShowAfterTime(): number;
-          public isLaunchTimeMet(): boolean;
-          public clearUserData(): void;
-          public getSavedFeedback(): string;
+          public bindTo(param0: java.lang.Long, param1: com.zendesk.sdk.storage.ArticleVoteStorage): void;
+        }
+        export namespace ArticleVotingView {
+          export class VoteState {
+            public static UPVOTED: com.zendesk.sdk.support.ArticleVotingView.VoteState;
+            public static DOWNVOTED: com.zendesk.sdk.support.ArticleVotingView.VoteState;
+            public static NONE: com.zendesk.sdk.support.ArticleVotingView.VoteState;
+            public static valueOf(param0: string): com.zendesk.sdk.support.ArticleVotingView.VoteState;
+            public static values(): native.Array<com.zendesk.sdk.support.ArticleVotingView.VoteState>;
+          }
         }
       }
     }
@@ -1551,13 +1224,6 @@ declare namespace com {
           export class AttachmentRequestCallback {
             public onError(param0: com.zendesk.service.ErrorResponse): void;
             public onSuccess(param0: java.util.List): void;
-          }
-          export class VoteState {
-            public static UPVOTED: com.zendesk.sdk.support.ViewArticleActivity.VoteState;
-            public static DOWNVOTED: com.zendesk.sdk.support.ViewArticleActivity.VoteState;
-            public static NONE: com.zendesk.sdk.support.ViewArticleActivity.VoteState;
-            public static valueOf(param0: string): com.zendesk.sdk.support.ViewArticleActivity.VoteState;
-            public static values(): native.Array<com.zendesk.sdk.support.ViewArticleActivity.VoteState>;
           }
         }
       }
@@ -1912,20 +1578,6 @@ declare namespace com {
         export class ToolbarSherlock {
           public constructor();
           public static installToolBar(param0: android.support.v7.app.AppCompatActivity): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace ui {
-        export class ZendeskDialog {
-          public onStart(): void;
-          public constructor();
-          public onCreate(param0: android.os.Bundle): void;
         }
       }
     }

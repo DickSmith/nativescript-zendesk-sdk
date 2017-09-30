@@ -524,6 +524,8 @@ declare class ZDKCommentsTableViewDelegate extends NSObject implements UITableVi
 
 	retainCount(): number;
 
+	scrollViewDidChangeAdjustedContentInset(scrollView: UIScrollView): void;
+
 	scrollViewDidEndDecelerating(scrollView: UIScrollView): void;
 
 	scrollViewDidEndDraggingWillDecelerate(scrollView: UIScrollView, decelerate: boolean): void;
@@ -594,6 +596,8 @@ declare class ZDKCommentsTableViewDelegate extends NSObject implements UITableVi
 
 	tableViewIndentationLevelForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): number;
 
+	tableViewLeadingSwipeActionsConfigurationForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): UISwipeActionsConfiguration;
+
 	tableViewPerformActionForRowAtIndexPathWithSender(tableView: UITableView, action: string, indexPath: NSIndexPath, sender: any): void;
 
 	tableViewShouldHighlightRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
@@ -602,11 +606,15 @@ declare class ZDKCommentsTableViewDelegate extends NSObject implements UITableVi
 
 	tableViewShouldShowMenuForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
 
+	tableViewShouldSpringLoadRowAtIndexPathWithContext(tableView: UITableView, indexPath: NSIndexPath, context: UISpringLoadedInteractionContext): boolean;
+
 	tableViewShouldUpdateFocusInContext(tableView: UITableView, context: UITableViewFocusUpdateContext): boolean;
 
 	tableViewTargetIndexPathForMoveFromRowAtIndexPathToProposedIndexPath(tableView: UITableView, sourceIndexPath: NSIndexPath, proposedDestinationIndexPath: NSIndexPath): NSIndexPath;
 
 	tableViewTitleForDeleteConfirmationButtonForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): string;
+
+	tableViewTrailingSwipeActionsConfigurationForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): UISwipeActionsConfiguration;
 
 	tableViewViewForFooterInSection(tableView: UITableView, section: number): UIView;
 
@@ -1031,6 +1039,8 @@ declare class ZDKImageViewerViewController extends ZDKUIViewController implement
 
 	retainCount(): number;
 
+	scrollViewDidChangeAdjustedContentInset(scrollView: UIScrollView): void;
+
 	scrollViewDidEndDecelerating(scrollView: UIScrollView): void;
 
 	scrollViewDidEndDraggingWillDecelerate(scrollView: UIScrollView, decelerate: boolean): void;
@@ -1090,568 +1100,6 @@ declare class ZDKPushUtil extends NSObject {
 	static handlePushForApplicationPresentationStyleLayoutGuideWithAppIdZendeskUrlClientIdFetchCompletionHandler(pushInfo: NSDictionary<any, any>, application: UIApplication, presentationStyle: UIModalPresentationStyle, guide: ZDKLayoutGuide, applicationId: string, zendeskUrl: string, oAuthClientId: string, completionHandler: (p1: UIBackgroundFetchResult) => void): void;
 
 	static new(): ZDKPushUtil; // inherited from NSObject
-}
-
-declare class ZDKRMA extends NSObject {
-
-	static alloc(): ZDKRMA; // inherited from NSObject
-
-	static configure(configBlock: (p1: ZDKAccount, p2: ZDKRMAConfigObject) => void): void;
-
-	static instance(): ZDKRMA;
-
-	static logVisit(): void;
-
-	static new(): ZDKRMA; // inherited from NSObject
-
-	static notifyFeedbackError(): void;
-
-	static notifyFeedbackSuccess(): void;
-
-	static showAlwaysInView(view: UIView): void;
-
-	static showInView(view: UIView): void;
-
-	readonly zdkrmaConfigObject: ZDKRMAConfigObject;
-
-	readonly zdkrmaDataObject: ZDKRMADataObject;
-}
-
-declare const enum ZDKRMAAction {
-
-	RateApp = 1,
-
-	SendFeedback = 2,
-
-	DontAskAgain = 3,
-
-	Undisplayed = 4
-}
-
-declare class ZDKRMAConfigObject extends NSObject implements NSCopying {
-
-	static alloc(): ZDKRMAConfigObject; // inherited from NSObject
-
-	static daysBetweenDateAndDate(fromDate: Date, toDate: Date): number;
-
-	static new(): ZDKRMAConfigObject; // inherited from NSObject
-
-	additionalRequestInfo: string;
-
-	additionalTags: NSArray<any>;
-
-	dialogActions: NSArray<any>;
-
-	errorImageName: string;
-
-	sendFeedbackBlock: (p1: string) => void;
-
-	shouldShowBlock: (p1: number, p2: Date, p3: Date, p4: ZDKRMAAction, p5: string) => boolean;
-
-	successImageName: string;
-
-	copyWithZone(zone: interop.Pointer | interop.Reference<any>): any;
-
-	tagList(): NSArray<any>;
-}
-
-declare class ZDKRMADataObject extends NSObject {
-
-	static alloc(): ZDKRMADataObject; // inherited from NSObject
-
-	static currentAppBuild(): string;
-
-	static currentAppVersion(): string;
-
-	static new(): ZDKRMADataObject; // inherited from NSObject
-
-	appVersion: string;
-
-	chosenZDKRMAAction: ZDKRMAAction;
-
-	dateOfActionChosen: Date;
-
-	initialCheckDate: Date;
-
-	requestText: string;
-
-	visitCount: number;
-
-	storeChosenAction(action: ZDKRMAAction): void;
-}
-
-declare class ZDKRMADialogView extends UITableView implements UITableViewDataSource, UITableViewDelegate {
-
-	static alloc(): ZDKRMADialogView; // inherited from NSObject
-
-	static appearance(): ZDKRMADialogView; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): ZDKRMADialogView; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): ZDKRMADialogView; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject>): ZDKRMADialogView; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): ZDKRMADialogView; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject>): ZDKRMADialogView; // inherited from UIAppearance
-
-	static new(): ZDKRMADialogView; // inherited from NSObject
-
-	rows: NSArray<any>;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	constructor(o: { delegate: ZDKRMADialogViewDelegate; });
-
-	constructor(o: { frame: CGRect; delegate: ZDKRMADialogViewDelegate; });
-
-	constructor(o: { frame: CGRect; style: UITableViewStyle; delegate: ZDKRMADialogViewDelegate; });
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	indexPathForPreferredFocusedViewInTableView(tableView: UITableView): NSIndexPath;
-
-	initWithDelegate(delegate: ZDKRMADialogViewDelegate): this;
-
-	initWithFrameDelegate(frame: CGRect, delegate: ZDKRMADialogViewDelegate): this;
-
-	initWithFrameStyleDelegate(frame: CGRect, style: UITableViewStyle, delegate: ZDKRMADialogViewDelegate): this;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	numberOfSectionsInTableView(tableView: UITableView): number;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	scrollViewDidEndDecelerating(scrollView: UIScrollView): void;
-
-	scrollViewDidEndDraggingWillDecelerate(scrollView: UIScrollView, decelerate: boolean): void;
-
-	scrollViewDidEndScrollingAnimation(scrollView: UIScrollView): void;
-
-	scrollViewDidEndZoomingWithViewAtScale(scrollView: UIScrollView, view: UIView, scale: number): void;
-
-	scrollViewDidScroll(scrollView: UIScrollView): void;
-
-	scrollViewDidScrollToTop(scrollView: UIScrollView): void;
-
-	scrollViewDidZoom(scrollView: UIScrollView): void;
-
-	scrollViewShouldScrollToTop(scrollView: UIScrollView): boolean;
-
-	scrollViewWillBeginDecelerating(scrollView: UIScrollView): void;
-
-	scrollViewWillBeginDragging(scrollView: UIScrollView): void;
-
-	scrollViewWillBeginZoomingWithView(scrollView: UIScrollView, view: UIView): void;
-
-	scrollViewWillEndDraggingWithVelocityTargetContentOffset(scrollView: UIScrollView, velocity: CGPoint, targetContentOffset: interop.Pointer | interop.Reference<CGPoint>): void;
-
-	sectionIndexTitlesForTableView(tableView: UITableView): NSArray<string>;
-
-	self(): this;
-
-	tableViewAccessoryButtonTappedForRowWithIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewAccessoryTypeForRowWithIndexPath(tableView: UITableView, indexPath: NSIndexPath): UITableViewCellAccessoryType;
-
-	tableViewCanEditRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewCanFocusRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewCanMoveRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewCanPerformActionForRowAtIndexPathWithSender(tableView: UITableView, action: string, indexPath: NSIndexPath, sender: any): boolean;
-
-	tableViewCellForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): UITableViewCell;
-
-	tableViewCommitEditingStyleForRowAtIndexPath(tableView: UITableView, editingStyle: UITableViewCellEditingStyle, indexPath: NSIndexPath): void;
-
-	tableViewDidDeselectRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidEndDisplayingCellForRowAtIndexPath(tableView: UITableView, cell: UITableViewCell, indexPath: NSIndexPath): void;
-
-	tableViewDidEndDisplayingFooterViewForSection(tableView: UITableView, view: UIView, section: number): void;
-
-	tableViewDidEndDisplayingHeaderViewForSection(tableView: UITableView, view: UIView, section: number): void;
-
-	tableViewDidEndEditingRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidHighlightRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidSelectRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidUnhighlightRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewDidUpdateFocusInContextWithAnimationCoordinator(tableView: UITableView, context: UITableViewFocusUpdateContext, coordinator: UIFocusAnimationCoordinator): void;
-
-	tableViewEditActionsForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): NSArray<UITableViewRowAction>;
-
-	tableViewEditingStyleForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): UITableViewCellEditingStyle;
-
-	tableViewEstimatedHeightForFooterInSection(tableView: UITableView, section: number): number;
-
-	tableViewEstimatedHeightForHeaderInSection(tableView: UITableView, section: number): number;
-
-	tableViewEstimatedHeightForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): number;
-
-	tableViewHeightForFooterInSection(tableView: UITableView, section: number): number;
-
-	tableViewHeightForHeaderInSection(tableView: UITableView, section: number): number;
-
-	tableViewHeightForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): number;
-
-	tableViewIndentationLevelForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): number;
-
-	tableViewMoveRowAtIndexPathToIndexPath(tableView: UITableView, sourceIndexPath: NSIndexPath, destinationIndexPath: NSIndexPath): void;
-
-	tableViewNumberOfRowsInSection(tableView: UITableView, section: number): number;
-
-	tableViewPerformActionForRowAtIndexPathWithSender(tableView: UITableView, action: string, indexPath: NSIndexPath, sender: any): void;
-
-	tableViewSectionForSectionIndexTitleAtIndex(tableView: UITableView, title: string, index: number): number;
-
-	tableViewShouldHighlightRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewShouldIndentWhileEditingRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewShouldShowMenuForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
-
-	tableViewShouldUpdateFocusInContext(tableView: UITableView, context: UITableViewFocusUpdateContext): boolean;
-
-	tableViewTargetIndexPathForMoveFromRowAtIndexPathToProposedIndexPath(tableView: UITableView, sourceIndexPath: NSIndexPath, proposedDestinationIndexPath: NSIndexPath): NSIndexPath;
-
-	tableViewTitleForDeleteConfirmationButtonForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): string;
-
-	tableViewTitleForFooterInSection(tableView: UITableView, section: number): string;
-
-	tableViewTitleForHeaderInSection(tableView: UITableView, section: number): string;
-
-	tableViewViewForFooterInSection(tableView: UITableView, section: number): UIView;
-
-	tableViewViewForHeaderInSection(tableView: UITableView, section: number): UIView;
-
-	tableViewWillBeginEditingRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): void;
-
-	tableViewWillDeselectRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): NSIndexPath;
-
-	tableViewWillDisplayCellForRowAtIndexPath(tableView: UITableView, cell: UITableViewCell, indexPath: NSIndexPath): void;
-
-	tableViewWillDisplayFooterViewForSection(tableView: UITableView, view: UIView, section: number): void;
-
-	tableViewWillDisplayHeaderViewForSection(tableView: UITableView, view: UIView, section: number): void;
-
-	tableViewWillSelectRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): NSIndexPath;
-
-	viewForZoomingInScrollView(scrollView: UIScrollView): UIView;
-}
-
-declare class ZDKRMADialogViewCell extends UITableViewCell {
-
-	static alloc(): ZDKRMADialogViewCell; // inherited from NSObject
-
-	static appearance(): ZDKRMADialogViewCell; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): ZDKRMADialogViewCell; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): ZDKRMADialogViewCell; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject>): ZDKRMADialogViewCell; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): ZDKRMADialogViewCell; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject>): ZDKRMADialogViewCell; // inherited from UIAppearance
-
-	static new(): ZDKRMADialogViewCell; // inherited from NSObject
-
-	bgColor: UIColor;
-
-	selectedBgColor: UIColor;
-
-	constructor(o: { style: UITableViewCellStyle; reuseIdentifier: string; separatorColor: UIColor; backgroundColor: UIColor; selectedBackgroundColor: UIColor; });
-
-	initWithStyleReuseIdentifierSeparatorColorBackgroundColorSelectedBackgroundColor(style: UITableViewCellStyle, reuseIdentifier: string, theSeparatorColor: UIColor, theBgColor: UIColor, theSelectedBgColor: UIColor): this;
-}
-
-declare class ZDKRMADialogViewController extends ZDKUIViewController implements ZDKRMADialogViewDelegate, ZDKRMAFeedbackViewDelegate {
-
-	static alloc(): ZDKRMADialogViewController; // inherited from NSObject
-
-	static new(): ZDKRMADialogViewController; // inherited from NSObject
-
-	dialog: ZDKRMADialogView;
-
-	feedbackView: ZDKRMAFeedbackView;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	constructor(o: { config: ZDKRMAConfigObject; });
-
-	back(): void;
-
-	class(): typeof NSObject;
-
-	closeDialog(): void;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	initWithConfig(config: ZDKRMAConfigObject): this;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	neverShowDialogAgain(): void;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	rateApp(): void;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	self(): this;
-
-	sendFeedback(feedback: string): void;
-
-	showFeedbackView(): void;
-}
-
-interface ZDKRMADialogViewDelegate extends NSObjectProtocol {
-
-	neverShowDialogAgain(): void;
-
-	rateApp(): void;
-
-	showFeedbackView?(): void;
-}
-declare var ZDKRMADialogViewDelegate: {
-
-	prototype: ZDKRMADialogViewDelegate;
-};
-
-declare const enum ZDKRMAFeedbackDialogState {
-
-	Editing = 0,
-
-	Cancel = 1,
-
-	Submitting = 2,
-
-	Success = 3,
-
-	Error = 4
-}
-
-declare class ZDKRMAFeedbackView extends UIView implements UITextViewDelegate {
-
-	static alloc(): ZDKRMAFeedbackView; // inherited from NSObject
-
-	static appearance(): ZDKRMAFeedbackView; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): ZDKRMAFeedbackView; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): ZDKRMAFeedbackView; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject>): ZDKRMAFeedbackView; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): ZDKRMAFeedbackView; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject>): ZDKRMAFeedbackView; // inherited from UIAppearance
-
-	static new(): ZDKRMAFeedbackView; // inherited from NSObject
-
-	backButton: UIButton;
-
-	closeButton: UIButton;
-
-	detailTitleLabel: UILabel;
-
-	errorImageName: string;
-
-	feedbackState: ZDKRMAFeedbackDialogState;
-
-	submissionStatusImageView: UIImageView;
-
-	submitButton: UIButton;
-
-	successImageName: string;
-
-	titleLabel: UILabel;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	constructor(o: { delegate: ZDKRMAFeedbackViewDelegate; });
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	initWithDelegate(del: ZDKRMAFeedbackViewDelegate): this;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	scrollViewDidEndDecelerating(scrollView: UIScrollView): void;
-
-	scrollViewDidEndDraggingWillDecelerate(scrollView: UIScrollView, decelerate: boolean): void;
-
-	scrollViewDidEndScrollingAnimation(scrollView: UIScrollView): void;
-
-	scrollViewDidEndZoomingWithViewAtScale(scrollView: UIScrollView, view: UIView, scale: number): void;
-
-	scrollViewDidScroll(scrollView: UIScrollView): void;
-
-	scrollViewDidScrollToTop(scrollView: UIScrollView): void;
-
-	scrollViewDidZoom(scrollView: UIScrollView): void;
-
-	scrollViewShouldScrollToTop(scrollView: UIScrollView): boolean;
-
-	scrollViewWillBeginDecelerating(scrollView: UIScrollView): void;
-
-	scrollViewWillBeginDragging(scrollView: UIScrollView): void;
-
-	scrollViewWillBeginZoomingWithView(scrollView: UIScrollView, view: UIView): void;
-
-	scrollViewWillEndDraggingWithVelocityTargetContentOffset(scrollView: UIScrollView, velocity: CGPoint, targetContentOffset: interop.Pointer | interop.Reference<CGPoint>): void;
-
-	self(): this;
-
-	showSpinner(show: boolean): void;
-
-	successTransition(): void;
-
-	textViewDidBeginEditing(textView: UITextView): void;
-
-	textViewDidChange(textView: UITextView): void;
-
-	textViewDidChangeSelection(textView: UITextView): void;
-
-	textViewDidEndEditing(textView: UITextView): void;
-
-	textViewShouldBeginEditing(textView: UITextView): boolean;
-
-	textViewShouldChangeTextInRangeReplacementText(textView: UITextView, range: NSRange, text: string): boolean;
-
-	textViewShouldEndEditing(textView: UITextView): boolean;
-
-	textViewShouldInteractWithTextAttachmentInRange(textView: UITextView, textAttachment: NSTextAttachment, characterRange: NSRange): boolean;
-
-	textViewShouldInteractWithTextAttachmentInRangeInteraction(textView: UITextView, textAttachment: NSTextAttachment, characterRange: NSRange, interaction: UITextItemInteraction): boolean;
-
-	textViewShouldInteractWithURLInRange(textView: UITextView, URL: NSURL, characterRange: NSRange): boolean;
-
-	textViewShouldInteractWithURLInRangeInteraction(textView: UITextView, URL: NSURL, characterRange: NSRange, interaction: UITextItemInteraction): boolean;
-
-	transitionFromError(): void;
-
-	transitionToError(): void;
-
-	viewForZoomingInScrollView(scrollView: UIScrollView): UIView;
-}
-
-interface ZDKRMAFeedbackViewDelegate extends NSObjectProtocol {
-
-	back(): void;
-
-	closeDialog(): void;
-
-	sendFeedback(feedback: string): void;
-}
-declare var ZDKRMAFeedbackViewDelegate: {
-
-	prototype: ZDKRMAFeedbackViewDelegate;
-};
-
-declare class ZDKRMATableHeaderView extends UIView {
-
-	static alloc(): ZDKRMATableHeaderView; // inherited from NSObject
-
-	static appearance(): ZDKRMATableHeaderView; // inherited from UIAppearance
-
-	static appearanceForTraitCollection(trait: UITraitCollection): ZDKRMATableHeaderView; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedIn(trait: UITraitCollection, ContainerClass: typeof NSObject): ZDKRMATableHeaderView; // inherited from UIAppearance
-
-	static appearanceForTraitCollectionWhenContainedInInstancesOfClasses(trait: UITraitCollection, containerTypes: NSArray<typeof NSObject>): ZDKRMATableHeaderView; // inherited from UIAppearance
-
-	static appearanceWhenContainedIn(ContainerClass: typeof NSObject): ZDKRMATableHeaderView; // inherited from UIAppearance
-
-	static appearanceWhenContainedInInstancesOfClasses(containerTypes: NSArray<typeof NSObject>): ZDKRMATableHeaderView; // inherited from UIAppearance
-
-	static new(): ZDKRMATableHeaderView; // inherited from NSObject
-
-	textLabel: UILabel;
-
-	constructor(o: { frame: CGRect; andTitle: string; });
-
-	initWithFrameAndTitle(frame: CGRect, title: string): this;
 }
 
 declare class ZDKRequestCommentAttachmentLoadingTableCell extends ZDKRequestCommentTableCell {
@@ -1787,6 +1235,8 @@ declare class ZDKRequestListTable extends UITableView implements UITableViewData
 
 	retainCount(): number;
 
+	scrollViewDidChangeAdjustedContentInset(scrollView: UIScrollView): void;
+
 	scrollViewDidEndDecelerating(scrollView: UIScrollView): void;
 
 	scrollViewDidEndDraggingWillDecelerate(scrollView: UIScrollView, decelerate: boolean): void;
@@ -1869,6 +1319,8 @@ declare class ZDKRequestListTable extends UITableView implements UITableViewData
 
 	tableViewIndentationLevelForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): number;
 
+	tableViewLeadingSwipeActionsConfigurationForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): UISwipeActionsConfiguration;
+
 	tableViewMoveRowAtIndexPathToIndexPath(tableView: UITableView, sourceIndexPath: NSIndexPath, destinationIndexPath: NSIndexPath): void;
 
 	tableViewNumberOfRowsInSection(tableView: UITableView, section: number): number;
@@ -1883,6 +1335,8 @@ declare class ZDKRequestListTable extends UITableView implements UITableViewData
 
 	tableViewShouldShowMenuForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): boolean;
 
+	tableViewShouldSpringLoadRowAtIndexPathWithContext(tableView: UITableView, indexPath: NSIndexPath, context: UISpringLoadedInteractionContext): boolean;
+
 	tableViewShouldUpdateFocusInContext(tableView: UITableView, context: UITableViewFocusUpdateContext): boolean;
 
 	tableViewTargetIndexPathForMoveFromRowAtIndexPathToProposedIndexPath(tableView: UITableView, sourceIndexPath: NSIndexPath, proposedDestinationIndexPath: NSIndexPath): NSIndexPath;
@@ -1892,6 +1346,8 @@ declare class ZDKRequestListTable extends UITableView implements UITableViewData
 	tableViewTitleForFooterInSection(tableView: UITableView, section: number): string;
 
 	tableViewTitleForHeaderInSection(tableView: UITableView, section: number): string;
+
+	tableViewTrailingSwipeActionsConfigurationForRowAtIndexPath(tableView: UITableView, indexPath: NSIndexPath): UISwipeActionsConfiguration;
 
 	tableViewViewForFooterInSection(tableView: UITableView, section: number): UIView;
 

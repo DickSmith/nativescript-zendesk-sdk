@@ -16,10 +16,6 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
             ZendeskSdk.setUserLocale(config.userLocale);
         }
 
-        if ( config.coppaEnabled ) {
-            ZendeskSdk.setCoppaEnabled(config.coppaEnabled);
-        }
-
         if ( config.identity === null ) {
             ZendeskSdk.setAnonymousIdentity();
         } else if ( typeof config.identity === 'object' ) {
@@ -34,13 +30,6 @@ export class ZendeskSdk implements ZendeskSdkDefinition {
     public static setUserLocale(locale: string): typeof ZendeskSdk {
 
         ZDKConfig.instance().userLocale = locale;
-
-        return ZendeskSdk;
-    }
-
-    public static setCoppaEnabled(enable: boolean = true): typeof ZendeskSdk {
-
-        ZDKConfig.instance().coppaEnabled = enable;
 
         return ZendeskSdk;
     }

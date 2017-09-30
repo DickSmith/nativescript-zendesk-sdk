@@ -6,7 +6,7 @@ android {
 }
 
 dependencies {
-    compile 'com.zendesk:sdk:1.10.0.1'
+    compile 'com.zendesk:sdk:1.11.0.1'
 }
 
 task getDeps(type: Copy) {

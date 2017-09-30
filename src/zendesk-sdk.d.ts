@@ -6,8 +6,6 @@ export interface AnonUserIdentity {
 export interface HelpCenterOptions {
     /** default: false */
     categoriesCollapsedAndroid?: boolean;
-    /** default: false */
-    contactUsButtonAndroid?: boolean;
     /** default: true */
     conversationsMenuAndroid?: boolean;
     /** default: true */
@@ -21,7 +19,6 @@ export interface InitConfig {
     applicationId: string;
     clientId: string;
     userLocale?: string;
-    coppaEnabled?: boolean;
     /** AnonUserIdentity object or JWT Token string */
     identity?: AnonUserIdentity | string;
 }
@@ -52,8 +49,6 @@ export declare class ZendeskSdk {
     public static initialize(config: InitConfig): typeof ZendeskSdk;
 
     public static setUserLocale(locale: string): typeof ZendeskSdk;
-
-    public static setCoppaEnabled(enable?: boolean): typeof ZendeskSdk;
 
     public static setAnonymousIdentity(anonUserIdentity?: AnonUserIdentity): typeof ZendeskSdk;
 
