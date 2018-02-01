@@ -1,6 +1,6 @@
 {
   "name": "nativescript-zendesk-sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Zendesk SDK for NativeScript",
   "main": "zendesk-sdk",
   "typings": "zendesk-sdk.d.ts",

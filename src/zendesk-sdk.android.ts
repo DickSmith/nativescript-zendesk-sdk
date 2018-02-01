@@ -1,25 +1,14 @@
 import { device } from 'tns-core-modules/platform';
 import { topmost } from 'tns-core-modules/ui/frame';
 import { AnonUserIdentity, HelpCenterOptions, InitConfig, IosThemeSimple, RequestConfig } from './zendesk-sdk';
-import ArrayList = java.util.ArrayList;
-import List = java.util.List;
-import Locale = java.util.Locale;
-import ZendeskConfig = com.zendesk.sdk.network.impl.ZendeskConfig;
-import AnonymousIdentity = com.zendesk.sdk.model.access.AnonymousIdentity;
-import JwtIdentity = com.zendesk.sdk.model.access.JwtIdentity;
-import SupportActivity = com.zendesk.sdk.support.SupportActivity;
-import ViewArticleActivity = com.zendesk.sdk.support.ViewArticleActivity;
-import SimpleArticle = com.zendesk.sdk.model.helpcenter.SimpleArticle;
-import ContactZendeskActivity = com.zendesk.sdk.feedback.ui.ContactZendeskActivity;
-import ZendeskFeedbackConfiguration = com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
 
 export class ZendeskSdk {
 
-    private static _zendeskRequestConfiguration: ZendeskFeedbackConfiguration;
+    private static _zendeskRequestConfiguration: com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
 
     public static initialize(config: InitConfig): typeof ZendeskSdk {
 
-        ZendeskConfig.INSTANCE.init(
+        com.zendesk.sdk.network.impl.ZendeskConfig.INSTANCE.init(
             topmost().android.activity, config.zendeskUrl, config.applicationId, config.clientId,
         );
 
@@ -40,28 +29,29 @@ export class ZendeskSdk {
 
     public static setUserLocale(locale: string): typeof ZendeskSdk {
 
-        ZendeskConfig.INSTANCE.setDeviceLocale(new Locale(locale));
+        com.zendesk.sdk.network.impl.ZendeskConfig.INSTANCE.setDeviceLocale(new java.util.Locale(locale));
 
         return ZendeskSdk;
     }
 
     public static setAnonymousIdentity(anonUserIdentity: AnonUserIdentity = {}): typeof ZendeskSdk {
 
-        const anonymousIdentityBuilder: AnonymousIdentity.Builder = new AnonymousIdentity.Builder();
+        const anonymousIdentityBuilder: com.zendesk.sdk.model.access.AnonymousIdentity.Builder
+                  = new com.zendesk.sdk.model.access.AnonymousIdentity.Builder();
 
         if ( anonUserIdentity.name ) { anonymousIdentityBuilder.withNameIdentifier(anonUserIdentity.name); }
 
         if ( anonUserIdentity.email ) { anonymousIdentityBuilder.withEmailIdentifier(anonUserIdentity.email); }
 
-        ZendeskConfig.INSTANCE.setIdentity(anonymousIdentityBuilder.build());
+        com.zendesk.sdk.network.impl.ZendeskConfig.INSTANCE.setIdentity(anonymousIdentityBuilder.build());
 
         return ZendeskSdk;
     }
 
     public static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk {
 
-        ZendeskConfig.INSTANCE.setIdentity(
-            new JwtIdentity(jwtUserIdentifier),
+        com.zendesk.sdk.network.impl.ZendeskConfig.INSTANCE.setIdentity(
+            new com.zendesk.sdk.model.access.JwtIdentity(jwtUserIdentifier),
         );
 
         return ZendeskSdk;
@@ -70,15 +60,15 @@ export class ZendeskSdk {
     public static configureRequests(config: RequestConfig): typeof ZendeskSdk {
 
         config.addDeviceInfo = config.addDeviceInfo != null ? config.addDeviceInfo : true;
-        let tagsArrayList: ArrayList<string> = null;
+        let tagsArrayList: java.util.ArrayList<string> = null;
         if ( config.tags ) {
-            tagsArrayList = new ArrayList(config.tags.length);
+            tagsArrayList = new java.util.ArrayList(config.tags.length);
             config.tags.forEach((value: string) => {
                 tagsArrayList.add(value);
             });
         }
 
-        ZendeskSdk._zendeskRequestConfiguration = new ZendeskFeedbackConfiguration(
+        ZendeskSdk._zendeskRequestConfiguration = new com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration(
             {
                 getRequestSubject(): string {
                     return !!config.requestSubject ? config.requestSubject : null;
@@ -96,7 +86,7 @@ export class ZendeskSdk {
                           ) + deviceInfo
                         : '';
                 },
-                getTags(): List<string> {
+                getTags(): java.util.List<string> {
                     return tagsArrayList;
                 },
             },
@@ -130,21 +120,23 @@ export class ZendeskSdk {
 
     public static showArticle(articleId: string): void {
 
-        ViewArticleActivity.startActivity(
-            topmost().android.activity, new SimpleArticle(long(long(articleId)), ''),
+        com.zendesk.sdk.support.ViewArticleActivity.startActivity(
+            topmost().android.activity, new com.zendesk.sdk.model.helpcenter.SimpleArticle(long(long(articleId)), ''),
         );
     }
 
     public static createRequest() {
 
-        ContactZendeskActivity.startActivity(topmost().android.activity, ZendeskSdk._zendeskRequestConfiguration);
+        com.zendesk.sdk.feedback.ui.ContactZendeskActivity
+           .startActivity(topmost().android.activity, ZendeskSdk._zendeskRequestConfiguration);
     }
 
     public static setIosTheme(theme: IosThemeSimple): void { }
 
-    private static _initHelpCenter(options: HelpCenterOptions): SupportActivity.Builder {
+    private static _initHelpCenter(options: HelpCenterOptions): com.zendesk.sdk.support.SupportActivity.Builder {
 
-        const supportActivityBuilder: SupportActivity.Builder = new SupportActivity.Builder()
+        const supportActivityBuilder: com.zendesk.sdk.support.SupportActivity.Builder
+                  = new com.zendesk.sdk.support.SupportActivity.Builder()
             .withCategoriesCollapsed(
                 options.categoriesCollapsedAndroid != null
                     ? options.categoriesCollapsedAndroid
