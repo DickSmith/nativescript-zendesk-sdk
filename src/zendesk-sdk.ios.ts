@@ -4,6 +4,8 @@ import { topmost } from 'tns-core-modules/ui/frame';
 import { AnonUserIdentity, HelpCenterOptions, InitConfig, IosThemeSimple, RequestConfig } from './zendesk-sdk';
 import { ZendeskSdk as ZendeskSdkDefinition } from './zendesk-sdk';
 
+export * from './zendesk-sdk.common';
+
 export class ZendeskSdk implements ZendeskSdkDefinition {
 
     public static initialize(config: InitConfig): typeof ZendeskSdk {

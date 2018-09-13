@@ -2,6 +2,8 @@ import { device } from 'tns-core-modules/platform';
 import { topmost } from 'tns-core-modules/ui/frame';
 import { AnonUserIdentity, HelpCenterOptions, InitConfig, IosThemeSimple, RequestConfig } from './zendesk-sdk';
 
+export * from './zendesk-sdk.common';
+
 export class ZendeskSdk {
 
     private static _zendeskRequestConfiguration: com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
