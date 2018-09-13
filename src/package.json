@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "description": "Zendesk SDK for NativeScript",
   "main": "zendesk-sdk",
-  "typings": "zendesk-sdk.d.ts",
+  "typings": "index.d.ts",
   "nativescript": {
     "platforms": {
       "android": "3.2.0",

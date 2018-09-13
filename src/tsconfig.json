@@ -12,7 +12,7 @@
       "dom",
       "es2015.iterable"
     ],
-    "sourceMap": false,
+    "sourceMap": true,
     "pretty": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -20,13 +20,23 @@
     "noEmitOnError": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true
+    "noFallthroughCasesInSwitch": false,
+    "noUnusedLocals": true,
+    "noImplicitThis": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false // TODO
   },
   "include": [
-    "references.d.ts",
-    "zendesk-sdk.android.ts",
-    "zendesk-sdk.ios.ts"
+    // refs
+    "node_modules/tns-platform-declarations/android.d.ts",
+    "node_modules/tns-platform-declarations/ios.d.ts",
+    "typings/*",
+    // srcs
+    "zendesk-sdk.*.ts"
   ],
   "compileOnSave": false
 }

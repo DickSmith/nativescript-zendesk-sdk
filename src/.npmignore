@@ -1,5 +1,11 @@
 /**
+!README
+!LICENSE
 !/platforms/**
+!/typings/**
+*.common.d.ts
+index.d.ts
+index.js
 !/zendesk-sdk.android.js
-!/zendesk-sdk.d.ts
 !/zendesk-sdk.ios.js
+!/zendesk-sdk.common.js
