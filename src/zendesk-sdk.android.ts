@@ -1,158 +1,168 @@
 import { device } from 'tns-core-modules/platform';
 import { topmost } from 'tns-core-modules/ui/frame';
-import { AnonUserIdentity, HelpCenterOptions, InitConfig, IosThemeSimple, RequestConfig } from './zendesk-sdk';
+import {
+  AnonUserIdentity,
+  HelpCenterOptions,
+  InitConfig,
+  IosThemeSimple,
+  RequestConfig,
+  ZendeskSdk as ZendeskSdkBase
+} from './zendesk-sdk';
 
 export * from './zendesk-sdk.common';
 
-export class ZendeskSdk {
+export class ZendeskSdk implements ZendeskSdkBase {
 
-    private static _zendeskRequestConfiguration: com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration;
+  public static initialize(config: InitConfig): ZendeskSdk {
 
-    public static initialize(config: InitConfig): typeof ZendeskSdk {
+    zendesk.core.Zendesk.INSTANCE.init(
+      topmost().android.activity, config.zendeskUrl, config.applicationId, config.clientId,
+    );
 
-        com.zendesk.sdk.network.impl.ZendeskConfig.INSTANCE.init(
-            topmost().android.activity, config.zendeskUrl, config.applicationId, config.clientId,
-        );
+    if (config.userLocale) {
+      ZendeskSdk.setUserLocale(config.userLocale);
+    }
 
-        if ( config.userLocale ) {
-            ZendeskSdk.setUserLocale(config.userLocale);
+    if (config.identity == null) {
+      ZendeskSdk.setAnonymousIdentity();
+    } else if (typeof config.identity === 'object') {
+      ZendeskSdk.setAnonymousIdentity(config.identity);
+    } else if (typeof config.identity === 'string') {
+      ZendeskSdk.setJwtIdentity(config.identity);
+    }
+    zendesk.support.Support.INSTANCE.init(zendesk.core.Zendesk.INSTANCE);
+
+    return ZendeskSdk;
+  }
+
+  public static setUserLocale(locale: string): ZendeskSdk {
+
+    zendesk.support.Support.INSTANCE.setHelpCenterLocaleOverride(new java.util.Locale(locale));
+
+    return ZendeskSdk;
+  }
+
+  public static setAnonymousIdentity(anonUserIdentity: AnonUserIdentity = {}): ZendeskSdk {
+
+    const anonymousIdentityBuilder: zendesk.core.AnonymousIdentity.Builder
+      = new zendesk.core.AnonymousIdentity.Builder();
+
+    if (anonUserIdentity.name) {
+      anonymousIdentityBuilder.withNameIdentifier(anonUserIdentity.name);
+    }
+
+    if (anonUserIdentity.email) {
+      anonymousIdentityBuilder.withEmailIdentifier(anonUserIdentity.email);
+    }
+
+    zendesk.core.Zendesk.INSTANCE.setIdentity(anonymousIdentityBuilder.build());
+
+    return ZendeskSdk;
+  }
+
+  public static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk {
+
+    zendesk.core.Zendesk.INSTANCE.setIdentity(
+      new zendesk.core.JwtIdentity(jwtUserIdentifier),
+    );
+
+    return ZendeskSdk;
+  }
+
+  public static configureRequests(config: RequestConfig = {}): ZendeskSdk {
+
+    let temp = zendesk.support.request.RequestActivity.builder();
+
+    if (config.requestSubject) {
+      temp.withRequestSubject(config.requestSubject);
+    }
+
+    let tags = [];
+
+    if (config.addDeviceInfo) {
+      for (const p in device) {
+        let value: any = (<any>device)[p];
+        if (typeof value === 'string' && value.length) {
+          const tag: string = value.replace(/(\s|,)/g, "");
+          tags.push(`${p}:${tag}`);
         }
+      }
+    }
 
-        if ( config.identity === null ) {
-            ZendeskSdk.setAnonymousIdentity();
-        } else if ( typeof config.identity === 'object' ) {
-            ZendeskSdk.setAnonymousIdentity(config.identity);
-        } else if ( typeof config.identity === 'string' ) {
-            ZendeskSdk.setJwtIdentity(config.identity);
+    if (config.tags && config.tags.length) {
+      for (const value of config.tags) {
+        if (typeof value === 'string' && value.length) {
+          const tag: string = value.replace(/(\s|,)/g, "");
+          tags.push(tag);
         }
-
-        return ZendeskSdk;
+      }
     }
 
-    public static setUserLocale(locale: string): typeof ZendeskSdk {
-
-        com.zendesk.sdk.network.impl.ZendeskConfig.INSTANCE.setDeviceLocale(new java.util.Locale(locale));
-
-        return ZendeskSdk;
+    if (tags.length) {
+      temp.withTags(tags);
     }
 
-    public static setAnonymousIdentity(anonUserIdentity: AnonUserIdentity = {}): typeof ZendeskSdk {
+    ZendeskSdk._requestUiConfig = temp.config();
 
-        const anonymousIdentityBuilder: com.zendesk.sdk.model.access.AnonymousIdentity.Builder
-                  = new com.zendesk.sdk.model.access.AnonymousIdentity.Builder();
+    return ZendeskSdk;
+  }
 
-        if ( anonUserIdentity.name ) { anonymousIdentityBuilder.withNameIdentifier(anonUserIdentity.name); }
+  public static showHelpCenter(options: HelpCenterOptions = {}): void {
 
-        if ( anonUserIdentity.email ) { anonymousIdentityBuilder.withEmailIdentifier(anonUserIdentity.email); }
+    ZendeskSdk._initHelpCenter(options)
+      .show(topmost().android.activity, [ZendeskSdk._requestUiConfig]);
+  }
 
-        com.zendesk.sdk.network.impl.ZendeskConfig.INSTANCE.setIdentity(anonymousIdentityBuilder.build());
+  public static showHelpCenterForCategoryIds(categoryIds: Array<number>, options: HelpCenterOptions = {}): void {
 
-        return ZendeskSdk;
-    }
+    ZendeskSdk._initHelpCenter(options).withArticlesForCategoryIds(<any>categoryIds)
+      .show(topmost().android.activity, [ZendeskSdk._requestUiConfig]);
+  }
 
-    public static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk {
+  public static showHelpCenterForLabelNames(labelNames: Array<string>, options: HelpCenterOptions = {}): void {
 
-        com.zendesk.sdk.network.impl.ZendeskConfig.INSTANCE.setIdentity(
-            new com.zendesk.sdk.model.access.JwtIdentity(jwtUserIdentifier),
-        );
+    ZendeskSdk._initHelpCenter(options).withLabelNames(labelNames)
+      .show(topmost().android.activity, [ZendeskSdk._requestUiConfig]);
+  }
 
-        return ZendeskSdk;
-    }
+  public static showHelpCenterForSectionIds(sectionIds: Array<number>, options: HelpCenterOptions = {}): void {
 
-    public static configureRequests(config: RequestConfig): typeof ZendeskSdk {
+    ZendeskSdk._initHelpCenter(options).withArticlesForSectionIds(<any>sectionIds)
+      .show(topmost().android.activity, [ZendeskSdk._requestUiConfig]);
+  }
 
-        config.addDeviceInfo = config.addDeviceInfo != null ? config.addDeviceInfo : true;
-        let tagsArrayList: java.util.ArrayList<string> = null;
-        if ( config.tags ) {
-            tagsArrayList = new java.util.ArrayList(config.tags.length);
-            config.tags.forEach((value: string) => {
-                tagsArrayList.add(value);
-            });
-        }
+  public static showArticle(articleId: string): void {
 
-        ZendeskSdk._zendeskRequestConfiguration = new com.zendesk.sdk.feedback.ZendeskFeedbackConfiguration(
-            {
-                getRequestSubject(): string {
-                    return !!config.requestSubject ? config.requestSubject : null;
-                },
-                getAdditionalInfo(): string {
-                    const deviceInfo: string = config.addDeviceInfo ? '\n\n' + device.language + '-' + device.region
-                                                                      + '\n' + device.manufacturer + ' ' + device.model
-                                                                      + '\n' + device.os + ' ' + device.osVersion + '('
-                                                                      + device.sdkVersion + ')' : '';
+    zendesk.support.guide.ViewArticleActivity.builder(parseInt(articleId))
+      .show(topmost().android.activity, [ZendeskSdk._requestUiConfig]);
+  }
 
-                    return !!config.additionalInfo || config.addDeviceInfo
-                        ? (!!config.additionalInfo
-                            ? '\n\n' + config.additionalInfo
-                            : ''
-                          ) + deviceInfo
-                        : '';
-                },
-                getTags(): java.util.List<string> {
-                    return tagsArrayList;
-                },
-            },
-        );
+  public static createRequest() {
 
-        return ZendeskSdk;
-    }
+    zendesk.support.request.RequestActivity.builder()
+      .show(topmost().android.activity, [ZendeskSdk._requestUiConfig]);
+  }
 
-    public static showHelpCenter(options: HelpCenterOptions = {}): void {
+  public static setIosTheme(theme: IosThemeSimple): ZendeskSdk {
+    return ZendeskSdk;
+  }
 
-        ZendeskSdk._initHelpCenter(options).show(topmost().android.activity);
-    }
+  private static _requestUiConfig: zendesk.support.UiConfig = null;
 
-    public static showHelpCenterForCategoryIds(categoryIds: Array<number>,
-                                               options: HelpCenterOptions = {}): void {
+  private static _initHelpCenter(options: HelpCenterOptions): zendesk.support.guide.HelpCenterUiConfig.Builder {
 
-        ZendeskSdk._initHelpCenter(options).withArticlesForCategoryIds(categoryIds).show(topmost().android.activity);
-    }
+    return zendesk.support.guide.HelpCenterActivity.builder()
+      .withContactUsButtonVisible(false)
+      .withCategoriesCollapsed(
+        options.categoriesCollapsedAndroid != null
+          ? options.categoriesCollapsedAndroid
+          : false)
+      .withShowConversationsMenuButton(
+        options.conversationsMenu != null
+          ? options.conversationsMenu
+          : true);
+  }
 
-    public static showHelpCenterForLabelNames(labelNames: Array<string>,
-                                              options: HelpCenterOptions = {}): void {
-
-        ZendeskSdk._initHelpCenter(options).withLabelNames(labelNames).show(topmost().android.activity);
-    }
-
-    public static showHelpCenterForSectionIds(sectionIds: Array<number>,
-                                              options: HelpCenterOptions = {}): void {
-
-        ZendeskSdk._initHelpCenter(options).withArticlesForSectionIds(sectionIds).show(topmost().android.activity);
-    }
-
-    public static showArticle(articleId: string): void {
-
-        com.zendesk.sdk.support.ViewArticleActivity.startActivity(
-            topmost().android.activity, new com.zendesk.sdk.model.helpcenter.SimpleArticle(long(long(articleId)), ''),
-        );
-    }
-
-    public static createRequest() {
-
-        com.zendesk.sdk.feedback.ui.ContactZendeskActivity
-           .startActivity(topmost().android.activity, ZendeskSdk._zendeskRequestConfiguration);
-    }
-
-    public static setIosTheme(theme: IosThemeSimple): void { }
-
-    private static _initHelpCenter(options: HelpCenterOptions): com.zendesk.sdk.support.SupportActivity.Builder {
-
-        const supportActivityBuilder: com.zendesk.sdk.support.SupportActivity.Builder
-                  = new com.zendesk.sdk.support.SupportActivity.Builder()
-            .withCategoriesCollapsed(
-                options.categoriesCollapsedAndroid != null
-                    ? options.categoriesCollapsedAndroid
-                    : false)
-            .showConversationsMenuButton(
-                options.conversationsMenuAndroid != null
-                    ? options.conversationsMenuAndroid
-                    : true);
-        if ( ZendeskSdk._zendeskRequestConfiguration ) {
-            supportActivityBuilder.withContactConfiguration(ZendeskSdk._zendeskRequestConfiguration);
-        }
-
-        return supportActivityBuilder;
-    }
-
-    private constructor() { }
+  private constructor() {
+  }
 }

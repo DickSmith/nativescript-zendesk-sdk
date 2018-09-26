@@ -26,7 +26,6 @@ export interface InitConfig {
     zendeskUrl: string;
     clientId: string;
     userLocale?: string;
-    coppaEnabled?: boolean;
     /** AnonUserIdentity object or JWT Token string */
     identity?: AnonUserIdentity | string;
 }
@@ -76,9 +75,14 @@ ZendeskSdk.setUserLocale(localeCode);
 ### Configure Requests
 _Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/add_data_to_request) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/https://developer.zendesk.com/embeddables/docs/ios/requests#additional-methods-api-providers)_
 
-Before opening the Help Center or creating a Rewuest you can specify the Request settings:
+Before opening the Help Center or creating a Request you can specify the Request settings:
 
 ```typescript
+export interface RequestConfig {
+  requestSubject?: string;
+  addDeviceInfo?: boolean;
+  tags?: Array<string>;
+}
 
 ```
 
@@ -237,17 +241,7 @@ if ( isIOS ) {
 }
 
 const iOSTheme: ZendeskIosThemeSimple = {
-    primaryTextColor:          '#FF0000',
-    secondaryTextColor:        '#00FF00',
-    primaryBackgroundColor:    '#0000FF',
-    secondaryBackgroundColor:  '#00FFFF',
-    emptyBackgroundColor:      '#FF00FF',
-    metaTextColor:             '#FFFF00',
-    separatorColor:            '#884444',
-    inputFieldTextColor:       '#448844',
-    inputFieldBackgroundColor: '#444488',
-    fontName:                  'Courier',
-    boldFontName:              'Cochin-BoldItalic',
+    primaryColor: '#FF0000',
 };
 ZendeskSdk.setIosTheme(iOSTheme);
 ```

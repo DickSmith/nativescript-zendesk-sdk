@@ -1,4 +1,26 @@
 
+declare class DispatcherAdapter extends NSObject {
+
+	static alloc(): DispatcherAdapter; // inherited from NSObject
+
+	static clearSettingsAndSession(): void;
+
+	static convertErrorWithResponseOriginalError(response: NSURLResponse, error: NSError): NSError;
+
+	static new(): DispatcherAdapter; // inherited from NSObject
+
+	static performRequestWithZendeskUrlRequsetRequiresAuthCompletionHandler(zendesk: ZDKZendesk, urlRequset: NSURLRequest, requiresAuth: boolean, completionHandler: (p1: NSURLResponse, p2: NSData, p3: NSError) => void): void;
+}
+
+declare class HTMLSanitizer extends NSObject {
+
+	static alloc(): HTMLSanitizer; // inherited from NSObject
+
+	static cleanWithHtml(html: string): string;
+
+	static new(): HTMLSanitizer; // inherited from NSObject
+}
+
 declare var ZDCharacterLimitForUserAgentHeader: number;
 
 declare var ZDD_Accept: string;
@@ -36,25 +58,6 @@ declare var ZDD_TypeJSON: string;
 declare var ZDD_UserAgent: string;
 
 declare var ZDD_Validator_Error_Key: string;
-
-declare const enum ZDKAPIErrorCode {
-
-	Unreachable = 0,
-
-	Connection = 1,
-
-	Auth = 2,
-
-	Request = 3,
-
-	Subdomain = 4,
-
-	ClientId = 5,
-
-	UserId = 6,
-
-	DelegateConfig = 7
-}
 
 declare const enum ZDKAPILoginState {
 
@@ -147,83 +150,6 @@ declare var ZDKAPI_UploadAttachmentSuccess: string;
 
 declare var ZDKAPI_UsersUpdated: string;
 
-declare class ZDKAccount extends NSObject {
-
-	static alloc(): ZDKAccount; // inherited from NSObject
-
-	static new(): ZDKAccount; // inherited from NSObject
-
-	applicationId: string;
-
-	oAuthClientId: string;
-
-	oauthToken: string;
-
-	state: ZDKAccountState;
-
-	zendeskUrl: string;
-
-	constructor(o: { url: string; applicationId: string; clientId: string; });
-
-	initWithUrlApplicationIdClientId(zendeskUrl: string, applicationId: string, clientId: string): this;
-}
-
-declare class ZDKAccountSettings extends ZDKCoding {
-
-	static alloc(): ZDKAccountSettings; // inherited from NSObject
-
-	static new(): ZDKAccountSettings; // inherited from NSObject
-
-	readonly attachmentSettings: ZDKAttachmentSettings;
-
-	constructor(o: { dictionary: NSDictionary<any, any>; });
-
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
-}
-
-declare const enum ZDKAccountState {
-
-	Unloaded = 0,
-
-	Valid = 1,
-
-	Invalidated = 2
-}
-
-declare class ZDKAnonymousIdentity extends ZDKCoding implements ZDKIdentity {
-
-	static alloc(): ZDKAnonymousIdentity; // inherited from NSObject
-
-	static new(): ZDKAnonymousIdentity; // inherited from NSObject
-
-	email: string;
-
-	name: string;
-
-	toJson(): NSDictionary<any, any>;
-}
-
-declare class ZDKAppSettings extends ZDKCoding {
-
-	static alloc(): ZDKAppSettings; // inherited from NSObject
-
-	static new(): ZDKAppSettings; // inherited from NSObject
-
-	readonly authentication: string;
-
-	readonly contactUsSettings: ZDKContactUsSettings;
-
-	readonly conversationsSettings: ZDKConversationsSettings;
-
-	readonly helpCenterSettings: ZDKHelpCenterSettings;
-
-	readonly ticketFormsSettings: ZDKTicketFormsSettings;
-
-	constructor(o: { dictionary: NSDictionary<any, any>; });
-
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
-}
-
 declare class ZDKAttachment extends NSObject {
 
 	static alloc(): ZDKAttachment; // inherited from NSObject
@@ -238,9 +164,11 @@ declare class ZDKAttachment extends NSObject {
 
 	filename: string;
 
+	imageDimension: CGSize;
+
 	size: number;
 
-	thumbnails: NSArray<any>;
+	thumbnails: NSArray<ZDKAttachment>;
 
 	constructor(o: { dict: NSDictionary<any, any>; });
 
@@ -260,7 +188,18 @@ declare class ZDKAttachmentCache extends NSObject {
 	static new(): ZDKAttachmentCache; // inherited from NSObject
 }
 
-declare class ZDKAttachmentSettings extends ZDKCoding {
+declare class ZDKAttachmentProvider extends ZDKProvider {
+
+	static alloc(): ZDKAttachmentProvider; // inherited from NSObject
+
+	static new(): ZDKAttachmentProvider; // inherited from NSObject
+
+	getAttachmentForUrlWithCallback(attachmentUrl: string, callback: (p1: NSData, p2: NSError) => void): void;
+
+	getAvatarForUrlWithCallback(avatarUrl: string, callback: (p1: UIImage, p2: NSError) => void): void;
+}
+
+declare class ZDKAttachmentSettings extends NSObject {
 
 	static alloc(): ZDKAttachmentSettings; // inherited from NSObject
 
@@ -269,31 +208,15 @@ declare class ZDKAttachmentSettings extends ZDKCoding {
 	readonly enabled: boolean;
 
 	readonly maxAttachmentSize: number;
-
-	constructor(o: { dictionary: NSDictionary<any, any>; });
-
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
 }
 
-declare class ZDKAuthenticationSpace extends NSObject {
+declare class ZDKAttachmentSettingsProvider extends NSObject {
 
-	static alloc(): ZDKAuthenticationSpace; // inherited from NSObject
+	static alloc(): ZDKAttachmentSettingsProvider; // inherited from NSObject
 
-	static defaultSpace(): ZDKAuthenticationSpace;
+	static getAttachmentSettingsWithCallback(callback: (p1: ZDKAttachmentSettings) => void): void;
 
-	static new(): ZDKAuthenticationSpace; // inherited from NSObject
-
-	readonly account: ZDKAccount;
-
-	identityStorage: ZDKIdentityStorage;
-
-	readonly userIdentity: ZDKIdentity;
-
-	constructor(o: { account: ZDKAccount; userIdentity: ZDKIdentity; });
-
-	UUID(): string;
-
-	initWithAccountUserIdentity(account: ZDKAccount, userIdentity: ZDKIdentity): this;
+	static new(): ZDKAttachmentSettingsProvider; // inherited from NSObject
 }
 
 declare const enum ZDKAuthenticationType {
@@ -305,33 +228,9 @@ declare const enum ZDKAuthenticationType {
 	Anonymous = 2
 }
 
-declare class ZDKAuthenticationURLProtocol extends NSURLProtocol {
-
-	static alloc(): ZDKAuthenticationURLProtocol; // inherited from NSObject
-
-	static new(): ZDKAuthenticationURLProtocol; // inherited from NSObject
-}
-
-declare class ZDKAvatarProvider extends ZDKProvider {
-
-	static alloc(): ZDKAvatarProvider; // inherited from NSObject
-
-	static new(): ZDKAvatarProvider; // inherited from NSObject
-
-	getAvatarForUrlWithCallback(avatarUrl: string, callback: (p1: UIImage, p2: NSError) => void): void;
-}
-
 declare class ZDKBundleUtils extends NSObject {
 
 	static alloc(): ZDKBundleUtils; // inherited from NSObject
-
-	static attachmentImage(): UIImage;
-
-	static conversationsImage(): UIImage;
-
-	static createRequestImage(): UIImage;
-
-	static deviceModelIdentifier(): NSDictionary<any, any>;
 
 	static frameworkResourceBundle(): NSBundle;
 
@@ -369,7 +268,7 @@ declare class ZDKComment extends NSObject {
 
 	static new(): ZDKComment; // inherited from NSObject
 
-	attachments: NSArray<any>;
+	attachments: NSArray<ZDKAttachment>;
 
 	authorId: number;
 
@@ -379,11 +278,15 @@ declare class ZDKComment extends NSObject {
 
 	createdAt: Date;
 
+	htmlBody: string;
+
 	requestId: string;
 
 	constructor(o: { dictionary: NSDictionary<any, any>; });
 
 	initWithDictionary(dictionary: NSDictionary<any, any>): this;
+
+	toJson(): NSDictionary<any, any>;
 }
 
 declare class ZDKCommentWithUser extends NSObject {
@@ -396,7 +299,7 @@ declare class ZDKCommentWithUser extends NSObject {
 
 	readonly comment: ZDKComment;
 
-	readonly user: ZDKUser;
+	readonly user: ZDKSupportUser;
 }
 
 declare class ZDKCommentsResponse extends NSObject {
@@ -410,76 +313,44 @@ declare class ZDKCommentsResponse extends NSObject {
 	readonly commmentsWithUsers: NSArray<any>;
 }
 
-declare class ZDKConfig extends NSObject {
-
-	static alloc(): ZDKConfig; // inherited from NSObject
-
-	static instance(): ZDKConfig;
-
-	static new(): ZDKConfig; // inherited from NSObject
-
-	readonly account: ZDKAccount;
-
-	articleVotingEnabled: boolean;
-
-	readonly authenticationType: ZDKAuthenticationType;
-
-	coppaEnabled: boolean;
-
-	customTicketFields: NSArray<ZDKCustomField>;
-
-	reloadInterval: number;
-
-	ticketFormId: number;
-
-	userIdentity: ZDKIdentity;
-
-	userLocale: string;
-
-	disablePushCallback(identifier: string, callback: (p1: number, p2: NSError) => void): void;
-
-	enablePushWithDeviceIDCallback(identifier: string, callback: (p1: ZDKPushRegistrationResponse, p2: NSError) => void): void;
-
-	enablePushWithUAChannelIDCallback(identifier: string, callback: (p1: ZDKPushRegistrationResponse, p2: NSError) => void): void;
-
-	initializeWithAppIdZendeskUrlClientId(applicationId: string, zendeskUrl: string, oAuthClientId: string): void;
-
-	reload(): void;
-}
-
-declare class ZDKContactUsSettings extends ZDKCoding {
+declare class ZDKContactUsSettings extends NSObject {
 
 	static alloc(): ZDKContactUsSettings; // inherited from NSObject
 
 	static new(): ZDKContactUsSettings; // inherited from NSObject
 
-	readonly tags: NSArray<any>;
+	readonly tags: NSArray<string>;
 
-	constructor(o: { dictionary: NSDictionary<any, any>; });
+	constructor();
 
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
+	initWith(tags: NSArray<string>): this;
 }
 
-declare const enum ZDKContactUsVisibility {
+declare class ZDKContactUsSettingsProvider extends NSObject {
 
-	Off = 0,
+	static alloc(): ZDKContactUsSettingsProvider; // inherited from NSObject
 
-	ArticleListOnly = 1,
+	static getContactUsSettingsWithCallback(callback: (p1: ZDKContactUsSettings) => void): void;
 
-	ArticleListAndArticle = 2
+	static new(): ZDKContactUsSettingsProvider; // inherited from NSObject
 }
 
-declare class ZDKConversationsSettings extends ZDKCoding {
+declare class ZDKConversationsSettings extends NSObject {
 
 	static alloc(): ZDKConversationsSettings; // inherited from NSObject
 
 	static new(): ZDKConversationsSettings; // inherited from NSObject
 
 	readonly enabled: boolean;
+}
 
-	constructor(o: { dictionary: NSDictionary<any, any>; });
+declare class ZDKConversationsSettingsProvider extends NSObject {
 
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
+	static alloc(): ZDKConversationsSettingsProvider; // inherited from NSObject
+
+	static getConversationsSettingsWithCallback(callback: (p1: ZDKConversationsSettings) => void): void;
+
+	static new(): ZDKConversationsSettingsProvider; // inherited from NSObject
 }
 
 declare class ZDKCreateRequest extends NSObject {
@@ -537,6 +408,8 @@ declare class ZDKDateUtil extends NSObject {
 	static formatterForFormat(format: string): NSDateFormatter;
 
 	static new(): ZDKDateUtil; // inherited from NSObject
+
+	static stringFromDate(date: Date): string;
 
 	static stringFromDateUsingFormat(date: Date, format: string): string;
 }
@@ -615,7 +488,7 @@ declare class ZDKHelpCenterArticle extends NSObject {
 
 	article_details: string;
 
-	author_id: string;
+	author_id: number;
 
 	author_name: string;
 
@@ -625,6 +498,8 @@ declare class ZDKHelpCenterArticle extends NSObject {
 
 	htmlUrl: string;
 
+	identifier: number;
+
 	labelNames: NSArray<any>;
 
 	locale: string;
@@ -633,9 +508,7 @@ declare class ZDKHelpCenterArticle extends NSObject {
 
 	position: number;
 
-	section_id: string;
-
-	sid: string;
+	section_id: number;
 
 	title: string;
 
@@ -648,57 +521,19 @@ declare class ZDKHelpCenterArticle extends NSObject {
 	getUpvoteCount(): number;
 }
 
-declare class ZDKHelpCenterArticleViewModel extends NSObject implements ZDKHelpCenterViewModel {
+declare class ZDKHelpCenterArticleViewModel extends NSObject {
 
 	static alloc(): ZDKHelpCenterArticleViewModel; // inherited from NSObject
 
+	static convertWithArticles(articles: NSArray<ZDKHelpCenterArticle>): NSArray<ZDKHelpCenterArticleViewModel>;
+
 	static new(): ZDKHelpCenterArticleViewModel; // inherited from NSObject
 
-	static parseArticle(json: NSDictionary<any, any>): ZDKHelpCenterArticleViewModel;
+	readonly id: string;
 
-	static parseArticles(json: NSDictionary<any, any>): NSArray<ZDKHelpCenterArticleViewModel>;
+	readonly name: string;
 
-	articleId: string;
-
-	sectionId: string;
-
-	title: string;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly detailTitle: string; // inherited from ZDKHelpCenterViewModel
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly  // inherited from NSObjectProtocol
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	self(): this;
+	readonly section_id: string;
 }
 
 declare class ZDKHelpCenterArticleVote extends NSObject {
@@ -713,9 +548,9 @@ declare class ZDKHelpCenterArticleVote extends NSObject {
 
 	createdAt: Date;
 
-	identifier: string;
+	identifier: number;
 
-	itemId: string;
+	itemId: number;
 
 	itemType: string;
 
@@ -723,7 +558,7 @@ declare class ZDKHelpCenterArticleVote extends NSObject {
 
 	url: string;
 
-	userId: string;
+	userId: number;
 
 	value: string;
 }
@@ -738,7 +573,7 @@ declare class ZDKHelpCenterAttachment extends NSObject {
 
 	static parseAttachments(json: NSDictionary<any, any>): NSArray<any>;
 
-	article_id: string;
+	article_id: number;
 
 	content_type: string;
 
@@ -746,15 +581,22 @@ declare class ZDKHelpCenterAttachment extends NSObject {
 
 	file_name: string;
 
-	isInline: boolean;
+	identifier: number;
 
-	sid: string;
+	isInline: boolean;
 
 	size: number;
 
 	url: string;
 
 	humanReadableFileSize(): string;
+}
+
+declare class ZDKHelpCenterBlips extends NSObject {
+
+	static alloc(): ZDKHelpCenterBlips; // inherited from NSObject
+
+	static new(): ZDKHelpCenterBlips; // inherited from NSObject
 }
 
 declare class ZDKHelpCenterCategory extends NSObject {
@@ -773,6 +615,8 @@ declare class ZDKHelpCenterCategory extends NSObject {
 
 	html_url: string;
 
+	identifier: number;
+
 	locale: string;
 
 	name: string;
@@ -781,8 +625,6 @@ declare class ZDKHelpCenterCategory extends NSObject {
 
 	position: number;
 
-	sid: string;
-
 	sourceLocale: string;
 
 	updatedAt: string;
@@ -790,77 +632,27 @@ declare class ZDKHelpCenterCategory extends NSObject {
 	url: string;
 }
 
-declare class ZDKHelpCenterCategoryViewModel extends NSObject implements ZDKHelpCenterViewModel {
+declare class ZDKHelpCenterCategoryViewModel extends NSObject {
 
 	static alloc(): ZDKHelpCenterCategoryViewModel; // inherited from NSObject
 
 	static new(): ZDKHelpCenterCategoryViewModel; // inherited from NSObject
 
-	static parseCategories(json: NSDictionary<any, any>): NSArray<ZDKHelpCenterCategoryViewModel>;
-
-	static parseCategory(json: NSDictionary<any, any>): ZDKHelpCenterCategoryViewModel;
-
-	categoryId: string;
-
-	name: string;
+	readonly name: string;
 
 	sections: NSArray<ZDKHelpCenterSectionViewModel>;
 
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly detailTitle: string; // inherited from ZDKHelpCenterViewModel
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly title: string; // inherited from ZDKHelpCenterViewModel
-
-	readonly  // inherited from NSObjectProtocol
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	self(): this;
-
-	updateWithSection(section: ZDKHelpCenterSectionViewModel): void;
+	updateWithSection(newSection: ZDKHelpCenterSectionViewModel): ZDKHelpCenterCategoryViewModel;
 }
 
-interface ZDKHelpCenterConversationsUIDelegate extends NSObjectProtocol {
+declare class ZDKHelpCenterCategoryViewModelContainer extends NSObject {
 
-	active(): ZDKContactUsVisibility;
+	static alloc(): ZDKHelpCenterCategoryViewModelContainer; // inherited from NSObject
 
-	conversationsBarButtonImage(): UIImage;
+	static new(): ZDKHelpCenterCategoryViewModelContainer; // inherited from NSObject
 
-	conversationsBarButtonLocalizedLabel?(): string;
-
-	navBarConversationsUIType(): ZDKNavBarConversationsUIType;
+	static parseWithDataError(data: NSData): NSArray<ZDKHelpCenterCategoryViewModel>;
 }
-declare var ZDKHelpCenterConversationsUIDelegate: {
-
-	prototype: ZDKHelpCenterConversationsUIDelegate;
-};
 
 declare class ZDKHelpCenterDeflection extends NSObject {
 
@@ -925,7 +717,7 @@ declare class ZDKHelpCenterOverviewContentModel extends NSObject {
 
 	static new(): ZDKHelpCenterOverviewContentModel; // inherited from NSObject
 
-	groupIds: NSArray<string>;
+	groupIds: NSArray<number>;
 
 	groupType: ZDKHelpCenterOverviewGroupType;
 
@@ -957,16 +749,6 @@ declare class ZDKHelpCenterParser extends NSObject {
 
 	static new(): ZDKHelpCenterParser; // inherited from NSObject
 
-	static parseArticlesIntoSection(json: NSDictionary<any, any>): NSArray<any>;
-
-	static parseHelpCenterOverview(json: NSDictionary<any, any>): NSArray<ZDKHelpCenterCategoryViewModel>;
-
-	readonly categoryLookup: NSDictionary<any, any>;
-
-	readonly sectionLookup: NSDictionary<any, any>;
-
-	readonly userLookup: NSDictionary<any, any>;
-
 	constructor(o: { dictionary: NSDictionary<any, any>; });
 
 	initWithDictionary(dict: NSDictionary<any, any>): this;
@@ -986,39 +768,33 @@ declare class ZDKHelpCenterProvider extends ZDKProvider {
 
 	static new(): ZDKHelpCenterProvider; // inherited from NSObject
 
-	readonly locale: string;
+	downVoteArticleWithIdWithCallback(articleId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
-	constructor(o: { locale: string; });
-
-	deleteVoteWithIdWithCallback(voteId: string, callback: (p1: any, p2: NSError) => void): void;
-
-	downvoteArticleWithIdWithCallback(articleId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
-
-	getArticleByIdWithCallback(articleId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	getArticleWithIdWithCallback(articleId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
 	getArticlesByLabelsWithCallback(labels: NSArray<string>, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
-	getArticlesForSectionIdWithCallback(sectionId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	getArticlesWithSectionIdLabelsWithCallback(sectionId: string, labels: NSArray<any>, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
-	getAttachmentForArticleIdWithCallback(articleId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	getArticlesWithSectionIdWithCallback(sectionId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+
+	getAttachmentWithArticleIdWithCallback(articleId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
 	getCategoriesWithCallback(callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
-	getCategoryByIdWithCallback(categoryId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	getCategoryWithIdWithCallback(categoryId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
 	getFlatArticlesWithCallback(callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
 	getHelpCenterOverviewWithHelpCenterOverviewModelCallback(helpCenterModel: ZDKHelpCenterOverviewContentModel, callback: (p1: NSArray<ZDKHelpCenterCategoryViewModel>, p2: NSError) => void): void;
 
-	getSectionByIdWithCallback(sectionId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	getSectionWithIdWithCallback(sectionId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
-	getSectionWithArticlesForSectionIdLabelsCallback(sectionId: string, labels: NSArray<string>, callback: (p1: NSArray<any>, p2: NSError) => void): void;
-
-	getSectionsForCategoryIdWithCallback(categoryId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	getSectionsWithCategoryIdWithCallback(categoryId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
 	getSuggestedArticlesWithCallback(search: ZDKHelpCenterDeflection, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
-	initWithLocale(locale: string): this;
+	removeVoteWithIdWithCallback(voteId: string, callback: (p1: any, p2: NSError) => void): void;
 
 	searchArticlesWithCallback(search: ZDKHelpCenterSearch, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 
@@ -1028,7 +804,7 @@ declare class ZDKHelpCenterProvider extends ZDKProvider {
 
 	submitRecordArticleViewWithCallback(article: ZDKHelpCenterArticle, callback: (p1: any, p2: NSError) => void): void;
 
-	upvoteArticleWithIdWithCallback(articleId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	upVoteArticleWithIdWithCallback(articleId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
 }
 
 declare class ZDKHelpCenterSearch extends NSObject {
@@ -1037,7 +813,7 @@ declare class ZDKHelpCenterSearch extends NSObject {
 
 	static new(): ZDKHelpCenterSearch; // inherited from NSObject
 
-	categoryIds: NSArray<string>;
+	categoryIds: NSArray<number>;
 
 	labelNames: NSMutableArray<any>;
 
@@ -1049,7 +825,7 @@ declare class ZDKHelpCenterSearch extends NSObject {
 
 	resultsPerPage: number;
 
-	sectionIds: NSArray<string>;
+	sectionIds: NSArray<number>;
 
 	sideLoads: NSMutableArray<any>;
 }
@@ -1064,11 +840,13 @@ declare class ZDKHelpCenterSection extends NSObject {
 
 	static parseSections(json: NSDictionary<any, any>): NSArray<any>;
 
-	category_id: string;
+	category_id: number;
 
 	createdAt: string;
 
 	html_url: string;
+
+	identifier: number;
 
 	locale: string;
 
@@ -1080,8 +858,6 @@ declare class ZDKHelpCenterSection extends NSObject {
 
 	sectionDescription: string;
 
-	sid: string;
-
 	sorting: string;
 
 	sourceLocale: string;
@@ -1091,65 +867,25 @@ declare class ZDKHelpCenterSection extends NSObject {
 	url: string;
 }
 
-declare class ZDKHelpCenterSectionViewModel extends NSObject implements ZDKHelpCenterViewModel {
+declare class ZDKHelpCenterSectionViewModel extends NSObject {
 
 	static alloc(): ZDKHelpCenterSectionViewModel; // inherited from NSObject
 
 	static new(): ZDKHelpCenterSectionViewModel; // inherited from NSObject
 
-	static parseSection(json: NSDictionary<any, any>): ZDKHelpCenterSectionViewModel;
+	readonly article_count: number;
 
-	static parseSections(json: NSDictionary<any, any>): NSArray<ZDKHelpCenterSectionViewModel>;
+	readonly articles: NSArray<ZDKHelpCenterArticleViewModel>;
 
-	articles: NSArray<ZDKHelpCenterArticleViewModel>;
+	readonly category_id: string;
 
-	categoryId: string;
+	readonly detailTitle: string;
 
-	name: string;
+	readonly id: string;
 
-	sectionId: string;
+	readonly name: string;
 
-	totalNumberOfArticles: number;
-
-	readonly debugDescription: string; // inherited from NSObjectProtocol
-
-	readonly description: string; // inherited from NSObjectProtocol
-
-	readonly detailTitle: string; // inherited from ZDKHelpCenterViewModel
-
-	readonly hash: number; // inherited from NSObjectProtocol
-
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
-
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
-
-	readonly title: string; // inherited from ZDKHelpCenterViewModel
-
-	readonly  // inherited from NSObjectProtocol
-
-	class(): typeof NSObject;
-
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
-
-	isEqual(object: any): boolean;
-
-	isKindOfClass(aClass: typeof NSObject): boolean;
-
-	isMemberOfClass(aClass: typeof NSObject): boolean;
-
-	performSelector(aSelector: string): any;
-
-	performSelectorWithObject(aSelector: string, object: any): any;
-
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
-
-	respondsToSelector(aSelector: string): boolean;
-
-	retainCount(): number;
-
-	self(): this;
-
-	updateWithArticles(articles: NSArray<ZDKHelpCenterArticleViewModel>): void;
+	sectionByReplacingWithArticles(articles: NSArray<ZDKHelpCenterArticleViewModel>): ZDKHelpCenterSectionViewModel;
 }
 
 declare class ZDKHelpCenterSessionCache extends NSObject {
@@ -1167,7 +903,7 @@ declare class ZDKHelpCenterSessionCache extends NSObject {
 	static unsetUniqueSearchResultClick(): void;
 }
 
-declare class ZDKHelpCenterSettings extends ZDKCoding {
+declare class ZDKHelpCenterSettings extends NSObject {
 
 	static alloc(): ZDKHelpCenterSettings; // inherited from NSObject
 
@@ -1175,11 +911,18 @@ declare class ZDKHelpCenterSettings extends ZDKCoding {
 
 	readonly enabled: boolean;
 
+	readonly helpCenterArticleVotingEnabled: boolean;
+
 	readonly locale: string;
+}
 
-	constructor(o: { dictionary: NSDictionary<any, any>; });
+declare class ZDKHelpCenterSettingsProvider extends NSObject {
 
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
+	static alloc(): ZDKHelpCenterSettingsProvider; // inherited from NSObject
+
+	static getHelpCenterSettingsWithCallback(callback: (p1: ZDKHelpCenterSettings) => void): void;
+
+	static new(): ZDKHelpCenterSettingsProvider; // inherited from NSObject
 }
 
 declare class ZDKHelpCenterSimpleArticle extends NSObject {
@@ -1201,46 +944,20 @@ interface ZDKHelpCenterViewModel extends NSObjectProtocol {
 
 	detailTitle?: string;
 
-	title: string;
+	name: string;
 }
 declare var ZDKHelpCenterViewModel: {
 
 	prototype: ZDKHelpCenterViewModel;
 };
 
-interface ZDKIdentity {
-
-	toJson(): NSDictionary<any, any>;
-}
-declare var ZDKIdentity: {
-
-	prototype: ZDKIdentity;
-};
-
-declare class ZDKIdentityStorage extends NSObject {
-
-	static alloc(): ZDKIdentityStorage; // inherited from NSObject
-
-	static new(): ZDKIdentityStorage; // inherited from NSObject
-
-	deleteStoredData(): void;
-
-	getUUID(): string;
-
-	storeIdentity(identity: ZDKIdentity): void;
-
-	storeOAuthToken(oAuthToken: string): void;
-
-	storedIdentity(): ZDKIdentity;
-
-	storedOAuthToken(): string;
-}
-
 declare class ZDKJsonUtil extends NSObject {
 
 	static alloc(): ZDKJsonUtil; // inherited from NSObject
 
 	static arrayWithPropertiesOfObject(aClass: typeof NSObject): NSMutableArray<any>;
+
+	static cleanJSONArrayValKey(json: NSDictionary<any, any>, key: string): any;
 
 	static cleanJSONVal(val: any): any;
 
@@ -1255,40 +972,15 @@ declare class ZDKJsonUtil extends NSObject {
 	static new(): ZDKJsonUtil; // inherited from NSObject
 }
 
-declare class ZDKJwtIdentity extends ZDKCoding implements ZDKIdentity {
+declare class ZDKLegacyRequestStorageMigrator extends NSObject {
 
-	static alloc(): ZDKJwtIdentity; // inherited from NSObject
+	static alloc(): ZDKLegacyRequestStorageMigrator; // inherited from NSObject
 
-	static new(): ZDKJwtIdentity; // inherited from NSObject
+	static new(): ZDKLegacyRequestStorageMigrator; // inherited from NSObject
 
-	constructor(o: { jwtUserIdentifier: string; });
+	constructor(o: { requestStorage: ZDKRequestStorage; });
 
-	hasIdentifer(): boolean;
-
-	initWithJwtUserIdentifier(jwtUserIdentifier: string): this;
-
-	toJson(): NSDictionary<any, any>;
-}
-
-declare class ZDKKeychainWrapper extends NSObject {
-
-	static alloc(): ZDKKeychainWrapper; // inherited from NSObject
-
-	static new(): ZDKKeychainWrapper; // inherited from NSObject
-
-	genericPasswordQuery: NSMutableDictionary<any, any>;
-
-	keychainItemData: NSMutableDictionary<any, any>;
-
-	constructor(o: { identifier: string; accessGroup: string; });
-
-	initWithIdentifierAccessGroup(identifier: string, accessGroup: string): this;
-
-	objectForKey(key: any): any;
-
-	resetKeychainItem(): void;
-
-	setObjectForKey(inObject: any, key: any): void;
+	initWithRequestStorage(requestStorage: ZDKRequestStorage): this;
 }
 
 declare class ZDKLocalization extends NSObject {
@@ -1302,42 +994,6 @@ declare class ZDKLocalization extends NSObject {
 	static printAllKeys(): void;
 
 	static registerTableName(tableName: string): void;
-}
-
-declare const enum ZDKLogLevel {
-
-	Error = 0,
-
-	Warn = 1,
-
-	Info = 2,
-
-	Debug = 3,
-
-	Verbose = 4
-}
-
-declare class ZDKLogger extends NSObject {
-
-	static alloc(): ZDKLogger; // inherited from NSObject
-
-	static debug(logMessage: string): void;
-
-	static enable(enabled: boolean): void;
-
-	static error(logMessage: string): void;
-
-	static info(logMessage: string): void;
-
-	static logLevel(): ZDKLogLevel;
-
-	static new(): ZDKLogger; // inherited from NSObject
-
-	static setLogLevel(level: ZDKLogLevel): void;
-
-	static verbose(logMessage: string): void;
-
-	static warn(logMessage: string): void;
 }
 
 declare class ZDKMobileProvisionAnalyzer extends NSObject {
@@ -1385,55 +1041,6 @@ declare class ZDKProvider extends NSObject {
 	static alloc(): ZDKProvider; // inherited from NSObject
 
 	static new(): ZDKProvider; // inherited from NSObject
-
-	readonly authenticationSpace: ZDKAuthenticationSpace;
-
-	constructor(o: { authenticationSpace: ZDKAuthenticationSpace; });
-
-	initWithAuthenticationSpace(authenticationSpace: ZDKAuthenticationSpace): this;
-}
-
-declare class ZDKPushRegistrationProvider extends ZDKProvider {
-
-	static alloc(): ZDKPushRegistrationProvider; // inherited from NSObject
-
-	static new(): ZDKPushRegistrationProvider; // inherited from NSObject
-
-	registerForPushWithDeviceIDLocaleCallback(identifier: string, locale: string, callback: (p1: ZDKPushRegistrationResponse, p2: NSError) => void): void;
-
-	registerForPushWithUAChannelIDLocalCallback(identifier: string, locale: string, callback: (p1: ZDKPushRegistrationResponse, p2: NSError) => void): void;
-
-	unregisterDeviceCallback(identifier: string, callback: (p1: number, p2: NSError) => void): void;
-}
-
-declare class ZDKPushRegistrationRequest extends NSObject {
-
-	static alloc(): ZDKPushRegistrationRequest; // inherited from NSObject
-
-	static new(): ZDKPushRegistrationRequest; // inherited from NSObject
-
-	readonly device_type: string;
-
-	identifier: string;
-
-	locale: string;
-
-	token_type: string;
-
-	toJson(): NSMutableDictionary<any, any>;
-}
-
-declare class ZDKPushRegistrationResponse extends NSObject {
-
-	static alloc(): ZDKPushRegistrationResponse; // inherited from NSObject
-
-	static new(): ZDKPushRegistrationResponse; // inherited from NSObject
-
-	identifier: string;
-
-	constructor(o: { dictionary: NSDictionary<any, any>; });
-
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
 }
 
 declare class ZDKReachability extends NSObject {
@@ -1465,9 +1072,17 @@ declare class ZDKRequest extends NSObject {
 
 	static new(): ZDKRequest; // inherited from NSObject
 
+	collaboratingIds: NSArray<number>;
+
 	commentCount: number;
 
+	commentingAgentsIds: NSArray<number>;
+
 	createdAt: Date;
+
+	firstComment: ZDKComment;
+
+	lastComment: ZDKComment;
 
 	publicUpdatedAt: Date;
 
@@ -1488,6 +1103,22 @@ declare class ZDKRequest extends NSObject {
 	constructor(o: { dict: NSDictionary<any, any>; });
 
 	initWithDict(dict: NSDictionary<any, any>): this;
+
+	toJson(): NSDictionary<any, any>;
+}
+
+declare class ZDKRequestBlips extends NSObject {
+
+	static alloc(): ZDKRequestBlips; // inherited from NSObject
+
+	static new(): ZDKRequestBlips; // inherited from NSObject
+}
+
+declare class ZDKRequestForStorage extends NSObject {
+
+	static alloc(): ZDKRequestForStorage; // inherited from NSObject
+
+	static new(): ZDKRequestForStorage; // inherited from NSObject
 }
 
 declare class ZDKRequestProvider extends ZDKProvider {
@@ -1502,17 +1133,25 @@ declare class ZDKRequestProvider extends ZDKProvider {
 
 	createRequestWithCallback(request: ZDKCreateRequest, callback: (p1: any, p2: NSError) => void): void;
 
-	getAllRequestsWithCallback(callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	getAllRequestsWithCallback(callback: (p1: ZDKRequestsWithCommentingAgents, p2: NSError) => void): void;
 
-	getCommentsWithRequestIdWithCallback(requestId: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	getCommentsWithRequestIdSinceDateOnlyAgentWithCallback(requestId: string, sinceDate: Date, onlyAgent: boolean, callback: (p1: NSArray<ZDKCommentWithUser>, p2: NSError) => void): void;
+
+	getCommentsWithRequestIdWithCallback(requestId: string, callback: (p1: NSArray<ZDKCommentWithUser>, p2: NSError) => void): void;
 
 	getRequestByIdWithCallback(requestId: string, callback: (p1: ZDKRequest, p2: NSError) => void): void;
 
-	getRequestsByStatusWithCallback(status: string, callback: (p1: NSArray<any>, p2: NSError) => void): void;
+	getRequestsByStatusWithCallback(status: string, callback: (p1: ZDKRequestsWithCommentingAgents, p2: NSError) => void): void;
 
 	getTicketFormWithIdsCallback(ticketFormIds: NSArray<number>, callback: (p1: NSArray<ZDKTicketForm>, p2: NSError) => void): void;
 
-	getUpdatesForDevice(callback: (p1: ZDKRequestUpdates, p2: NSError) => void): ZDKRequestUpdatesProtocol;
+	getUpdatesForDeviceWithCallback(callback: (p1: ZDKRequestUpdates) => void): void;
+
+	markRequestAsReadWithCommentCount(requestId: string, commentCount: number): void;
+
+	markRequestAsUnread(requestId: string): void;
+
+	updateRequestStorageWithRequests(requests: NSArray<ZDKRequest>): void;
 }
 
 declare class ZDKRequestStorage extends NSObject {
@@ -1521,17 +1160,11 @@ declare class ZDKRequestStorage extends NSObject {
 
 	static new(): ZDKRequestStorage; // inherited from NSObject
 
-	clientCommentCountForRequest(requestId: string): number;
+	constructor(o: { zendesk: ZDKZendesk; });
 
-	deleteStoredData(): void;
+	getRequestForId(requestId: string): ZDKRequestForStorage;
 
-	getRequestIdentifiers(): NSArray<any>;
-
-	requestIdentifiers(): NSArray<any>;
-
-	setClientCommentCountForRequestCount(requestId: string, count: number): void;
-
-	storeRequestIdentifier(requestIdentifier: string): void;
+	initWithZendesk(zendesk: ZDKZendesk): this;
 }
 
 declare class ZDKRequestUpdates extends NSObject {
@@ -1540,21 +1173,14 @@ declare class ZDKRequestUpdates extends NSObject {
 
 	static new(): ZDKRequestUpdates; // inherited from NSObject
 
-	readonly hasUpdates: boolean;
+	readonly requestUpdates: NSDictionary<string, number>;
 
-	readonly requestsWithUpdates: NSMutableDictionary<string, number>;
+	readonly totalUpdates: number;
 
-	readonly updateCount: number;
+	hasUpdatedRequests(): boolean;
+
+	isRequestUnread(requestId: string): boolean;
 }
-
-interface ZDKRequestUpdatesProtocol extends NSObjectProtocol {
-
-	markRequestAsRead(requestId: string): void;
-}
-declare var ZDKRequestUpdatesProtocol: {
-
-	prototype: ZDKRequestUpdatesProtocol;
-};
 
 declare class ZDKRequestWithAttachmentsUtil extends NSObject {
 
@@ -1581,48 +1207,24 @@ declare class ZDKRequestsResponse extends NSObject {
 
 	static new(): ZDKRequestsResponse; // inherited from NSObject
 
-	static parseRequestListWithDictionary(dictionary: NSDictionary<any, any>): NSArray<any>;
+	static parseRequestListAgentsWithDictionary(dictionary: NSDictionary<any, any>): NSArray<ZDKSupportUser>;
+
+	static parseRequestListWithDictionary(dictionary: NSDictionary<any, any>): NSArray<ZDKRequest>;
 }
 
-declare class ZDKSdkStorage extends NSObject {
+declare class ZDKRequestsWithCommentingAgents extends NSObject {
 
-	static alloc(): ZDKSdkStorage; // inherited from NSObject
+	static alloc(): ZDKRequestsWithCommentingAgents; // inherited from NSObject
 
-	static instance(): ZDKSdkStorage;
+	static new(): ZDKRequestsWithCommentingAgents; // inherited from NSObject
 
-	static new(): ZDKSdkStorage; // inherited from NSObject
+	commentingAgents: NSArray<ZDKSupportUser>;
 
-	readonly identityStorage: ZDKIdentityStorage;
+	requests: NSArray<ZDKRequest>;
 
-	readonly requestStorage: ZDKRequestStorage;
+	constructor(o: { requests: NSArray<ZDKRequest>; andCommentingAgents: NSArray<ZDKSupportUser>; });
 
-	clearUserData(): void;
-}
-
-declare class ZDKSettings extends ZDKCoding {
-
-	static alloc(): ZDKSettings; // inherited from NSObject
-
-	static new(): ZDKSettings; // inherited from NSObject
-
-	readonly accountSettings: ZDKAccountSettings;
-
-	readonly appSettings: ZDKAppSettings;
-
-	constructor(o: { dictionary: NSDictionary<any, any>; });
-
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
-}
-
-declare class ZDKSettingsProvider extends ZDKProvider {
-
-	static alloc(): ZDKSettingsProvider; // inherited from NSObject
-
-	static new(): ZDKSettingsProvider; // inherited from NSObject
-
-	getSdkSettingsWithCallback(callback: (p1: ZDKSettings, p2: NSError) => void): void;
-
-	getSdkSettingsWithLocaleAndCallback(locale: string, callback: (p1: ZDKSettings, p2: NSError) => void): void;
+	initWithRequestsAndCommentingAgents(requests: NSArray<ZDKRequest>, commentingAgents: NSArray<ZDKSupportUser>): this;
 }
 
 declare class ZDKStringUtil extends NSObject {
@@ -1632,6 +1234,80 @@ declare class ZDKStringUtil extends NSObject {
 	static csvStringFromArray(array: NSArray<any>): string;
 
 	static new(): ZDKStringUtil; // inherited from NSObject
+}
+
+declare class ZDKSupport extends NSObject {
+
+	static alloc(): ZDKSupport; // inherited from NSObject
+
+	static initializeWithZendesk(zendesk: ZDKZendesk): void;
+
+	static new(): ZDKSupport; // inherited from NSObject
+
+	helpCenterLocaleOverride: string;
+
+	static readonly instance: ZDKSupport;
+
+	refreshRequestWithRequestId(requestId: string): boolean;
+}
+
+declare class ZDKSupportSettings extends NSObject {
+
+	static alloc(): ZDKSupportSettings; // inherited from NSObject
+
+	static new(): ZDKSupportSettings; // inherited from NSObject
+
+	readonly attachmentSettings: ZDKAttachmentSettings;
+
+	readonly contactUsSettings: ZDKContactUsSettings;
+
+	readonly conversationSettings: ZDKConversationsSettings;
+
+	readonly neverRequestEmail: boolean;
+
+	readonly referrerUrl: string;
+
+	readonly showClosedRequests: boolean;
+
+	readonly showReferrerLogo: boolean;
+
+	readonly systemMessage: string;
+
+	readonly ticketFormsSettings: ZDKTicketFormsSettings;
+}
+
+declare class ZDKSupportSettingsProvider extends NSObject {
+
+	static alloc(): ZDKSupportSettingsProvider; // inherited from NSObject
+
+	static getSupportSettingsWithCallback(callback: (p1: ZDKSupportSettings) => void): void;
+
+	static new(): ZDKSupportSettingsProvider; // inherited from NSObject
+}
+
+declare class ZDKSupportUser extends NSObject {
+
+	static alloc(): ZDKSupportUser; // inherited from NSObject
+
+	static new(): ZDKSupportUser; // inherited from NSObject
+
+	avatarURL: string;
+
+	isAgent: boolean;
+
+	name: string;
+
+	tags: NSArray<any>;
+
+	userFields: NSDictionary<any, any>;
+
+	userId: number;
+
+	constructor(o: { dictionary: NSDictionary<any, any>; });
+
+	initWithDictionary(dictionary: NSDictionary<any, any>): this;
+
+	toJson(): NSDictionary<any, any>;
 }
 
 declare class ZDKTicketField extends NSObject implements ZDKDictionaryCreatable {
@@ -1821,17 +1497,22 @@ declare class ZDKTicketForm extends NSObject implements ZDKDictionaryCreatable {
 	self(): this;
 }
 
-declare class ZDKTicketFormsSettings extends ZDKCoding {
+declare class ZDKTicketFormsSettings extends NSObject {
 
 	static alloc(): ZDKTicketFormsSettings; // inherited from NSObject
 
 	static new(): ZDKTicketFormsSettings; // inherited from NSObject
 
-	readonly enabled: boolean;
+	readonly available: boolean;
+}
 
-	constructor(o: { dictionary: NSDictionary<any, any>; });
+declare class ZDKTicketFormsSettingsProvider extends NSObject {
 
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
+	static alloc(): ZDKTicketFormsSettingsProvider; // inherited from NSObject
+
+	static getTicketFormsSettingsWithCallback(callback: (p1: ZDKTicketFormsSettings) => void): void;
+
+	static new(): ZDKTicketFormsSettingsProvider; // inherited from NSObject
 }
 
 declare class ZDKUploadProvider extends ZDKProvider {
@@ -1860,69 +1541,6 @@ declare class ZDKUploadResponse extends NSObject implements NSCopying {
 	copyWithZone(zone: interop.Pointer | interop.Reference<any>): any;
 
 	initWithDict(dict: NSDictionary<any, any>): this;
-}
-
-declare class ZDKUser extends NSObject {
-
-	static alloc(): ZDKUser; // inherited from NSObject
-
-	static new(): ZDKUser; // inherited from NSObject
-
-	avatarURL: string;
-
-	isAgent: boolean;
-
-	name: string;
-
-	tags: NSArray<any>;
-
-	userFields: NSDictionary<any, any>;
-
-	userId: number;
-
-	constructor(o: { dictionary: NSDictionary<any, any>; });
-
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
-}
-
-declare class ZDKUserField extends NSObject {
-
-	static alloc(): ZDKUserField; // inherited from NSObject
-
-	static new(): ZDKUserField; // inherited from NSObject
-
-	static parseUserFields(array: NSArray<any>): NSArray<any>;
-
-	customFieldOptions: NSArray<any>;
-
-	fieldDescription: string;
-
-	title: string;
-
-	typeOfField: string;
-
-	userFieldId: number;
-
-	constructor(o: { dictionary: NSDictionary<any, any>; });
-
-	initWithDictionary(dictionary: NSDictionary<any, any>): this;
-}
-
-declare class ZDKUserProvider extends ZDKProvider {
-
-	static alloc(): ZDKUserProvider; // inherited from NSObject
-
-	static new(): ZDKUserProvider; // inherited from NSObject
-
-	addTagsCallback(tags: NSArray<any>, callback: (p1: NSArray<any>, p2: NSError) => void): void;
-
-	deleteTagsCallback(tags: NSArray<any>, callback: (p1: NSArray<any>, p2: NSError) => void): void;
-
-	getUser(callback: (p1: ZDKUser, p2: NSError) => void): void;
-
-	getUserFields(callback: (p1: NSArray<any>, p2: NSError) => void): void;
-
-	setUserFieldsCallback(userFields: NSDictionary<any, any>, callback: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 }
 
 declare const enum ZDKValidation {
@@ -1956,6 +1574,8 @@ declare var ZDK_Article_Up_Vote_Button_Index: number;
 declare var ZDK_Article_Up_Vote_Number: number;
 
 declare var ZDK_Header_Suffix_Format: string;
+
+declare var ZDSDKUserDefaultsKey: string;
 
 declare var ZD_DefaultAnimationTime: number;
 
@@ -2030,3 +1650,7 @@ declare var ZD_ResignFirstResponder: string;
 declare var ZendeskSDKVersionNumber: number;
 
 declare var ZendeskSDKVersionString: string;
+
+declare var iOS7AppStoreURLFormat: string;
+
+declare var iOSAppStoreURLFormat: string;

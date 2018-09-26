@@ -6,8 +6,8 @@
   "typings": "index.d.ts",
   "nativescript": {
     "platforms": {
-      "android": "3.2.0",
-      "ios": "3.2.0"
+      "android": "4.2.0",
+      "ios": "4.2.0"
     }
   },
   "plugin": {
@@ -20,24 +20,27 @@
     "wrapper": ""
   },
   "scripts": {
-    "tsc": "tsc -skipLibCheck",
-    "postclone": "npm i && node scripts/postclone.js && cd ../demo && npm i && cd ../src && npm run plugin.link",
-    "test.android": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build android && tns test android --justlaunch",
-    "test.ios": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build ios && tns test ios --justlaunch",
-    "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
-    "plugin.link": "npm link && cd ../demo && npm link nativescript-zendesk-sdk && cd ../src",
-    "plugin.tscwatch": "npm run tsc -- -w",
-    "demo.ios": "npm i && npm run tsc && cd ../demo && tns run ios --syncAllFiles",
-    "demo.android": "npm i && npm run tsc && cd ../demo && tns run android --syncAllFiles",
-    "clean": "rm -rf node_modules && cd ../demo && rm -rf hooks node_modules platforms && cd ../src && npm run plugin.link",
     "tns": "tns",
-    "lint": "tslint --type-check --force --fix --project tsconfig.json",
-    "nuke": "rm -rf node_modules/ package-lock.json ../demo/hooks ../demo/node_modules ../demo/platforms ../demo/package-lock.json",
+    "lint": "tslint --force --fix --project tsconfig.json",
+    "nuke": "rm -rf node_modules/ package-lock.json",
     "nuki": "npm run nuke && npm i",
     "build": "npm run lint && tsc",
-    "prepack": "npm run build && cp README.md .. && cp CHANGELOG.md .. && CP LICENSE ..",
-    "demo.buildonly.ios": "npm i && npm run tsc && cd ../demo && tns build ios --syncAllFiles",
-    "typings.ios": "npm run nuki && pod repo update && TNS_TYPESCRIPT_DECLARATIONS_PATH=\"$(pwd)/typings\" npm run demo.buildonly.ios"
+    "prepack": "npm run build && cp ../LICENSE ./LICENSE && cp ../README.md ./README.md",
+    "postpack": "rm ./LICENSE ./README.md",
+    "android-dts": "npm run android-dts1 && npm run android-dts2 && npm run android-dts3 && npm run android-dts4",
+    "android-dts1": "cd ../android && git clean -dfX && ./gradlew getDeps",
+    "android-dts2": "npm run android-dts2a && npm run android-dts2b && npm run android-dts2c",
+    "android-dts2a": "cd ../android/libs && jar xf support-2.1.1.aar && mv classes.jar zendesk-sdk.jar",
+    "android-dts2b": "cd ../android/libs && jar xf support-providers-2.1.1.aar && mv classes.jar zendesk-providers.jar",
+    "android-dts2c": "cd ../android/libs && jar xf core-2.0.1.aar && mv classes.jar zendesk-core.jar",
+    "android-dts3": "npm run android-dts3a && npm run android-dts3b && npm run android-dts3c",
+    "android-dts3a": "cd ../android && java -jar dts-generator-34a696d.jar -input libs/zendesk-sdk.jar -output zendesk-sdk",
+    "android-dts3b": "cd ../android && java -jar dts-generator-34a696d.jar -input libs/zendesk-providers.jar -output zendesk-providers",
+    "android-dts3c": "cd ../android && java -jar dts-generator-34a696d.jar -input libs/zendesk-core.jar -output zendesk-core",
+    "android-dts4": "npm run android-dts4a && npm run android-dts4b && npm run android-dts4c",
+    "android-dts4a": "mv ../android/zendesk-sdk/android.d.ts typings/java\\!ZendeskSDK.d.ts",
+    "android-dts4b": "mv ../android/zendesk-providers/android.d.ts typings/java\\!ZendeskProviderSDK.d.ts",
+    "android-dts4c": "mv ../android/zendesk-core/android.d.ts typings/java\\!ZendeskCoreSDK.d.ts"
   },
   "repository": {
     "type": "git",

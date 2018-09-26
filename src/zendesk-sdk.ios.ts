@@ -1,196 +1,202 @@
 import { Color } from 'tns-core-modules/color/color';
 import { device } from 'tns-core-modules/platform';
 import { topmost } from 'tns-core-modules/ui/frame';
-import { AnonUserIdentity, HelpCenterOptions, InitConfig, IosThemeSimple, RequestConfig } from './zendesk-sdk';
-import { ZendeskSdk as ZendeskSdkDefinition } from './zendesk-sdk';
+import {
+  AnonUserIdentity,
+  HelpCenterOptions,
+  InitConfig,
+  IosThemeSimple,
+  RequestConfig,
+  ZendeskSdk as ZendeskSdkBase
+} from './zendesk-sdk';
 
 export * from './zendesk-sdk.common';
 
-export class ZendeskSdk implements ZendeskSdkDefinition {
+export class ZendeskSdk implements ZendeskSdkBase {
 
-    public static initialize(config: InitConfig): typeof ZendeskSdk {
+  public static initialize(config: InitConfig): ZendeskSdk {
 
-        ZDKConfig.instance().initializeWithAppIdZendeskUrlClientId(
-            config.applicationId, config.zendeskUrl, config.clientId,
-        );
+    ZDKZendesk.initializeWithAppIdClientIdZendeskUrl(
+      config.applicationId, config.clientId, config.zendeskUrl,
+    );
 
-        if ( config.userLocale ) {
-            ZendeskSdk.setUserLocale(config.userLocale);
-        }
-
-        if ( config.identity === null ) {
-            ZendeskSdk.setAnonymousIdentity();
-        } else if ( typeof config.identity === 'object' ) {
-            ZendeskSdk.setAnonymousIdentity(config.identity);
-        } else if ( typeof config.identity === 'string' ) {
-            ZendeskSdk.setJwtIdentity(config.identity);
-        }
-
-        return ZendeskSdk;
+    if (config.userLocale) {
+      ZendeskSdk.setUserLocale(config.userLocale);
     }
 
-    public static setUserLocale(locale: string): typeof ZendeskSdk {
+    if (config.identity == null) {
+      ZendeskSdk.setAnonymousIdentity();
+    } else if (typeof config.identity === 'object') {
+      ZendeskSdk.setAnonymousIdentity(config.identity);
+    } else if (typeof config.identity === 'string') {
+      ZendeskSdk.setJwtIdentity(config.identity);
+    }
+    ZDKSupport.initializeWithZendesk(ZDKZendesk.instance);
 
-        ZDKConfig.instance().userLocale = locale;
+    return ZendeskSdk;
+  }
 
-        return ZendeskSdk;
+  public static setUserLocale(locale: string): ZendeskSdk {
+
+    ZDKSupport.instance.helpCenterLocaleOverride = locale;
+
+    return ZendeskSdk;
+  }
+
+  public static setAnonymousIdentity(anonUserIdentity: AnonUserIdentity = {}): ZendeskSdk {
+
+    ZDKZendesk.instance.setIdentity(
+      ZDKObjCAnonymous.alloc().initWithNameEmail(anonUserIdentity.name, anonUserIdentity.email)
+    );
+
+    return ZendeskSdk;
+  }
+
+  public static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk {
+
+    ZDKZendesk.instance.setIdentity(
+      ZDKObjCJwt.alloc().initWithToken(jwtUserIdentifier)
+    );
+
+    return ZendeskSdk;
+  }
+
+  public static configureRequests(config: RequestConfig): ZendeskSdk {
+
+    let temp = ZDKRequestUiConfiguration.new();
+
+    if (config.requestSubject) {
+      temp.subject = config.requestSubject;
     }
 
-    public static setAnonymousIdentity(anonUserIdentity: AnonUserIdentity = {}): typeof ZendeskSdk {
+    let tags: Array<string> = [];
 
-        const identity: ZDKAnonymousIdentity = ZDKAnonymousIdentity.new();
-
-        if ( anonUserIdentity.name ) { identity.name = anonUserIdentity.name; }
-
-        if ( anonUserIdentity.email ) { identity.email = anonUserIdentity.email; }
-
-        ZDKConfig.instance().userIdentity = identity;
-
-        return ZendeskSdk;
+    if (config.addDeviceInfo) {
+      for (const p in device) {
+        let value: any = (<any>device)[p];
+        if (typeof value === 'string' && value.length) {
+          const tag: string = value.replace(/(\s|,)/g, "");
+          tags.push(`${p}:${tag}`);
+        }
+      }
     }
 
-    public static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk {
-
-        ZDKConfig.instance().userIdentity = ZDKJwtIdentity.alloc().initWithJwtUserIdentifier(jwtUserIdentifier);
-
-        return ZendeskSdk;
+    if (config.tags && config.tags.length) {
+      for (const value of config.tags) {
+        if (typeof value === 'string' && value.length) {
+          const tag: string = value.replace(/(\s|,)/g, "");
+          tags.push(tag);
+        }
+      }
     }
 
-    public static configureRequests(config: RequestConfig): typeof ZendeskSdk {
-
-        config.addDeviceInfo = config.addDeviceInfo != null ? config.addDeviceInfo : true;
-        let tagsNSArray: NSMutableArray<any> = null;
-        if ( config.tags ) {
-            tagsNSArray = NSMutableArray.alloc().initWithCapacity(config.tags.length);
-            config.tags.forEach((value: string) => {
-                tagsNSArray.addObject(value);
-            });
-        }
-
-        const deviceInfo: string = config.addDeviceInfo
-            ? '\n\n' + device.language + '-' + device.region + '\n'
-              + device.manufacturer + ' ' + device.model + '\n' + device.os + ' '
-              + device.osVersion + '(' + device.sdkVersion + ')'
-            : '';
-        ZDKRequests.configure(
-            (account: ZDKAccount,
-             requestCreationConfig: ZDKRequestCreationConfig) => {
-                requestCreationConfig.subject = config.requestSubject;
-                requestCreationConfig.additionalRequestInfo = !!config.additionalInfo || config.addDeviceInfo
-                    ? '\n\n------------------------------' // added to make the output the same as Android SDK
-                      + (!!config.additionalInfo
-                            ? '\n\n' + config.additionalInfo
-                            : ''
-                      ) + deviceInfo
-                    : '';
-
-                requestCreationConfig.tags = tagsNSArray;
-            },
-        );
-
-        return ZendeskSdk;
+    if (tags.length) {
+      let tagsNSArray: NSMutableArray<any> = NSMutableArray.alloc().initWithCapacity(tags.length);
+      for (const tag of tags) {
+        tagsNSArray.addObject(tag)
+      }
+      temp.tags = tagsNSArray;
     }
 
-    public static showHelpCenter(options: HelpCenterOptions = {}): void {
-        const contentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
-        ZendeskSdk._initHelpCenter(options, contentModel);
+    ZendeskSdk._requestUiConfig = temp;
+
+    return ZendeskSdk;
+  }
+
+  public static showHelpCenter(options: HelpCenterOptions = {}): void {
+    const vc = ZDKHelpCenterUi.buildHelpCenterOverviewWithConfigs(
+      NSArray.arrayWithObject(ZendeskSdk._requestUiConfig)
+    );
+    ZendeskSdk._initHelpCenter(options, vc);
+  }
+
+  public static showHelpCenterForCategoryIds(categoryIds: Array<number>,
+                                             options: HelpCenterOptions = {}): void {
+    const hcUiConfig = ZDKHelpCenterUiConfiguration.new();
+    hcUiConfig.groupType = ZDKHelpCenterOverviewGroupType.Category;
+    const nsArray: NSMutableArray<number> = NSMutableArray.array();
+    for (const e of categoryIds) {
+      nsArray.addObject(e);
+    }
+    hcUiConfig.groupIds = nsArray;
+    const vc = ZDKHelpCenterUi.buildHelpCenterOverviewWithConfigs(
+      NSArray.arrayWithObject(ZendeskSdk._requestUiConfig).arrayByAddingObject(hcUiConfig)
+    );
+    ZendeskSdk._initHelpCenter(options, vc);
+  }
+
+  public static showHelpCenterForLabelNames(labelNames: Array<string>,
+                                            options: HelpCenterOptions = {}): void {
+    const hcUiConfig = ZDKHelpCenterUiConfiguration.new();
+    const nsArray: NSMutableArray<string> = NSMutableArray.array();
+    for (const e of labelNames) {
+      nsArray.addObject(e);
+    }
+    hcUiConfig.labels = nsArray;
+    const vc = ZDKHelpCenterUi.buildHelpCenterOverviewWithConfigs(
+      NSArray.arrayWithObject(ZendeskSdk._requestUiConfig).arrayByAddingObject(hcUiConfig)
+    );
+    ZendeskSdk._initHelpCenter(options, vc);
+  }
+
+  public static showHelpCenterForSectionIds(sectionIds: Array<number>,
+                                            options: HelpCenterOptions = {}): void {
+    const hcUiConfig = ZDKHelpCenterUiConfiguration.new();
+    hcUiConfig.groupType = ZDKHelpCenterOverviewGroupType.Section;
+    const nsArray: NSMutableArray<number> = NSMutableArray.array();
+    for (const e of sectionIds) {
+      nsArray.addObject(e);
+    }
+    hcUiConfig.groupIds = nsArray;
+    const vc = ZDKHelpCenterUi.buildHelpCenterOverviewWithConfigs(
+      NSArray.arrayWithObject(ZendeskSdk._requestUiConfig).arrayByAddingObject(hcUiConfig)
+    );
+    ZendeskSdk._initHelpCenter(options, vc);
+  }
+
+  public static showArticle(articleId: string): void {
+    const vc = ZDKHelpCenterUi.buildHelpCenterArticleWithArticleIdAndConfigs(
+      articleId, NSArray.arrayWithObject(ZendeskSdk._requestUiConfig)
+    );
+    topmost().ios.controller.pushViewControllerAnimated(vc, true);
+  }
+
+  public static createRequest(): void {
+    topmost().ios.controller.pushViewControllerAnimated(ZDKRequestUi.buildRequestUi(), true);
+  }
+
+  public static setIosTheme(theme: IosThemeSimple): ZendeskSdk {
+
+    if (theme.primaryColor) {
+      ZDKTheme.currentTheme.primaryColor = new Color(theme.primaryColor).ios;
     }
 
-    public static showHelpCenterForCategoryIds(categoryIds: Array<number>,
-                                               options: HelpCenterOptions = {}): void {
-        const contentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
-        contentModel.groupType = ZDKHelpCenterOverviewGroupType.Category;
-        ZendeskSdk._initHelpCenter(options, contentModel);
+    return ZendeskSdk;
+  }
+
+  private static _requestUiConfig: ZDKUiConfiguration = null;
+
+  private static _initHelpCenter(options: HelpCenterOptions,
+                                 vc: UIViewController): void {
+    if (options.conversationsMenu != null ? !options.conversationsMenu : false) {
+      (<ZDKHelpCenterDelegate>(<any>vc)).uiDelegate = ZDKHelpCenterConversationsUIDelegateImpl.new();
     }
+    topmost().ios.controller.pushViewControllerAnimated(vc, true);
+  }
 
-    public static showHelpCenterForLabelNames(labelNames: Array<string>,
-                                              options: HelpCenterOptions = {}): void {
-        const contentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
-        const nsArray = NSMutableArray.alloc().initWithCapacity(labelNames.length);
-        labelNames.forEach((value: string) => {
-            nsArray.addObject(value);
-        });
-        contentModel.labels = nsArray;
-        ZendeskSdk._initHelpCenter(options, contentModel);
-    }
+  private constructor() {
+  }
+}
 
-    public static showHelpCenterForSectionIds(sectionIds: Array<number>,
-                                              options: HelpCenterOptions = {}): void {
-        const contentModel: ZDKHelpCenterOverviewContentModel = ZDKHelpCenterOverviewContentModel.defaultContent();
-        contentModel.groupType = ZDKHelpCenterOverviewGroupType.Section;
-        ZendeskSdk._initHelpCenter(options, contentModel);
-    }
-
-    public static showArticle(articleId: string): void {
-        const provider: ZDKHelpCenterProvider = ZDKHelpCenterProvider.alloc()
-            .initWithLocale(ZDKConfig.instance().userLocale);
-        provider.getArticleByIdWithCallback(
-            articleId, (items: NSArray<any>,
-                        error: NSError) => {
-                if ( items.count > 0 ) {
-                    const vc: ZDKArticleViewController = ZDKArticleViewController.alloc()
-                        .initWithArticle(items.firstObject);
-                    topmost()
-                        .ios
-                        .controller
-                        .pushViewControllerAnimated(vc, true);
-                }
-            },
-        );
-    }
-
-    public static createRequest(): void {
-        ZDKRequests.presentRequestCreationWithViewController(topmost().ios.controller);
-    }
-
-    public static setIosTheme(theme: IosThemeSimple): void {
-        const baseTheme: ZDKTheme = ZDKTheme.baseTheme();
-
-        if ( theme.primaryTextColor ) {
-            baseTheme.primaryTextColor = new Color(theme.primaryTextColor).ios;
-        }
-        if ( theme.secondaryTextColor ) {
-            baseTheme.secondaryTextColor = new Color(theme.secondaryTextColor).ios;
-        }
-        if ( theme.primaryBackgroundColor ) {
-            baseTheme.primaryBackgroundColor = new Color(theme.primaryBackgroundColor).ios;
-        }
-        if ( theme.secondaryBackgroundColor ) {
-            baseTheme.secondaryBackgroundColor = new Color(theme.secondaryBackgroundColor).ios;
-        }
-        if ( theme.emptyBackgroundColor ) {
-            baseTheme.emptyBackgroundColor = new Color(theme.emptyBackgroundColor).ios;
-        }
-        if ( theme.metaTextColor ) {
-            baseTheme.metaTextColor = new Color(theme.metaTextColor).ios;
-        }
-        if ( theme.separatorColor ) {
-            baseTheme.separatorColor = new Color(theme.separatorColor).ios;
-        }
-        if ( theme.inputFieldTextColor ) {
-            baseTheme.inputFieldTextColor = new Color(theme.inputFieldTextColor).ios;
-        }
-        if ( theme.inputFieldBackgroundColor ) {
-            baseTheme.inputFieldBackgroundColor = new Color(theme.inputFieldBackgroundColor).ios;
-        }
-        if ( theme.fontName ) { baseTheme.fontName = theme.fontName; }
-        if ( theme.boldFontName ) { baseTheme.boldFontName = theme.boldFontName; }
-
-        baseTheme.apply();
-    }
-
-    private static _initHelpCenter(options: HelpCenterOptions,
-                                   helpCenterContentModel: ZDKHelpCenterOverviewContentModel): void {
-        if ( options.conversationsMenuIos != null ? !options.conversationsMenuIos : false ) {
-            ZDKHelpCenter.setNavBarConversationsUIType(ZDKNavBarConversationsUIType.None);
-        }
-        if ( options.showAsModalForIos != null ? options.showAsModalForIos : false ) {
-            topmost().ios.controller.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
-            ZDKHelpCenter.presentHelpCenterOverviewWithContentModel(topmost().ios.controller, helpCenterContentModel);
-        } else {
-            ZDKHelpCenter.pushHelpCenterOverviewWithContentModel(topmost().ios.controller, helpCenterContentModel);
-        }
-    }
-
-    private constructor() { }
+class ZDKHelpCenterConversationsUIDelegateImpl extends NSObject implements ZDKHelpCenterConversationsUIDelegate {
+  static ObjCProtocols = [ZDKHelpCenterConversationsUIDelegate];
+  static new(): ZDKHelpCenterConversationsUIDelegateImpl {
+    return <ZDKHelpCenterConversationsUIDelegateImpl>super.new()
+  }
+  public active(): ZDKContactUsVisibility {
+    return ZDKContactUsVisibility.Off;
+  }
+  public navBarConversationsUIType(): ZDKNavBarConversationsUIType{
+    return ZDKNavBarConversationsUIType.None;
+  }
 }

@@ -1,15 +1,7 @@
-android {
-    productFlavors {
-        "nativescript-zendesk-sdk" {
-            dimension "nativescript-zendesk-sdk"
-        }
-    }
-}
-
 repositories {
-    maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
+  maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
 }
 
 dependencies {
-    compile 'com.zendesk:sdk:1.11.0.1'
+  implementation 'com.zendesk:support:2.1.1'
 }

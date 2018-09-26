@@ -1,15 +1,15 @@
 export * from './zendesk-sdk.common';
 
 export declare class ZendeskSdk {
-    public static initialize(config: InitConfig): typeof ZendeskSdk;
+    public static initialize(config: InitConfig): ZendeskSdk;
 
-    public static setUserLocale(locale: string): typeof ZendeskSdk;
+    public static setUserLocale(locale: string): ZendeskSdk;
 
-    public static setAnonymousIdentity(anonUserIdentity?: AnonUserIdentity): typeof ZendeskSdk;
+    public static setAnonymousIdentity(anonUserIdentity?: AnonUserIdentity): ZendeskSdk;
 
-    public static setJwtIdentity(jwtUserIdentifier: string): typeof ZendeskSdk;
+    public static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk;
 
-    public static configureRequests(config: RequestConfig): typeof ZendeskSdk;
+    public static configureRequests(config: RequestConfig): ZendeskSdk;
 
     public static showHelpCenter(options?: HelpCenterOptions): void;
 
@@ -26,7 +26,7 @@ export declare class ZendeskSdk {
 
     public static createRequest(): void;
 
-    public static setIosTheme(theme: IosThemeSimple): void;
+    public static setIosTheme(theme: IosThemeSimple): ZendeskSdk;
 
     private constructor();
 }

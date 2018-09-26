@@ -1,3 +1,11 @@
+## 0.3.0
+- Updated to 2.1.1
+#### Breaking Changes
+- Unified `conversationsMenu` option
+- `IosThemeSimple` can only specify a `primaryColor` now
+- `additionalInfo` no longer available, must be done via tags now (whitespace and commas are filtered)
+- `addDeviceInfo` now added as tags
+
 ## 0.2.0
 - Updated to 1.11.1.1 for [iOS](https://developer.zendesk.com/embeddables/docs/ios/version_information) and 1.11.0.1 for [Android](https://developer.zendesk.com/embeddables/docs/android/version_information)
 - Removed option for COPPA per [SDK deprecation](https://help.zendesk.com/hc/en-us/articles/115012320548-Deprecating-the-Support-SDK-COPPA-flag).

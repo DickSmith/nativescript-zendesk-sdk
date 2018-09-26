@@ -1,26 +1,23 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'java'
 
-buildscript {
-    repositories {
-        jcenter()
+repositories {
+    maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
+}
+
+dependencies {
+    compile('com.zendesk:support:2.1.1') {
+        transitive = false
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+    compile('com.zendesk:support-providers:2.1.1') {
+        transitive = false
+    }
+    compile('com.zendesk:core:2.0.1') {
+        transitive = false
     }
 }
 
-allprojects {
-    repositories {
-        maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
-        jcenter()
-        mavenCentral()
-    }
-}
-
-task clean(type: Delete) {
-    delete 'lib'
-    delete rootProject.buildDir
+task getDeps(type: Copy) {
+    delete 'libs'
+    from configurations.compile
+    into 'libs'
 }

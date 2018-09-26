@@ -1,5266 +1,2247 @@
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export class SdkConfiguration {
-          public getBearerAuthorizationHeader(): string;
-          public constructor(param0: com.zendesk.sdk.model.access.AccessToken, param1: com.zendesk.sdk.model.settings.SafeMobileSettings);
-          public getMobileSettings(): com.zendesk.sdk.model.settings.SafeMobileSettings;
-          public getAccessToken(): com.zendesk.sdk.model.access.AccessToken;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace access {
-          export class AccessToken {
-            public getUserId(): string;
-            public constructor();
-            public equals(param0: java.lang.Object): boolean;
-            public getAccessToken(): string;
-            public hashCode(): number;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace access {
-          export class AnonymousIdentity {
-            public reloadGuid(): void;
-            public constructor();
-            public equals(param0: java.lang.Object): boolean;
-            public hashCode(): number;
-            public getEmail(): string;
-            public getSdkGuid(): string;
-            public getName(): string;
-          }
-          export namespace AnonymousIdentity {
-            export class Builder {
-              public constructor();
-              public withEmailIdentifier(param0: string): com.zendesk.sdk.model.access.AnonymousIdentity.Builder;
-              public build(): com.zendesk.sdk.model.access.Identity;
-              public withNameIdentifier(param0: string): com.zendesk.sdk.model.access.AnonymousIdentity.Builder;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace access {
-          export class AuthenticationRequestWrapper {
-            public constructor();
-            public setUser(param0: com.zendesk.sdk.model.access.Identity): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace access {
-          export class AuthenticationResponse {
-            public getAuthentication(): com.zendesk.sdk.model.access.AccessToken;
-            public constructor();
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace access {
-          export class AuthenticationType {
-            public static JWT: com.zendesk.sdk.model.access.AuthenticationType;
-            public static ANONYMOUS: com.zendesk.sdk.model.access.AuthenticationType;
-            public getAuthenticationType(): string;
-            public static getAuthType(param0: string): com.zendesk.sdk.model.access.AuthenticationType;
-            public static values(): native.Array<com.zendesk.sdk.model.access.AuthenticationType>;
-            public static valueOf(param0: string): com.zendesk.sdk.model.access.AuthenticationType;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace access {
-          export class Identity {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.model.access.Identity interface with the provided implementation.
-             */
-            public constructor(implementation: {
-            });
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace access {
-          export class JwtIdentity {
-            public equals(param0: java.lang.Object): boolean;
-            public constructor(param0: string);
-            public hashCode(): number;
-            public getJwtUserIdentifier(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class Article {
-            public static UNKNOWN_VOTE_COUNT: number;
-            public getVoteSum(): number;
-            public getUpvoteCount(): number;
-            public getId(): java.lang.Long;
-            public getCreatedAt(): java.util.Date;
-            public getDownvoteCount(): number;
-            public isOutdated(): boolean;
-            public getAuthor(): com.zendesk.sdk.model.helpcenter.User;
-            public getHtmlUrl(): string;
-            public getAuthorId(): java.lang.Long;
-            public getTitle(): string;
-            public getLocale(): string;
-            public isCommentsDisabled(): boolean;
-            public getVoteCount(): number;
-            public getSourceLocale(): string;
-            public constructor();
-            public getUpdatedAt(): java.util.Date;
-            public setAuthor(param0: com.zendesk.sdk.model.helpcenter.User): void;
-            public getBody(): string;
-            public isDraft(): boolean;
-            public getUrl(): string;
-            public getLabelNames(): java.util.List;
-            public getSectionId(): java.lang.Long;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class ArticleResponse {
-            public constructor();
-            public getArticle(): com.zendesk.sdk.model.helpcenter.Article;
-            public getUsers(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class ArticleVote {
-            public getId(): java.lang.Long;
-            public getCreatedAt(): java.util.Date;
-            public constructor();
-            public getItemId(): java.lang.Long;
-            public equals(param0: java.lang.Object): boolean;
-            public getUpdatedAt(): java.util.Date;
-            public hashCode(): number;
-            public getUrl(): string;
-            public getValue(): java.lang.Integer;
-            public getItemType(): string;
-            public getUserId(): java.lang.Long;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class ArticleVoteResponse {
-            public getVote(): com.zendesk.sdk.model.helpcenter.ArticleVote;
-            public constructor();
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class ArticlesListResponse {
-            public constructor();
-            public getArticles(): java.util.List;
-            public getSections(): java.util.List;
-            public getCategories(): java.util.List;
-            public getPreviousPage(): string;
-            public getNextPage(): string;
-            public getUsers(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class ArticlesResponse {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.model.helpcenter.ArticlesResponse interface with the provided implementation.
-             */
-            public constructor(implementation: {
-              getArticles(): java.util.List;
-              getCategories(): java.util.List;
-              getSections(): java.util.List;
-              getUsers(): java.util.List;
-            });
-            public getArticles(): java.util.List;
-            public getSections(): java.util.List;
-            public getCategories(): java.util.List;
-            public getUsers(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class ArticlesSearchResponse {
-            public constructor();
-            public getArticles(): java.util.List;
-            public getSections(): java.util.List;
-            public getCategories(): java.util.List;
-            public getPreviousPage(): string;
-            public getNextPage(): string;
-            public getUsers(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class Attachment {
-            public getId(): java.lang.Long;
-            public getContentUrl(): string;
-            public getCreatedAt(): java.util.Date;
-            public getSize(): java.lang.Long;
-            public constructor();
-            public getUpdatedAt(): java.util.Date;
-            public getFileName(): string;
-            public getUrl(): string;
-            public getContentType(): string;
-            public getArticleId(): java.lang.Long;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class AttachmentResponse {
-            public constructor();
-            public getArticleAttachments(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class AttachmentType {
-            public static INLINE: com.zendesk.sdk.model.helpcenter.AttachmentType;
-            public static BLOCK: com.zendesk.sdk.model.helpcenter.AttachmentType;
-            public static valueOf(param0: string): com.zendesk.sdk.model.helpcenter.AttachmentType;
-            public getAttachmentType(): string;
-            public static values(): native.Array<com.zendesk.sdk.model.helpcenter.AttachmentType>;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class CategoriesResponse {
-            public constructor();
-            public getCategories(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class Category {
-            public getId(): java.lang.Long;
-            public getCreatedAt(): java.util.Date;
-            public isOutdated(): boolean;
-            public getSourceLocale(): string;
-            public constructor();
-            public getDescription(): string;
-            public getPosition(): number;
-            public getUpdatedAt(): java.util.Date;
-            public getHtmlUrl(): string;
-            public getUrl(): string;
-            public getLocale(): string;
-            public getName(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class CategoryResponse {
-            public constructor();
-            public getCategory(): com.zendesk.sdk.model.helpcenter.Category;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class FlatArticle {
-            public compareTo(param0: com.zendesk.sdk.model.helpcenter.FlatArticle): number;
-            public constructor(param0: com.zendesk.sdk.model.helpcenter.Category, param1: com.zendesk.sdk.model.helpcenter.Section, param2: com.zendesk.sdk.model.helpcenter.Article);
-            public getArticle(): com.zendesk.sdk.model.helpcenter.Article;
-            public toString(): string;
-            public getCategory(): com.zendesk.sdk.model.helpcenter.Category;
-            public getSection(): com.zendesk.sdk.model.helpcenter.Section;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class HelpCenterSearch {
-            public getQuery(): string;
-            public getPerPage(): java.lang.Integer;
-            public getPage(): java.lang.Integer;
-            public getInclude(): string;
-            public withQuery(param0: string): com.zendesk.sdk.model.helpcenter.HelpCenterSearch;
-            public getLocale(): java.util.Locale;
-            public getCategoryIds(): string;
-            public getSectionIds(): string;
-            public getLabelNames(): string;
-          }
-          export namespace HelpCenterSearch {
-            export class Builder {
-              public withIncludes(param0: native.Array<string>): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-              public withCategoryId(param0: java.lang.Long): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-              public page(param0: java.lang.Integer): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-              public withSectionId(param0: java.lang.Long): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-              public withQuery(param0: string): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-              public constructor();
-              public build(): com.zendesk.sdk.model.helpcenter.HelpCenterSearch;
-              public perPage(param0: java.lang.Integer): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-              public withLabelNames(param0: native.Array<string>): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-              public withSectionIds(param0: java.util.List): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-              public forLocale(param0: java.util.Locale): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-              public withCategoryIds(param0: java.util.List): com.zendesk.sdk.model.helpcenter.HelpCenterSearch.Builder;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class LastSearch {
-            public getQuery(): string;
-            public constructor(param0: string, param1: number);
-            public getResultsCount(): number;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class ListArticleQuery {
-            public setLabelNames(param0: string): void;
-            public setInclude(param0: string): void;
-            public getResultsPerPage(): java.lang.Integer;
-            public setSortOrder(param0: com.zendesk.sdk.model.helpcenter.SortOrder): void;
-            public getPage(): java.lang.Integer;
-            public setSortBy(param0: com.zendesk.sdk.model.helpcenter.SortBy): void;
-            public getSortOrder(): com.zendesk.sdk.model.helpcenter.SortOrder;
-            public setLocale(param0: java.util.Locale): void;
-            public getSortBy(): com.zendesk.sdk.model.helpcenter.SortBy;
-            public constructor();
-            public getInclude(): string;
-            public getLocale(): java.util.Locale;
-            public setResultsPerPage(param0: java.lang.Integer): void;
-            public setPage(param0: java.lang.Integer): void;
-            public getLabelNames(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class RecordArticleViewRequest {
-            public constructor(param0: com.zendesk.sdk.model.helpcenter.LastSearch, param1: boolean);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class SearchArticle {
-            public getArticle(): com.zendesk.sdk.model.helpcenter.Article;
-            public getSection(): com.zendesk.sdk.model.helpcenter.Section;
-            public getCategory(): com.zendesk.sdk.model.helpcenter.Category;
-            public constructor(param0: com.zendesk.sdk.model.helpcenter.Article, param1: com.zendesk.sdk.model.helpcenter.Section, param2: com.zendesk.sdk.model.helpcenter.Category);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class Section {
-            public getId(): java.lang.Long;
-            public getCreatedAt(): java.util.Date;
-            public isOutdated(): boolean;
-            public getDescription(): string;
-            public getHtmlUrl(): string;
-            public getLocale(): string;
-            public getSorting(): string;
-            public getName(): string;
-            public getSourceLocale(): string;
-            public constructor();
-            public getCategoryId(): java.lang.Long;
-            public getPosition(): number;
-            public getUpdatedAt(): java.util.Date;
-            public getUrl(): string;
-            public getArticlesCount(): number;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class SectionResponse {
-            public constructor();
-            public getSection(): com.zendesk.sdk.model.helpcenter.Section;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class SectionsResponse {
-            public sections: java.util.List;
-            public constructor();
-            public getSections(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class SimpleArticle {
-            public getId(): java.lang.Long;
-            public constructor(param0: java.lang.Long, param1: string);
-            public getTitle(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class SortBy {
-            public static POSITION: com.zendesk.sdk.model.helpcenter.SortBy;
-            public static TITLE: com.zendesk.sdk.model.helpcenter.SortBy;
-            public static CREATED_AT: com.zendesk.sdk.model.helpcenter.SortBy;
-            public static UPDATED_AT: com.zendesk.sdk.model.helpcenter.SortBy;
-            public getApiValue(): string;
-            public static values(): native.Array<com.zendesk.sdk.model.helpcenter.SortBy>;
-            public static valueOf(param0: string): com.zendesk.sdk.model.helpcenter.SortBy;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class SortOrder {
-            public static ASCENDING: com.zendesk.sdk.model.helpcenter.SortOrder;
-            public static DESCENDING: com.zendesk.sdk.model.helpcenter.SortOrder;
-            public getApiValue(): string;
-            public static valueOf(param0: string): com.zendesk.sdk.model.helpcenter.SortOrder;
-            public static values(): native.Array<com.zendesk.sdk.model.helpcenter.SortOrder>;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class SuggestedArticleResponse {
-            public constructor();
-            public getResults(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class SuggestedArticleSearch {
-            public getQuery(): string;
-            public getCategoryId(): java.lang.Long;
-            public getLocale(): java.util.Locale;
-            public getSectionId(): java.lang.Long;
-            public getLabelNames(): string;
-          }
-          export namespace SuggestedArticleSearch {
-            export class Builder {
-              public withLabelNames(param0: native.Array<string>): com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch.Builder;
-              public constructor();
-              public forLocale(param0: java.util.Locale): com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch.Builder;
-              public withSectionId(param0: java.lang.Long): com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch.Builder;
-              public withQuery(param0: string): com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch.Builder;
-              public build(): com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch;
-              public withCategoryId(param0: java.lang.Long): com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch.Builder;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export class User {
-            public getId(): java.lang.Long;
-            public constructor();
-            public equals(param0: java.lang.Object): boolean;
-            public hashCode(): number;
-            public getName(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export namespace help {
-            export class ArticleItem {
-              public getName(): string;
-              public hashCode(): number;
-              public constructor();
-              public getId(): java.lang.Long;
-              public getParentId(): java.lang.Long;
-              public equals(param0: java.lang.Object): boolean;
-              public getViewType(): number;
-              public getChildren(): java.util.List;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export namespace help {
-            export class CategoryItem {
-              public getName(): string;
-              public hashCode(): number;
-              public constructor();
-              public getId(): java.lang.Long;
-              public getParentId(): java.lang.Long;
-              public isExpanded(): boolean;
-              public equals(param0: java.lang.Object): boolean;
-              public setExpanded(param0: boolean): boolean;
-              public getViewType(): number;
-              public getChildren(): java.util.List;
-              public setSections(param0: java.util.List): void;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export namespace help {
-            export class HelpItem {
-              /**
-               * Constructs a new instance of the com.zendesk.sdk.model.helpcenter.help.HelpItem interface with the provided implementation.
-               */
-              public constructor(implementation: {
-                getViewType(): number;
-                getName(): string;
-                getId(): java.lang.Long;
-                getParentId(): java.lang.Long;
-                getChildren(): java.util.List;
-              });
-              public static TYPE_LOADING: number;
-              public static TYPE_SEE_ALL: number;
-              public static TYPE_SECTION: number;
-              public static TYPE_NO_RESULTS: number;
-              public static TYPE_PADDING: number;
-              public static TYPE_CATEGORY: number;
-              public static TYPE_ARTICLE: number;
-              public getName(): string;
-              public getId(): java.lang.Long;
-              public getParentId(): java.lang.Long;
-              public getViewType(): number;
-              public getChildren(): java.util.List;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export namespace help {
-            export class HelpRequest {
-              public getSectionIds(): string;
-              public getCategoryIds(): string;
-              public getArticlesPerPageLimit(): number;
-              public getLabelNames(): native.Array<string>;
-              public getIncludes(): string;
-            }
-            export namespace HelpRequest {
-              export class Builder {
-                public constructor();
-                public includeSections(): com.zendesk.sdk.model.helpcenter.help.HelpRequest.Builder;
-                public withSectionIds(param0: java.util.List): com.zendesk.sdk.model.helpcenter.help.HelpRequest.Builder;
-                public withArticlesPerSectionLimit(param0: number): com.zendesk.sdk.model.helpcenter.help.HelpRequest.Builder;
-                public withLabelNames(param0: native.Array<string>): com.zendesk.sdk.model.helpcenter.help.HelpRequest.Builder;
-                public withCategoryIds(param0: java.util.List): com.zendesk.sdk.model.helpcenter.help.HelpRequest.Builder;
-                public includeCategories(): com.zendesk.sdk.model.helpcenter.help.HelpRequest.Builder;
-                public build(): com.zendesk.sdk.model.helpcenter.help.HelpRequest;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export namespace help {
-            export class HelpResponse {
-              public constructor();
-              public getCategories(): java.util.List;
-              public getArticles(): java.util.List;
-              public getSections(): java.util.List;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export namespace help {
-            export class SectionItem {
-              public getName(): string;
-              public addChildren(param0: java.util.List): void;
-              public getTotalArticlesCount(): number;
-              public hashCode(): number;
-              public constructor();
-              public getId(): java.lang.Long;
-              public getParentId(): java.lang.Long;
-              public addChild(param0: com.zendesk.sdk.model.helpcenter.help.HelpItem): void;
-              public equals(param0: java.lang.Object): boolean;
-              public getViewType(): number;
-              public removeChild(param0: com.zendesk.sdk.model.helpcenter.help.HelpItem): void;
-              public getChildren(): java.util.List;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace helpcenter {
-          export namespace help {
-            export class SeeAllArticlesItem {
-              public getName(): string;
-              public hashCode(): number;
-              public setLoading(param0: boolean): void;
-              public getId(): java.lang.Long;
-              public getParentId(): java.lang.Long;
-              public equals(param0: java.lang.Object): boolean;
-              public getViewType(): number;
-              public getSection(): com.zendesk.sdk.model.helpcenter.help.SectionItem;
-              public isLoading(): boolean;
-              public constructor(param0: com.zendesk.sdk.model.helpcenter.help.SectionItem);
-              public getChildren(): java.util.List;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace network {
-          export abstract class ResponseWrapper {
-            public constructor();
-            public getCount(): java.lang.Integer;
-            public getPreviousPage(): string;
-            public getNextPage(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace push {
-          export class AnonymousPushRegistrationRequest extends com.zendesk.sdk.model.push.PushRegistrationRequest {
-            public constructor();
-            public getSdkGuid(): string;
-            public setSdkGuid(param0: string): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace push {
-          export class JwtPushRegistrationRequest extends com.zendesk.sdk.model.push.PushRegistrationRequest {
-            public constructor();
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace push {
-          export abstract class PushRegistrationRequest {
-            public getIdentifier(): string;
-            public constructor();
-            public setTokenType(param0: string): void;
-            public getTokenType(): string;
-            public setLocale(param0: string): void;
-            public setIdentifier(param0: string): void;
-            public getLocale(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace push {
-          export class PushRegistrationRequestWrapper {
-            public constructor();
-            public setPushRegistrationRequest(param0: com.zendesk.sdk.model.push.PushRegistrationRequest): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace push {
-          export class PushRegistrationResponse {
-            public getIdentifier(): string;
-            public constructor();
-            public equals(param0: java.lang.Object): boolean;
-            public hashCode(): number;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace push {
-          export class PushRegistrationResponseWrapper {
-            public constructor();
-            public getRegistrationResponse(): com.zendesk.sdk.model.push.PushRegistrationResponse;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class Attachment {
-            public getId(): java.lang.Long;
-            public getContentUrl(): string;
-            public getSize(): java.lang.Long;
-            public constructor();
-            public getThumbnails(): java.util.List;
-            public getFileName(): string;
-            public getUrl(): string;
-            public getContentType(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class Comment {
-            public getId(): java.lang.Long;
-            public getCreatedAt(): java.util.Date;
-            public isPublic(): boolean;
-            public setCreatedAt(param0: java.util.Date): void;
-            public getAuthorId(): java.lang.Long;
-            public setAuthorId(param0: java.lang.Long): void;
-            public getAttachments(): java.util.List;
-            public constructor();
-            public getHtmlBody(): string;
-            public getBody(): string;
-            public getUrl(): string;
-            public setBody(param0: string): void;
-            public getRequestId(): string;
-            public setAttachments(param0: java.util.List): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class CommentResponse {
-            public getId(): java.lang.Long;
-            public getCreatedAt(): java.util.Date;
-            public isPublic(): boolean;
-            public setCreatedAt(param0: java.util.Date): void;
-            public getAuthorId(): java.lang.Long;
-            public setAuthorId(param0: java.lang.Long): void;
-            public getAttachments(): java.util.List;
-            public constructor();
-            public getHtmlBody(): string;
-            public getBody(): string;
-            public setId(param0: java.lang.Long): void;
-            public getUrl(): string;
-            public setBody(param0: string): void;
-            public getRequestId(): string;
-            public setAttachments(param0: java.util.List): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class CommentsResponse extends com.zendesk.sdk.model.network.ResponseWrapper {
-            public constructor();
-            public getOrganizations(): java.util.List;
-            public getUsers(): java.util.List;
-            public getComments(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class CreateRequest {
-            public setEmail(param0: string): void;
-            public setTags(param0: java.util.List): void;
-            public getTags(): java.util.List;
-            public getDescription(): string;
-            public setCustomFields(param0: java.util.List): void;
-            public getEmail(): string;
-            public setId(param0: string): void;
-            public setSubject(param0: string): void;
-            public constructor();
-            public setDescription(param0: string): void;
-            public getId(): string;
-            public setMetadata(param0: java.util.Map): void;
-            public getSubject(): string;
-            public setTicketFormId(param0: java.lang.Long): void;
-            public setAttachments(param0: java.util.List): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class CreateRequestWrapper {
-            public setRequest(param0: com.zendesk.sdk.model.request.CreateRequest): void;
-            public constructor();
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class CustomField {
-            public constructor(param0: java.lang.Long, param1: string);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class EndUserComment {
-            public getAttachments(): java.util.List;
-            public constructor();
-            public setValue(param0: string): void;
-            public setAttachments(param0: java.util.List): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class Organization {
-            public getId(): java.lang.Long;
-            public constructor();
-            public getName(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class Request {
-            public getCommentCount(): java.lang.Integer;
-            public getCreatedAt(): java.util.Date;
-            public getPriority(): string;
-            public getOrganizationId(): java.lang.Long;
-            public getDescription(): string;
-            public getStatus(): string;
-            public getType(): string;
-            public getRequesterId(): java.lang.Long;
-            public setComment(param0: com.zendesk.sdk.model.request.EndUserComment): void;
-            public constructor();
-            public getUpdatedAt(): java.util.Date;
-            public getPublicUpdatedAt(): java.util.Date;
-            public getId(): string;
-            public getUrl(): string;
-            public getSubject(): string;
-            public getDueAt(): java.util.Date;
-            public getCollaboratorIds(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class RequestResponse {
-            public constructor();
-            public getRequest(): com.zendesk.sdk.model.request.Request;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class RequestUpdates {
-            public equals(param0: java.lang.Object): boolean;
-            public getRequestsWithUpdates(): java.util.Map;
-            public hasUpdates(): boolean;
-            public hashCode(): number;
-            public constructor(param0: java.util.Map);
-            public getUpdateCount(): number;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class RequestsResponse extends com.zendesk.sdk.model.network.ResponseWrapper {
-            public constructor();
-            public getRequests(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class UpdateRequestWrapper {
-            public constructor();
-            public setRequest(param0: com.zendesk.sdk.model.request.Request): void;
-            public getRequest(): com.zendesk.sdk.model.request.Request;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class UploadResponse {
-            public getExpiresAt(): java.util.Date;
-            public getAttachment(): com.zendesk.sdk.model.request.Attachment;
-            public constructor();
-            public getToken(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class UploadResponseWrapper {
-            public constructor();
-            public getUpload(): com.zendesk.sdk.model.request.UploadResponse;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class User {
-            public getId(): java.lang.Long;
-            public getOrganizationId(): java.lang.Long;
-            public constructor();
-            public getPhoto(): com.zendesk.sdk.model.request.Attachment;
-            public isAgent(): boolean;
-            public getTags(): java.util.List;
-            public getUserFields(): java.util.Map;
-            public getName(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class UserField {
-            public getPosition(): java.lang.Long;
-            public getId(): java.lang.Long;
-            public getCreatedAt(): java.util.Date;
-            public getDescription(): string;
-            public getUserFieldOptions(): java.util.List;
-            public getTitle(): string;
-            public getRegexpForValidation(): string;
-            public getRawTitle(): string;
-            public constructor();
-            public getUpdatedAt(): java.util.Date;
-            public getRawDescription(): string;
-            public getUrl(): string;
-            public isSystem(): boolean;
-            public isActive(): boolean;
-            public getUserFieldType(): com.zendesk.sdk.model.request.UserField.UserFieldType;
-            public getKey(): string;
-          }
-          export namespace UserField {
-            export class UserFieldType {
-              public static Integer: com.zendesk.sdk.model.request.UserField.UserFieldType;
-              public static Decimal: com.zendesk.sdk.model.request.UserField.UserFieldType;
-              public static Checkbox: com.zendesk.sdk.model.request.UserField.UserFieldType;
-              public static Date: com.zendesk.sdk.model.request.UserField.UserFieldType;
-              public static Text: com.zendesk.sdk.model.request.UserField.UserFieldType;
-              public static Textarea: com.zendesk.sdk.model.request.UserField.UserFieldType;
-              public static Dropdown: com.zendesk.sdk.model.request.UserField.UserFieldType;
-              public static Regexp: com.zendesk.sdk.model.request.UserField.UserFieldType;
-              public static valueOf(param0: string): com.zendesk.sdk.model.request.UserField.UserFieldType;
-              public static values(): native.Array<com.zendesk.sdk.model.request.UserField.UserFieldType>;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class UserFieldOption {
-            public getId(): java.lang.Long;
-            public constructor();
-            public getRawName(): string;
-            public getValue(): string;
-            public getName(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class UserFieldRequest {
-            public constructor(param0: java.util.Map);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class UserFieldResponse {
-            public constructor();
-            public getUserFields(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class UserResponse {
-            public constructor();
-            public getUser(): com.zendesk.sdk.model.request.User;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export class UserTagRequest {
-            public setTags(param0: java.util.List): void;
-            public constructor();
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class RawTicketField {
-              public getType(): com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public constructor();
-              public getTitleInPortal(): string;
-              public getTitle(): string;
-              public getDescription(): string;
-              public getId(): number;
-              public getSystemFieldOptions(): java.util.List;
-              public getRegexpForValidation(): string;
-              public getCustomFieldOptions(): java.util.List;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class RawTicketFieldOption {
-              public getName(): string;
-              public constructor();
-              public getValue(): string;
-              public getId(): number;
-              public isDefault(): boolean;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class RawTicketFieldSystemOption {
-              public getName(): string;
-              public constructor();
-              public getValue(): string;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class RawTicketForm {
-              public getName(): string;
-              public constructor();
-              public getTicketFieldIds(): java.util.List;
-              public getId(): number;
-              public getDisplayName(): string;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class RawTicketFormResponse {
-              public constructor();
-              public getTicketForms(): java.util.List;
-              public getTicketFields(): java.util.List;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class TicketField {
-              public getType(): com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public getTicketFieldOptions(): java.util.List;
-              public getTitleInPortal(): string;
-              public constructor(param0: number, param1: com.zendesk.sdk.model.request.fields.TicketFieldType, param2: string, param3: string, param4: string, param5: string, param6: java.util.List, param7: java.util.List);
-              public getTicketFieldSystemOptions(): java.util.List;
-              public static create(param0: com.zendesk.sdk.model.request.fields.RawTicketField): com.zendesk.sdk.model.request.fields.TicketField;
-              public getTitle(): string;
-              public getDescription(): string;
-              public getId(): number;
-              public getRegexpForValidation(): string;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class TicketFieldOption {
-              public getName(): string;
-              public getValue(): string;
-              public static create(param0: com.zendesk.sdk.model.request.fields.RawTicketFieldOption): com.zendesk.sdk.model.request.fields.TicketFieldOption;
-              public constructor(param0: number, param1: string, param2: string, param3: boolean);
-              public getId(): number;
-              public isDefault(): boolean;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class TicketFieldSystemOption {
-              public getName(): string;
-              public getValue(): string;
-              public constructor(param0: string, param1: string);
-              public static create(param0: com.zendesk.sdk.model.request.fields.RawTicketFieldSystemOption): com.zendesk.sdk.model.request.fields.TicketFieldSystemOption;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class TicketFieldType {
-              public static Checkbox: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Date: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Decimal: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Description: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Integer: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static PartialCreditCard: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Priority: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Status: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static TicketType: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Regexp: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Subject: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Tagger: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Text: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static TextArea: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static MultiSelect: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static Unknown: com.zendesk.sdk.model.request.fields.TicketFieldType;
-              public static values(): native.Array<com.zendesk.sdk.model.request.fields.TicketFieldType>;
-              public static valueOf(param0: string): com.zendesk.sdk.model.request.fields.TicketFieldType;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace request {
-          export namespace fields {
-            export class TicketForm {
-              public getName(): string;
-              public constructor(param0: number, param1: string, param2: string, param3: java.util.List);
-              public static create(param0: com.zendesk.sdk.model.request.fields.RawTicketForm, param1: java.util.List): com.zendesk.sdk.model.request.fields.TicketForm;
-              public getTicketFields(): java.util.List;
-              public getId(): number;
-              public getDisplayName(): string;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class AccountSettings {
-            public constructor();
-            public getAttachmentSettings(): com.zendesk.sdk.model.settings.AttachmentSettings;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class AttachmentSettings {
-            public constructor();
-            public isEnabled(): boolean;
-            public getMaxAttachmentSize(): number;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class BlipsPermissions {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class BlipsSettings {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class ContactUsSettings {
-            public constructor();
-            public getTags(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class ConversationsSettings {
-            public constructor();
-            public isEnabled(): boolean;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class HelpCenterSettings {
-            public constructor();
-            public isEnabled(): boolean;
-            public getLocale(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class MobileSettings {
-            public constructor();
-            public getAccountSettings(): com.zendesk.sdk.model.settings.AccountSettings;
-            public getSdkSettings(): com.zendesk.sdk.model.settings.SdkSettings;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class SafeMobileSettings {
-            public getHelpCenterLocale(): string;
-            public getMobileSettings(): com.zendesk.sdk.model.settings.MobileSettings;
-            public isConversationsEnabled(): boolean;
-            public constructor(param0: com.zendesk.sdk.model.settings.MobileSettings);
-            public isAttachmentsEnabled(): boolean;
-            public isHelpCenterEnabled(): boolean;
-            public getHelpCenterSettings(): com.zendesk.sdk.model.settings.HelpCenterSettings;
-            public hasHelpCenterSettings(): boolean;
-            public getContactZendeskTags(): java.util.List;
-            public getMaxAttachmentSize(): number;
-            public getAuthenticationType(): com.zendesk.sdk.model.access.AuthenticationType;
-            public isPathfinderEnabled(): boolean;
-            public isTicketFormSupportAvailable(): boolean;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class SdkSettings {
-            public getHelpCenterSettings(): com.zendesk.sdk.model.settings.HelpCenterSettings;
-            public constructor();
-            public getUpdatedAt(): java.util.Date;
-            public getAuthentication(): com.zendesk.sdk.model.access.AuthenticationType;
-            public getConversationsSettings(): com.zendesk.sdk.model.settings.ConversationsSettings;
-            public getTicketFormSettings(): com.zendesk.sdk.model.settings.TicketFormSettings;
-            public getBlipsSettings(): com.zendesk.sdk.model.settings.BlipsSettings;
-            public getContactUsSettings(): com.zendesk.sdk.model.settings.ContactUsSettings;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace model {
-        export namespace settings {
-          export class TicketFormSettings {
-            public constructor();
-            public isAvailable(): boolean;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class AccessProvider {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.AccessProvider interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            getAndStoreAuthTokenViaJwt(param0: com.zendesk.sdk.model.access.JwtIdentity, param1: com.zendesk.service.ZendeskCallback): void;
-            getAndStoreAuthTokenViaAnonymous(param0: com.zendesk.sdk.model.access.AnonymousIdentity, param1: com.zendesk.service.ZendeskCallback): void;
-          });
-          public getAndStoreAuthTokenViaJwt(param0: com.zendesk.sdk.model.access.JwtIdentity, param1: com.zendesk.service.ZendeskCallback): void;
-          public getAndStoreAuthTokenViaAnonymous(param0: com.zendesk.sdk.model.access.AnonymousIdentity, param1: com.zendesk.service.ZendeskCallback): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class AccessService {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.AccessService interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            getAuthToken(param0: com.zendesk.sdk.model.access.AuthenticationRequestWrapper): retrofit2.Call;
-            getAuthTokenForAnonymous(param0: com.zendesk.sdk.model.access.AuthenticationRequestWrapper): retrofit2.Call;
-          });
-          public getAuthTokenForAnonymous(param0: com.zendesk.sdk.model.access.AuthenticationRequestWrapper): retrofit2.Call;
-          public getAuthToken(param0: com.zendesk.sdk.model.access.AuthenticationRequestWrapper): retrofit2.Call;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class BaseProvider {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.BaseProvider interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            configureSdk(param0: com.zendesk.service.ZendeskCallback): void;
-            getSdkSettings(param0: com.zendesk.service.ZendeskCallback): void;
-            getAccessToken(param0: com.zendesk.sdk.model.settings.SafeMobileSettings, param1: com.zendesk.service.ZendeskCallback): void;
-          });
-          public getAccessToken(param0: com.zendesk.sdk.model.settings.SafeMobileSettings, param1: com.zendesk.service.ZendeskCallback): void;
-          public configureSdk(param0: com.zendesk.service.ZendeskCallback): void;
-          public getSdkSettings(param0: com.zendesk.service.ZendeskCallback): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class Constants {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.Constants interface with the provided implementation.
-           */
-          public constructor(implementation: {
-          });
-          public static APPLICATION_JSON: string;
-          public static HEADER_SUFFIX_FORMAT: string;
-          public static ENVIRONMENT_DEBUG: string;
-          public static ENVIRONMENT_PRODUCTION: string;
-          public static HOURS_MINUTES_FORMAT: string;
-          public static USER_AGENT_HEADER: string;
-          public static ZENDESK_SDK_FOR_ANDROID: string;
-          public static HEADER_SUFFIX_MAX_LENGTH: number;
-          public static ACCEPT_HEADER: string;
-          public static AUTHORIZATION_HEADER: string;
-          public static CLIENT_IDENTIFIER_HEADER: string;
-          public static SDK_GUID_HEADER: string;
-          public static ACCEPT_LANGUAGE_HEADER: string;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class HelpCenterProvider {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.HelpCenterProvider interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            getHelp(param0: com.zendesk.sdk.model.helpcenter.help.HelpRequest, param1: com.zendesk.service.ZendeskCallback): void;
-            getCategories(param0: com.zendesk.service.ZendeskCallback): void;
-            getSections(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            getArticles(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            listArticles(param0: com.zendesk.sdk.model.helpcenter.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback): void;
-            listArticlesFlat(param0: com.zendesk.sdk.model.helpcenter.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback): void;
-            searchArticles(param0: com.zendesk.sdk.model.helpcenter.HelpCenterSearch, param1: com.zendesk.service.ZendeskCallback): void;
-            getArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            getSection(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            getCategory(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            getAttachments(param0: java.lang.Long, param1: com.zendesk.sdk.model.helpcenter.AttachmentType, param2: com.zendesk.service.ZendeskCallback): void;
-            upvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            downvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            deleteVote(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            getSuggestedArticles(param0: com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch, param1: com.zendesk.service.ZendeskCallback): void;
-            submitRecordArticleView(param0: com.zendesk.sdk.model.helpcenter.Article, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-          });
-          public getSection(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-          public getAttachments(param0: java.lang.Long, param1: com.zendesk.sdk.model.helpcenter.AttachmentType, param2: com.zendesk.service.ZendeskCallback): void;
-          public listArticles(param0: com.zendesk.sdk.model.helpcenter.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback): void;
-          public getCategory(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-          public getSuggestedArticles(param0: com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch, param1: com.zendesk.service.ZendeskCallback): void;
-          public downvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-          public deleteVote(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-          public getCategories(param0: com.zendesk.service.ZendeskCallback): void;
-          public searchArticles(param0: com.zendesk.sdk.model.helpcenter.HelpCenterSearch, param1: com.zendesk.service.ZendeskCallback): void;
-          public getArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-          public upvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-          public getSections(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-          public getArticles(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-          public listArticlesFlat(param0: com.zendesk.sdk.model.helpcenter.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback): void;
-          public getHelp(param0: com.zendesk.sdk.model.helpcenter.help.HelpRequest, param1: com.zendesk.service.ZendeskCallback): void;
-          public submitRecordArticleView(param0: com.zendesk.sdk.model.helpcenter.Article, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class HelpCenterService {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.HelpCenterService interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            getHelp(param0: string, param1: string, param2: string, param3: string, param4: string, param5: number, param6: string, param7: number, param8: string, param9: string): retrofit2.Call;
-            getCategories(param0: string, param1: string): retrofit2.Call;
-            getSections(param0: string, param1: string, param2: java.lang.Long, param3: number): retrofit2.Call;
-            getArticles(param0: string, param1: string, param2: java.lang.Long, param3: string, param4: number): retrofit2.Call;
-            listArticles(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: java.lang.Integer, param7: java.lang.Integer): retrofit2.Call;
-            searchArticles(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: string, param7: java.lang.Integer, param8: java.lang.Integer): retrofit2.Call;
-            getArticle(param0: string, param1: string, param2: java.lang.Long, param3: string): retrofit2.Call;
-            getSectionById(param0: string, param1: string, param2: java.lang.Long): retrofit2.Call;
-            getCategoryById(param0: string, param1: string, param2: java.lang.Long): retrofit2.Call;
-            getAttachments(param0: string, param1: string, param2: java.lang.Long, param3: string): retrofit2.Call;
-            upvoteArticle(param0: string, param1: java.lang.Long, param2: string): retrofit2.Call;
-            downvoteArticle(param0: string, param1: java.lang.Long, param2: string): retrofit2.Call;
-            deleteVote(param0: string, param1: java.lang.Long): retrofit2.Call;
-            getSuggestedArticles(param0: string, param1: string, param2: string, param3: string, param4: java.lang.Long, param5: java.lang.Long): retrofit2.Call;
-            submitRecordArticleView(param0: string, param1: java.lang.Long, param2: string, param3: com.zendesk.sdk.model.helpcenter.RecordArticleViewRequest): retrofit2.Call;
-          });
-          public getSections(param0: string, param1: string, param2: java.lang.Long, param3: number): retrofit2.Call;
-          public submitRecordArticleView(param0: string, param1: java.lang.Long, param2: string, param3: com.zendesk.sdk.model.helpcenter.RecordArticleViewRequest): retrofit2.Call;
-          public searchArticles(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: string, param7: java.lang.Integer, param8: java.lang.Integer): retrofit2.Call;
-          public getArticle(param0: string, param1: string, param2: java.lang.Long, param3: string): retrofit2.Call;
-          public deleteVote(param0: string, param1: java.lang.Long): retrofit2.Call;
-          public upvoteArticle(param0: string, param1: java.lang.Long, param2: string): retrofit2.Call;
-          public getHelp(param0: string, param1: string, param2: string, param3: string, param4: string, param5: number, param6: string, param7: number, param8: string, param9: string): retrofit2.Call;
-          public getCategories(param0: string, param1: string): retrofit2.Call;
-          public getSectionById(param0: string, param1: string, param2: java.lang.Long): retrofit2.Call;
-          public getAttachments(param0: string, param1: string, param2: java.lang.Long, param3: string): retrofit2.Call;
-          public listArticles(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: java.lang.Integer, param7: java.lang.Integer): retrofit2.Call;
-          public getSuggestedArticles(param0: string, param1: string, param2: string, param3: string, param4: java.lang.Long, param5: java.lang.Long): retrofit2.Call;
-          public downvoteArticle(param0: string, param1: java.lang.Long, param2: string): retrofit2.Call;
-          public getCategoryById(param0: string, param1: string, param2: java.lang.Long): retrofit2.Call;
-          public getArticles(param0: string, param1: string, param2: java.lang.Long, param3: string, param4: number): retrofit2.Call;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class NetworkAware {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.NetworkAware interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            onNetworkAvailable(): void;
-            onNetworkUnavailable(): void;
-          });
-          public onNetworkUnavailable(): void;
-          public onNetworkAvailable(): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class NetworkInfoProvider {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.NetworkInfoProvider interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            register(): void;
-            unregister(): void;
-            isNetworkAvailable(): boolean;
-            addNetworkAwareListener(param0: java.lang.Integer, param1: com.zendesk.sdk.network.NetworkAware): void;
-            removeNetworkAwareListener(param0: java.lang.Integer): void;
-            clearNetworkAwareListeners(): void;
-            addRetryAction(param0: java.lang.Integer, param1: com.zendesk.sdk.network.RetryAction): void;
-            removeRetryAction(param0: java.lang.Integer): void;
-            clearRetryActions(): void;
-          });
-          public isNetworkAvailable(): boolean;
-          public unregister(): void;
-          public removeRetryAction(param0: java.lang.Integer): void;
-          public addNetworkAwareListener(param0: java.lang.Integer, param1: com.zendesk.sdk.network.NetworkAware): void;
-          public register(): void;
-          public removeNetworkAwareListener(param0: java.lang.Integer): void;
-          public addRetryAction(param0: java.lang.Integer, param1: com.zendesk.sdk.network.RetryAction): void;
-          public clearRetryActions(): void;
-          public clearNetworkAwareListeners(): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class PushRegistrationProvider {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.PushRegistrationProvider interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            registerDeviceWithIdentifier(param0: string, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-            registerDeviceWithUAChannelId(param0: string, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-            unregisterDevice(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-          });
-          public registerDeviceWithIdentifier(param0: string, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-          public registerDeviceWithUAChannelId(param0: string, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-          public unregisterDevice(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class PushRegistrationService {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.PushRegistrationService interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            registerDevice(param0: string, param1: com.zendesk.sdk.model.push.PushRegistrationRequestWrapper): retrofit2.Call;
-            unregisterDevice(param0: string, param1: string): retrofit2.Call;
-          });
-          public unregisterDevice(param0: string, param1: string): retrofit2.Call;
-          public registerDevice(param0: string, param1: com.zendesk.sdk.model.push.PushRegistrationRequestWrapper): retrofit2.Call;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class RequestProvider {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.RequestProvider interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            createRequest(param0: com.zendesk.sdk.model.request.CreateRequest, param1: com.zendesk.service.ZendeskCallback): void;
-            getAllRequests(param0: com.zendesk.service.ZendeskCallback): void;
-            getRequests(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            getComments(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            addComment(param0: string, param1: com.zendesk.sdk.model.request.EndUserComment, param2: com.zendesk.service.ZendeskCallback): void;
-            getRequest(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            getTicketFormsById(param0: java.util.List, param1: com.zendesk.service.ZendeskCallback): void;
-            getUpdatesForDevice(param0: com.zendesk.service.ZendeskCallback): void;
-          });
-          public getComments(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-          public getAllRequests(param0: com.zendesk.service.ZendeskCallback): void;
-          public getTicketFormsById(param0: java.util.List, param1: com.zendesk.service.ZendeskCallback): void;
-          public createRequest(param0: com.zendesk.sdk.model.request.CreateRequest, param1: com.zendesk.service.ZendeskCallback): void;
-          public getRequests(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-          public getUpdatesForDevice(param0: com.zendesk.service.ZendeskCallback): void;
-          public getRequest(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-          public addComment(param0: string, param1: com.zendesk.sdk.model.request.EndUserComment, param2: com.zendesk.service.ZendeskCallback): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class RequestService {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.RequestService interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            createRequest(param0: string, param1: string, param2: com.zendesk.sdk.model.request.CreateRequestWrapper): retrofit2.Call;
-            getAllRequests(param0: string, param1: string, param2: string): retrofit2.Call;
-            getManyRequests(param0: string, param1: string, param2: string, param3: string): retrofit2.Call;
-            getComments(param0: string, param1: string): retrofit2.Call;
-            addComment(param0: string, param1: string, param2: com.zendesk.sdk.model.request.UpdateRequestWrapper): retrofit2.Call;
-            getRequest(param0: string, param1: string): retrofit2.Call;
-            getTicketFormsById(param0: string, param1: string, param2: string, param3: string): retrofit2.Call;
-          });
-          public getComments(param0: string, param1: string): retrofit2.Call;
-          public getRequest(param0: string, param1: string): retrofit2.Call;
-          public getManyRequests(param0: string, param1: string, param2: string, param3: string): retrofit2.Call;
-          public addComment(param0: string, param1: string, param2: com.zendesk.sdk.model.request.UpdateRequestWrapper): retrofit2.Call;
-          public createRequest(param0: string, param1: string, param2: com.zendesk.sdk.model.request.CreateRequestWrapper): retrofit2.Call;
-          public getAllRequests(param0: string, param1: string, param2: string): retrofit2.Call;
-          public getTicketFormsById(param0: string, param1: string, param2: string, param3: string): retrofit2.Call;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class RetryAction {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.RetryAction interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            onRetry(): void;
-          });
-          public onRetry(): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class Retryable {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.Retryable interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            onRetryAvailable(param0: string, param1: android.view.View.OnClickListener): void;
-            onRetryUnavailable(): void;
-          });
-          public onRetryUnavailable(): void;
-          public onRetryAvailable(param0: string, param1: android.view.View.OnClickListener): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class SdkOptions {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.SdkOptions interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            overrideResourceLoadingInWebview(): boolean;
-            getServiceOptions(): com.zendesk.sdk.network.SdkOptions.ServiceOptions;
-          });
-          public getServiceOptions(): com.zendesk.sdk.network.SdkOptions.ServiceOptions;
-          public overrideResourceLoadingInWebview(): boolean;
-        }
-        export namespace SdkOptions {
-          export class ServiceOptions {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.network.SdkOptions$ServiceOptions interface with the provided implementation.
-             */
-            public constructor(implementation: {
-              getConnectionSpecs(): java.util.List;
-            });
-            public getConnectionSpecs(): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class SdkSettingsProvider {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.SdkSettingsProvider interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            getSettings(param0: com.zendesk.service.ZendeskCallback): void;
-          });
-          public getSettings(param0: com.zendesk.service.ZendeskCallback): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class SdkSettingsService {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.SdkSettingsService interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            getSettings(param0: string): retrofit2.Call;
-          });
-          public getSettings(param0: string): retrofit2.Call;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class SettingsHelper {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.SettingsHelper interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            loadSetting(param0: com.zendesk.service.ZendeskCallback): void;
-          });
-          public loadSetting(param0: com.zendesk.service.ZendeskCallback): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class UploadProvider {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.UploadProvider interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            uploadAttachment(param0: string, param1: java.io.File, param2: string, param3: com.zendesk.service.ZendeskCallback): void;
-            deleteAttachment(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-          });
-          public deleteAttachment(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-          public uploadAttachment(param0: string, param1: java.io.File, param2: string, param3: com.zendesk.service.ZendeskCallback): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class UploadService {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.UploadService interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            uploadAttachment(param0: string, param1: string, param2: okhttp3.RequestBody): retrofit2.Call;
-            deleteAttachment(param0: string, param1: string): retrofit2.Call;
-          });
-          public uploadAttachment(param0: string, param1: string, param2: okhttp3.RequestBody): retrofit2.Call;
-          public deleteAttachment(param0: string, param1: string): retrofit2.Call;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class UserProvider {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.UserProvider interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            addTags(param0: java.util.List, param1: com.zendesk.service.ZendeskCallback): void;
-            deleteTags(param0: java.util.List, param1: com.zendesk.service.ZendeskCallback): void;
-            getUserFields(param0: com.zendesk.service.ZendeskCallback): void;
-            setUserFields(param0: java.util.Map, param1: com.zendesk.service.ZendeskCallback): void;
-            getUser(param0: com.zendesk.service.ZendeskCallback): void;
-          });
-          public getUser(param0: com.zendesk.service.ZendeskCallback): void;
-          public deleteTags(param0: java.util.List, param1: com.zendesk.service.ZendeskCallback): void;
-          public addTags(param0: java.util.List, param1: com.zendesk.service.ZendeskCallback): void;
-          public getUserFields(param0: com.zendesk.service.ZendeskCallback): void;
-          public setUserFields(param0: java.util.Map, param1: com.zendesk.service.ZendeskCallback): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class UserService {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.UserService interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            addTags(param0: string, param1: com.zendesk.sdk.model.request.UserTagRequest): retrofit2.Call;
-            deleteTags(param0: string, param1: string): retrofit2.Call;
-            getUserFields(param0: string): retrofit2.Call;
-            setUserFields(param0: string, param1: com.zendesk.sdk.model.request.UserFieldRequest): retrofit2.Call;
-            getUser(param0: string): retrofit2.Call;
-          });
-          public addTags(param0: string, param1: com.zendesk.sdk.model.request.UserTagRequest): retrofit2.Call;
-          public setUserFields(param0: string, param1: com.zendesk.sdk.model.request.UserFieldRequest): retrofit2.Call;
-          public getUser(param0: string): retrofit2.Call;
-          public getUserFields(param0: string): retrofit2.Call;
-          public deleteTags(param0: string, param1: string): retrofit2.Call;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export class ZendeskTracker {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.network.ZendeskTracker interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            helpCenterLoaded(): void;
-            helpCenterSearched(param0: string): void;
-            helpCenterArticleViewed(): void;
-            requestCreated(): void;
-            requestUpdated(): void;
-          });
-          public helpCenterSearched(param0: string): void;
-          public helpCenterArticleViewed(): void;
-          public requestUpdated(): void;
-          public helpCenterLoaded(): void;
-          public requestCreated(): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class AnswersTracker {
-            public requestCreated(): void;
-            public helpCenterArticleViewed(): void;
-            public requestUpdated(): void;
-            public helpCenterSearched(param0: string): void;
-            public helpCenterLoaded(): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ApplicationScope {
-            public isCoppaEnabled(): boolean;
-            public newBuilder(): com.zendesk.sdk.network.impl.ApplicationScope.Builder;
-            public getLocale(): java.util.Locale;
-            public getApplicationContext(): android.content.Context;
-            public getUserAgentHeader(): string;
-            public getUrl(): string;
-            public getAppId(): string;
-            public getOAuthToken(): string;
-            public getSdkOptions(): com.zendesk.sdk.network.SdkOptions;
-            public isDevelopmentMode(): boolean;
-            public getCustomFields(): java.util.List;
-            public getTicketFormId(): java.lang.Long;
-          }
-          export namespace ApplicationScope {
-            export class Builder {
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class AuthenticationLoggerHelper {
-            public getLogMessage(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideAppIdFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule): dagger.internal.Factory;
-            public get(): string;
-            public static proxyProvideAppId(param0: com.zendesk.sdk.network.impl.BaseModule): string;
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideApplicationContextFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule): dagger.internal.Factory;
-            public static proxyProvideApplicationContext(param0: com.zendesk.sdk.network.impl.BaseModule): android.content.Context;
-            public get(): android.content.Context;
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideBase64SerializerFactory {
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javax.inject.Provider);
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideBase64Serializer(param0: com.zendesk.sdk.network.impl.BaseModule, param1: java.lang.Object): com.zendesk.sdk.network.impl.Serializer;
-            public get(): com.zendesk.sdk.network.impl.Serializer;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideConnectionSpecFactory {
-            public get(): java.util.List;
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
-            public static proxyProvideConnectionSpec(param0: com.zendesk.sdk.network.impl.BaseModule): java.util.List;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideDeviceInfoFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule): dagger.internal.Factory;
-            public get(): com.zendesk.sdk.network.impl.DeviceInfo;
-            public static proxyProvideDeviceInfo(param0: com.zendesk.sdk.network.impl.BaseModule): com.zendesk.sdk.network.impl.DeviceInfo;
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideLocaleFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule): dagger.internal.Factory;
-            public get(): java.util.Locale;
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
-            public static proxyProvideLocale(param0: com.zendesk.sdk.network.impl.BaseModule): java.util.Locale;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideOAuthtokenFactory {
-            public static proxyProvideOAuthtoken(param0: com.zendesk.sdk.network.impl.BaseModule): string;
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule): dagger.internal.Factory;
-            public get(): string;
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideSerializerFactory {
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javax.inject.Provider);
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public get(): com.zendesk.sdk.network.impl.Serializer;
-            public static proxyProvideSerializer(param0: com.zendesk.sdk.network.impl.BaseModule, param1: com.google.gson.Gson): com.zendesk.sdk.network.impl.Serializer;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideUrlFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule): dagger.internal.Factory;
-            public get(): string;
-            public static proxyProvideUrl(param0: com.zendesk.sdk.network.impl.BaseModule): string;
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideUserAgentHeaderFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule): dagger.internal.Factory;
-            public get(): string;
-            public static proxyProvideUserAgentHeader(param0: com.zendesk.sdk.network.impl.BaseModule): string;
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideZendeskLocaleConverterFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule): dagger.internal.Factory;
-            public static proxyProvideZendeskLocaleConverter(param0: com.zendesk.sdk.network.impl.BaseModule): com.zendesk.sdk.network.impl.ZendeskLocaleConverter;
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule);
-            public get(): com.zendesk.sdk.network.impl.ZendeskLocaleConverter;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BaseModule_ProvideZendeskLocaleTagFactory {
-            public constructor(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-            public get(): string;
-            public static create(param0: com.zendesk.sdk.network.impl.BaseModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideZendeskLocaleTag(param0: com.zendesk.sdk.network.impl.BaseModule, param1: java.lang.Object, param2: java.util.Locale): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BlipsFormatHelper {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BlipsPageView {
-            public equals(param0: java.lang.Object): boolean;
-            public hashCode(): number;
-          }
-          export namespace BlipsPageView {
-            export class Builder {
-              public from(param0: com.zendesk.sdk.network.impl.BlipsPageView): com.zendesk.sdk.network.impl.BlipsPageView.Builder;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BlipsPageViewRequest extends com.zendesk.sdk.network.impl.BlipsRequest {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BlipsProvider {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.network.impl.BlipsProvider interface with the provided implementation.
-             */
-            public constructor(implementation: {
-              sendHelpCenterSearchBlip(param0: string): void;
-              sendPageViewBlip(param0: string, param1: string): void;
-            });
-            public sendPageViewBlip(param0: string, param1: string): void;
-            public sendHelpCenterSearchBlip(param0: string): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export abstract class BlipsRequest {
-            public version: string;
-            public timestamp: string;
-            public channel: string;
-            public schemaVersion: string;
-            public userId: java.lang.Long;
-            public appId: string;
-            public getAppId(): string;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BlipsService {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.network.impl.BlipsService interface with the provided implementation.
-             */
-            public constructor(implementation: {
-              send(param0: string): retrofit2.Call;
-            });
-            public send(param0: string): retrofit2.Call;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BlipsUserAction {
-            public equals(param0: java.lang.Object): boolean;
-            public hashCode(): number;
-            public toString(): string;
-          }
-          export namespace BlipsUserAction {
-            export class Builder {
-              public from(param0: com.zendesk.sdk.network.impl.BlipsUserAction): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
-              public withAction(param0: string): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
-              public build(): com.zendesk.sdk.network.impl.BlipsUserAction;
-              public constructor();
-              public withLabel(param0: string): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
-              public withValue(param0: java.util.Map): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
-              public withCategory(param0: string): com.zendesk.sdk.network.impl.BlipsUserAction.Builder;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class BlipsUserActionRequest extends com.zendesk.sdk.network.impl.BlipsRequest {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ConfigurationRuntimeException {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class DaggerStubComponent {
-            public static create(): com.zendesk.sdk.network.impl.StubComponent;
-            public inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
-            public static builder(): com.zendesk.sdk.network.impl.DaggerStubComponent.Builder;
-          }
-          export namespace DaggerStubComponent {
-            export class Builder {
-              public stubModule(param0: com.zendesk.sdk.network.impl.StubModule): com.zendesk.sdk.network.impl.DaggerStubComponent.Builder;
-              public build(): com.zendesk.sdk.network.impl.StubComponent;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class DaggerSupportSdkProvidersComponent {
-            public static builder(): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
-            public inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
-          }
-          export namespace DaggerSupportSdkProvidersComponent {
-            export class Builder {
-              public baseModule(param0: com.zendesk.sdk.network.impl.BaseModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
-              public restModule(param0: com.zendesk.sdk.network.impl.RestModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
-              public zendeskConfigModule(param0: com.zendesk.sdk.network.impl.ZendeskConfigModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
-              public build(): com.zendesk.sdk.network.impl.SupportSdkProvidersComponent;
-              public storageModule(param0: com.zendesk.sdk.storage.StorageModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
-              public serviceModule(param0: com.zendesk.sdk.network.impl.ServiceModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
-              public providerModule(param0: com.zendesk.sdk.network.impl.ProviderModule): com.zendesk.sdk.network.impl.DaggerSupportSdkProvidersComponent.Builder;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class DefaultSdkOptions {
-            public constructor();
-            public overrideResourceLoadingInWebview(): boolean;
-            public getServiceOptions(): com.zendesk.sdk.network.SdkOptions.ServiceOptions;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class DefaultZendeskUnauthorizedInterceptor {
-            public constructor(param0: com.zendesk.sdk.storage.SdkStorage, param1: okhttp3.Cache);
-            public intercept(param0: okhttp3.Interceptor.Chain): okhttp3.Response;
-            public onHttpUnauthorized(): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class DeviceInfo {
-            public isLowMemory(): boolean;
-            public getDeviceInfoAsMapForMetaData(): java.util.Map;
-            public constructor(param0: android.content.Context);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class GsonSerializer {
-            public serialize(param0: java.lang.Object): string;
-            public deserialize(param0: java.lang.Object, param1: java.lang.Class): java.lang.Object;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class HelpCenterCachingInterceptor {
-            public intercept(param0: okhttp3.Interceptor.Chain): okhttp3.Response;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class HelpResponseConverter {
-            public constructor(param0: com.zendesk.sdk.model.helpcenter.help.HelpResponse);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class NoOpTracker {
-            public requestCreated(): void;
-            public helpCenterArticleViewed(): void;
-            public requestUpdated(): void;
-            public helpCenterSearched(param0: string): void;
-            public helpCenterLoaded(): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export abstract class PassThroughErrorZendeskCallback {
-            public onSuccess(param0: java.lang.Object): void;
-            public onError(param0: com.zendesk.service.ErrorResponse): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_InjectNetworkInfoProviderFactory {
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider);
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public get(): com.zendesk.sdk.network.NetworkInfoProvider;
-            public static proxyInjectNetworkInfoProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: android.content.Context): com.zendesk.sdk.network.NetworkInfoProvider;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_InjectUserProviderFactory {
-            public static proxyInjectUserProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: java.lang.Object): com.zendesk.sdk.network.UserProvider;
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.UserProvider;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_InjectZendeskSettingsHelperFactory {
-            public static proxyInjectZendeskSettingsHelper(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider): com.zendesk.sdk.network.SettingsHelper;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider);
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public get(): com.zendesk.sdk.network.SettingsHelper;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_ProvideAccessProviderFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideAccessProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.storage.IdentityStorage, param2: java.lang.Object): com.zendesk.sdk.network.AccessProvider;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.AccessProvider;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_ProvideHelpCenterProviderFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider);
-            public static proxyProvideHelpCenterProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: java.lang.Object, param3: com.zendesk.sdk.storage.HelpCenterSessionCache, param4: java.lang.Object): com.zendesk.sdk.network.HelpCenterProvider;
-            public get(): com.zendesk.sdk.network.HelpCenterProvider;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_ProvideProviderStoreFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider, param7: javax.inject.Provider, param8: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideProviderStore(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.UserProvider, param2: com.zendesk.sdk.network.HelpCenterProvider, param3: com.zendesk.sdk.network.PushRegistrationProvider, param4: com.zendesk.sdk.network.RequestProvider, param5: com.zendesk.sdk.network.UploadProvider, param6: com.zendesk.sdk.network.SdkSettingsProvider, param7: com.zendesk.sdk.network.NetworkInfoProvider, param8: com.zendesk.sdk.network.SettingsHelper): com.zendesk.sdk.network.impl.ProviderStore;
-            public get(): com.zendesk.sdk.network.impl.ProviderStore;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider, param7: javax.inject.Provider, param8: javax.inject.Provider);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_ProvidePushRegistrationProviderFactory {
-            public get(): com.zendesk.sdk.network.PushRegistrationProvider;
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider);
-            public static proxyProvidePushRegistrationProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: java.lang.Object, param3: com.zendesk.sdk.storage.IdentityStorage, param4: com.zendesk.sdk.storage.PushRegistrationResponseStorage): com.zendesk.sdk.network.PushRegistrationProvider;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_ProvideRequestProviderFactory {
-            public static proxyProvideRequestProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: com.zendesk.sdk.storage.IdentityStorage, param3: java.lang.Object, param4: com.zendesk.sdk.storage.RequestStorage, param5: com.zendesk.sdk.storage.RequestSessionCache, param6: com.zendesk.sdk.storage.PushRegistrationResponseStorage, param7: java.util.Locale): com.zendesk.sdk.network.RequestProvider;
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider, param7: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider, param7: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.RequestProvider;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_ProvideSdkSettingsProviderFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider): dagger.internal.Factory;
-            public get(): com.zendesk.sdk.network.SdkSettingsProvider;
-            public static proxyProvideSdkSettingsProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: java.lang.Object, param2: string, param3: com.zendesk.sdk.storage.SdkSettingsStorage, param4: string): com.zendesk.sdk.network.SdkSettingsProvider;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_ProvideUploadProviderFactory {
-            public get(): com.zendesk.sdk.network.UploadProvider;
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-            public static proxyProvideUploadProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: java.lang.Object): com.zendesk.sdk.network.UploadProvider;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_ProvideZendeskBaseProviderFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideZendeskBaseProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.AccessProvider, param2: com.zendesk.sdk.storage.SdkSettingsStorage, param3: com.zendesk.sdk.storage.IdentityStorage, param4: com.zendesk.sdk.network.SdkSettingsProvider): com.zendesk.sdk.network.BaseProvider;
-            public get(): com.zendesk.sdk.network.BaseProvider;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderModule_ProvideZendeskBlipsProviderFactory {
-            public get(): com.zendesk.sdk.network.impl.BlipsProvider;
-            public static create(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider, param7: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideZendeskBlipsProvider(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: com.zendesk.sdk.network.BaseProvider, param2: java.lang.Object, param3: java.util.Locale, param4: com.zendesk.sdk.storage.IdentityStorage, param5: java.lang.Object, param6: com.zendesk.sdk.network.impl.DeviceInfo, param7: string): com.zendesk.sdk.network.impl.BlipsProvider;
-            public constructor(param0: com.zendesk.sdk.network.impl.ProviderModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider, param7: javax.inject.Provider);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ProviderStore {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.network.impl.ProviderStore interface with the provided implementation.
-             */
-            public constructor(implementation: {
-              userProvider(): com.zendesk.sdk.network.UserProvider;
-              helpCenterProvider(): com.zendesk.sdk.network.HelpCenterProvider;
-              pushRegistrationProvider(): com.zendesk.sdk.network.PushRegistrationProvider;
-              requestProvider(): com.zendesk.sdk.network.RequestProvider;
-              uploadProvider(): com.zendesk.sdk.network.UploadProvider;
-              sdkSettingsProvider(): com.zendesk.sdk.network.SdkSettingsProvider;
-              networkInfoProvider(): com.zendesk.sdk.network.NetworkInfoProvider;
-              uiSettingsHelper(): com.zendesk.sdk.network.SettingsHelper;
-            });
-            public requestProvider(): com.zendesk.sdk.network.RequestProvider;
-            public uploadProvider(): com.zendesk.sdk.network.UploadProvider;
-            public sdkSettingsProvider(): com.zendesk.sdk.network.SdkSettingsProvider;
-            public helpCenterProvider(): com.zendesk.sdk.network.HelpCenterProvider;
-            public pushRegistrationProvider(): com.zendesk.sdk.network.PushRegistrationProvider;
-            public userProvider(): com.zendesk.sdk.network.UserProvider;
-            public networkInfoProvider(): com.zendesk.sdk.network.NetworkInfoProvider;
-            public uiSettingsHelper(): com.zendesk.sdk.network.SettingsHelper;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideCacheFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideCache(param0: com.zendesk.sdk.network.impl.RestModule, param1: android.content.Context): okhttp3.Cache;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider);
-            public get(): okhttp3.Cache;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideDateTypeAdapterFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule): dagger.internal.Factory;
-            public static proxyProvideDateTypeAdapter(param0: com.zendesk.sdk.network.impl.RestModule): com.google.gson.TypeAdapter;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule);
-            public get(): com.google.gson.TypeAdapter;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideDefaultZendeskUnauthorizedInterceptorFactory {
-            public get(): com.zendesk.sdk.network.impl.DefaultZendeskUnauthorizedInterceptor;
-            public static proxyProvideDefaultZendeskUnauthorizedInterceptor(param0: com.zendesk.sdk.network.impl.RestModule, param1: com.zendesk.sdk.storage.SdkStorage, param2: okhttp3.Cache): com.zendesk.sdk.network.impl.DefaultZendeskUnauthorizedInterceptor;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideGsonConverterFactoryFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideGsonConverterFactory(param0: com.zendesk.sdk.network.impl.RestModule, param1: com.google.gson.Gson): retrofit2.converter.gson.GsonConverterFactory;
-            public get(): retrofit2.converter.gson.GsonConverterFactory;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideGsonFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideGson(param0: com.zendesk.sdk.network.impl.RestModule, param1: com.google.gson.TypeAdapter): com.google.gson.Gson;
-            public get(): com.google.gson.Gson;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideHelpCenterCachingInterceptorFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule);
-            public get(): com.zendesk.sdk.network.impl.HelpCenterCachingInterceptor;
-            public static proxyProvideHelpCenterCachingInterceptor(param0: com.zendesk.sdk.network.impl.RestModule): com.zendesk.sdk.network.impl.HelpCenterCachingInterceptor;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideHttpLoggingInterceptorFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule): dagger.internal.Factory;
-            public static proxyProvideHttpLoggingInterceptor(param0: com.zendesk.sdk.network.impl.RestModule): okhttp3.logging.HttpLoggingInterceptor;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule);
-            public get(): okhttp3.logging.HttpLoggingInterceptor;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideOkHttpClientFactory {
-            public get(): okhttp3.OkHttpClient;
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider): dagger.internal.Factory;
-            public static proxyProvideOkHttpClient(param0: com.zendesk.sdk.network.impl.RestModule, param1: com.zendesk.sdk.network.impl.DefaultZendeskUnauthorizedInterceptor, param2: com.zendesk.sdk.network.impl.ZendeskRequestInterceptor, param3: okhttp3.logging.HttpLoggingInterceptor, param4: java.lang.Object, param5: java.util.List, param6: okhttp3.Cache): okhttp3.OkHttpClient;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideRestAdapterFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider);
-            public get(): retrofit2.Retrofit;
-            public static proxyProvideRestAdapter(param0: com.zendesk.sdk.network.impl.RestModule, param1: string, param2: retrofit2.converter.gson.GsonConverterFactory, param3: okhttp3.OkHttpClient): retrofit2.Retrofit;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class RestModule_ProvideZendeskRequestInterceptorFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.RestModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider);
-            public static proxyProvideZendeskRequestInterceptor(param0: com.zendesk.sdk.network.impl.RestModule, param1: string, param2: string, param3: string): com.zendesk.sdk.network.impl.ZendeskRequestInterceptor;
-            public get(): com.zendesk.sdk.network.impl.ZendeskRequestInterceptor;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class Serializer {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.network.impl.Serializer interface with the provided implementation.
-             */
-            public constructor(implementation: {
-              deserialize(param0: java.lang.Object, param1: java.lang.Class): java.lang.Object;
-              serialize(param0: java.lang.Object): string;
-            });
-            public serialize(param0: java.lang.Object): string;
-            public deserialize(param0: java.lang.Object, param1: java.lang.Class): java.lang.Object;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideAccessServiceFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.AccessService;
-            public static proxyProvideAccessService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2.Retrofit): com.zendesk.sdk.network.AccessService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideBlipsServiceFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public static proxyProvideBlipsService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2.Retrofit): com.zendesk.sdk.network.impl.BlipsService;
-            public get(): com.zendesk.sdk.network.impl.BlipsService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideHelpCenterServiceFactory {
-            public static proxyProvideHelpCenterService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2.Retrofit): com.zendesk.sdk.network.HelpCenterService;
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.HelpCenterService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvidePushRegistrationServiceFactory {
-            public get(): com.zendesk.sdk.network.PushRegistrationService;
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public static proxyProvidePushRegistrationService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2.Retrofit): com.zendesk.sdk.network.PushRegistrationService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideRequestServiceFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public static proxyProvideRequestService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2.Retrofit): com.zendesk.sdk.network.RequestService;
-            public get(): com.zendesk.sdk.network.RequestService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideSdkSettingsServiceFactory {
-            public get(): com.zendesk.sdk.network.SdkSettingsService;
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public static proxyProvideSdkSettingsService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2.Retrofit): com.zendesk.sdk.network.SdkSettingsService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideUploadServiceFactory {
-            public get(): com.zendesk.sdk.network.UploadService;
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public static proxyProvideUploadService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2.Retrofit): com.zendesk.sdk.network.UploadService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideUserServiceFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.UserService;
-            public static proxyProvideUserService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: retrofit2.Retrofit): com.zendesk.sdk.network.UserService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideZendeskAccessServiceFactory {
-            public static proxyProvideZendeskAccessService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.AccessService): com.zendesk.sdk.network.impl.ZendeskAccessService;
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.impl.ZendeskAccessService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideZendeskHelpCenterServiceFactory {
-            public static proxyProvideZendeskHelpCenterService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.HelpCenterService): com.zendesk.sdk.network.impl.ZendeskHelpCenterService;
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.impl.ZendeskHelpCenterService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideZendeskPushRegistrationServiceFactory {
-            public static proxyProvideZendeskPushRegistrationService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.PushRegistrationService): com.zendesk.sdk.network.impl.ZendeskPushRegistrationService;
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.impl.ZendeskPushRegistrationService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideZendeskRequestServiceFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.impl.ZendeskRequestService;
-            public static proxyProvideZendeskRequestService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.RequestService): com.zendesk.sdk.network.impl.ZendeskRequestService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideZendeskSdkSettingsServiceFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public static proxyProvideZendeskSdkSettingsService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.SdkSettingsService): com.zendesk.sdk.network.impl.ZendeskSdkSettingsService;
-            public get(): com.zendesk.sdk.network.impl.ZendeskSdkSettingsService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideZendeskUploadServiceFactory {
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public static proxyProvideZendeskUploadService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.UploadService): com.zendesk.sdk.network.impl.ZendeskUploadService;
-            public get(): com.zendesk.sdk.network.impl.ZendeskUploadService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ServiceModule_ProvideZendeskUserServiceFactory {
-            public get(): com.zendesk.sdk.network.impl.ZendeskUserService;
-            public static create(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider): dagger.internal.Factory;
-            public constructor(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: javax.inject.Provider);
-            public static proxyProvideZendeskUserService(param0: com.zendesk.sdk.network.impl.ServiceModule, param1: com.zendesk.sdk.network.UserService): com.zendesk.sdk.network.impl.ZendeskUserService;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubArticleVoteStorage {
-            public storeArticleVote(param0: java.lang.Long, param1: com.zendesk.sdk.model.helpcenter.ArticleVote): void;
-            public getCacheKey(): string;
-            public constructor();
-            public clearUserData(): void;
-            public getStoredArticleVote(param0: java.lang.Long): com.zendesk.sdk.model.helpcenter.ArticleVote;
-            public removeStoredArticleVote(param0: java.lang.Long): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubComponent {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.network.impl.StubComponent interface with the provided implementation.
-             */
-            public constructor(implementation: {
-              inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
-            });
-            public inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubHelpCenterSessionCache {
-            public isUniqueSearchResultClick(): boolean;
-            public unsetUniqueSearchResultClick(): void;
-            public setLastSearch(param0: string, param1: number): void;
-            public getLastSearch(): com.zendesk.sdk.model.helpcenter.LastSearch;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubIdentity {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubIdentityStorage {
-            public storeIdentity(param0: com.zendesk.sdk.model.access.Identity): void;
-            public getCacheKey(): string;
-            public storeAccessToken(param0: com.zendesk.sdk.model.access.AccessToken): void;
-            public getStoredAccessToken(): com.zendesk.sdk.model.access.AccessToken;
-            public getUUID(): string;
-            public getIdentity(): com.zendesk.sdk.model.access.Identity;
-            public clearUserData(): void;
-            public anonymiseIdentity(): com.zendesk.sdk.model.access.Identity;
-            public getUserId(): java.lang.Long;
-            public getStoredAccessTokenAsBearerToken(): string;
-            public storeUserId(param0: java.lang.Long): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubModule {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubModule_InjectStubZendeskConfigHelperFactory {
-            public static proxyInjectStubZendeskConfigHelper(param0: com.zendesk.sdk.network.impl.StubModule, param1: com.zendesk.sdk.network.impl.ProviderStore, param2: com.zendesk.sdk.storage.StorageStore): com.zendesk.sdk.network.impl.ZendeskConfigHelper;
-            public get(): com.zendesk.sdk.network.impl.ZendeskConfigHelper;
-            public constructor(param0: com.zendesk.sdk.network.impl.StubModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-            public static create(param0: com.zendesk.sdk.network.impl.StubModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubModule_ProvideStubProviderStoreFactory {
-            public constructor(param0: com.zendesk.sdk.network.impl.StubModule);
-            public static create(param0: com.zendesk.sdk.network.impl.StubModule): dagger.internal.Factory;
-            public get(): com.zendesk.sdk.network.impl.ProviderStore;
-            public static proxyProvideStubProviderStore(param0: com.zendesk.sdk.network.impl.StubModule): com.zendesk.sdk.network.impl.ProviderStore;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubModule_ProvideStubStorageStoreFactory {
-            public constructor(param0: com.zendesk.sdk.network.impl.StubModule);
-            public static create(param0: com.zendesk.sdk.network.impl.StubModule): dagger.internal.Factory;
-            public get(): com.zendesk.sdk.storage.StorageStore;
-            public static proxyProvideStubStorageStore(param0: com.zendesk.sdk.network.impl.StubModule): com.zendesk.sdk.storage.StorageStore;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubProviderFactory {
-          }
-          export namespace StubProviderFactory {
-            export class ZendeskCallbackInvocationHandler {
-              public invoke(param0: java.lang.Object, param1: java.lang.reflect.Method, param2: native.Array<java.lang.Object>): java.lang.Object;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubProviderStore {
-            public requestProvider(): com.zendesk.sdk.network.RequestProvider;
-            public uploadProvider(): com.zendesk.sdk.network.UploadProvider;
-            public sdkSettingsProvider(): com.zendesk.sdk.network.SdkSettingsProvider;
-            public helpCenterProvider(): com.zendesk.sdk.network.HelpCenterProvider;
-            public pushRegistrationProvider(): com.zendesk.sdk.network.PushRegistrationProvider;
-            public userProvider(): com.zendesk.sdk.network.UserProvider;
-            public networkInfoProvider(): com.zendesk.sdk.network.NetworkInfoProvider;
-            public uiSettingsHelper(): com.zendesk.sdk.network.SettingsHelper;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubPushRegistrationResponseStorage {
-            public hasStoredPushRegistrationResponse(): boolean;
-            public getCacheKey(): string;
-            public constructor();
-            public getPushRegistrationResponse(): com.zendesk.sdk.model.push.PushRegistrationResponse;
-            public clearUserData(): void;
-            public storePushRegistrationResponse(param0: com.zendesk.sdk.model.push.PushRegistrationResponse): void;
-            public removePushRegistrationResponse(): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubRequestStorage {
-            public hasStoredRequestUpdates(): boolean;
-            public storeRequestId(param0: string): void;
-            public getRequestUpdatesTimestamp(): number;
-            public getCacheKey(): string;
-            public getStoredRequestIds(): java.util.List;
-            public getRequestUpdates(): com.zendesk.sdk.model.request.RequestUpdates;
-            public clearUserData(): void;
-            public setRequestUpdates(param0: com.zendesk.sdk.model.request.RequestUpdates): void;
-            public markRequestAsRead(param0: string): void;
-            public setCommentCount(param0: string, param1: number): void;
-            public getCommentCount(param0: string): java.lang.Integer;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubSdkSettingsStorage {
-            public areSettingsUpToDate(param0: number, param1: java.util.concurrent.TimeUnit): boolean;
-            public deleteStoredSettings(): void;
-            public setStoredSettings(param0: com.zendesk.sdk.model.settings.SafeMobileSettings): void;
-            public getStoredSettings(): com.zendesk.sdk.model.settings.SafeMobileSettings;
-            public hasStoredSdkSettings(): boolean;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubSdkStorage {
-            public getUserStorage(): java.util.Set;
-            public clearUserData(): void;
-            public registerUserStorage(param0: com.zendesk.sdk.storage.SdkStorage.UserStorage): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class StubStorageStore {
-            public requestStorage(): com.zendesk.sdk.storage.RequestStorage;
-            public helpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
-            public sdkStorage(): com.zendesk.sdk.storage.SdkStorage;
-            public identityStorage(): com.zendesk.sdk.storage.IdentityStorage;
-            public sdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
-            public pushStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
-            public voteStorage(): com.zendesk.sdk.storage.ArticleVoteStorage;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class SupportSdkProvidersComponent {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.network.impl.SupportSdkProvidersComponent interface with the provided implementation.
-             */
-            public constructor(implementation: {
-              inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
-            });
-            public inject(param0: com.zendesk.sdk.network.impl.ZendeskConfig): com.zendesk.sdk.network.impl.ZendeskConfig;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskAccessProvider {
-            public getAndStoreAuthTokenViaAnonymous(param0: com.zendesk.sdk.model.access.AnonymousIdentity, param1: com.zendesk.service.ZendeskCallback): void;
-            public constructor(param0: com.zendesk.sdk.storage.IdentityStorage, param1: com.zendesk.sdk.network.impl.ZendeskAccessService);
-            public getAndStoreAuthTokenViaJwt(param0: com.zendesk.sdk.model.access.JwtIdentity, param1: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskAccessService {
-            public constructor(param0: com.zendesk.sdk.network.AccessService);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskBase64Serializer {
-            public serialize(param0: java.lang.Object): string;
-            public deserialize(param0: java.lang.Object, param1: java.lang.Class): java.lang.Object;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskBaseProvider {
-            public configureSdk(param0: com.zendesk.service.ZendeskCallback): void;
-            public getAccessToken(param0: com.zendesk.sdk.model.settings.SafeMobileSettings, param1: com.zendesk.service.ZendeskCallback): void;
-            public constructor(param0: com.zendesk.sdk.network.AccessProvider, param1: com.zendesk.sdk.storage.SdkSettingsStorage, param2: com.zendesk.sdk.storage.IdentityStorage, param3: com.zendesk.sdk.network.SdkSettingsProvider);
-            public getSdkSettings(param0: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskBlipsProvider {
-            public sendPageViewBlip(param0: string, param1: string): void;
-            public sendHelpCenterSearchBlip(param0: string): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskConfig {
-            public static INSTANCE: com.zendesk.sdk.network.impl.ZendeskConfig;
-            public static HEADER_SUFFIX_MAX_LENGTH: number;
-            public setSdkOptions(param0: com.zendesk.sdk.network.SdkOptions): void;
-            public isInitialized(): boolean;
-            public provider(): com.zendesk.sdk.network.impl.ProviderStore;
-            public isCoppaEnabled(): boolean;
-            public getApplicationId(): string;
-            public getOauthClientId(): string;
-            public setCoppaEnabled(param0: boolean): void;
-            public enablePushWithIdentifier(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            public setTicketFormId(param0: java.lang.Long): void;
-            public isAuthenticationAvailable(): boolean;
-            public enablePushWithUAChannelId(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            public static valueOf(param0: string): com.zendesk.sdk.network.impl.ZendeskConfig;
-            public storage(): com.zendesk.sdk.storage.StorageStore;
-            public disablePush(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            public init(param0: android.content.Context, param1: string, param2: string, param3: string): void;
-            public setCustomFields(param0: java.util.List): void;
-            public getMobileSettings(): com.zendesk.sdk.model.settings.SafeMobileSettings;
-            public getSdkOptions(): com.zendesk.sdk.network.SdkOptions;
-            public getZendeskUrl(): string;
-            public getTicketFormId(): java.lang.Long;
-            public setIdentity(param0: com.zendesk.sdk.model.access.Identity): void;
-            public setDeviceLocale(param0: java.util.Locale): void;
-            public getTracker(): com.zendesk.sdk.network.ZendeskTracker;
-            public getCustomFields(): java.util.List;
-            public static values(): native.Array<com.zendesk.sdk.network.impl.ZendeskConfig>;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskConfigHelper {
-            public getStorageStore(): com.zendesk.sdk.storage.StorageStore;
-            public getProviderStore(): com.zendesk.sdk.network.impl.ProviderStore;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskConfigModule {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskConfigModule_ProvideZendeskConfigHelperFactory {
-            public constructor(param0: com.zendesk.sdk.network.impl.ZendeskConfigModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-            public get(): com.zendesk.sdk.network.impl.ZendeskConfigHelper;
-            public static proxyProvideZendeskConfigHelper(param0: com.zendesk.sdk.network.impl.ZendeskConfigModule, param1: com.zendesk.sdk.network.impl.ProviderStore, param2: com.zendesk.sdk.storage.StorageStore): com.zendesk.sdk.network.impl.ZendeskConfigHelper;
-            public static create(param0: com.zendesk.sdk.network.impl.ZendeskConfigModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskConfig_MembersInjector {
-            public static injectZendeskConfigHelper(param0: com.zendesk.sdk.network.impl.ZendeskConfig, param1: javax.inject.Provider): void;
-            public injectMembers(param0: com.zendesk.sdk.network.impl.ZendeskConfig): void;
-            public static create(param0: javax.inject.Provider): dagger.MembersInjector;
-            public constructor(param0: javax.inject.Provider);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskDateTypeAdapter {
-            public write(param0: com.google.gson.stream.JsonWriter, param1: java.util.Date): void;
-            public read(param0: com.google.gson.stream.JsonReader): java.util.Date;
-            public constructor();
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskHelpCenterProvider {
-            public listArticlesFlat(param0: com.zendesk.sdk.model.helpcenter.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback): void;
-            public deleteVote(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            public getSections(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            public getSection(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            public getArticles(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            public getSuggestedArticles(param0: com.zendesk.sdk.model.helpcenter.SuggestedArticleSearch, param1: com.zendesk.service.ZendeskCallback): void;
-            public getHelp(param0: com.zendesk.sdk.model.helpcenter.help.HelpRequest, param1: com.zendesk.service.ZendeskCallback): void;
-            public getAttachments(param0: java.lang.Long, param1: com.zendesk.sdk.model.helpcenter.AttachmentType, param2: com.zendesk.service.ZendeskCallback): void;
-            public upvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            public getArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            public downvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            public submitRecordArticleView(param0: com.zendesk.sdk.model.helpcenter.Article, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-            public getCategory(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback): void;
-            public getCategories(param0: com.zendesk.service.ZendeskCallback): void;
-            public listArticles(param0: com.zendesk.sdk.model.helpcenter.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback): void;
-            public searchArticles(param0: com.zendesk.sdk.model.helpcenter.HelpCenterSearch, param1: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskHelpCenterService {
-            public listArticles(param0: string, param1: string, param2: java.util.Locale, param3: string, param4: string, param5: string, param6: java.lang.Integer, param7: java.lang.Integer, param8: com.zendesk.service.ZendeskCallback): void;
-            public searchArticles(param0: string, param1: string, param2: java.util.Locale, param3: string, param4: string, param5: string, param6: string, param7: java.lang.Integer, param8: java.lang.Integer, param9: com.zendesk.service.ZendeskCallback): void;
-            public getCategoryById(param0: string, param1: java.lang.Long, param2: java.util.Locale, param3: com.zendesk.service.ZendeskCallback): void;
-            public getSuggestedArticles(param0: string, param1: string, param2: java.util.Locale, param3: string, param4: java.lang.Long, param5: java.lang.Long, param6: com.zendesk.service.ZendeskCallback): void;
-            public upvoteArticle(param0: string, param1: java.lang.Long, param2: string, param3: com.zendesk.service.ZendeskCallback): void;
-            public getSectionsForCategory(param0: string, param1: java.lang.Long, param2: java.util.Locale, param3: com.zendesk.service.ZendeskCallback): void;
-            public deleteVote(param0: string, param1: java.lang.Long, param2: com.zendesk.service.ZendeskCallback): void;
-            public submitRecordArticleView(param0: string, param1: java.lang.Long, param2: java.util.Locale, param3: com.zendesk.sdk.model.helpcenter.RecordArticleViewRequest, param4: com.zendesk.service.ZendeskCallback): void;
-            public getSectionById(param0: string, param1: java.lang.Long, param2: java.util.Locale, param3: com.zendesk.service.ZendeskCallback): void;
-            public getArticle(param0: string, param1: java.lang.Long, param2: java.util.Locale, param3: string, param4: com.zendesk.service.ZendeskCallback): void;
-            public downvoteArticle(param0: string, param1: java.lang.Long, param2: string, param3: com.zendesk.service.ZendeskCallback): void;
-            public getCategories(param0: string, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-            public getArticlesForSection(param0: string, param1: java.lang.Long, param2: java.util.Locale, param3: string, param4: com.zendesk.service.ZendeskCallback): void;
-            public getAttachments(param0: string, param1: java.util.Locale, param2: java.lang.Long, param3: com.zendesk.sdk.model.helpcenter.AttachmentType, param4: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskLocaleConverter {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskNetworkInfoProvider {
-            public unregister(): void;
-            public clearRetryActions(): void;
-            public addRetryAction(param0: java.lang.Integer, param1: com.zendesk.sdk.network.RetryAction): void;
-            public onNetworkAvailable(): void;
-            public onNetworkUnavailable(): void;
-            public register(): void;
-            public clearNetworkAwareListeners(): void;
-            public isNetworkAvailable(): boolean;
-            public addNetworkAwareListener(param0: java.lang.Integer, param1: com.zendesk.sdk.network.NetworkAware): void;
-            public removeRetryAction(param0: java.lang.Integer): void;
-            public removeNetworkAwareListener(param0: java.lang.Integer): void;
-          }
-          export namespace ZendeskNetworkInfoProvider {
-            export class NetworkAvailabilityBroadcastReceiver {
-              public onReceive(param0: android.content.Context, param1: android.content.Intent): void;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskProviderStore {
-            public requestProvider(): com.zendesk.sdk.network.RequestProvider;
-            public uploadProvider(): com.zendesk.sdk.network.UploadProvider;
-            public sdkSettingsProvider(): com.zendesk.sdk.network.SdkSettingsProvider;
-            public helpCenterProvider(): com.zendesk.sdk.network.HelpCenterProvider;
-            public pushRegistrationProvider(): com.zendesk.sdk.network.PushRegistrationProvider;
-            public userProvider(): com.zendesk.sdk.network.UserProvider;
-            public networkInfoProvider(): com.zendesk.sdk.network.NetworkInfoProvider;
-            public uiSettingsHelper(): com.zendesk.sdk.network.SettingsHelper;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskPushRegistrationProvider {
-            public unregisterDevice(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            public registerDeviceWithIdentifier(param0: string, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-            public registerDeviceWithUAChannelId(param0: string, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback): void;
-          }
-          export namespace ZendeskPushRegistrationProvider {
-            export class TokenType {
-              public static Identifier: com.zendesk.sdk.network.impl.ZendeskPushRegistrationProvider.TokenType;
-              public static UrbanAirshipChannelId: com.zendesk.sdk.network.impl.ZendeskPushRegistrationProvider.TokenType;
-              public static valueOf(param0: string): com.zendesk.sdk.network.impl.ZendeskPushRegistrationProvider.TokenType;
-              public static values(): native.Array<com.zendesk.sdk.network.impl.ZendeskPushRegistrationProvider.TokenType>;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskPushRegistrationService {
-            public registerDevice(param0: string, param1: com.zendesk.sdk.model.push.PushRegistrationRequestWrapper, param2: com.zendesk.service.ZendeskCallback): void;
-            public unregisterDevice(param0: string, param1: string, param2: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskRequestInterceptor {
-            public intercept(param0: okhttp3.Interceptor.Chain): okhttp3.Response;
-            public constructor(param0: string, param1: string, param2: string);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskRequestProvider {
-            public getComments(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            public getUpdatesForDevice(param0: com.zendesk.service.ZendeskCallback): void;
-            public getRequests(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            public getRequest(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            public createRequest(param0: com.zendesk.sdk.model.request.CreateRequest, param1: com.zendesk.service.ZendeskCallback): void;
-            public getTicketFormsById(param0: java.util.List, param1: com.zendesk.service.ZendeskCallback): void;
-            public getAllRequests(param0: com.zendesk.service.ZendeskCallback): void;
-            public addComment(param0: string, param1: com.zendesk.sdk.model.request.EndUserComment, param2: com.zendesk.service.ZendeskCallback): void;
-          }
-          export namespace ZendeskRequestProvider {
-            export class RequestUpdatesCacheCallback extends com.zendesk.sdk.network.impl.PassThroughErrorZendeskCallback {
-              public onSuccess(param0: java.lang.Object): void;
-              public onSuccess(param0: java.util.List): void;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskRequestService {
-            public createRequest(param0: string, param1: string, param2: com.zendesk.sdk.model.request.CreateRequest, param3: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskSdkSettingsProvider {
-            public getSettings(param0: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskSdkSettingsService {
-            public getSettings(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskSettingsHelper {
-            public loadSetting(param0: com.zendesk.service.ZendeskCallback): void;
-            public constructor(param0: com.zendesk.sdk.network.BaseProvider);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskUploadProvider {
-            public deleteAttachment(param0: string, param1: com.zendesk.service.ZendeskCallback): void;
-            public uploadAttachment(param0: string, param1: java.io.File, param2: string, param3: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskUploadService {
-            public constructor(param0: com.zendesk.sdk.network.UploadService);
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskUserProvider {
-            public setUserFields(param0: java.util.Map, param1: com.zendesk.service.ZendeskCallback): void;
-            public getUserFields(param0: com.zendesk.service.ZendeskCallback): void;
-            public addTags(param0: java.util.List, param1: com.zendesk.service.ZendeskCallback): void;
-            public deleteTags(param0: java.util.List, param1: com.zendesk.service.ZendeskCallback): void;
-            public getUser(param0: com.zendesk.service.ZendeskCallback): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace network {
-        export namespace impl {
-          export class ZendeskUserService {
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace power {
-        export class BatteryStateBroadcastReceiver {
-          public constructor();
-          public onReceive(param0: android.content.Context, param1: android.content.Intent): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace power {
-        export class PowerConfig {
-          public static FIFTEEN_PERCENT_BATTERY_CHARGE: number;
-          public static THIRTY_PERCENT_BATTERY_CHARGE: number;
-          public isGlobalSyncDisabled(): boolean;
-          public isGlobalSyncEnabled(): boolean;
-          public isBatteryLow(): boolean;
-          public isBatteryOk(): boolean;
-          public static getInstance(param0: android.content.Context): com.zendesk.sdk.power.PowerConfig;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace providers {
-        export class BuildConfig {
-          public static DEBUG: boolean;
-          public static APPLICATION_ID: string;
-          public static BUILD_TYPE: string;
-          public static FLAVOR: string;
-          public static VERSION_CODE: number;
-          public static VERSION_NAME: string;
-          public constructor();
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ArticleVoteStorage {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.storage.ArticleVoteStorage interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            storeArticleVote(param0: java.lang.Long, param1: com.zendesk.sdk.model.helpcenter.ArticleVote): void;
-            getStoredArticleVote(param0: java.lang.Long): com.zendesk.sdk.model.helpcenter.ArticleVote;
-            removeStoredArticleVote(param0: java.lang.Long): void;
-            clearUserData(): void;
-            getCacheKey(): string;
-          });
-          public getStoredArticleVote(param0: java.lang.Long): com.zendesk.sdk.model.helpcenter.ArticleVote;
-          public getCacheKey(): string;
-          public clearUserData(): void;
-          public storeArticleVote(param0: java.lang.Long, param1: com.zendesk.sdk.model.helpcenter.ArticleVote): void;
-          public removeStoredArticleVote(param0: java.lang.Long): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class HelpCenterSessionCache {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.storage.HelpCenterSessionCache interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            getLastSearch(): com.zendesk.sdk.model.helpcenter.LastSearch;
-            setLastSearch(param0: string, param1: number): void;
-            unsetUniqueSearchResultClick(): void;
-            isUniqueSearchResultClick(): boolean;
-          });
-          public getLastSearch(): com.zendesk.sdk.model.helpcenter.LastSearch;
-          public unsetUniqueSearchResultClick(): void;
-          public isUniqueSearchResultClick(): boolean;
-          public setLastSearch(param0: string, param1: number): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class IdentityStorage {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.storage.IdentityStorage interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            storeAccessToken(param0: com.zendesk.sdk.model.access.AccessToken): void;
-            getStoredAccessToken(): com.zendesk.sdk.model.access.AccessToken;
-            storeUserId(param0: java.lang.Long): void;
-            getUserId(): java.lang.Long;
-            getStoredAccessTokenAsBearerToken(): string;
-            getUUID(): string;
-            storeIdentity(param0: com.zendesk.sdk.model.access.Identity): void;
-            getIdentity(): com.zendesk.sdk.model.access.Identity;
-            anonymiseIdentity(): com.zendesk.sdk.model.access.Identity;
-            clearUserData(): void;
-            getCacheKey(): string;
-          });
-          public storeUserId(param0: java.lang.Long): void;
-          public storeAccessToken(param0: com.zendesk.sdk.model.access.AccessToken): void;
-          public getUserId(): java.lang.Long;
-          public getUUID(): string;
-          public getIdentity(): com.zendesk.sdk.model.access.Identity;
-          public anonymiseIdentity(): com.zendesk.sdk.model.access.Identity;
-          public getCacheKey(): string;
-          public storeIdentity(param0: com.zendesk.sdk.model.access.Identity): void;
-          public clearUserData(): void;
-          public getStoredAccessToken(): com.zendesk.sdk.model.access.AccessToken;
-          public getStoredAccessTokenAsBearerToken(): string;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class PushRegistrationResponseStorage {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.storage.PushRegistrationResponseStorage interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            storePushRegistrationResponse(param0: com.zendesk.sdk.model.push.PushRegistrationResponse): void;
-            getPushRegistrationResponse(): com.zendesk.sdk.model.push.PushRegistrationResponse;
-            hasStoredPushRegistrationResponse(): boolean;
-            removePushRegistrationResponse(): void;
-            clearUserData(): void;
-            getCacheKey(): string;
-          });
-          public storePushRegistrationResponse(param0: com.zendesk.sdk.model.push.PushRegistrationResponse): void;
-          public hasStoredPushRegistrationResponse(): boolean;
-          public getPushRegistrationResponse(): com.zendesk.sdk.model.push.PushRegistrationResponse;
-          public removePushRegistrationResponse(): void;
-          public getCacheKey(): string;
-          public clearUserData(): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class RequestSessionCache {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.storage.RequestSessionCache interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            updateTicketFormCache(param0: java.util.List): void;
-            getTicketFormsById(param0: java.util.List): java.util.List;
-            containsAllTicketForms(param0: java.util.List): boolean;
-          });
-          public getTicketFormsById(param0: java.util.List): java.util.List;
-          public updateTicketFormCache(param0: java.util.List): void;
-          public containsAllTicketForms(param0: java.util.List): boolean;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class RequestStorage {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.storage.RequestStorage interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            getStoredRequestIds(): java.util.List;
-            storeRequestId(param0: string): void;
-            setCommentCount(param0: string, param1: number): void;
-            getCommentCount(param0: string): java.lang.Integer;
-            hasStoredRequestUpdates(): boolean;
-            getRequestUpdatesTimestamp(): number;
-            setRequestUpdates(param0: com.zendesk.sdk.model.request.RequestUpdates): void;
-            markRequestAsRead(param0: string): void;
-            getRequestUpdates(): com.zendesk.sdk.model.request.RequestUpdates;
-            clearUserData(): void;
-            getCacheKey(): string;
-          });
-          public setCommentCount(param0: string, param1: number): void;
-          public getCacheKey(): string;
-          public getCommentCount(param0: string): java.lang.Integer;
-          public hasStoredRequestUpdates(): boolean;
-          public getRequestUpdatesTimestamp(): number;
-          public setRequestUpdates(param0: com.zendesk.sdk.model.request.RequestUpdates): void;
-          public markRequestAsRead(param0: string): void;
-          public getStoredRequestIds(): java.util.List;
-          public clearUserData(): void;
-          public getRequestUpdates(): com.zendesk.sdk.model.request.RequestUpdates;
-          public storeRequestId(param0: string): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class SdkSettingsStorage {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.storage.SdkSettingsStorage interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            hasStoredSdkSettings(): boolean;
-            areSettingsUpToDate(param0: number, param1: java.util.concurrent.TimeUnit): boolean;
-            getStoredSettings(): com.zendesk.sdk.model.settings.SafeMobileSettings;
-            setStoredSettings(param0: com.zendesk.sdk.model.settings.SafeMobileSettings): void;
-            deleteStoredSettings(): void;
-          });
-          public getStoredSettings(): com.zendesk.sdk.model.settings.SafeMobileSettings;
-          public areSettingsUpToDate(param0: number, param1: java.util.concurrent.TimeUnit): boolean;
-          public setStoredSettings(param0: com.zendesk.sdk.model.settings.SafeMobileSettings): void;
-          public deleteStoredSettings(): void;
-          public hasStoredSdkSettings(): boolean;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class SdkStorage {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.storage.SdkStorage interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            registerUserStorage(param0: com.zendesk.sdk.storage.SdkStorage.UserStorage): void;
-            clearUserData(): void;
-            getUserStorage(): java.util.Set;
-          });
-          public getUserStorage(): java.util.Set;
-          public registerUserStorage(param0: com.zendesk.sdk.storage.SdkStorage.UserStorage): void;
-          public clearUserData(): void;
-        }
-        export namespace SdkStorage {
-          export class UserStorage {
-            /**
-             * Constructs a new instance of the com.zendesk.sdk.storage.SdkStorage$UserStorage interface with the provided implementation.
-             */
-            public constructor(implementation: {
-              clearUserData(): void;
-              getCacheKey(): string;
-            });
-            public getCacheKey(): string;
-            public clearUserData(): void;
-          }
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule {
-          public constructor();
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule_ProvideArticleVoteStorageFactory {
-          public static proxyProvideArticleVoteStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: android.content.Context, param2: com.google.gson.Gson): com.zendesk.sdk.storage.ArticleVoteStorage;
-          public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-          public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-          public get(): com.zendesk.sdk.storage.ArticleVoteStorage;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule_ProvideHelpCenterSessionCacheFactory {
-          public constructor(param0: com.zendesk.sdk.storage.StorageModule);
-          public static create(param0: com.zendesk.sdk.storage.StorageModule): dagger.internal.Factory;
-          public get(): com.zendesk.sdk.storage.HelpCenterSessionCache;
-          public static proxyProvideHelpCenterSessionCache(param0: com.zendesk.sdk.storage.StorageModule): com.zendesk.sdk.storage.HelpCenterSessionCache;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule_ProvideIdentityStorageFactory {
-          public get(): com.zendesk.sdk.storage.IdentityStorage;
-          public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-          public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-          public static proxyProvideIdentityStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: android.content.Context, param2: com.google.gson.Gson): com.zendesk.sdk.storage.IdentityStorage;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule_ProvidePushDeviceIdStorageFactory {
-          public get(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
-          public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-          public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-          public static proxyProvidePushDeviceIdStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: android.content.Context, param2: com.google.gson.Gson): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule_ProvideRequestSessionCacheFactory {
-          public constructor(param0: com.zendesk.sdk.storage.StorageModule);
-          public get(): com.zendesk.sdk.storage.RequestSessionCache;
-          public static create(param0: com.zendesk.sdk.storage.StorageModule): dagger.internal.Factory;
-          public static proxyProvideRequestSessionCache(param0: com.zendesk.sdk.storage.StorageModule): com.zendesk.sdk.storage.RequestSessionCache;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule_ProvideRequestStorageFactory {
-          public static proxyProvideRequestStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: android.content.Context, param2: com.google.gson.Gson): com.zendesk.sdk.storage.RequestStorage;
-          public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-          public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-          public get(): com.zendesk.sdk.storage.RequestStorage;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule_ProvideSdkSettingsStorageFactory {
-          public static proxyProvideSdkSettingsStorage(param0: com.zendesk.sdk.storage.StorageModule, param1: android.content.Context, param2: com.google.gson.Gson): com.zendesk.sdk.storage.SdkSettingsStorage;
-          public get(): com.zendesk.sdk.storage.SdkSettingsStorage;
-          public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider): dagger.internal.Factory;
-          public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider);
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule_ProvideSdkStorageFactory {
-          public constructor(param0: com.zendesk.sdk.storage.StorageModule);
-          public get(): com.zendesk.sdk.storage.SdkStorage;
-          public static create(param0: com.zendesk.sdk.storage.StorageModule): dagger.internal.Factory;
-          public static proxyProvideSdkStorage(param0: com.zendesk.sdk.storage.StorageModule): com.zendesk.sdk.storage.SdkStorage;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageModule_ProvideStorageStoreFactory {
-          public static create(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider, param7: javax.inject.Provider): dagger.internal.Factory;
-          public constructor(param0: com.zendesk.sdk.storage.StorageModule, param1: javax.inject.Provider, param2: javax.inject.Provider, param3: javax.inject.Provider, param4: javax.inject.Provider, param5: javax.inject.Provider, param6: javax.inject.Provider, param7: javax.inject.Provider);
-          public static proxyProvideStorageStore(param0: com.zendesk.sdk.storage.StorageModule, param1: com.zendesk.sdk.storage.SdkStorage, param2: com.zendesk.sdk.storage.IdentityStorage, param3: com.zendesk.sdk.storage.RequestStorage, param4: com.zendesk.sdk.storage.SdkSettingsStorage, param5: com.zendesk.sdk.storage.HelpCenterSessionCache, param6: com.zendesk.sdk.storage.PushRegistrationResponseStorage, param7: com.zendesk.sdk.storage.ArticleVoteStorage): com.zendesk.sdk.storage.StorageStore;
-          public get(): com.zendesk.sdk.storage.StorageStore;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class StorageStore {
-          /**
-           * Constructs a new instance of the com.zendesk.sdk.storage.StorageStore interface with the provided implementation.
-           */
-          public constructor(implementation: {
-            sdkStorage(): com.zendesk.sdk.storage.SdkStorage;
-            identityStorage(): com.zendesk.sdk.storage.IdentityStorage;
-            requestStorage(): com.zendesk.sdk.storage.RequestStorage;
-            sdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
-            helpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
-            pushStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
-            voteStorage(): com.zendesk.sdk.storage.ArticleVoteStorage;
-          });
-          public requestStorage(): com.zendesk.sdk.storage.RequestStorage;
-          public sdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
-          public helpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
-          public pushStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
-          public voteStorage(): com.zendesk.sdk.storage.ArticleVoteStorage;
-          public sdkStorage(): com.zendesk.sdk.storage.SdkStorage;
-          public identityStorage(): com.zendesk.sdk.storage.IdentityStorage;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ZendeskArticleVoteStorage {
-          public getStoredArticleVote(param0: java.lang.Long): com.zendesk.sdk.model.helpcenter.ArticleVote;
-          public getCacheKey(): string;
-          public clearUserData(): void;
-          public storeArticleVote(param0: java.lang.Long, param1: com.zendesk.sdk.model.helpcenter.ArticleVote): void;
-          public removeStoredArticleVote(param0: java.lang.Long): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ZendeskHelpCenterSessionCache {
-          public static DEFAULT_SEARCH: com.zendesk.sdk.model.helpcenter.LastSearch;
-          public getLastSearch(): com.zendesk.sdk.model.helpcenter.LastSearch;
-          public unsetUniqueSearchResultClick(): void;
-          public isUniqueSearchResultClick(): boolean;
-          public setLastSearch(param0: string, param1: number): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ZendeskIdentityStorage {
-          public storeUserId(param0: java.lang.Long): void;
-          public storeAccessToken(param0: com.zendesk.sdk.model.access.AccessToken): void;
-          public getUserId(): java.lang.Long;
-          public getUUID(): string;
-          public getIdentity(): com.zendesk.sdk.model.access.Identity;
-          public anonymiseIdentity(): com.zendesk.sdk.model.access.Identity;
-          public getCacheKey(): string;
-          public storeIdentity(param0: com.zendesk.sdk.model.access.Identity): void;
-          public clearUserData(): void;
-          public getStoredAccessToken(): com.zendesk.sdk.model.access.AccessToken;
-          public getStoredAccessTokenAsBearerToken(): string;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ZendeskPushRegistrationResponseStorage {
-          public storePushRegistrationResponse(param0: com.zendesk.sdk.model.push.PushRegistrationResponse): void;
-          public hasStoredPushRegistrationResponse(): boolean;
-          public getPushRegistrationResponse(): com.zendesk.sdk.model.push.PushRegistrationResponse;
-          public removePushRegistrationResponse(): void;
-          public getCacheKey(): string;
-          public clearUserData(): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ZendeskRequestSessionCache {
-          public getTicketFormsById(param0: java.util.List): java.util.List;
-          public updateTicketFormCache(param0: java.util.List): void;
-          public containsAllTicketForms(param0: java.util.List): boolean;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ZendeskRequestStorage {
-          public setCommentCount(param0: string, param1: number): void;
-          public getCacheKey(): string;
-          public getCommentCount(param0: string): java.lang.Integer;
-          public hasStoredRequestUpdates(): boolean;
-          public getRequestUpdatesTimestamp(): number;
-          public setRequestUpdates(param0: com.zendesk.sdk.model.request.RequestUpdates): void;
-          public markRequestAsRead(param0: string): void;
-          public getStoredRequestIds(): java.util.List;
-          public clearUserData(): void;
-          public getRequestUpdates(): com.zendesk.sdk.model.request.RequestUpdates;
-          public storeRequestId(param0: string): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ZendeskSdkSettingsStorage {
-          public getStoredSettings(): com.zendesk.sdk.model.settings.SafeMobileSettings;
-          public areSettingsUpToDate(param0: number, param1: java.util.concurrent.TimeUnit): boolean;
-          public setStoredSettings(param0: com.zendesk.sdk.model.settings.SafeMobileSettings): void;
-          public deleteStoredSettings(): void;
-          public hasStoredSdkSettings(): boolean;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ZendeskSdkStorage {
-          public getUserStorage(): java.util.Set;
-          public registerUserStorage(param0: com.zendesk.sdk.storage.SdkStorage.UserStorage): void;
-          public clearUserData(): void;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace storage {
-        export class ZendeskStorageStore {
-          public requestStorage(): com.zendesk.sdk.storage.RequestStorage;
-          public sdkSettingsStorage(): com.zendesk.sdk.storage.SdkSettingsStorage;
-          public helpCenterSessionCache(): com.zendesk.sdk.storage.HelpCenterSessionCache;
-          public pushStorage(): com.zendesk.sdk.storage.PushRegistrationResponseStorage;
-          public voteStorage(): com.zendesk.sdk.storage.ArticleVoteStorage;
-          public sdkStorage(): com.zendesk.sdk.storage.SdkStorage;
-          public identityStorage(): com.zendesk.sdk.storage.IdentityStorage;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace util {
-        export class NetworkUtils {
-          public static isConnected(param0: android.content.Context): boolean;
-          public static getConnectivityManager(param0: android.content.Context): android.net.ConnectivityManager;
-          public static isMobile(param0: android.content.Context): boolean;
-          public static getActiveNetworkInfo(param0: android.content.Context): android.net.NetworkInfo;
-        }
-      }
-    }
-  }
-}
-
-declare namespace com {
-  export namespace zendesk {
-    export namespace sdk {
-      export namespace util {
-        export class StageDetectionUtil {
-          public static isProduction(param0: android.content.Context): boolean;
-          public static isDebug(param0: android.content.Context): boolean;
-        }
-      }
-    }
-  }
-}
+/// <reference path="android-declarations.d.ts"/>
+
+declare module com {
+	export module zendesk {
+		export module sdk {
+			export module providers {
+				export class BuildConfig {
+					public static class: java.lang.Class<com.zendesk.sdk.providers.BuildConfig>;
+					public static DEBUG: boolean;
+					public static APPLICATION_ID: string;
+					public static BUILD_TYPE: string;
+					public static FLAVOR: string;
+					public static VERSION_CODE: number;
+					public static VERSION_NAME: string;
+					public constructor();
+				}
+			}
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class AnswersTracker extends zendesk.support.ZendeskTracker {
+			public static class: java.lang.Class<zendesk.support.AnswersTracker>;
+			public requestCreated(): void;
+			public requestUpdated(): void;
+			public helpCenterSearched(param0: string): void;
+			public helpCenterLoaded(): void;
+			public helpCenterArticleViewed(): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ApplicationScope {
+			public static class: java.lang.Class<zendesk.support.ApplicationScope>;
+			public getZendeskTracker(): zendesk.support.ZendeskTracker;
+			public newBuilder(): zendesk.support.ApplicationScope.Builder;
+			public getLocale(): java.util.Locale;
+		}
+		export module ApplicationScope {
+			export class Builder {
+				public static class: java.lang.Class<zendesk.support.ApplicationScope.Builder>;
+			}
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Article {
+			public static class: java.lang.Class<zendesk.support.Article>;
+			public static UNKNOWN_VOTE_COUNT: number;
+			public getTitle(): string;
+			public getUrl(): string;
+			public isOutdated(): boolean;
+			public getCreatedAt(): java.util.Date;
+			public constructor();
+			public getVoteCount(): number;
+			public getUpdatedAt(): java.util.Date;
+			public isDraft(): boolean;
+			public getSectionId(): java.lang.Long;
+			public getAuthor(): zendesk.support.User;
+			public getAuthorId(): java.lang.Long;
+			public getLocale(): string;
+			public getId(): java.lang.Long;
+			public getLabelNames(): java.util.List<string>;
+			public setAuthor(param0: zendesk.support.User): void;
+			public getSourceLocale(): string;
+			public isCommentsDisabled(): boolean;
+			public getUpvoteCount(): number;
+			public getDownvoteCount(): number;
+			public getBody(): string;
+			public getHtmlUrl(): string;
+			public getVoteSum(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ArticleItem extends zendesk.support.HelpItem {
+			public static class: java.lang.Class<zendesk.support.ArticleItem>;
+			public equals(param0: any): boolean;
+			public getName(): string;
+			public getId(): java.lang.Long;
+			public getParentId(): java.lang.Long;
+			public constructor(param0: java.lang.Long, param1: java.lang.Long, param2: string);
+			public getViewType(): number;
+			public hashCode(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ArticleResponse {
+			public static class: java.lang.Class<zendesk.support.ArticleResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ArticleVote {
+			public static class: java.lang.Class<zendesk.support.ArticleVote>;
+			public getValue(): java.lang.Integer;
+			public equals(param0: any): boolean;
+			public getUrl(): string;
+			public getId(): java.lang.Long;
+			public getUserId(): java.lang.Long;
+			public getItemType(): string;
+			public getCreatedAt(): java.util.Date;
+			public constructor();
+			public getUpdatedAt(): java.util.Date;
+			public getItemId(): java.lang.Long;
+			public hashCode(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ArticleVoteResponse {
+			public static class: java.lang.Class<zendesk.support.ArticleVoteResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ArticleVoteStorage {
+			public static class: java.lang.Class<zendesk.support.ArticleVoteStorage>;
+			/**
+			 * Constructs a new instance of the zendesk.support.ArticleVoteStorage interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				storeArticleVote(param0: java.lang.Long, param1: zendesk.support.ArticleVote): void;
+				getStoredArticleVote(param0: java.lang.Long): zendesk.support.ArticleVote;
+				removeStoredArticleVote(param0: java.lang.Long): void;
+			});
+			public constructor();
+			public removeStoredArticleVote(param0: java.lang.Long): void;
+			public storeArticleVote(param0: java.lang.Long, param1: zendesk.support.ArticleVote): void;
+			public getStoredArticleVote(param0: java.lang.Long): zendesk.support.ArticleVote;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ArticlesListResponse extends zendesk.support.ArticlesResponse {
+			public static class: java.lang.Class<zendesk.support.ArticlesListResponse>;
+			public getSections(): java.util.List<zendesk.support.Section>;
+			public getCategories(): java.util.List<zendesk.support.Category>;
+			public getNextPage(): string;
+			public getArticles(): java.util.List<zendesk.support.Article>;
+			public getUsers(): java.util.List<zendesk.support.User>;
+			public getPreviousPage(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ArticlesResponse {
+			public static class: java.lang.Class<zendesk.support.ArticlesResponse>;
+			/**
+			 * Constructs a new instance of the zendesk.support.ArticlesResponse interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				getArticles(): java.util.List<zendesk.support.Article>;
+				getCategories(): java.util.List<zendesk.support.Category>;
+				getSections(): java.util.List<zendesk.support.Section>;
+				getUsers(): java.util.List<zendesk.support.User>;
+			});
+			public constructor();
+			public getSections(): java.util.List<zendesk.support.Section>;
+			public getCategories(): java.util.List<zendesk.support.Category>;
+			public getArticles(): java.util.List<zendesk.support.Article>;
+			public getUsers(): java.util.List<zendesk.support.User>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ArticlesSearchResponse extends zendesk.support.ArticlesResponse {
+			public static class: java.lang.Class<zendesk.support.ArticlesSearchResponse>;
+			public getSections(): java.util.List<zendesk.support.Section>;
+			public getCategories(): java.util.List<zendesk.support.Category>;
+			public getNextPage(): string;
+			public getArticles(): java.util.List<zendesk.support.Article>;
+			public getUsers(): java.util.List<zendesk.support.User>;
+			public getPreviousPage(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Attachment {
+			public static class: java.lang.Class<zendesk.support.Attachment>;
+			public getSize(): java.lang.Long;
+			public getUrl(): string;
+			public getId(): java.lang.Long;
+			public getFileName(): string;
+			public getHeight(): java.lang.Long;
+			public getWidth(): java.lang.Long;
+			public getThumbnails(): java.util.List<zendesk.support.Attachment>;
+			public constructor();
+			public getContentType(): string;
+			public getContentUrl(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class AttachmentResponse {
+			public static class: java.lang.Class<zendesk.support.AttachmentResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class AttachmentSettings {
+			public static class: java.lang.Class<zendesk.support.AttachmentSettings>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class AttachmentType {
+			public static class: java.lang.Class<zendesk.support.AttachmentType>;
+			public static INLINE: zendesk.support.AttachmentType;
+			public static BLOCK: zendesk.support.AttachmentType;
+			public static valueOf(param0: string): zendesk.support.AttachmentType;
+			public getAttachmentType(): string;
+			public static values(): native.Array<zendesk.support.AttachmentType>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class CategoriesResponse {
+			public static class: java.lang.Class<zendesk.support.CategoriesResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Category {
+			public static class: java.lang.Class<zendesk.support.Category>;
+			public getUrl(): string;
+			public getLocale(): string;
+			public getName(): string;
+			public getId(): java.lang.Long;
+			public isOutdated(): boolean;
+			public getSourceLocale(): string;
+			public getCreatedAt(): java.util.Date;
+			public getPosition(): number;
+			public constructor();
+			public getUpdatedAt(): java.util.Date;
+			public getDescription(): string;
+			public getHtmlUrl(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class CategoryItem extends zendesk.support.HelpItem {
+			public static class: java.lang.Class<zendesk.support.CategoryItem>;
+			public equals(param0: any): boolean;
+			public setSections(param0: java.util.List<zendesk.support.SectionItem>): void;
+			public isExpanded(): boolean;
+			public getName(): string;
+			public getId(): java.lang.Long;
+			public getParentId(): java.lang.Long;
+			public setExpanded(param0: boolean): boolean;
+			public getSections(): java.util.List<zendesk.support.SectionItem>;
+			public constructor();
+			public getViewType(): number;
+			public hashCode(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class CategoryResponse {
+			public static class: java.lang.Class<zendesk.support.CategoryResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Comment {
+			public static class: java.lang.Class<zendesk.support.Comment>;
+			public setBody(param0: string): void;
+			public getUrl(): string;
+			public setAttachments(param0: java.util.List<string>): void;
+			public getAttachments(): java.util.List<string>;
+			public getCreatedAt(): java.util.Date;
+			public constructor();
+			public getHtmlBody(): string;
+			public getAuthorId(): java.lang.Long;
+			public setAuthorId(param0: java.lang.Long): void;
+			public getId(): java.lang.Long;
+			public getRequestId(): string;
+			public isPublic(): boolean;
+			public setCreatedAt(param0: java.util.Date): void;
+			public getBody(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class CommentResponse {
+			public static class: java.lang.Class<zendesk.support.CommentResponse>;
+			public setBody(param0: string): void;
+			public getUrl(): string;
+			public getCreatedAt(): java.util.Date;
+			public constructor();
+			public getHtmlBody(): string;
+			public setAttachments(param0: java.util.List<zendesk.support.Attachment>): void;
+			public getAuthorId(): java.lang.Long;
+			public setAuthorId(param0: java.lang.Long): void;
+			public getId(): java.lang.Long;
+			public getAttachments(): java.util.List<zendesk.support.Attachment>;
+			public getRequestId(): string;
+			public isPublic(): boolean;
+			public setCreatedAt(param0: java.util.Date): void;
+			public setId(param0: java.lang.Long): void;
+			public getBody(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class CommentsResponse extends zendesk.support.ResponseWrapper {
+			public static class: java.lang.Class<zendesk.support.CommentsResponse>;
+			public getOrganizations(): java.util.List<zendesk.support.Organization>;
+			public getComments(): java.util.List<zendesk.support.CommentResponse>;
+			public constructor();
+			public getUsers(): java.util.List<zendesk.support.User>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Constants {
+			public static class: java.lang.Class<zendesk.support.Constants>;
+			/**
+			 * Constructs a new instance of the zendesk.support.Constants interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+			});
+			public constructor();
+			public static USER_AGENT_VARIANT: string;
+			public static CUSTOM_HC_CACHING_HEADER: string;
+			public static SDK_GUID_HEADER: string;
+			public static ACTION_REFRESH_REQUEST_LIST: string;
+			public static ACTION_REFRESH_REQUEST_CONVERSATION: string;
+			public static HOURS_MINUTES_FORMAT: string;
+			public static STANDARD_CACHING_HEADER: string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ContactUsSettings {
+			public static class: java.lang.Class<zendesk.support.ContactUsSettings>;
+			public getTags(): java.util.List<string>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ConversationsSettings {
+			public static class: java.lang.Class<zendesk.support.ConversationsSettings>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class CreateRequest {
+			public static class: java.lang.Class<zendesk.support.CreateRequest>;
+			public setMetadata(param0: java.util.Map<string,string>): void;
+			public setSubject(param0: string): void;
+			public setAttachments(param0: java.util.List<string>): void;
+			public setDescription(param0: string): void;
+			public setCustomFields(param0: java.util.List<zendesk.support.CustomField>): void;
+			public constructor();
+			public getCustomFields(): java.util.List<zendesk.support.CustomField>;
+			public setTicketFormId(param0: java.lang.Long): void;
+			public setTags(param0: java.util.List<string>): void;
+			public getId(): string;
+			public setId(param0: string): void;
+			public getTags(): java.util.List<string>;
+			public getSubject(): string;
+			public getTicketFormId(): java.lang.Long;
+			public getDescription(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class CreateRequestWrapper {
+			public static class: java.lang.Class<zendesk.support.CreateRequestWrapper>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class CustomField {
+			public static class: java.lang.Class<zendesk.support.CustomField>;
+			public getId(): java.lang.Long;
+			public constructor(param0: java.lang.Long, param1: string);
+			public getValue(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class DaggerSupportSdkProvidersComponent extends zendesk.support.SupportSdkProvidersComponent {
+			public static class: java.lang.Class<zendesk.support.DaggerSupportSdkProvidersComponent>;
+			public static builder(): zendesk.support.DaggerSupportSdkProvidersComponent.Builder;
+			public inject(param0: zendesk.support.Support): zendesk.support.Support;
+		}
+		export module DaggerSupportSdkProvidersComponent {
+			export class Builder {
+				public static class: java.lang.Class<zendesk.support.DaggerSupportSdkProvidersComponent.Builder>;
+				public coreModule(param0: zendesk.core.CoreModule): zendesk.support.DaggerSupportSdkProvidersComponent.Builder;
+				public serviceModule(param0: zendesk.support.ServiceModule): zendesk.support.DaggerSupportSdkProvidersComponent.Builder;
+				public supportApplicationModule(param0: zendesk.support.SupportApplicationModule): zendesk.support.DaggerSupportSdkProvidersComponent.Builder;
+				public storageModule(param0: zendesk.support.StorageModule): zendesk.support.DaggerSupportSdkProvidersComponent.Builder;
+				public build(): zendesk.support.SupportSdkProvidersComponent;
+				public providerModule(param0: zendesk.support.ProviderModule): zendesk.support.DaggerSupportSdkProvidersComponent.Builder;
+			}
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class EndUserComment {
+			public static class: java.lang.Class<zendesk.support.EndUserComment>;
+			public setAttachments(param0: java.util.List<string>): void;
+			public getAttachments(): java.util.List<string>;
+			public constructor();
+			public setValue(param0: string): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class FlatArticle extends java.lang.Comparable<zendesk.support.FlatArticle> {
+			public static class: java.lang.Class<zendesk.support.FlatArticle>;
+			public getCategory(): zendesk.support.Category;
+			public toString(): string;
+			public constructor(param0: zendesk.support.Category, param1: zendesk.support.Section, param2: zendesk.support.Article);
+			public getSection(): zendesk.support.Section;
+			public getArticle(): zendesk.support.Article;
+			public compareTo(param0: zendesk.support.FlatArticle): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpCenterAttachment {
+			public static class: java.lang.Class<zendesk.support.HelpCenterAttachment>;
+			public getSize(): java.lang.Long;
+			public getUrl(): string;
+			public getId(): java.lang.Long;
+			public getFileName(): string;
+			public getCreatedAt(): java.util.Date;
+			public constructor();
+			public getContentType(): string;
+			public getUpdatedAt(): java.util.Date;
+			public getContentUrl(): string;
+			public getArticleId(): java.lang.Long;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpCenterCachingInterceptor {
+			public static class: java.lang.Class<zendesk.support.HelpCenterCachingInterceptor>;
+			public intercept(param0: okhttp3.Interceptor.Chain): okhttp3.Response;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpCenterCachingNetworkConfig {
+			public static class: java.lang.Class<zendesk.support.HelpCenterCachingNetworkConfig>;
+			public configureOkHttpClient(param0: okhttp3.OkHttpClient.Builder): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpCenterLocaleConverter {
+			public static class: java.lang.Class<zendesk.support.HelpCenterLocaleConverter>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpCenterProvider {
+			public static class: java.lang.Class<zendesk.support.HelpCenterProvider>;
+			/**
+			 * Constructs a new instance of the zendesk.support.HelpCenterProvider interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				getHelp(param0: zendesk.support.HelpRequest, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.HelpItem>>): void;
+				getCategories(param0: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Category>>): void;
+				getSections(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Section>>): void;
+				getArticles(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Article>>): void;
+				getArticles(param0: java.lang.Long, param1: string, param2: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Article>>): void;
+				listArticles(param0: zendesk.support.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.SearchArticle>>): void;
+				listArticlesFlat(param0: zendesk.support.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.FlatArticle>>): void;
+				searchArticles(param0: zendesk.support.HelpCenterSearch, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.SearchArticle>>): void;
+				getArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Article>): void;
+				getSection(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Section>): void;
+				getCategory(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Category>): void;
+				getAttachments(param0: java.lang.Long, param1: zendesk.support.AttachmentType, param2: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.HelpCenterAttachment>>): void;
+				upvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.ArticleVote>): void;
+				downvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.ArticleVote>): void;
+				deleteVote(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+				getSuggestedArticles(param0: zendesk.support.SuggestedArticleSearch, param1: com.zendesk.service.ZendeskCallback<zendesk.support.SuggestedArticleResponse>): void;
+				submitRecordArticleView(param0: zendesk.support.Article, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+			});
+			public constructor();
+			public getAttachments(param0: java.lang.Long, param1: zendesk.support.AttachmentType, param2: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.HelpCenterAttachment>>): void;
+			public getArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Article>): void;
+			public getArticles(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Article>>): void;
+			public getSections(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Section>>): void;
+			public getCategory(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Category>): void;
+			public deleteVote(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+			public upvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.ArticleVote>): void;
+			public submitRecordArticleView(param0: zendesk.support.Article, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+			public downvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.ArticleVote>): void;
+			public getCategories(param0: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Category>>): void;
+			public listArticlesFlat(param0: zendesk.support.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.FlatArticle>>): void;
+			public getHelp(param0: zendesk.support.HelpRequest, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.HelpItem>>): void;
+			public getArticles(param0: java.lang.Long, param1: string, param2: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Article>>): void;
+			public listArticles(param0: zendesk.support.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.SearchArticle>>): void;
+			public getSuggestedArticles(param0: zendesk.support.SuggestedArticleSearch, param1: com.zendesk.service.ZendeskCallback<zendesk.support.SuggestedArticleResponse>): void;
+			public searchArticles(param0: zendesk.support.HelpCenterSearch, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.SearchArticle>>): void;
+			public getSection(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Section>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpCenterSearch {
+			public static class: java.lang.Class<zendesk.support.HelpCenterSearch>;
+			public getInclude(): string;
+			public getLabelNames(): string;
+			public getCategoryIds(): string;
+			public getQuery(): string;
+			public getPage(): java.lang.Integer;
+			public getSectionIds(): string;
+			public getPerPage(): java.lang.Integer;
+			public withQuery(param0: string): zendesk.support.HelpCenterSearch;
+			public getLocale(): java.util.Locale;
+		}
+		export module HelpCenterSearch {
+			export class Builder {
+				public static class: java.lang.Class<zendesk.support.HelpCenterSearch.Builder>;
+				public withIncludes(param0: native.Array<string>): zendesk.support.HelpCenterSearch.Builder;
+				public withLabelNames(param0: native.Array<string>): zendesk.support.HelpCenterSearch.Builder;
+				public withSectionId(param0: java.lang.Long): zendesk.support.HelpCenterSearch.Builder;
+				public build(): zendesk.support.HelpCenterSearch;
+				public withCategoryId(param0: java.lang.Long): zendesk.support.HelpCenterSearch.Builder;
+				public perPage(param0: java.lang.Integer): zendesk.support.HelpCenterSearch.Builder;
+				public withCategoryIds(param0: java.util.List<java.lang.Long>): zendesk.support.HelpCenterSearch.Builder;
+				public page(param0: java.lang.Integer): zendesk.support.HelpCenterSearch.Builder;
+				public withSectionIds(param0: java.util.List<java.lang.Long>): zendesk.support.HelpCenterSearch.Builder;
+				public constructor();
+				public withQuery(param0: string): zendesk.support.HelpCenterSearch.Builder;
+				public forLocale(param0: java.util.Locale): zendesk.support.HelpCenterSearch.Builder;
+			}
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpCenterService {
+			public static class: java.lang.Class<zendesk.support.HelpCenterService>;
+			/**
+			 * Constructs a new instance of the zendesk.support.HelpCenterService interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				getHelp(param0: string, param1: string, param2: string, param3: string, param4: number, param5: string, param6: number, param7: string, param8: string): retrofit2.Call<zendesk.support.HelpResponse>;
+				getCategories(param0: string): retrofit2.Call<zendesk.support.CategoriesResponse>;
+				getSections(param0: string, param1: java.lang.Long, param2: number): retrofit2.Call<zendesk.support.SectionsResponse>;
+				getArticles(param0: string, param1: java.lang.Long, param2: string, param3: string, param4: number): retrofit2.Call<zendesk.support.ArticlesListResponse>;
+				listArticles(param0: string, param1: string, param2: string, param3: string, param4: string, param5: java.lang.Integer, param6: java.lang.Integer): retrofit2.Call<zendesk.support.ArticlesListResponse>;
+				searchArticles(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: java.lang.Integer, param7: java.lang.Integer): retrofit2.Call<zendesk.support.ArticlesSearchResponse>;
+				getArticle(param0: string, param1: java.lang.Long, param2: string): retrofit2.Call<zendesk.support.ArticleResponse>;
+				getSectionById(param0: string, param1: java.lang.Long): retrofit2.Call<zendesk.support.SectionResponse>;
+				getCategoryById(param0: string, param1: java.lang.Long): retrofit2.Call<zendesk.support.CategoryResponse>;
+				getAttachments(param0: string, param1: java.lang.Long, param2: string): retrofit2.Call<zendesk.support.AttachmentResponse>;
+				upvoteArticle(param0: java.lang.Long, param1: string): retrofit2.Call<zendesk.support.ArticleVoteResponse>;
+				downvoteArticle(param0: java.lang.Long, param1: string): retrofit2.Call<zendesk.support.ArticleVoteResponse>;
+				deleteVote(param0: java.lang.Long): retrofit2.Call<java.lang.Void>;
+				getSuggestedArticles(param0: string, param1: string, param2: string, param3: java.lang.Long, param4: java.lang.Long): retrofit2.Call<zendesk.support.SuggestedArticleResponse>;
+				submitRecordArticleView(param0: java.lang.Long, param1: string, param2: zendesk.support.RecordArticleViewRequest): retrofit2.Call<java.lang.Void>;
+			});
+			public constructor();
+			public getSectionById(param0: string, param1: java.lang.Long): retrofit2.Call<zendesk.support.SectionResponse>;
+			public getSuggestedArticles(param0: string, param1: string, param2: string, param3: java.lang.Long, param4: java.lang.Long): retrofit2.Call<zendesk.support.SuggestedArticleResponse>;
+			public getHelp(param0: string, param1: string, param2: string, param3: string, param4: number, param5: string, param6: number, param7: string, param8: string): retrofit2.Call<zendesk.support.HelpResponse>;
+			public getCategoryById(param0: string, param1: java.lang.Long): retrofit2.Call<zendesk.support.CategoryResponse>;
+			public submitRecordArticleView(param0: java.lang.Long, param1: string, param2: zendesk.support.RecordArticleViewRequest): retrofit2.Call<java.lang.Void>;
+			public listArticles(param0: string, param1: string, param2: string, param3: string, param4: string, param5: java.lang.Integer, param6: java.lang.Integer): retrofit2.Call<zendesk.support.ArticlesListResponse>;
+			public downvoteArticle(param0: java.lang.Long, param1: string): retrofit2.Call<zendesk.support.ArticleVoteResponse>;
+			public upvoteArticle(param0: java.lang.Long, param1: string): retrofit2.Call<zendesk.support.ArticleVoteResponse>;
+			public searchArticles(param0: string, param1: string, param2: string, param3: string, param4: string, param5: string, param6: java.lang.Integer, param7: java.lang.Integer): retrofit2.Call<zendesk.support.ArticlesSearchResponse>;
+			public getAttachments(param0: string, param1: java.lang.Long, param2: string): retrofit2.Call<zendesk.support.AttachmentResponse>;
+			public getArticles(param0: string, param1: java.lang.Long, param2: string, param3: string, param4: number): retrofit2.Call<zendesk.support.ArticlesListResponse>;
+			public getSections(param0: string, param1: java.lang.Long, param2: number): retrofit2.Call<zendesk.support.SectionsResponse>;
+			public getArticle(param0: string, param1: java.lang.Long, param2: string): retrofit2.Call<zendesk.support.ArticleResponse>;
+			public deleteVote(param0: java.lang.Long): retrofit2.Call<java.lang.Void>;
+			public getCategories(param0: string): retrofit2.Call<zendesk.support.CategoriesResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpCenterSessionCache {
+			public static class: java.lang.Class<zendesk.support.HelpCenterSessionCache>;
+			/**
+			 * Constructs a new instance of the zendesk.support.HelpCenterSessionCache interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				getLastSearch(): zendesk.support.LastSearch;
+				setLastSearch(param0: string, param1: number): void;
+				unsetUniqueSearchResultClick(): void;
+				isUniqueSearchResultClick(): boolean;
+			});
+			public constructor();
+			public isUniqueSearchResultClick(): boolean;
+			public unsetUniqueSearchResultClick(): void;
+			public getLastSearch(): zendesk.support.LastSearch;
+			public setLastSearch(param0: string, param1: number): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpCenterSettings {
+			public static class: java.lang.Class<zendesk.support.HelpCenterSettings>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpItem {
+			public static class: java.lang.Class<zendesk.support.HelpItem>;
+			/**
+			 * Constructs a new instance of the zendesk.support.HelpItem interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				getViewType(): number;
+				getName(): string;
+				getId(): java.lang.Long;
+				getParentId(): java.lang.Long;
+			});
+			public constructor();
+			public static TYPE_LOADING: number;
+			public static TYPE_SEE_ALL: number;
+			public static TYPE_SECTION: number;
+			public static TYPE_NO_RESULTS: number;
+			public static TYPE_PADDING: number;
+			public static TYPE_CATEGORY: number;
+			public static TYPE_ARTICLE: number;
+			public getName(): string;
+			public getId(): java.lang.Long;
+			public getParentId(): java.lang.Long;
+			public getViewType(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpRequest {
+			public static class: java.lang.Class<zendesk.support.HelpRequest>;
+			public getCategoryIds(): string;
+			public getLabelNames(): native.Array<string>;
+			public getIncludes(): string;
+			public getSectionIds(): string;
+			public getArticlesPerPageLimit(): number;
+		}
+		export module HelpRequest {
+			export class Builder {
+				public static class: java.lang.Class<zendesk.support.HelpRequest.Builder>;
+				public withArticlesPerSectionLimit(param0: number): zendesk.support.HelpRequest.Builder;
+				public withLabelNames(param0: native.Array<string>): zendesk.support.HelpRequest.Builder;
+				public withCategoryIds(param0: java.util.List<java.lang.Long>): zendesk.support.HelpRequest.Builder;
+				public includeCategories(): zendesk.support.HelpRequest.Builder;
+				public withSectionIds(param0: java.util.List<java.lang.Long>): zendesk.support.HelpRequest.Builder;
+				public build(): zendesk.support.HelpRequest;
+				public includeSections(): zendesk.support.HelpRequest.Builder;
+				public constructor();
+			}
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class HelpResponse {
+			public static class: java.lang.Class<zendesk.support.HelpResponse>;
+			public getCategories(): java.util.List<zendesk.support.CategoryItem>;
+			public getCategoryCount(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class LastSearch {
+			public static class: java.lang.Class<zendesk.support.LastSearch>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class LegacyRequestMigrator extends zendesk.support.RequestMigrator {
+			public static class: java.lang.Class<zendesk.support.LegacyRequestMigrator>;
+			public clearLegacyRequestStorage(): void;
+			public getLegacyRequests(): java.util.List<zendesk.support.RequestData>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ListArticleQuery {
+			public static class: java.lang.Class<zendesk.support.ListArticleQuery>;
+			public setLocale(param0: java.util.Locale): void;
+			public setResultsPerPage(param0: java.lang.Integer): void;
+			public setPage(param0: java.lang.Integer): void;
+			public getSortBy(): zendesk.support.SortBy;
+			public setSortBy(param0: zendesk.support.SortBy): void;
+			public constructor();
+			public getPage(): java.lang.Integer;
+			public getResultsPerPage(): java.lang.Integer;
+			public getInclude(): string;
+			public getSortOrder(): zendesk.support.SortOrder;
+			public getLabelNames(): string;
+			public setInclude(param0: string): void;
+			public setLabelNames(param0: string): void;
+			public getLocale(): java.util.Locale;
+			public setSortOrder(param0: zendesk.support.SortOrder): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Organization {
+			public static class: java.lang.Class<zendesk.support.Organization>;
+			public getName(): string;
+			public getId(): java.lang.Long;
+			public constructor();
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderModule {
+			public static class: java.lang.Class<zendesk.support.ProviderModule>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderModule_ProvideHelpCenterLocaleConverterFactory extends dagger.internal.Factory<zendesk.support.HelpCenterLocaleConverter> {
+			public static class: java.lang.Class<zendesk.support.ProviderModule_ProvideHelpCenterLocaleConverterFactory>;
+			public static create(param0: zendesk.support.ProviderModule): dagger.internal.Factory<zendesk.support.HelpCenterLocaleConverter>;
+			public get(): zendesk.support.HelpCenterLocaleConverter;
+			public static proxyProvideHelpCenterLocaleConverter(param0: zendesk.support.ProviderModule): zendesk.support.HelpCenterLocaleConverter;
+			public constructor(param0: zendesk.support.ProviderModule);
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderModule_ProvideHelpCenterProviderFactory extends dagger.internal.Factory<zendesk.support.HelpCenterProvider> {
+			public static class: java.lang.Class<zendesk.support.ProviderModule_ProvideHelpCenterProviderFactory>;
+			public get(): zendesk.support.HelpCenterProvider;
+			public constructor(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.SupportSettingsProvider>, param2: javax.inject.Provider<zendesk.support.SupportBlipsProvider>, param3: javax.inject.Provider<zendesk.support.ZendeskHelpCenterService>, param4: javax.inject.Provider<zendesk.support.HelpCenterSessionCache>, param5: javax.inject.Provider<zendesk.support.ZendeskTracker>);
+			public static create(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.SupportSettingsProvider>, param2: javax.inject.Provider<zendesk.support.SupportBlipsProvider>, param3: javax.inject.Provider<zendesk.support.ZendeskHelpCenterService>, param4: javax.inject.Provider<zendesk.support.HelpCenterSessionCache>, param5: javax.inject.Provider<zendesk.support.ZendeskTracker>): dagger.internal.Factory<zendesk.support.HelpCenterProvider>;
+			public static proxyProvideHelpCenterProvider(param0: zendesk.support.ProviderModule, param1: zendesk.support.SupportSettingsProvider, param2: zendesk.support.SupportBlipsProvider, param3: any, param4: any, param5: any): zendesk.support.HelpCenterProvider;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderModule_ProvideProviderStoreFactory extends dagger.internal.Factory<zendesk.support.ProviderStore> {
+			public static class: java.lang.Class<zendesk.support.ProviderModule_ProvideProviderStoreFactory>;
+			public static create(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.HelpCenterProvider>, param2: javax.inject.Provider<zendesk.support.RequestProvider>, param3: javax.inject.Provider<zendesk.support.UploadProvider>): dagger.internal.Factory<zendesk.support.ProviderStore>;
+			public static proxyProvideProviderStore(param0: zendesk.support.ProviderModule, param1: zendesk.support.HelpCenterProvider, param2: zendesk.support.RequestProvider, param3: zendesk.support.UploadProvider): zendesk.support.ProviderStore;
+			public constructor(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.HelpCenterProvider>, param2: javax.inject.Provider<zendesk.support.RequestProvider>, param3: javax.inject.Provider<zendesk.support.UploadProvider>);
+			public get(): zendesk.support.ProviderStore;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderModule_ProvideRequestProviderFactory extends dagger.internal.Factory<zendesk.support.RequestProvider> {
+			public static class: java.lang.Class<zendesk.support.ProviderModule_ProvideRequestProviderFactory>;
+			public static proxyProvideRequestProvider(param0: zendesk.support.ProviderModule, param1: zendesk.support.SupportSettingsProvider, param2: zendesk.core.AuthenticationProvider, param3: any, param4: any, param5: any, param6: any, param7: any, param8: zendesk.support.SupportBlipsProvider): zendesk.support.RequestProvider;
+			public constructor(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.SupportSettingsProvider>, param2: javax.inject.Provider<zendesk.core.AuthenticationProvider>, param3: javax.inject.Provider<zendesk.support.ZendeskRequestService>, param4: javax.inject.Provider<zendesk.support.RequestStorage>, param5: javax.inject.Provider<zendesk.support.RequestSessionCache>, param6: javax.inject.Provider<zendesk.support.ZendeskTracker>, param7: javax.inject.Provider<zendesk.support.SupportSdkMetadata>, param8: javax.inject.Provider<zendesk.support.SupportBlipsProvider>);
+			public get(): zendesk.support.RequestProvider;
+			public static create(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.SupportSettingsProvider>, param2: javax.inject.Provider<zendesk.core.AuthenticationProvider>, param3: javax.inject.Provider<zendesk.support.ZendeskRequestService>, param4: javax.inject.Provider<zendesk.support.RequestStorage>, param5: javax.inject.Provider<zendesk.support.RequestSessionCache>, param6: javax.inject.Provider<zendesk.support.ZendeskTracker>, param7: javax.inject.Provider<zendesk.support.SupportSdkMetadata>, param8: javax.inject.Provider<zendesk.support.SupportBlipsProvider>): dagger.internal.Factory<zendesk.support.RequestProvider>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderModule_ProvideSdkSettingsProviderFactory extends dagger.internal.Factory<zendesk.support.SupportSettingsProvider> {
+			public static class: java.lang.Class<zendesk.support.ProviderModule_ProvideSdkSettingsProviderFactory>;
+			public constructor(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.core.SettingsProvider>, param2: javax.inject.Provider<java.util.Locale>, param3: javax.inject.Provider<zendesk.support.HelpCenterLocaleConverter>);
+			public get(): zendesk.support.SupportSettingsProvider;
+			public static create(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.core.SettingsProvider>, param2: javax.inject.Provider<java.util.Locale>, param3: javax.inject.Provider<zendesk.support.HelpCenterLocaleConverter>): dagger.internal.Factory<zendesk.support.SupportSettingsProvider>;
+			public static proxyProvideSdkSettingsProvider(param0: zendesk.support.ProviderModule, param1: zendesk.core.SettingsProvider, param2: java.util.Locale, param3: any): zendesk.support.SupportSettingsProvider;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderModule_ProvideSupportBlipsProviderFactory extends dagger.internal.Factory<zendesk.support.SupportBlipsProvider> {
+			public static class: java.lang.Class<zendesk.support.ProviderModule_ProvideSupportBlipsProviderFactory>;
+			public constructor(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.core.BlipsProvider>, param2: javax.inject.Provider<java.util.Locale>);
+			public static proxyProvideSupportBlipsProvider(param0: zendesk.support.ProviderModule, param1: zendesk.core.BlipsProvider, param2: java.util.Locale): zendesk.support.SupportBlipsProvider;
+			public get(): zendesk.support.SupportBlipsProvider;
+			public static create(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.core.BlipsProvider>, param2: javax.inject.Provider<java.util.Locale>): dagger.internal.Factory<zendesk.support.SupportBlipsProvider>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderModule_ProvideSupportModuleFactory extends dagger.internal.Factory<zendesk.support.SupportModule> {
+			public static class: java.lang.Class<zendesk.support.ProviderModule_ProvideSupportModuleFactory>;
+			public static create(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.RequestProvider>, param2: javax.inject.Provider<zendesk.support.UploadProvider>, param3: javax.inject.Provider<zendesk.support.HelpCenterProvider>, param4: javax.inject.Provider<zendesk.support.SupportSettingsProvider>, param5: javax.inject.Provider<zendesk.core.RestServiceProvider>, param6: javax.inject.Provider<zendesk.support.SupportBlipsProvider>, param7: javax.inject.Provider<zendesk.support.ZendeskTracker>, param8: javax.inject.Provider<zendesk.support.ArticleVoteStorage>): dagger.internal.Factory<zendesk.support.SupportModule>;
+			public get(): zendesk.support.SupportModule;
+			public static proxyProvideSupportModule(param0: zendesk.support.ProviderModule, param1: zendesk.support.RequestProvider, param2: zendesk.support.UploadProvider, param3: zendesk.support.HelpCenterProvider, param4: zendesk.support.SupportSettingsProvider, param5: zendesk.core.RestServiceProvider, param6: zendesk.support.SupportBlipsProvider, param7: any, param8: zendesk.support.ArticleVoteStorage): zendesk.support.SupportModule;
+			public constructor(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.RequestProvider>, param2: javax.inject.Provider<zendesk.support.UploadProvider>, param3: javax.inject.Provider<zendesk.support.HelpCenterProvider>, param4: javax.inject.Provider<zendesk.support.SupportSettingsProvider>, param5: javax.inject.Provider<zendesk.core.RestServiceProvider>, param6: javax.inject.Provider<zendesk.support.SupportBlipsProvider>, param7: javax.inject.Provider<zendesk.support.ZendeskTracker>, param8: javax.inject.Provider<zendesk.support.ArticleVoteStorage>);
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderModule_ProvideUploadProviderFactory extends dagger.internal.Factory<zendesk.support.UploadProvider> {
+			public static class: java.lang.Class<zendesk.support.ProviderModule_ProvideUploadProviderFactory>;
+			public constructor(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.ZendeskUploadService>);
+			public static create(param0: zendesk.support.ProviderModule, param1: javax.inject.Provider<zendesk.support.ZendeskUploadService>): dagger.internal.Factory<zendesk.support.UploadProvider>;
+			public static proxyProvideUploadProvider(param0: zendesk.support.ProviderModule, param1: any): zendesk.support.UploadProvider;
+			public get(): zendesk.support.UploadProvider;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ProviderStore {
+			public static class: java.lang.Class<zendesk.support.ProviderStore>;
+			/**
+			 * Constructs a new instance of the zendesk.support.ProviderStore interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				helpCenterProvider(): zendesk.support.HelpCenterProvider;
+				requestProvider(): zendesk.support.RequestProvider;
+				uploadProvider(): zendesk.support.UploadProvider;
+			});
+			public constructor();
+			public helpCenterProvider(): zendesk.support.HelpCenterProvider;
+			public requestProvider(): zendesk.support.RequestProvider;
+			public uploadProvider(): zendesk.support.UploadProvider;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RawTicketField {
+			public static class: java.lang.Class<zendesk.support.RawTicketField>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RawTicketFieldOption {
+			public static class: java.lang.Class<zendesk.support.RawTicketFieldOption>;
+			public static create(param0: zendesk.support.RawTicketFieldOption): zendesk.support.TicketFieldOption;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RawTicketFieldSystemOption {
+			public static class: java.lang.Class<zendesk.support.RawTicketFieldSystemOption>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RawTicketForm {
+			public static class: java.lang.Class<zendesk.support.RawTicketForm>;
+			public static create(param0: zendesk.support.RawTicketForm, param1: java.util.List<zendesk.support.TicketField>): zendesk.support.TicketForm;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RawTicketFormResponse {
+			public static class: java.lang.Class<zendesk.support.RawTicketFormResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RecordArticleViewRequest {
+			public static class: java.lang.Class<zendesk.support.RecordArticleViewRequest>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Request {
+			public static class: java.lang.Class<zendesk.support.Request>;
+			public getCommentCount(): java.lang.Integer;
+			public getFirstComment(): zendesk.support.Comment;
+			public getUrl(): string;
+			public getDueAt(): java.util.Date;
+			public getRequesterId(): java.lang.Long;
+			public getLastCommentingAgents(): java.util.List<zendesk.support.User>;
+			public getCreatedAt(): java.util.Date;
+			public getStatus(): zendesk.support.RequestStatus;
+			public constructor();
+			public getUpdatedAt(): java.util.Date;
+			public getOrganizationId(): java.lang.Long;
+			public setComment(param0: zendesk.support.EndUserComment): void;
+			public getId(): string;
+			public getSubject(): string;
+			public getPriority(): string;
+			public getPublicUpdatedAt(): java.util.Date;
+			public getLastComment(): zendesk.support.Comment;
+			public getDescription(): string;
+			public getCollaboratorIds(): java.util.List<java.lang.Long>;
+			public getType(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestData {
+			public static class: java.lang.Class<zendesk.support.RequestData>;
+			public equals(param0: any): boolean;
+			public toString(): string;
+			public hashCode(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestDataList {
+			public static class: java.lang.Class<zendesk.support.RequestDataList>;
+			public equals(param0: any): boolean;
+			public hashCode(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestMigrator {
+			public static class: java.lang.Class<zendesk.support.RequestMigrator>;
+			/**
+			 * Constructs a new instance of the zendesk.support.RequestMigrator interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				getLegacyRequests(): java.util.List<zendesk.support.RequestData>;
+				clearLegacyRequestStorage(): void;
+			});
+			public constructor();
+			public clearLegacyRequestStorage(): void;
+			public getLegacyRequests(): java.util.List<zendesk.support.RequestData>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestProvider {
+			public static class: java.lang.Class<zendesk.support.RequestProvider>;
+			/**
+			 * Constructs a new instance of the zendesk.support.RequestProvider interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				createRequest(param0: zendesk.support.CreateRequest, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Request>): void;
+				getAllRequests(param0: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Request>>): void;
+				getRequests(param0: string, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Request>>): void;
+				getComments(param0: string, param1: com.zendesk.service.ZendeskCallback<zendesk.support.CommentsResponse>): void;
+				getCommentsSince(param0: string, param1: java.util.Date, param2: boolean, param3: com.zendesk.service.ZendeskCallback<zendesk.support.CommentsResponse>): void;
+				addComment(param0: string, param1: zendesk.support.EndUserComment, param2: com.zendesk.service.ZendeskCallback<zendesk.support.Comment>): void;
+				getRequest(param0: string, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Request>): void;
+				getTicketFormsById(param0: java.util.List<java.lang.Long>, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.TicketForm>>): void;
+				getUpdatesForDevice(param0: com.zendesk.service.ZendeskCallback<zendesk.support.RequestUpdates>): void;
+				markRequestAsRead(param0: string, param1: number): void;
+				markRequestAsUnread(param0: string): void;
+			});
+			public constructor();
+			public createRequest(param0: zendesk.support.CreateRequest, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Request>): void;
+			public getCommentsSince(param0: string, param1: java.util.Date, param2: boolean, param3: com.zendesk.service.ZendeskCallback<zendesk.support.CommentsResponse>): void;
+			public getUpdatesForDevice(param0: com.zendesk.service.ZendeskCallback<zendesk.support.RequestUpdates>): void;
+			public addComment(param0: string, param1: zendesk.support.EndUserComment, param2: com.zendesk.service.ZendeskCallback<zendesk.support.Comment>): void;
+			public getComments(param0: string, param1: com.zendesk.service.ZendeskCallback<zendesk.support.CommentsResponse>): void;
+			public getTicketFormsById(param0: java.util.List<java.lang.Long>, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.TicketForm>>): void;
+			public markRequestAsRead(param0: string, param1: number): void;
+			public markRequestAsUnread(param0: string): void;
+			public getRequests(param0: string, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Request>>): void;
+			public getAllRequests(param0: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Request>>): void;
+			public getRequest(param0: string, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Request>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestResponse {
+			public static class: java.lang.Class<zendesk.support.RequestResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestService {
+			public static class: java.lang.Class<zendesk.support.RequestService>;
+			/**
+			 * Constructs a new instance of the zendesk.support.RequestService interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				createRequest(param0: string, param1: zendesk.support.CreateRequestWrapper): retrofit2.Call<zendesk.support.RequestResponse>;
+				getAllRequests(param0: string, param1: string): retrofit2.Call<zendesk.support.RequestsResponse>;
+				getManyRequests(param0: string, param1: string, param2: string): retrofit2.Call<zendesk.support.RequestsResponse>;
+				getComments(param0: string): retrofit2.Call<zendesk.support.CommentsResponse>;
+				getCommentsSince(param0: string, param1: string, param2: string): retrofit2.Call<zendesk.support.CommentsResponse>;
+				addComment(param0: string, param1: zendesk.support.UpdateRequestWrapper): retrofit2.Call<zendesk.support.RequestResponse>;
+				getRequest(param0: string, param1: string): retrofit2.Call<zendesk.support.RequestResponse>;
+				getTicketFormsById(param0: string, param1: string): retrofit2.Call<zendesk.support.RawTicketFormResponse>;
+			});
+			public constructor();
+			public getCommentsSince(param0: string, param1: string, param2: string): retrofit2.Call<zendesk.support.CommentsResponse>;
+			public getManyRequests(param0: string, param1: string, param2: string): retrofit2.Call<zendesk.support.RequestsResponse>;
+			public getRequest(param0: string, param1: string): retrofit2.Call<zendesk.support.RequestResponse>;
+			public getTicketFormsById(param0: string, param1: string): retrofit2.Call<zendesk.support.RawTicketFormResponse>;
+			public getComments(param0: string): retrofit2.Call<zendesk.support.CommentsResponse>;
+			public addComment(param0: string, param1: zendesk.support.UpdateRequestWrapper): retrofit2.Call<zendesk.support.RequestResponse>;
+			public getAllRequests(param0: string, param1: string): retrofit2.Call<zendesk.support.RequestsResponse>;
+			public createRequest(param0: string, param1: zendesk.support.CreateRequestWrapper): retrofit2.Call<zendesk.support.RequestResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestSessionCache {
+			public static class: java.lang.Class<zendesk.support.RequestSessionCache>;
+			/**
+			 * Constructs a new instance of the zendesk.support.RequestSessionCache interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				updateTicketFormCache(param0: java.util.List<zendesk.support.TicketForm>): void;
+				getTicketFormsById(param0: java.util.List<java.lang.Long>): java.util.List<zendesk.support.TicketForm>;
+				containsAllTicketForms(param0: java.util.List<java.lang.Long>): boolean;
+			});
+			public constructor();
+			public updateTicketFormCache(param0: java.util.List<zendesk.support.TicketForm>): void;
+			public getTicketFormsById(param0: java.util.List<java.lang.Long>): java.util.List<zendesk.support.TicketForm>;
+			public containsAllTicketForms(param0: java.util.List<java.lang.Long>): boolean;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestStatus {
+			public static class: java.lang.Class<zendesk.support.RequestStatus>;
+			public static New: zendesk.support.RequestStatus;
+			public static Open: zendesk.support.RequestStatus;
+			public static Pending: zendesk.support.RequestStatus;
+			public static Hold: zendesk.support.RequestStatus;
+			public static Solved: zendesk.support.RequestStatus;
+			public static Closed: zendesk.support.RequestStatus;
+			public static values(): native.Array<zendesk.support.RequestStatus>;
+			public static valueOf(param0: string): zendesk.support.RequestStatus;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestStorage {
+			public static class: java.lang.Class<zendesk.support.RequestStorage>;
+			/**
+			 * Constructs a new instance of the zendesk.support.RequestStorage interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				storeRequestData(param0: java.util.List<zendesk.support.RequestData>): void;
+				getRequestData(): java.util.List<zendesk.support.RequestData>;
+				isRequestDataExpired(): boolean;
+				updateRequestData(param0: java.util.List<zendesk.support.Request>): void;
+				markRequestAsRead(param0: string, param1: number): void;
+				markRequestAsUnread(param0: string): void;
+			});
+			public constructor();
+			public storeRequestData(param0: java.util.List<zendesk.support.RequestData>): void;
+			public getRequestData(): java.util.List<zendesk.support.RequestData>;
+			public isRequestDataExpired(): boolean;
+			public markRequestAsRead(param0: string, param1: number): void;
+			public markRequestAsUnread(param0: string): void;
+			public updateRequestData(param0: java.util.List<zendesk.support.Request>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestUpdates {
+			public static class: java.lang.Class<zendesk.support.RequestUpdates>;
+			public getRequestUpdates(): java.util.Map<string,java.lang.Integer>;
+			public totalUpdates(): number;
+			public isRequestUnread(param0: string): boolean;
+			public constructor(param0: java.util.Map<string,java.lang.Integer>);
+			public hasUpdatedRequests(): boolean;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class RequestsResponse extends zendesk.support.ResponseWrapper {
+			public static class: java.lang.Class<zendesk.support.RequestsResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export abstract class ResponseWrapper {
+			public static class: java.lang.Class<zendesk.support.ResponseWrapper>;
+			public getCount(): java.lang.Integer;
+			public constructor();
+			public getNextPage(): string;
+			public getPreviousPage(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SearchArticle {
+			public static class: java.lang.Class<zendesk.support.SearchArticle>;
+			public getCategory(): zendesk.support.Category;
+			public getSection(): zendesk.support.Section;
+			public getArticle(): zendesk.support.Article;
+			public constructor(param0: zendesk.support.Article, param1: zendesk.support.Section, param2: zendesk.support.Category);
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Section {
+			public static class: java.lang.Class<zendesk.support.Section>;
+			public getCategoryId(): java.lang.Long;
+			public getUrl(): string;
+			public isOutdated(): boolean;
+			public getArticlesCount(): number;
+			public getCreatedAt(): java.util.Date;
+			public getPosition(): number;
+			public constructor();
+			public getUpdatedAt(): java.util.Date;
+			public getLocale(): string;
+			public getSorting(): string;
+			public getName(): string;
+			public getId(): java.lang.Long;
+			public getSourceLocale(): string;
+			public getDescription(): string;
+			public getHtmlUrl(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SectionItem extends zendesk.support.HelpItem {
+			public static class: java.lang.Class<zendesk.support.SectionItem>;
+			public addArticle(param0: zendesk.support.ArticleItem): void;
+			public equals(param0: any): boolean;
+			public getName(): string;
+			public getChildren(): java.util.List<zendesk.support.HelpItem>;
+			public getId(): java.lang.Long;
+			public getParentId(): java.lang.Long;
+			public getTotalArticlesCount(): number;
+			public constructor();
+			public getViewType(): number;
+			public hashCode(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SectionResponse {
+			public static class: java.lang.Class<zendesk.support.SectionResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SectionsResponse {
+			public static class: java.lang.Class<zendesk.support.SectionsResponse>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SeeAllArticlesItem extends zendesk.support.HelpItem {
+			public static class: java.lang.Class<zendesk.support.SeeAllArticlesItem>;
+			public equals(param0: any): boolean;
+			public getName(): string;
+			public constructor(param0: zendesk.support.SectionItem);
+			public getId(): java.lang.Long;
+			public getParentId(): java.lang.Long;
+			public getSection(): zendesk.support.SectionItem;
+			public setLoading(param0: boolean): void;
+			public isLoading(): boolean;
+			public getViewType(): number;
+			public hashCode(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ServiceModule {
+			public static class: java.lang.Class<zendesk.support.ServiceModule>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ServiceModule_ProvideCustomNetworkConfigFactory extends dagger.internal.Factory<zendesk.support.HelpCenterCachingNetworkConfig> {
+			public static class: java.lang.Class<zendesk.support.ServiceModule_ProvideCustomNetworkConfigFactory>;
+			public get(): zendesk.support.HelpCenterCachingNetworkConfig;
+			public constructor(param0: javax.inject.Provider<zendesk.support.HelpCenterCachingInterceptor>);
+			public static proxyProvideCustomNetworkConfig(param0: any): zendesk.support.HelpCenterCachingNetworkConfig;
+			public static create(param0: javax.inject.Provider<zendesk.support.HelpCenterCachingInterceptor>): dagger.internal.Factory<zendesk.support.HelpCenterCachingNetworkConfig>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ServiceModule_ProvideHelpCenterCachingInterceptorFactory extends dagger.internal.Factory<zendesk.support.HelpCenterCachingInterceptor> {
+			public static class: java.lang.Class<zendesk.support.ServiceModule_ProvideHelpCenterCachingInterceptorFactory>;
+			public static create(): dagger.internal.Factory<zendesk.support.HelpCenterCachingInterceptor>;
+			public constructor();
+			public static proxyProvideHelpCenterCachingInterceptor(): zendesk.support.HelpCenterCachingInterceptor;
+			public get(): zendesk.support.HelpCenterCachingInterceptor;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ServiceModule_ProvideZendeskHelpCenterServiceFactory extends dagger.internal.Factory<zendesk.support.ZendeskHelpCenterService> {
+			public static class: java.lang.Class<zendesk.support.ServiceModule_ProvideZendeskHelpCenterServiceFactory>;
+			public static proxyProvideZendeskHelpCenterService(param0: any, param1: any): zendesk.support.ZendeskHelpCenterService;
+			public get(): zendesk.support.ZendeskHelpCenterService;
+			public static create(param0: javax.inject.Provider<zendesk.support.HelpCenterService>, param1: javax.inject.Provider<zendesk.support.HelpCenterLocaleConverter>): dagger.internal.Factory<zendesk.support.ZendeskHelpCenterService>;
+			public constructor(param0: javax.inject.Provider<zendesk.support.HelpCenterService>, param1: javax.inject.Provider<zendesk.support.HelpCenterLocaleConverter>);
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ServiceModule_ProvideZendeskRequestServiceFactory extends dagger.internal.Factory<zendesk.support.ZendeskRequestService> {
+			public static class: java.lang.Class<zendesk.support.ServiceModule_ProvideZendeskRequestServiceFactory>;
+			public static create(param0: javax.inject.Provider<zendesk.support.RequestService>): dagger.internal.Factory<zendesk.support.ZendeskRequestService>;
+			public constructor(param0: javax.inject.Provider<zendesk.support.RequestService>);
+			public get(): zendesk.support.ZendeskRequestService;
+			public static proxyProvideZendeskRequestService(param0: any): zendesk.support.ZendeskRequestService;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ServiceModule_ProvideZendeskUploadServiceFactory extends dagger.internal.Factory<zendesk.support.ZendeskUploadService> {
+			public static class: java.lang.Class<zendesk.support.ServiceModule_ProvideZendeskUploadServiceFactory>;
+			public constructor(param0: javax.inject.Provider<zendesk.support.UploadService>);
+			public static create(param0: javax.inject.Provider<zendesk.support.UploadService>): dagger.internal.Factory<zendesk.support.ZendeskUploadService>;
+			public get(): zendesk.support.ZendeskUploadService;
+			public static proxyProvideZendeskUploadService(param0: any): zendesk.support.ZendeskUploadService;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ServiceModule_ProvidesHelpCenterServiceFactory extends dagger.internal.Factory<zendesk.support.HelpCenterService> {
+			public static class: java.lang.Class<zendesk.support.ServiceModule_ProvidesHelpCenterServiceFactory>;
+			public static create(param0: javax.inject.Provider<zendesk.core.RestServiceProvider>, param1: javax.inject.Provider<zendesk.support.HelpCenterCachingNetworkConfig>): dagger.internal.Factory<zendesk.support.HelpCenterService>;
+			public get(): zendesk.support.HelpCenterService;
+			public constructor(param0: javax.inject.Provider<zendesk.core.RestServiceProvider>, param1: javax.inject.Provider<zendesk.support.HelpCenterCachingNetworkConfig>);
+			public static proxyProvidesHelpCenterService(param0: zendesk.core.RestServiceProvider, param1: any): zendesk.support.HelpCenterService;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ServiceModule_ProvidesRequestServiceFactory extends dagger.internal.Factory<zendesk.support.RequestService> {
+			public static class: java.lang.Class<zendesk.support.ServiceModule_ProvidesRequestServiceFactory>;
+			public get(): zendesk.support.RequestService;
+			public static proxyProvidesRequestService(param0: zendesk.core.RestServiceProvider): zendesk.support.RequestService;
+			public constructor(param0: javax.inject.Provider<zendesk.core.RestServiceProvider>);
+			public static create(param0: javax.inject.Provider<zendesk.core.RestServiceProvider>): dagger.internal.Factory<zendesk.support.RequestService>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ServiceModule_ProvidesUploadServiceFactory extends dagger.internal.Factory<zendesk.support.UploadService> {
+			public static class: java.lang.Class<zendesk.support.ServiceModule_ProvidesUploadServiceFactory>;
+			public static create(param0: javax.inject.Provider<zendesk.core.RestServiceProvider>): dagger.internal.Factory<zendesk.support.UploadService>;
+			public static proxyProvidesUploadService(param0: zendesk.core.RestServiceProvider): zendesk.support.UploadService;
+			public constructor(param0: javax.inject.Provider<zendesk.core.RestServiceProvider>);
+			public get(): zendesk.support.UploadService;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SimpleArticle {
+			public static class: java.lang.Class<zendesk.support.SimpleArticle>;
+			public getTitle(): string;
+			public getId(): java.lang.Long;
+			public constructor(param0: java.lang.Long, param1: string);
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SortBy {
+			public static class: java.lang.Class<zendesk.support.SortBy>;
+			public static POSITION: zendesk.support.SortBy;
+			public static TITLE: zendesk.support.SortBy;
+			public static CREATED_AT: zendesk.support.SortBy;
+			public static UPDATED_AT: zendesk.support.SortBy;
+			public static valueOf(param0: string): zendesk.support.SortBy;
+			public static values(): native.Array<zendesk.support.SortBy>;
+			public getApiValue(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SortOrder {
+			public static class: java.lang.Class<zendesk.support.SortOrder>;
+			public static ASCENDING: zendesk.support.SortOrder;
+			public static DESCENDING: zendesk.support.SortOrder;
+			public static values(): native.Array<zendesk.support.SortOrder>;
+			public static valueOf(param0: string): zendesk.support.SortOrder;
+			public getApiValue(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class StorageModule {
+			public static class: java.lang.Class<zendesk.support.StorageModule>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class StorageModule_ProvideArticleVoteStorageFactory extends dagger.internal.Factory<zendesk.support.ArticleVoteStorage> {
+			public static class: java.lang.Class<zendesk.support.StorageModule_ProvideArticleVoteStorageFactory>;
+			public static create(param0: zendesk.support.StorageModule, param1: javax.inject.Provider<zendesk.core.SessionStorage>): dagger.internal.Factory<zendesk.support.ArticleVoteStorage>;
+			public constructor(param0: zendesk.support.StorageModule, param1: javax.inject.Provider<zendesk.core.SessionStorage>);
+			public get(): zendesk.support.ArticleVoteStorage;
+			public static proxyProvideArticleVoteStorage(param0: zendesk.support.StorageModule, param1: zendesk.core.SessionStorage): zendesk.support.ArticleVoteStorage;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class StorageModule_ProvideHelpCenterSessionCacheFactory extends dagger.internal.Factory<zendesk.support.HelpCenterSessionCache> {
+			public static class: java.lang.Class<zendesk.support.StorageModule_ProvideHelpCenterSessionCacheFactory>;
+			public static create(param0: zendesk.support.StorageModule): dagger.internal.Factory<zendesk.support.HelpCenterSessionCache>;
+			public static proxyProvideHelpCenterSessionCache(param0: zendesk.support.StorageModule): zendesk.support.HelpCenterSessionCache;
+			public constructor(param0: zendesk.support.StorageModule);
+			public get(): zendesk.support.HelpCenterSessionCache;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class StorageModule_ProvideRequestMigratorFactory extends dagger.internal.Factory<zendesk.support.RequestMigrator> {
+			public static class: java.lang.Class<zendesk.support.StorageModule_ProvideRequestMigratorFactory>;
+			public get(): zendesk.support.RequestMigrator;
+			public constructor(param0: zendesk.support.StorageModule, param1: javax.inject.Provider<globalAndroid.content.Context>);
+			public static proxyProvideRequestMigrator(param0: zendesk.support.StorageModule, param1: globalAndroid.content.Context): zendesk.support.RequestMigrator;
+			public static create(param0: zendesk.support.StorageModule, param1: javax.inject.Provider<globalAndroid.content.Context>): dagger.internal.Factory<zendesk.support.RequestMigrator>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class StorageModule_ProvideRequestSessionCacheFactory extends dagger.internal.Factory<zendesk.support.RequestSessionCache> {
+			public static class: java.lang.Class<zendesk.support.StorageModule_ProvideRequestSessionCacheFactory>;
+			public get(): zendesk.support.RequestSessionCache;
+			public static proxyProvideRequestSessionCache(param0: zendesk.support.StorageModule): zendesk.support.RequestSessionCache;
+			public constructor(param0: zendesk.support.StorageModule);
+			public static create(param0: zendesk.support.StorageModule): dagger.internal.Factory<zendesk.support.RequestSessionCache>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class StorageModule_ProvideRequestStorageFactory extends dagger.internal.Factory<zendesk.support.RequestStorage> {
+			public static class: java.lang.Class<zendesk.support.StorageModule_ProvideRequestStorageFactory>;
+			public static proxyProvideRequestStorage(param0: zendesk.support.StorageModule, param1: zendesk.core.SessionStorage, param2: any, param3: zendesk.core.MemoryCache): zendesk.support.RequestStorage;
+			public constructor(param0: zendesk.support.StorageModule, param1: javax.inject.Provider<zendesk.core.SessionStorage>, param2: javax.inject.Provider<zendesk.support.RequestMigrator>, param3: javax.inject.Provider<zendesk.core.MemoryCache>);
+			public get(): zendesk.support.RequestStorage;
+			public static create(param0: zendesk.support.StorageModule, param1: javax.inject.Provider<zendesk.core.SessionStorage>, param2: javax.inject.Provider<zendesk.support.RequestMigrator>, param3: javax.inject.Provider<zendesk.core.MemoryCache>): dagger.internal.Factory<zendesk.support.RequestStorage>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SuggestedArticleResponse {
+			public static class: java.lang.Class<zendesk.support.SuggestedArticleResponse>;
+			public getResults(): java.util.List<zendesk.support.SimpleArticle>;
+			public constructor();
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SuggestedArticleSearch {
+			public static class: java.lang.Class<zendesk.support.SuggestedArticleSearch>;
+			public getLabelNames(): string;
+			public getCategoryId(): java.lang.Long;
+			public getQuery(): string;
+			public getSectionId(): java.lang.Long;
+			public getLocale(): java.util.Locale;
+		}
+		export module SuggestedArticleSearch {
+			export class Builder {
+				public static class: java.lang.Class<zendesk.support.SuggestedArticleSearch.Builder>;
+				public withSectionId(param0: java.lang.Long): zendesk.support.SuggestedArticleSearch.Builder;
+				public withQuery(param0: string): zendesk.support.SuggestedArticleSearch.Builder;
+				public forLocale(param0: java.util.Locale): zendesk.support.SuggestedArticleSearch.Builder;
+				public withLabelNames(param0: native.Array<string>): zendesk.support.SuggestedArticleSearch.Builder;
+				public withCategoryId(param0: java.lang.Long): zendesk.support.SuggestedArticleSearch.Builder;
+				public build(): zendesk.support.SuggestedArticleSearch;
+				public constructor();
+			}
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Support {
+			public static class: java.lang.Class<zendesk.support.Support>;
+			public static INSTANCE: zendesk.support.Support;
+			public provider(): zendesk.support.ProviderStore;
+			public setHelpCenterLocaleOverride(param0: java.util.Locale): void;
+			public static values(): native.Array<zendesk.support.Support>;
+			public refreshRequest(param0: string, param1: globalAndroid.content.Context): boolean;
+			public init(param0: zendesk.core.Zendesk): void;
+			public static valueOf(param0: string): zendesk.support.Support;
+			public getHelpCenterLocaleOverride(): java.util.Locale;
+			public isInitialized(): boolean;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportApplicationModule {
+			public static class: java.lang.Class<zendesk.support.SupportApplicationModule>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportApplicationModule_ProvideLocaleFactory extends dagger.internal.Factory<java.util.Locale> {
+			public static class: java.lang.Class<zendesk.support.SupportApplicationModule_ProvideLocaleFactory>;
+			public get(): java.util.Locale;
+			public static create(param0: zendesk.support.SupportApplicationModule): dagger.internal.Factory<java.util.Locale>;
+			public constructor(param0: zendesk.support.SupportApplicationModule);
+			public static proxyProvideLocale(param0: zendesk.support.SupportApplicationModule): java.util.Locale;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportApplicationModule_ProvideMetadataFactory extends dagger.internal.Factory<zendesk.support.SupportSdkMetadata> {
+			public static class: java.lang.Class<zendesk.support.SupportApplicationModule_ProvideMetadataFactory>;
+			public constructor(param0: zendesk.support.SupportApplicationModule, param1: javax.inject.Provider<globalAndroid.content.Context>);
+			public static proxyProvideMetadata(param0: zendesk.support.SupportApplicationModule, param1: globalAndroid.content.Context): zendesk.support.SupportSdkMetadata;
+			public static create(param0: zendesk.support.SupportApplicationModule, param1: javax.inject.Provider<globalAndroid.content.Context>): dagger.internal.Factory<zendesk.support.SupportSdkMetadata>;
+			public get(): zendesk.support.SupportSdkMetadata;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportApplicationModule_ProvidesZendeskTrackerFactory extends dagger.internal.Factory<zendesk.support.ZendeskTracker> {
+			public static class: java.lang.Class<zendesk.support.SupportApplicationModule_ProvidesZendeskTrackerFactory>;
+			public static create(param0: zendesk.support.SupportApplicationModule): dagger.internal.Factory<zendesk.support.ZendeskTracker>;
+			public constructor(param0: zendesk.support.SupportApplicationModule);
+			public get(): zendesk.support.ZendeskTracker;
+			public static proxyProvidesZendeskTracker(param0: zendesk.support.SupportApplicationModule): zendesk.support.ZendeskTracker;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportBlipsProvider {
+			public static class: java.lang.Class<zendesk.support.SupportBlipsProvider>;
+			/**
+			 * Constructs a new instance of the zendesk.support.SupportBlipsProvider interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				supportSdkInit(): void;
+				requestCreated(param0: string): void;
+				requestUpdated(param0: string): void;
+				requestViewed(param0: string): void;
+				requestListViewed(): void;
+				helpCenterSearch(param0: string): void;
+				articleView(param0: zendesk.support.Article): void;
+				articleVote(param0: java.lang.Long, param1: number): void;
+			});
+			public constructor();
+			public requestListViewed(): void;
+			public requestCreated(param0: string): void;
+			public articleView(param0: zendesk.support.Article): void;
+			public requestViewed(param0: string): void;
+			public articleVote(param0: java.lang.Long, param1: number): void;
+			public supportSdkInit(): void;
+			public requestUpdated(param0: string): void;
+			public helpCenterSearch(param0: string): void;
+		}
+		export module SupportBlipsProvider {
+			export class ArticleVote {
+				public static class: java.lang.Class<zendesk.support.SupportBlipsProvider.ArticleVote>;
+				/**
+				 * Constructs a new instance of the zendesk.support.SupportBlipsProvider$ArticleVote interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+				 */
+				public constructor(implementation: {
+				});
+				public constructor();
+				public static ARTICLE_VOTE_DOWN: number;
+				public static ARTICLE_VOTE_UP: number;
+			}
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportModule {
+			public static class: java.lang.Class<zendesk.support.SupportModule>;
+			public constructor(param0: zendesk.support.RequestProvider, param1: zendesk.support.UploadProvider, param2: zendesk.support.HelpCenterProvider, param3: zendesk.support.SupportSettingsProvider, param4: zendesk.support.SupportBlipsProvider, param5: okhttp3.OkHttpClient, param6: zendesk.support.ZendeskTracker, param7: zendesk.support.ArticleVoteStorage);
+			public getId(): java.util.UUID;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportModule_ProvidesArticleVoteStorageFactory extends dagger.internal.Factory<zendesk.support.ArticleVoteStorage> {
+			public static class: java.lang.Class<zendesk.support.SupportModule_ProvidesArticleVoteStorageFactory>;
+			public constructor(param0: zendesk.support.SupportModule);
+			public static create(param0: zendesk.support.SupportModule): dagger.internal.Factory<zendesk.support.ArticleVoteStorage>;
+			public static proxyProvidesArticleVoteStorage(param0: zendesk.support.SupportModule): zendesk.support.ArticleVoteStorage;
+			public get(): zendesk.support.ArticleVoteStorage;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportModule_ProvidesBlipsProviderFactory extends dagger.internal.Factory<zendesk.support.SupportBlipsProvider> {
+			public static class: java.lang.Class<zendesk.support.SupportModule_ProvidesBlipsProviderFactory>;
+			public constructor(param0: zendesk.support.SupportModule);
+			public static create(param0: zendesk.support.SupportModule): dagger.internal.Factory<zendesk.support.SupportBlipsProvider>;
+			public get(): zendesk.support.SupportBlipsProvider;
+			public static proxyProvidesBlipsProvider(param0: zendesk.support.SupportModule): zendesk.support.SupportBlipsProvider;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportModule_ProvidesHelpCenterProviderFactory extends dagger.internal.Factory<zendesk.support.HelpCenterProvider> {
+			public static class: java.lang.Class<zendesk.support.SupportModule_ProvidesHelpCenterProviderFactory>;
+			public get(): zendesk.support.HelpCenterProvider;
+			public constructor(param0: zendesk.support.SupportModule);
+			public static proxyProvidesHelpCenterProvider(param0: zendesk.support.SupportModule): zendesk.support.HelpCenterProvider;
+			public static create(param0: zendesk.support.SupportModule): dagger.internal.Factory<zendesk.support.HelpCenterProvider>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportModule_ProvidesOkHttpClientFactory extends dagger.internal.Factory<okhttp3.OkHttpClient> {
+			public static class: java.lang.Class<zendesk.support.SupportModule_ProvidesOkHttpClientFactory>;
+			public constructor(param0: zendesk.support.SupportModule);
+			public static create(param0: zendesk.support.SupportModule): dagger.internal.Factory<okhttp3.OkHttpClient>;
+			public static proxyProvidesOkHttpClient(param0: zendesk.support.SupportModule): okhttp3.OkHttpClient;
+			public get(): okhttp3.OkHttpClient;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportModule_ProvidesRequestProviderFactory extends dagger.internal.Factory<zendesk.support.RequestProvider> {
+			public static class: java.lang.Class<zendesk.support.SupportModule_ProvidesRequestProviderFactory>;
+			public constructor(param0: zendesk.support.SupportModule);
+			public get(): zendesk.support.RequestProvider;
+			public static create(param0: zendesk.support.SupportModule): dagger.internal.Factory<zendesk.support.RequestProvider>;
+			public static proxyProvidesRequestProvider(param0: zendesk.support.SupportModule): zendesk.support.RequestProvider;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportModule_ProvidesSettingsProviderFactory extends dagger.internal.Factory<zendesk.support.SupportSettingsProvider> {
+			public static class: java.lang.Class<zendesk.support.SupportModule_ProvidesSettingsProviderFactory>;
+			public constructor(param0: zendesk.support.SupportModule);
+			public get(): zendesk.support.SupportSettingsProvider;
+			public static proxyProvidesSettingsProvider(param0: zendesk.support.SupportModule): zendesk.support.SupportSettingsProvider;
+			public static create(param0: zendesk.support.SupportModule): dagger.internal.Factory<zendesk.support.SupportSettingsProvider>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportModule_ProvidesUploadProviderFactory extends dagger.internal.Factory<zendesk.support.UploadProvider> {
+			public static class: java.lang.Class<zendesk.support.SupportModule_ProvidesUploadProviderFactory>;
+			public constructor(param0: zendesk.support.SupportModule);
+			public static proxyProvidesUploadProvider(param0: zendesk.support.SupportModule): zendesk.support.UploadProvider;
+			public get(): zendesk.support.UploadProvider;
+			public static create(param0: zendesk.support.SupportModule): dagger.internal.Factory<zendesk.support.UploadProvider>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportModule_ProvidesZendeskTrackerFactory extends dagger.internal.Factory<zendesk.support.ZendeskTracker> {
+			public static class: java.lang.Class<zendesk.support.SupportModule_ProvidesZendeskTrackerFactory>;
+			public constructor(param0: zendesk.support.SupportModule);
+			public static proxyProvidesZendeskTracker(param0: zendesk.support.SupportModule): zendesk.support.ZendeskTracker;
+			public get(): zendesk.support.ZendeskTracker;
+			public static create(param0: zendesk.support.SupportModule): dagger.internal.Factory<zendesk.support.ZendeskTracker>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportSdkMetadata {
+			public static class: java.lang.Class<zendesk.support.SupportSdkMetadata>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportSdkProvidersComponent {
+			public static class: java.lang.Class<zendesk.support.SupportSdkProvidersComponent>;
+			/**
+			 * Constructs a new instance of the zendesk.support.SupportSdkProvidersComponent interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				inject(param0: zendesk.support.Support): zendesk.support.Support;
+			});
+			public constructor();
+			public inject(param0: zendesk.support.Support): zendesk.support.Support;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportSdkSettings {
+			public static class: java.lang.Class<zendesk.support.SupportSdkSettings>;
+			public getContactZendeskTags(): java.util.List<string>;
+			public isAttachmentsEnabled(): boolean;
+			public hasHelpCenterSettings(): boolean;
+			public isTicketFormSupportAvailable(): boolean;
+			public getHelpCenterLocale(): string;
+			public getMaxAttachmentSize(): number;
+			public isNeverAskForEmailEnabled(): boolean;
+			public getReferrerUrl(): string;
+			public constructor(param0: zendesk.support.SupportSettings, param1: zendesk.support.HelpCenterSettings, param2: zendesk.core.AuthenticationType);
+			public isHelpCenterArticleVotingEnabled(): boolean;
+			public isHelpCenterEnabled(): boolean;
+			public getAuthenticationType(): zendesk.core.AuthenticationType;
+			public isShowReferrerLogoEnabled(): boolean;
+			public isConversationsEnabled(): boolean;
+			public isShowClosedRequests(): boolean;
+			public getRequestSystemMessage(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportSettings {
+			public static class: java.lang.Class<zendesk.support.SupportSettings>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class SupportSettingsProvider {
+			public static class: java.lang.Class<zendesk.support.SupportSettingsProvider>;
+			/**
+			 * Constructs a new instance of the zendesk.support.SupportSettingsProvider interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				getSettings(param0: com.zendesk.service.ZendeskCallback<zendesk.support.SupportSdkSettings>): void;
+			});
+			public constructor();
+			public getSettings(param0: com.zendesk.service.ZendeskCallback<zendesk.support.SupportSdkSettings>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class Support_MembersInjector extends dagger.MembersInjector<zendesk.support.Support> {
+			public static class: java.lang.Class<zendesk.support.Support_MembersInjector>;
+			public static injectBlipsProvider(param0: zendesk.support.Support, param1: zendesk.support.SupportBlipsProvider): void;
+			public static injectAuthenticationProvider(param0: zendesk.support.Support, param1: zendesk.core.AuthenticationProvider): void;
+			public static injectRequestProvider(param0: zendesk.support.Support, param1: zendesk.support.RequestProvider): void;
+			public static injectProviderStore(param0: zendesk.support.Support, param1: zendesk.support.ProviderStore): void;
+			public injectMembers(param0: zendesk.support.Support): void;
+			public constructor(param0: javax.inject.Provider<zendesk.support.ProviderStore>, param1: javax.inject.Provider<zendesk.support.SupportModule>, param2: javax.inject.Provider<zendesk.support.RequestMigrator>, param3: javax.inject.Provider<zendesk.support.SupportBlipsProvider>, param4: javax.inject.Provider<zendesk.core.ActionHandlerRegistry>, param5: javax.inject.Provider<zendesk.support.RequestProvider>, param6: javax.inject.Provider<zendesk.core.AuthenticationProvider>);
+			public static injectSupportModule(param0: zendesk.support.Support, param1: zendesk.support.SupportModule): void;
+			public static create(param0: javax.inject.Provider<zendesk.support.ProviderStore>, param1: javax.inject.Provider<zendesk.support.SupportModule>, param2: javax.inject.Provider<zendesk.support.RequestMigrator>, param3: javax.inject.Provider<zendesk.support.SupportBlipsProvider>, param4: javax.inject.Provider<zendesk.core.ActionHandlerRegistry>, param5: javax.inject.Provider<zendesk.support.RequestProvider>, param6: javax.inject.Provider<zendesk.core.AuthenticationProvider>): dagger.MembersInjector<zendesk.support.Support>;
+			public static injectActionHandlerRegistry(param0: zendesk.support.Support, param1: zendesk.core.ActionHandlerRegistry): void;
+			public static injectRequestMigrator(param0: zendesk.support.Support, param1: any): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class TicketField {
+			public static class: java.lang.Class<zendesk.support.TicketField>;
+			public getTitle(): string;
+			public getId(): number;
+			public getTitleInPortal(): string;
+			public getRegexpForValidation(): string;
+			public getTicketFieldSystemOptions(): java.util.List<zendesk.support.TicketFieldSystemOption>;
+			public getDescription(): string;
+			public getTicketFieldOptions(): java.util.List<zendesk.support.TicketFieldOption>;
+			public getType(): zendesk.support.TicketFieldType;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class TicketFieldOption {
+			public static class: java.lang.Class<zendesk.support.TicketFieldOption>;
+			public getName(): string;
+			public getId(): number;
+			public getValue(): string;
+			public isDefault(): boolean;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class TicketFieldSystemOption {
+			public static class: java.lang.Class<zendesk.support.TicketFieldSystemOption>;
+			public getName(): string;
+			public getValue(): string;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class TicketFieldType {
+			public static class: java.lang.Class<zendesk.support.TicketFieldType>;
+			public static Checkbox: zendesk.support.TicketFieldType;
+			public static Date: zendesk.support.TicketFieldType;
+			public static Decimal: zendesk.support.TicketFieldType;
+			public static Description: zendesk.support.TicketFieldType;
+			public static Integer: zendesk.support.TicketFieldType;
+			public static PartialCreditCard: zendesk.support.TicketFieldType;
+			public static Priority: zendesk.support.TicketFieldType;
+			public static Status: zendesk.support.TicketFieldType;
+			public static TicketType: zendesk.support.TicketFieldType;
+			public static Regexp: zendesk.support.TicketFieldType;
+			public static Subject: zendesk.support.TicketFieldType;
+			public static Tagger: zendesk.support.TicketFieldType;
+			public static Text: zendesk.support.TicketFieldType;
+			public static TextArea: zendesk.support.TicketFieldType;
+			public static MultiSelect: zendesk.support.TicketFieldType;
+			public static Unknown: zendesk.support.TicketFieldType;
+			public static valueOf(param0: string): zendesk.support.TicketFieldType;
+			public static values(): native.Array<zendesk.support.TicketFieldType>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class TicketForm {
+			public static class: java.lang.Class<zendesk.support.TicketForm>;
+			public constructor(param0: number, param1: string, param2: java.util.List<zendesk.support.TicketField>);
+			public getName(): string;
+			public getId(): number;
+			public getTicketFields(): java.util.List<zendesk.support.TicketField>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class TicketFormSettings {
+			public static class: java.lang.Class<zendesk.support.TicketFormSettings>;
+			public isAvailable(): boolean;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class UpdateRequestWrapper {
+			public static class: java.lang.Class<zendesk.support.UpdateRequestWrapper>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class UploadProvider {
+			public static class: java.lang.Class<zendesk.support.UploadProvider>;
+			/**
+			 * Constructs a new instance of the zendesk.support.UploadProvider interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				uploadAttachment(param0: string, param1: java.io.File, param2: string, param3: com.zendesk.service.ZendeskCallback<zendesk.support.UploadResponse>): void;
+				deleteAttachment(param0: string, param1: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+			});
+			public constructor();
+			public uploadAttachment(param0: string, param1: java.io.File, param2: string, param3: com.zendesk.service.ZendeskCallback<zendesk.support.UploadResponse>): void;
+			public deleteAttachment(param0: string, param1: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class UploadResponse {
+			public static class: java.lang.Class<zendesk.support.UploadResponse>;
+			public getToken(): string;
+			public constructor();
+			public getAttachment(): zendesk.support.Attachment;
+			public getExpiresAt(): java.util.Date;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class UploadResponseWrapper {
+			public static class: java.lang.Class<zendesk.support.UploadResponseWrapper>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class UploadService {
+			public static class: java.lang.Class<zendesk.support.UploadService>;
+			/**
+			 * Constructs a new instance of the zendesk.support.UploadService interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				uploadAttachment(param0: string, param1: okhttp3.RequestBody): retrofit2.Call<zendesk.support.UploadResponseWrapper>;
+				deleteAttachment(param0: string): retrofit2.Call<java.lang.Void>;
+			});
+			public constructor();
+			public uploadAttachment(param0: string, param1: okhttp3.RequestBody): retrofit2.Call<zendesk.support.UploadResponseWrapper>;
+			public deleteAttachment(param0: string): retrofit2.Call<java.lang.Void>;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class User {
+			public static class: java.lang.Class<zendesk.support.User>;
+			public equals(param0: any): boolean;
+			public getTags(): java.util.List<string>;
+			public getName(): string;
+			public constructor(param0: java.lang.Long, param1: string, param2: zendesk.support.Attachment, param3: boolean, param4: java.lang.Long, param5: java.util.List<string>, param6: java.util.Map<string,string>);
+			public getId(): java.lang.Long;
+			public getUserFields(): java.util.Map<string,string>;
+			public constructor();
+			public getPhoto(): zendesk.support.Attachment;
+			public getOrganizationId(): java.lang.Long;
+			public isAgent(): boolean;
+			public hashCode(): number;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskArticleVoteStorage extends zendesk.support.ArticleVoteStorage {
+			public static class: java.lang.Class<zendesk.support.ZendeskArticleVoteStorage>;
+			public removeStoredArticleVote(param0: java.lang.Long): void;
+			public storeArticleVote(param0: java.lang.Long, param1: zendesk.support.ArticleVote): void;
+			public getStoredArticleVote(param0: java.lang.Long): zendesk.support.ArticleVote;
+		}
+		export module ZendeskArticleVoteStorage {
+			export class ArticleVoteMapWrapper {
+				public static class: java.lang.Class<zendesk.support.ZendeskArticleVoteStorage.ArticleVoteMapWrapper>;
+			}
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export abstract class ZendeskCallbackSuccess<E>  extends com.zendesk.service.ZendeskCallback<any> {
+			public static class: java.lang.Class<zendesk.support.ZendeskCallbackSuccess<any>>;
+			public onError(param0: com.zendesk.service.ErrorResponse): void;
+			public onSuccess(param0: any): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskHelpCenterProvider extends zendesk.support.HelpCenterProvider {
+			public static class: java.lang.Class<zendesk.support.ZendeskHelpCenterProvider>;
+			public getAttachments(param0: java.lang.Long, param1: zendesk.support.AttachmentType, param2: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.HelpCenterAttachment>>): void;
+			public getArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Article>): void;
+			public getArticles(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Article>>): void;
+			public getSections(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Section>>): void;
+			public getCategory(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Category>): void;
+			public deleteVote(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+			public upvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.ArticleVote>): void;
+			public submitRecordArticleView(param0: zendesk.support.Article, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+			public downvoteArticle(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.ArticleVote>): void;
+			public getCategories(param0: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Category>>): void;
+			public listArticlesFlat(param0: zendesk.support.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.FlatArticle>>): void;
+			public getHelp(param0: zendesk.support.HelpRequest, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.HelpItem>>): void;
+			public getArticles(param0: java.lang.Long, param1: string, param2: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Article>>): void;
+			public listArticles(param0: zendesk.support.ListArticleQuery, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.SearchArticle>>): void;
+			public getSuggestedArticles(param0: zendesk.support.SuggestedArticleSearch, param1: com.zendesk.service.ZendeskCallback<zendesk.support.SuggestedArticleResponse>): void;
+			public searchArticles(param0: zendesk.support.HelpCenterSearch, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.SearchArticle>>): void;
+			public getSection(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Section>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskHelpCenterService {
+			public static class: java.lang.Class<zendesk.support.ZendeskHelpCenterService>;
+			public getAttachments(param0: java.util.Locale, param1: java.lang.Long, param2: zendesk.support.AttachmentType, param3: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.HelpCenterAttachment>>): void;
+			public getCategoryById(param0: java.lang.Long, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback<zendesk.support.Category>): void;
+			public getSectionById(param0: java.lang.Long, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback<zendesk.support.Section>): void;
+			public getSuggestedArticles(param0: string, param1: java.util.Locale, param2: string, param3: java.lang.Long, param4: java.lang.Long, param5: com.zendesk.service.ZendeskCallback<zendesk.support.SuggestedArticleResponse>): void;
+			public getArticle(param0: java.lang.Long, param1: java.util.Locale, param2: string, param3: com.zendesk.service.ZendeskCallback<zendesk.support.Article>): void;
+			public downvoteArticle(param0: java.lang.Long, param1: string, param2: com.zendesk.service.ZendeskCallback<zendesk.support.ArticleVoteResponse>): void;
+			public deleteVote(param0: java.lang.Long, param1: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+			public submitRecordArticleView(param0: java.lang.Long, param1: java.util.Locale, param2: zendesk.support.RecordArticleViewRequest, param3: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+			public getSectionsForCategory(param0: java.lang.Long, param1: java.util.Locale, param2: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Section>>): void;
+			public searchArticles(param0: string, param1: java.util.Locale, param2: string, param3: string, param4: string, param5: string, param6: java.lang.Integer, param7: java.lang.Integer, param8: com.zendesk.service.ZendeskCallback<zendesk.support.ArticlesSearchResponse>): void;
+			public getCategories(param0: java.util.Locale, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Category>>): void;
+			public upvoteArticle(param0: java.lang.Long, param1: string, param2: com.zendesk.service.ZendeskCallback<zendesk.support.ArticleVoteResponse>): void;
+			public listArticles(param0: string, param1: java.util.Locale, param2: string, param3: string, param4: string, param5: java.lang.Integer, param6: java.lang.Integer, param7: com.zendesk.service.ZendeskCallback<zendesk.support.ArticlesListResponse>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskHelpCenterSessionCache extends zendesk.support.HelpCenterSessionCache {
+			public static class: java.lang.Class<zendesk.support.ZendeskHelpCenterSessionCache>;
+			public static DEFAULT_SEARCH: zendesk.support.LastSearch;
+			public isUniqueSearchResultClick(): boolean;
+			public unsetUniqueSearchResultClick(): void;
+			public getLastSearch(): zendesk.support.LastSearch;
+			public setLastSearch(param0: string, param1: number): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskProviderStore extends zendesk.support.ProviderStore {
+			public static class: java.lang.Class<zendesk.support.ZendeskProviderStore>;
+			public helpCenterProvider(): zendesk.support.HelpCenterProvider;
+			public requestProvider(): zendesk.support.RequestProvider;
+			public uploadProvider(): zendesk.support.UploadProvider;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskRequestProvider extends zendesk.support.RequestProvider {
+			public static class: java.lang.Class<zendesk.support.ZendeskRequestProvider>;
+			public createRequest(param0: zendesk.support.CreateRequest, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Request>): void;
+			public getCommentsSince(param0: string, param1: java.util.Date, param2: boolean, param3: com.zendesk.service.ZendeskCallback<zendesk.support.CommentsResponse>): void;
+			public getUpdatesForDevice(param0: com.zendesk.service.ZendeskCallback<zendesk.support.RequestUpdates>): void;
+			public addComment(param0: string, param1: zendesk.support.EndUserComment, param2: com.zendesk.service.ZendeskCallback<zendesk.support.Comment>): void;
+			public getComments(param0: string, param1: com.zendesk.service.ZendeskCallback<zendesk.support.CommentsResponse>): void;
+			public getTicketFormsById(param0: java.util.List<java.lang.Long>, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.TicketForm>>): void;
+			public markRequestAsRead(param0: string, param1: number): void;
+			public markRequestAsUnread(param0: string): void;
+			public getRequests(param0: string, param1: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Request>>): void;
+			public getAllRequests(param0: com.zendesk.service.ZendeskCallback<java.util.List<zendesk.support.Request>>): void;
+			public getRequest(param0: string, param1: com.zendesk.service.ZendeskCallback<zendesk.support.Request>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskRequestService {
+			public static class: java.lang.Class<zendesk.support.ZendeskRequestService>;
+			public createRequest(param0: string, param1: zendesk.support.CreateRequest, param2: com.zendesk.service.ZendeskCallback<zendesk.support.Request>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskRequestSessionCache extends zendesk.support.RequestSessionCache {
+			public static class: java.lang.Class<zendesk.support.ZendeskRequestSessionCache>;
+			public updateTicketFormCache(param0: java.util.List<zendesk.support.TicketForm>): void;
+			public getTicketFormsById(param0: java.util.List<java.lang.Long>): java.util.List<zendesk.support.TicketForm>;
+			public containsAllTicketForms(param0: java.util.List<java.lang.Long>): boolean;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskRequestStorage extends zendesk.support.RequestStorage {
+			public static class: java.lang.Class<zendesk.support.ZendeskRequestStorage>;
+			public storeRequestData(param0: java.util.List<zendesk.support.RequestData>): void;
+			public getRequestData(): java.util.List<zendesk.support.RequestData>;
+			public isRequestDataExpired(): boolean;
+			public markRequestAsRead(param0: string, param1: number): void;
+			public markRequestAsUnread(param0: string): void;
+			public updateRequestData(param0: java.util.List<zendesk.support.Request>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskSupportBlipsProvider extends zendesk.support.SupportBlipsProvider {
+			public static class: java.lang.Class<zendesk.support.ZendeskSupportBlipsProvider>;
+			public requestListViewed(): void;
+			public articleView(param0: zendesk.support.Article): void;
+			public requestCreated(param0: string): void;
+			public articleVote(param0: java.lang.Long, param1: number): void;
+			public requestViewed(param0: string): void;
+			public supportSdkInit(): void;
+			public requestUpdated(param0: string): void;
+			public helpCenterSearch(param0: string): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskSupportSettingsProvider extends zendesk.support.SupportSettingsProvider {
+			public static class: java.lang.Class<zendesk.support.ZendeskSupportSettingsProvider>;
+			public getSettings(param0: com.zendesk.service.ZendeskCallback<zendesk.support.SupportSdkSettings>): void;
+		}
+		export module ZendeskSupportSettingsProvider {
+			export class LoadHelpCenterSettings extends com.zendesk.service.ZendeskCallback<zendesk.core.SettingsPack<zendesk.support.HelpCenterSettings>> {
+				public static class: java.lang.Class<zendesk.support.ZendeskSupportSettingsProvider.LoadHelpCenterSettings>;
+				public onSuccess(param0: zendesk.core.SettingsPack<zendesk.support.HelpCenterSettings>): void;
+				public onError(param0: com.zendesk.service.ErrorResponse): void;
+			}
+			export class LoadSupportSettings extends com.zendesk.service.ZendeskCallback<zendesk.core.SettingsPack<zendesk.support.SupportSettings>> {
+				public static class: java.lang.Class<zendesk.support.ZendeskSupportSettingsProvider.LoadSupportSettings>;
+				public onSuccess(param0: zendesk.core.SettingsPack<zendesk.support.SupportSettings>): void;
+				public onError(param0: com.zendesk.service.ErrorResponse): void;
+			}
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskTracker {
+			public static class: java.lang.Class<zendesk.support.ZendeskTracker>;
+			/**
+			 * Constructs a new instance of the zendesk.support.ZendeskTracker interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+			 */
+			public constructor(implementation: {
+				helpCenterLoaded(): void;
+				helpCenterSearched(param0: string): void;
+				helpCenterArticleViewed(): void;
+				requestCreated(): void;
+				requestUpdated(): void;
+			});
+			public constructor();
+			public requestCreated(): void;
+			public requestUpdated(): void;
+			public helpCenterSearched(param0: string): void;
+			public helpCenterLoaded(): void;
+			public helpCenterArticleViewed(): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskUploadProvider extends zendesk.support.UploadProvider {
+			public static class: java.lang.Class<zendesk.support.ZendeskUploadProvider>;
+			public uploadAttachment(param0: string, param1: java.io.File, param2: string, param3: com.zendesk.service.ZendeskCallback<zendesk.support.UploadResponse>): void;
+			public deleteAttachment(param0: string, param1: com.zendesk.service.ZendeskCallback<java.lang.Void>): void;
+		}
+	}
+}
+
+declare module zendesk {
+	export module support {
+		export class ZendeskUploadService {
+			public static class: java.lang.Class<zendesk.support.ZendeskUploadService>;
+			public constructor(param0: zendesk.support.UploadService);
+		}
+	}
+}
+
+//Generics information:
+//zendesk.support.ZendeskCallbackSuccess:1
 
