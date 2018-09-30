@@ -7,14 +7,16 @@ import {
   InitConfig,
   IosThemeSimple,
   RequestConfig,
-  ZendeskSdk as ZendeskSdkBase
+  ZendeskSdk as ZendeskSdkBase,
 } from './zendesk-sdk';
 
 export * from './zendesk-sdk.common';
 
 export class ZendeskSdk implements ZendeskSdkBase {
 
-  public static initialize(config: InitConfig): ZendeskSdk {
+  public static initialize(
+    config: InitConfig
+  ): ZendeskSdk {
 
     ZDKZendesk.initializeWithAppIdClientIdZendeskUrl(
       config.applicationId, config.clientId, config.zendeskUrl,
@@ -36,14 +38,18 @@ export class ZendeskSdk implements ZendeskSdkBase {
     return ZendeskSdk;
   }
 
-  public static setUserLocale(locale: string): ZendeskSdk {
+  public static setUserLocale(
+    locale: string
+  ): ZendeskSdk {
 
     ZDKSupport.instance.helpCenterLocaleOverride = locale;
 
     return ZendeskSdk;
   }
 
-  public static setAnonymousIdentity(anonUserIdentity: AnonUserIdentity = {}): ZendeskSdk {
+  public static setAnonymousIdentity(
+    anonUserIdentity: AnonUserIdentity = {}
+  ): ZendeskSdk {
 
     ZDKZendesk.instance.setIdentity(
       ZDKObjCAnonymous.alloc().initWithNameEmail(anonUserIdentity.name, anonUserIdentity.email)
@@ -61,21 +67,23 @@ export class ZendeskSdk implements ZendeskSdkBase {
     return ZendeskSdk;
   }
 
-  public static configureRequests(config: RequestConfig): ZendeskSdk {
+  public static configureRequests(
+    config: RequestConfig
+  ): ZendeskSdk {
 
-    let temp = ZDKRequestUiConfiguration.new();
+    const temp = ZDKRequestUiConfiguration.new();
 
     if (config.requestSubject) {
       temp.subject = config.requestSubject;
     }
 
-    let tags: Array<string> = [];
+    const tags: Array<string> = [];
 
     if (config.addDeviceInfo) {
       for (const p in device) {
-        let value: any = (<any>device)[p];
+        const value: any = (<any>device)[p];
         if (typeof value === 'string' && value.length) {
-          const tag: string = value.replace(/(\s|,)/g, "");
+          const tag: string = value.replace(/(\s|,)/g, '');
           tags.push(`${p}:${tag}`);
         }
       }
@@ -84,16 +92,16 @@ export class ZendeskSdk implements ZendeskSdkBase {
     if (config.tags && config.tags.length) {
       for (const value of config.tags) {
         if (typeof value === 'string' && value.length) {
-          const tag: string = value.replace(/(\s|,)/g, "");
+          const tag: string = value.replace(/(\s|,)/g, '');
           tags.push(tag);
         }
       }
     }
 
     if (tags.length) {
-      let tagsNSArray: NSMutableArray<any> = NSMutableArray.alloc().initWithCapacity(tags.length);
+      const tagsNSArray: NSMutableArray<any> = NSMutableArray.alloc().initWithCapacity(tags.length);
       for (const tag of tags) {
-        tagsNSArray.addObject(tag)
+        tagsNSArray.addObject(tag);
       }
       temp.tags = tagsNSArray;
     }
@@ -103,15 +111,19 @@ export class ZendeskSdk implements ZendeskSdkBase {
     return ZendeskSdk;
   }
 
-  public static showHelpCenter(options: HelpCenterOptions = {}): void {
+  public static showHelpCenter(
+    options: HelpCenterOptions = {}
+  ): void {
     const vc = ZDKHelpCenterUi.buildHelpCenterOverviewWithConfigs(
       NSArray.arrayWithObject(ZendeskSdk._requestUiConfig)
     );
     ZendeskSdk._initHelpCenter(options, vc);
   }
 
-  public static showHelpCenterForCategoryIds(categoryIds: Array<number>,
-                                             options: HelpCenterOptions = {}): void {
+  public static showHelpCenterForCategoryIds(
+    categoryIds: Array<number>,
+    options: HelpCenterOptions = {}
+  ): void {
     const hcUiConfig = ZDKHelpCenterUiConfiguration.new();
     hcUiConfig.groupType = ZDKHelpCenterOverviewGroupType.Category;
     const nsArray: NSMutableArray<number> = NSMutableArray.array();
@@ -125,8 +137,10 @@ export class ZendeskSdk implements ZendeskSdkBase {
     ZendeskSdk._initHelpCenter(options, vc);
   }
 
-  public static showHelpCenterForLabelNames(labelNames: Array<string>,
-                                            options: HelpCenterOptions = {}): void {
+  public static showHelpCenterForLabelNames(
+    labelNames: Array<string>,
+    options: HelpCenterOptions = {}
+  ): void {
     const hcUiConfig = ZDKHelpCenterUiConfiguration.new();
     const nsArray: NSMutableArray<string> = NSMutableArray.array();
     for (const e of labelNames) {
@@ -139,8 +153,10 @@ export class ZendeskSdk implements ZendeskSdkBase {
     ZendeskSdk._initHelpCenter(options, vc);
   }
 
-  public static showHelpCenterForSectionIds(sectionIds: Array<number>,
-                                            options: HelpCenterOptions = {}): void {
+  public static showHelpCenterForSectionIds(
+    sectionIds: Array<number>,
+    options: HelpCenterOptions = {}
+  ): void {
     const hcUiConfig = ZDKHelpCenterUiConfiguration.new();
     hcUiConfig.groupType = ZDKHelpCenterOverviewGroupType.Section;
     const nsArray: NSMutableArray<number> = NSMutableArray.array();
@@ -154,7 +170,9 @@ export class ZendeskSdk implements ZendeskSdkBase {
     ZendeskSdk._initHelpCenter(options, vc);
   }
 
-  public static showArticle(articleId: string): void {
+  public static showArticle(
+    articleId: string
+  ): void {
     const vc = ZDKHelpCenterUi.buildHelpCenterArticleWithArticleIdAndConfigs(
       articleId, NSArray.arrayWithObject(ZendeskSdk._requestUiConfig)
     );
@@ -165,7 +183,9 @@ export class ZendeskSdk implements ZendeskSdkBase {
     topmost().ios.controller.pushViewControllerAnimated(ZDKRequestUi.buildRequestUi(), true);
   }
 
-  public static setIosTheme(theme: IosThemeSimple): ZendeskSdk {
+  public static setIosTheme(
+    theme: IosThemeSimple
+  ): ZendeskSdk {
 
     if (theme.primaryColor) {
       ZDKTheme.currentTheme.primaryColor = new Color(theme.primaryColor).ios;
@@ -176,10 +196,12 @@ export class ZendeskSdk implements ZendeskSdkBase {
 
   private static _requestUiConfig: ZDKUiConfiguration = null;
 
-  private static _initHelpCenter(options: HelpCenterOptions,
-                                 vc: UIViewController): void {
+  private static _initHelpCenter(
+    options: HelpCenterOptions,
+    vc: UIViewController
+  ): void {
     if (options.conversationsMenu != null ? !options.conversationsMenu : false) {
-      (<ZDKHelpCenterDelegate>(<any>vc)).uiDelegate = ZDKHelpCenterConversationsUIDelegateImpl.new();
+      (<ZDKHelpCenterDelegate>(<any>vc)).uiDelegate = new ZDKHelpCenterConversationsUIDelegateImpl();
     }
     topmost().ios.controller.pushViewControllerAnimated(vc, true);
   }
@@ -189,14 +211,13 @@ export class ZendeskSdk implements ZendeskSdkBase {
 }
 
 class ZDKHelpCenterConversationsUIDelegateImpl extends NSObject implements ZDKHelpCenterConversationsUIDelegate {
-  static ObjCProtocols = [ZDKHelpCenterConversationsUIDelegate];
-  static new(): ZDKHelpCenterConversationsUIDelegateImpl {
-    return <ZDKHelpCenterConversationsUIDelegateImpl>super.new()
-  }
+  public static ObjCProtocols = [ZDKHelpCenterConversationsUIDelegate];
+
   public active(): ZDKContactUsVisibility {
     return ZDKContactUsVisibility.Off;
   }
-  public navBarConversationsUIType(): ZDKNavBarConversationsUIType{
+
+  public navBarConversationsUIType(): ZDKNavBarConversationsUIType {
     return ZDKNavBarConversationsUIType.None;
   }
 }

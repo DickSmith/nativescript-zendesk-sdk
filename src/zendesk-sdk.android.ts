@@ -6,14 +6,16 @@ import {
   InitConfig,
   IosThemeSimple,
   RequestConfig,
-  ZendeskSdk as ZendeskSdkBase
+  ZendeskSdk as ZendeskSdkBase,
 } from './zendesk-sdk';
 
 export * from './zendesk-sdk.common';
 
 export class ZendeskSdk implements ZendeskSdkBase {
 
-  public static initialize(config: InitConfig): ZendeskSdk {
+  public static initialize(
+    config: InitConfig
+  ): ZendeskSdk {
 
     zendesk.core.Zendesk.INSTANCE.init(
       topmost().android.activity, config.zendeskUrl, config.applicationId, config.clientId,
@@ -35,14 +37,18 @@ export class ZendeskSdk implements ZendeskSdkBase {
     return ZendeskSdk;
   }
 
-  public static setUserLocale(locale: string): ZendeskSdk {
+  public static setUserLocale(
+    locale: string
+  ): ZendeskSdk {
 
     zendesk.support.Support.INSTANCE.setHelpCenterLocaleOverride(new java.util.Locale(locale));
 
     return ZendeskSdk;
   }
 
-  public static setAnonymousIdentity(anonUserIdentity: AnonUserIdentity = {}): ZendeskSdk {
+  public static setAnonymousIdentity(
+    anonUserIdentity: AnonUserIdentity = {}
+  ): ZendeskSdk {
 
     const anonymousIdentityBuilder: zendesk.core.AnonymousIdentity.Builder
       = new zendesk.core.AnonymousIdentity.Builder();
@@ -60,7 +66,9 @@ export class ZendeskSdk implements ZendeskSdkBase {
     return ZendeskSdk;
   }
 
-  public static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk {
+  public static setJwtIdentity(
+    jwtUserIdentifier: string
+  ): ZendeskSdk {
 
     zendesk.core.Zendesk.INSTANCE.setIdentity(
       new zendesk.core.JwtIdentity(jwtUserIdentifier),
@@ -69,21 +77,23 @@ export class ZendeskSdk implements ZendeskSdkBase {
     return ZendeskSdk;
   }
 
-  public static configureRequests(config: RequestConfig = {}): ZendeskSdk {
+  public static configureRequests(
+    config: RequestConfig = {}
+  ): ZendeskSdk {
 
-    let temp = zendesk.support.request.RequestActivity.builder();
+    const temp = zendesk.support.request.RequestActivity.builder();
 
     if (config.requestSubject) {
       temp.withRequestSubject(config.requestSubject);
     }
 
-    let tags = [];
+    const tags = [];
 
     if (config.addDeviceInfo) {
       for (const p in device) {
-        let value: any = (<any>device)[p];
+        const value: any = (<any>device)[p];
         if (typeof value === 'string' && value.length) {
-          const tag: string = value.replace(/(\s|,)/g, "");
+          const tag: string = value.replace(/(\s|,)/g, '');
           tags.push(`${p}:${tag}`);
         }
       }
@@ -92,7 +102,7 @@ export class ZendeskSdk implements ZendeskSdkBase {
     if (config.tags && config.tags.length) {
       for (const value of config.tags) {
         if (typeof value === 'string' && value.length) {
-          const tag: string = value.replace(/(\s|,)/g, "");
+          const tag: string = value.replace(/(\s|,)/g, '');
           tags.push(tag);
         }
       }
@@ -125,13 +135,18 @@ export class ZendeskSdk implements ZendeskSdkBase {
       .show(topmost().android.activity, [ZendeskSdk._requestUiConfig]);
   }
 
-  public static showHelpCenterForSectionIds(sectionIds: Array<number>, options: HelpCenterOptions = {}): void {
+  public static showHelpCenterForSectionIds(
+    sectionIds: Array<number>,
+    options: HelpCenterOptions = {}
+  ): void {
 
     ZendeskSdk._initHelpCenter(options).withArticlesForSectionIds(<any>sectionIds)
       .show(topmost().android.activity, [ZendeskSdk._requestUiConfig]);
   }
 
-  public static showArticle(articleId: string): void {
+  public static showArticle(
+    articleId: string
+  ): void {
 
     zendesk.support.guide.ViewArticleActivity.builder(parseInt(articleId))
       .show(topmost().android.activity, [ZendeskSdk._requestUiConfig]);

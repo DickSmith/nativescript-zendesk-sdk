@@ -1,6 +1,6 @@
 {
   "name": "nativescript-zendesk-sdk",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Zendesk SDK for NativeScript",
   "main": "index",
   "typings": "index.d.ts",
@@ -24,7 +24,7 @@
     "lint": "tslint --force --fix --project tsconfig.json",
     "nuke": "rm -rf node_modules/ package-lock.json",
     "nuki": "npm run nuke && npm i",
-    "build": "npm run lint && tsc",
+    "build": "tsc",
     "prepack": "npm run build && cp ../LICENSE ./LICENSE && cp ../README.md ./README.md",
     "postpack": "rm ./LICENSE ./README.md",
     "android-dts": "npm run android-dts1 && npm run android-dts2 && npm run android-dts3 && npm run android-dts4",
