@@ -22,10 +22,6 @@ export class ZendeskSdk implements ZendeskSdkBase {
       config.applicationId, config.clientId, config.zendeskUrl,
     );
 
-    if (config.userLocale) {
-      ZendeskSdk.setUserLocale(config.userLocale);
-    }
-
     if (config.identity == null) {
       ZendeskSdk.setAnonymousIdentity();
     } else if (typeof config.identity === 'object') {
@@ -33,7 +29,12 @@ export class ZendeskSdk implements ZendeskSdkBase {
     } else if (typeof config.identity === 'string') {
       ZendeskSdk.setJwtIdentity(config.identity);
     }
+
     ZDKSupport.initializeWithZendesk(ZDKZendesk.instance);
+
+    if (config.userLocale) {
+      ZendeskSdk.setUserLocale(config.userLocale);
+    }
 
     return ZendeskSdk;
   }
