@@ -1,6 +1,5 @@
 import { Color } from 'tns-core-modules/color/color';
 import { device } from 'tns-core-modules/platform';
-import { topmost } from 'tns-core-modules/ui/frame';
 import {
   AnonUserIdentity,
   HelpCenterOptions,
@@ -43,7 +42,9 @@ export class ZendeskSdk implements ZendeskSdkBase {
     locale: string
   ): ZendeskSdk {
 
-    ZDKSupport.instance.helpCenterLocaleOverride = locale;
+    if (ZDKSupport.instance) {
+      ZDKSupport.instance.helpCenterLocaleOverride = locale;
+    }
 
     return ZendeskSdk;
   }
@@ -177,11 +178,13 @@ export class ZendeskSdk implements ZendeskSdkBase {
     const vc = ZDKHelpCenterUi.buildHelpCenterArticleWithArticleIdAndConfigs(
       articleId, NSArray.arrayWithObject(ZendeskSdk._requestUiConfig)
     );
-    topmost().ios.controller.pushViewControllerAnimated(vc, true);
+    UIApplication.sharedApplication.keyWindow.rootViewController
+      .presentViewControllerAnimatedCompletion(vc, true, null);
   }
 
   public static createRequest(): void {
-    topmost().ios.controller.pushViewControllerAnimated(ZDKRequestUi.buildRequestUi(), true);
+    UIApplication.sharedApplication.keyWindow.rootViewController
+      .presentViewControllerAnimatedCompletion(ZDKRequestUi.buildRequestUi(), true, null);
   }
 
   public static setIosTheme(
@@ -204,7 +207,8 @@ export class ZendeskSdk implements ZendeskSdkBase {
     if (options.conversationsMenu != null ? !options.conversationsMenu : false) {
       (<ZDKHelpCenterDelegate>(<any>vc)).uiDelegate = new ZDKHelpCenterConversationsUIDelegateImpl();
     }
-    topmost().ios.controller.pushViewControllerAnimated(vc, true);
+    UIApplication.sharedApplication.keyWindow.rootViewController
+      .presentViewControllerAnimatedCompletion(vc, true, null);
   }
 
   private constructor() {

@@ -42,7 +42,9 @@ export class ZendeskSdk implements ZendeskSdkBase {
     locale: string
   ): ZendeskSdk {
 
-    zendesk.support.Support.INSTANCE.setHelpCenterLocaleOverride(new java.util.Locale(locale));
+    if (zendesk.support.Support.INSTANCE) {
+      zendesk.support.Support.INSTANCE.setHelpCenterLocaleOverride(new java.util.Locale(locale));
+    }
 
     return ZendeskSdk;
   }
