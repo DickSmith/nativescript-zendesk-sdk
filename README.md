@@ -15,10 +15,10 @@ tns plugin add nativescript-zendesk-sdk
 Following [Zendesk Embeddables Documentation](https://developer.zendesk.com/embeddables):
 
 ### [Must do] Configure an app in Zendesk Support
-_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/configure_an_app) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/configure_an_app)_
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android-support-sdk/nutshell) / [iOS](https://developer.zendesk.com/embeddables/docs/ios_support_sdk/nutshell)_
 
 ### [Must do] Initialize the SDK
-_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/initialize_sdk) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/initialize_sdk)_
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android-support-sdk/sdk_initialize) / [iOS](https://developer.zendesk.com/embeddables/docs/ios_support_sdk/sdk_initialize)_
 
 ```typescript
 export interface InitConfig {
@@ -44,7 +44,7 @@ If `identity: null` a new anonymous identity is created, but if `identity` is un
 
 _Note: `applicationId`, `zendeskUrl`, and `clientId` must be specified when initializing the Zendesk, but locale, COPPA-compliance mode, and Identity can be set/changed later._
 #### [Must do] Set an identity (authentication)
-_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/set_an_identity) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/set_an_identity)_
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android-support-sdk/sdk_set_identity) / [iOS](https://developer.zendesk.com/embeddables/docs/ios_support_sdk/sdk_set_identity)_
 
 ##### Authenticate using an anonymous identity
 ```typescript
@@ -62,7 +62,7 @@ ZendeskSdk.setJwtIdentity("jwtUserIdentifier");
 ```
 
 ### Locale Settings
-_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/localize_text) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/localize_text)_
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android-support-sdk/localize_text) / [iOS](https://developer.zendesk.com/embeddables/docs/ios_support_sdk/localize_text)_
 
 The locale used by the SDK for static strings will match the Android Application Configuration or the iOS NSUserDefaults.
 _(These strings can be overridden or missing languages can be added as described in the links above)._
@@ -73,21 +73,35 @@ ZendeskSdk.setUserLocale(localeCode);
 ```
 
 ### Configure Requests
-_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/add_data_to_request) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/https://developer.zendesk.com/embeddables/docs/ios/requests#additional-methods-api-providers)_
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android-support-sdk/requests) / [iOS](https://developer.zendesk.com/embeddables/docs/ios_support_sdk/requests)_
 
 Before opening the Help Center or creating a Request you can specify the Request settings:
 
 ```typescript
-export interface RequestConfig {
+export interface RequestOptions {
+  requestId?: string;
   requestSubject?: string;
   addDeviceInfo?: boolean;
-  tags?: Array<string>;
+  tags?: string[];
+  files?: File[]; // android only
+  customFields?: CustomField[];
+  ticketForm?: {
+    ticketFormId: string;
+    customFields: CustomField[]
+  };
 }
 
 ```
+### Show the user's tickets
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android-support-sdk/requests#show-the-users-tickets) / [iOS](https://developer.zendesk.com/embeddables/docs/ios_support_sdk/requests#show-the-users-tickets)_
+
+#### Default Usage
+```typescript
+ZendeskSdk.showRequestList();
+```
 
 ### Show the Help Center
-_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/show_help_center) / [iOS](https://developer.zendesk.com/embeddables/docs/ios/show_help_center)_
+_Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android-support-sdk/help_center) / [iOS](https://developer.zendesk.com/embeddables/docs/ios_support_sdk/help_center)_
 
 #### Default Usage
 ```typescript
@@ -97,42 +111,20 @@ ZendeskSdk.showHelpCenter();
 #### Optional Parameters
 ```typescript
 export interface HelpCenterOptions {
-    /** Default: false */
-    categoriesCollapsedAndroid?: boolean;
-    /** Default: true */
-    conversationsMenuAndroid?: boolean;
-    /** Default: true */
-    conversationsMenuIos?: boolean;
-    /** Default: false */
-    showAsModalForIos?: boolean;
+  /** default: { contactUsButtonVisible: false } */
+  articleOptions?: ArticleOptions;
+  /** default: false */
+  contactUsButtonVisible?: boolean;
+  /** default: false -- android only */
+  categoriesCollapsed?: boolean;
+  /** default: true -- android only */
+  conversationsMenu?: boolean;
 }
 ```
 
 ```typescript
 ZendeskSdk.showHelpCenter(options);
 ```
-
-_Note:  The SDKs for Android and iOS diverge quite a bit for this section, so some options are only applicable to iOS or Android. The defaults selected are those that provide the most consitency between both_
-
-##### Both
-
-###### showConversationMenuButtonFor(Android/Ios) [_default = true_]
-Enables a button in the navigation bar that enables users to view their active requests/converations or start a new one.
-
-##### Android only
-
-###### showContactUsButtonForAndroid [_default = false_]
-This displays an additional `(+)` button in the lower-right corner, similar to the button in the Android templates.
-
-Enabled by default in the Android SDK, but disabled by default in this plugin for consitency with iOS.
-
-###### withCategoriesCollapsedForAndroid [_default = false_]
-This collapses the categories into their headers. The default behaviour on both Android and iOS is to show the first 5 of a category, and then has the option to expand further if more are available.
-
-##### iOS only
-
-###### showAsModalForIos [_default = false_]
-This displays the helpcenter as a modal action sheet.
 
 ### Filter the Help Center
 _Support SDK for [Android](https://developer.zendesk.com/embeddables/docs/android/filter_help_center) / [iOS](https://developer.zendesk.com/embeddables/docs/iOS/filter_help_center)_
@@ -255,41 +247,5 @@ The settings within the theme object will only affect the Zendesk.
 Typings and iOS metadata have been included in the project to allow for easier usage.  
 Typings were autogenerated using:  
 https://github.com/NativeScript/android-dts-generator  
-https://docs.nativescript.org/runtimes/ios/how-to/Use-Native-Libraries  
-Although some manual changes had to be made by commenting-out types and setting to `any` that NativeScript handles the conversions for, such as NSArray and `java.util.List`.  
-Current typings/metadata were generated using version `ios@1.11.1.1` and ``android@1.11.0.1` of the Zendesk and Zendesk Provider SDKs.
-
-## Dumping typings...
-##### iOS
-From `src/`:
-```sh
-pod repo update
-TNS_TYPESCRIPT_DECLARATIONS_PATH="$(pwd)/typings" npm run demo.ios
-cp typings/x86_64/objc\!Zendesk* typings/
-```
-
-##### Android
-From project root:
-```sh
-cd android
-./gradlew clean
-./gradlew getDeps
-
-cd lib
-jar xf sdk-1.11.0.1.aar
-mv classes.jar used-zendesk-sdk.jar
-jar xf sdk-providers-1.11.0.1.aar
-mv classes.jar used-zendesk-providers-sdk.jar
-
-rm -rf */
-find . -type f ! -iname "used-zendesk-*" -delete
-cd ../..
-
-rm -rf out/
-java -jar ../android-dts-generator/dts-generator/build/libs/dts-generator.jar -input \
-    android/lib/used-zendesk-sdk.jar \
-    && mv out/android.d.ts src/typings/java\!ZendeskSDK.d.ts;
-java -jar ../android-dts-generator/dts-generator/build/libs/dts-generator.jar -input \
-    android/lib/used-zendesk-providers-sdk.jar \
-    && mv out/android.d.ts src/typings/java\!ZendeskProviderSDK.d.ts;
+https://docs.nativescript.org/runtimes/ios/how-to/Use-Native-Libraries
 ```

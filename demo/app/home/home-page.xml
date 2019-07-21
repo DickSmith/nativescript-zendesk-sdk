@@ -1,0 +1,21 @@
+<Page class="page"
+    navigatingTo="onNavigatingTo" 
+    xmlns="http://schemas.nativescript.org/tns.xsd" showingModally="onShowingModally">
+    
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Home"></Label>
+    </ActionBar>
+
+    <GridLayout rows="auto, auto, auto, auto">
+
+        <Button row="0" text="Show help center" tap="showHelpCenter" textWrap="true" />
+
+        <Button row="1" text="Create request" tap="createRequest" textWrap="true" />
+
+        <Button row="2" text="Show request list" tap="showRequestList" textWrap="true" />
+
+        <Button row="3" text="Show Article" tap="showArticle" textWrap="true" />
+
+    </GridLayout>
+</Page>
+
