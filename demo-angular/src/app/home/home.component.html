@@ -1,0 +1,33 @@
+<ActionBar class="action-bar">
+  <Label class="action-bar-title" text="Home"></Label>
+</ActionBar>
+
+<GridLayout class="page" rows="auto, auto, auto, auto">
+  <Button
+    row="0"
+    text="Show help center"
+    (tap)="showHelpCenter()"
+    textWrap="true"
+  ></Button>
+
+  <Button
+    row="1"
+    text="Create request"
+    (tap)="createRequest()"
+    textWrap="true"
+  ></Button>
+
+  <Button
+    row="2"
+    text="Show request list"
+    (tap)="showRequestList()"
+    textWrap="true"
+  ></Button>
+
+  <Button
+    row="3"
+    text="Show Article"
+    (tap)="showArticle()"
+    textWrap="true"
+  ></Button>
+</GridLayout>

@@ -3,9 +3,37 @@ export interface AnonUserIdentity {
   email?: string;
 }
 
-export interface HelpCenterOptions {
+export interface RequestOptions {
+  requestId?: string;
+  requestSubject?: string;
+  addDeviceInfo?: boolean;
+  tags?: string[];
+  files?: File[];
+  customFields?: CustomField[];
+  ticketForm?: {
+    ticketFormId: string;
+    customFields: CustomField[]
+  };
+}
+
+export interface CustomField {
+  id: string;
+  value: string;
+}
+
+
+export interface ArticleOptions {
   /** default: false */
-  categoriesCollapsedAndroid?: boolean;
+  contactUsButtonVisible?: boolean;
+}
+
+export interface HelpCenterOptions {
+  /** default: { contactUsButtonVisible: false } */
+  articleOptions?: ArticleOptions;
+  /** default: false */
+  contactUsButtonVisible?: boolean;
+  /** default: false */
+  categoriesCollapsed?: boolean;
   /** default: true */
   conversationsMenu?: boolean;
 }
@@ -21,10 +49,4 @@ export interface InitConfig {
 
 export interface IosThemeSimple {
   primaryColor: any;
-}
-
-export interface RequestConfig {
-  requestSubject?: string;
-  addDeviceInfo?: boolean;
-  tags?: Array<string>;
 }

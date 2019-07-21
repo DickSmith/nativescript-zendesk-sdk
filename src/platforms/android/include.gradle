@@ -3,5 +3,5 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.zendesk:support:2.1.1'
+    implementation group: 'com.zendesk', name: 'support', version: '3.0.1'
 }

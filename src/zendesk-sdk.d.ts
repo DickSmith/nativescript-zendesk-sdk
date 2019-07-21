@@ -1,54 +1,80 @@
-export * from './zendesk-sdk.common';
+export interface AnonUserIdentity {
+  name?: string;
+  email?: string;
+}
+export interface RequestOptions {
+  requestId?: string;
+  requestSubject?: string;
+  addDeviceInfo?: boolean;
+  tags?: string[];
+  files?: File[];
+  customFields?: CustomField[];
+  ticketForm?: {
+      ticketFormId: string;
+      customFields: CustomField[];
+  };
+}
+export interface CustomField {
+  id: string;
+  value: string;
+}
+export interface ArticleOptions {
+  contactUsButtonVisible?: boolean;
+}
+export interface HelpCenterOptions {
+  articleOptions?: ArticleOptions;
+  contactUsButtonVisible?: boolean;
+  categoriesCollapsed?: boolean;
+  conversationsMenu?: boolean;
+}
+export interface InitConfig {
+  zendeskUrl: string;
+  applicationId: string;
+  clientId: string;
+  userLocale?: string;
+  identity?: AnonUserIdentity | string;
+}
+export interface IosThemeSimple {
+  primaryColor: any;
+}
 
 export declare class ZendeskSdk {
-  public static initialize(
-    config: InitConfig
-  ): ZendeskSdk;
-
-  public static setUserLocale(
-    locale: string
-  ): ZendeskSdk;
-
-  public static setAnonymousIdentity(
-    anonUserIdentity?: AnonUserIdentity
-  ): ZendeskSdk;
-
-  public static setJwtIdentity(
-    jwtUserIdentifier: string
-  ): ZendeskSdk;
-
-  public static configureRequests(
-    config: RequestConfig
-  ): ZendeskSdk;
-
-  public static showHelpCenter(
-    options?: HelpCenterOptions
+  static initialize(config: InitConfig): ZendeskSdk;
+  static setUserLocale(locale: string): ZendeskSdk;
+  static setAnonymousIdentity(anonUserIdentity?: AnonUserIdentity): ZendeskSdk;
+  static setJwtIdentity(jwtUserIdentifier: string): ZendeskSdk;
+  private static getHelpCenterUiConfigs;
+  static showHelpCenter(
+    options?: HelpCenterOptions,
+    uiConfig?: any[]
   ): void;
-
-  public static showHelpCenterForCategoryIds(
-    categoryIds: Array<number>,
-    options?: HelpCenterOptions
+  static showHelpCenterForCategoryIds(
+    categoryIds: number[],
+    options?: HelpCenterOptions,
+    uiConfig?: any[]
   ): void;
-
-  public static showHelpCenterForLabelNames(
-    labelNames: Array<string>,
-    options?: HelpCenterOptions
+  static showHelpCenterForSectionIds(
+    sectionIds: number[],
+    options?: HelpCenterOptions,
+    uiConfig?: any[]
   ): void;
-
-  public static showHelpCenterForSectionIds(
-    sectionIds: Array<number>,
-    options?: HelpCenterOptions
+  static showHelpCenterForLabelNames(
+    labelNames: string[],
+    options?: HelpCenterOptions,
+    uiConfig?: any[]
   ): void;
-
-  public static showArticle(
-    articleId: string
+  static showArticle(
+    articleId: string,
+    options?: ArticleOptions,
+    uiConfig?: any[]
   ): void;
-
-  public static createRequest(): void;
-
-  public static setIosTheme(
-    theme: IosThemeSimple
-  ): ZendeskSdk;
-
-  private constructor();
+  static createRequest(
+    options?: RequestOptions,
+    uiConfig?: any[]
+  ): void;
+  static showRequestList(): void;
+  static setIosTheme(_theme: IosThemeSimple): ZendeskSdk;
+  static createNativeCustomFields(
+    customFields: CustomField[]
+  ): any;
 }
